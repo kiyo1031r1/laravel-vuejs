@@ -37868,12 +37868,25 @@ var staticRenderFns = [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-primary mr-4",
                         attrs: { type: "submit" }
                       },
                       [
                         _vm._v(
                           "\n                                    ログイン\n                                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    ユーザー新規作成\n                                "
                         )
                       ]
                     )
