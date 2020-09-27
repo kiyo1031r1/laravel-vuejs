@@ -38003,12 +38003,34 @@ var staticRenderFns = [
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "password_confirmation" }
+                    },
+                    [_vm._v("パスワードの確認")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "password_confirmation",
+                        type: "password",
+                        name: "password_confirmation"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group row mb-0" }, [
                   _c("div", { staticClass: "col-md-8 offset-md-4" }, [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary mr-4",
+                        staticClass: "btn btn-primary px-4 mt-4",
                         attrs: { type: "submit" }
                       },
                       [
