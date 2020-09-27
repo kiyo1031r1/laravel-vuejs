@@ -4,8 +4,8 @@ import TaskListComponent from './components/TaskListComponent'
 import TaskCreateComponent from './components/TaskCreateComponent'
 import TaskShowComponent from './components/TaskShowComponent'
 import TaskEditComponent from './components/TaskEditComponent'
-import LoginComponent from './components/LoginComponent'
-import RegisterComponent from './components/RegisterComponent'
+import LoginComponent from './components/auth/LoginComponent'
+import RegisterComponent from './components/auth/RegisterComponent'
 
 Vue.use(Router);
 
