@@ -37772,6 +37772,12 @@ var render = function() {
               _c("button", { staticClass: "btn btn-success" }, [
                 _vm._v("新規作成")
               ])
+            ]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: {} } }, [
+              _c("button", { staticClass: "btn btn-success" }, [
+                _vm._v("ログイン")
+              ])
             ])
           ],
           1

@@ -10,6 +10,9 @@
                     <router-link :to="{ name: 'task.create'}">
                         <button class="btn btn-success">新規作成</button>
                     </router-link>
+                    <router-link :to="{}">
+                        <button class="btn btn-success">ログイン</button>
+                    </router-link>
                 </div>
             </nav>
         </div>
