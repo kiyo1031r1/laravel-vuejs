@@ -52,3 +52,21 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+       return {
+           user:{} 
+        }
+    },
+    methods:{
+        submit() {
+            axios.post('', this.user)
+            .then((res) => {
+                this.$router.push({name: 'task.list'});
+            });
+        }
+    }
+}
+</script>
