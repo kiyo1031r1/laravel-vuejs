@@ -6,7 +6,7 @@
                     <div class="card-header">ユーザー作成</div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form @submit.prevent="submit">
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名</label>
 
