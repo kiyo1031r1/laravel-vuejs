@@ -29,9 +29,11 @@
                                         ログイン
                                     </button>
 
-                                    <button type="submit" class="btn btn-success">
-                                        ユーザー新規作成
-                                    </button>
+                                    <router-link :to="{ name: 'register'}">
+                                        <button type="submit" class="btn btn-success">
+                                            ユーザー新規作成
+                                        </button>
+                                    </router-link>
                                 </div>
                             </div>
                         </form>
