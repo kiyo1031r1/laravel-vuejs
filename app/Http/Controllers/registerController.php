@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    public function register(){
+
+    }
+    
     public function validator(array $data)
     {
         return Validator::make($data, [
