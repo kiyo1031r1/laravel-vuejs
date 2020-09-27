@@ -4,6 +4,7 @@ import TaskListComponent from './components/TaskListComponent'
 import TaskCreateComponent from './components/TaskCreateComponent'
 import TaskShowComponent from './components/TaskShowComponent'
 import TaskEditComponent from './components/TaskEditComponent'
+import LoginComponent from './components/LoginComponent'
 
 Vue.use(Router);
 
@@ -31,6 +32,11 @@ export default new Router({
             name: 'task.edit',
             component: TaskEditComponent,
             props: true
+        },
+        {
+            path:'/login',
+            name: 'login',
+            component: LoginComponent,
         }
     ]
 })
