@@ -9,25 +9,46 @@
                         <form @submit.prevent="submit">
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="text" v-model="user.name">
-                                </div>
+                                <template v-if="errors.name">
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control is-invalid" name="text" v-model="user.name">
+                                        <div class="invalid-feedback">{{ errors.name[0]}}</div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control" name="text" v-model="user.name">
+                                    </div>
+                                </template>
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" v-model="user.email">
-                                </div>
+                                <template v-if="errors.email">
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control is-invalid" name="email" v-model="user.email">
+                                        <div class="invalid-feedback">{{ errors.email[0]}}</div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control" name="email" v-model="user.email">
+                                    </div>
+                                </template>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" v-model="user.password">
-                                </div>
+                                <template v-if="errors.password">
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
+                                        <div class="invalid-feedback">{{ errors.password[0]}}</div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control" name="password" v-model="user.password">
+                                    </div>
+                                </template>
                             </div>
 
                             <div class="form-group row">
@@ -57,7 +78,8 @@
 export default {
     data(){
         return {
-           user:{} 
+           user:{} ,
+           errors: []
         }
     },
     methods:{
@@ -67,7 +89,7 @@ export default {
                 this.$router.push({name: 'task.list'});
             })
             .catch((error) =>{
-                console.log(error);
+                this.errors = error.response.data.errors;
             });
         }
     }
