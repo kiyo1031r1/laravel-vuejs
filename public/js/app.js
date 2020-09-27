@@ -37774,7 +37774,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("router-link", { attrs: { to: {} } }, [
+            _c("router-link", { attrs: { to: { name: "login" } } }, [
               _c("button", { staticClass: "btn btn-success" }, [
                 _vm._v("ログイン")
               ])
