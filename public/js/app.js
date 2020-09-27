@@ -2222,10 +2222,12 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios.post('', this.user).then(function (res) {
+      axios.post('/api/register', this.user).then(function (res) {
         _this.$router.push({
           name: 'task.list'
         });
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   }

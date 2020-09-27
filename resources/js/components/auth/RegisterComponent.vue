@@ -56,15 +56,18 @@
 <script>
 export default {
     data(){
-       return {
+        return {
            user:{} 
         }
     },
     methods:{
         submit() {
-            axios.post('', this.user)
+            axios.post('/api/register', this.user)
             .then((res) => {
                 this.$router.push({name: 'task.list'});
+            })
+            .catch((error) =>{
+                console.log(error);
             });
         }
     }
