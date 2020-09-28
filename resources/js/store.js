@@ -7,6 +7,9 @@ export default new Vuex.Store({
     state: {
         auth: null
     },
+    getters: {
+        auth: state => state.auth
+    },
     mutations: {
         updateAuth(state, auth){
             state.auth = auth;

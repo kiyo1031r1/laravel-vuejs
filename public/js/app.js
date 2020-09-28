@@ -56241,6 +56241,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     auth: null
   },
+  getters: {
+    auth: function auth(state) {
+      return state.auth;
+    }
+  },
   mutations: {
     updateAuth: function updateAuth(state, auth) {
       state.auth = auth;
