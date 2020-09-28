@@ -7,13 +7,20 @@
                     <router-link :to="{ name: 'task.list'}">
                         <button class="btn btn-success">一覧</button>
                     </router-link>
+
                     <router-link :to="{ name: 'task.create'}">
                         <button class="btn btn-success">新規作成</button>
                     </router-link>
-                    <router-link :to="{ name: 'login'}">
-                        <button class="btn btn-success">ログイン</button>
-                    </router-link>
-                    <button @click="logout" class="btn btn-success">ログアウト</button>
+
+                    <templete v-if="!isAuthenticated">
+                        <router-link :to="{ name: 'login'}">
+                            <button class="btn btn-success">ログイン</button>
+                        </router-link>
+                    </templete>
+
+                    <template v-else>
+                        <button @click="logout" class="btn btn-success">ログアウト</button>
+                    </template>>
                 </div>
             </nav>
         </div>
