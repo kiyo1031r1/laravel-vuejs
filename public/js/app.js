@@ -1931,6 +1931,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    isAuthenticated: function isAuthenticated() {
+      return this.$store.getters.auth !== null;
+    }
+  },
   methods: {
     logout: function logout() {
       this.$store.dispatch('logout');
@@ -56258,7 +56263,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var commit = _ref.commit;
       axios.get('sanctum/csrf-cookie').then(function (res) {
         axios.post('/api/login', authData).then(function (res) {
-          commit('updateAuth', true);
+          commit('updateAuth', 'true');
 
           _this.$router.push('/tasks/list');
         });
@@ -56269,7 +56274,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref2.commit;
       axios.post('/api/logout').then(function (res) {
-        commit('updateAuth', false);
+        commit('updateAuth', null);
 
         _this2.$router.push('/task/list');
       });

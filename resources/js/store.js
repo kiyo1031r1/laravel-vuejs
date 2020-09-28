@@ -21,7 +21,7 @@ export default new Vuex.Store({
             .then(res => {
                 axios.post('/api/login',authData)
                 .then(res => {
-                    commit('updateAuth', true);
+                    commit('updateAuth', 'true');
                     this.$router.push('/tasks/list');
                 });
             })
@@ -29,7 +29,7 @@ export default new Vuex.Store({
         logout({ commit }) {
             axios.post('/api/logout')
             .then(res => {
-                commit('updateAuth', false);
+                commit('updateAuth', null);
                 this.$router.push('/task/list');
             });
         }

@@ -22,6 +22,11 @@
 
 <script>
 export default {
+    computed:{
+        isAuthenticated(){
+            return this.$store.getters.auth !== null;
+        }
+    },
     methods:{
         logout(){
             this.$store.dispatch('logout');
