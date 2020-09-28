@@ -13,8 +13,19 @@
                     <router-link :to="{ name: 'login'}">
                         <button class="btn btn-success">ログイン</button>
                     </router-link>
+                    <button @click="logout" class="btn btn-success">ログアウト</button>
                 </div>
             </nav>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods:{
+        logout(){
+
+        }
+    }
+}
+</script>
