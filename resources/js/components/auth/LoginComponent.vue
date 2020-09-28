@@ -43,3 +43,19 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return{
+            user:{}
+        }
+    },
+    method:{
+        login(){
+            this.$store.dispatch('login', this.user);
+        }
+    }
+
+}
+</script>
