@@ -56285,9 +56285,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   actions: {
     login: function login(_ref, user) {
       var commit = _ref.commit;
-      axios.get('sanctum/csrf-cookie').then(function (res) {
-        axios.post('/api/login', user).then(function (res) {
-          //console.log(res);
+      axios.get('sanctum/csrf-cookie').then(function () {
+        axios.post('/api/login', user).then(function () {
           commit('updateAuth', 'true');
         })["catch"](function (error) {
           console.log(error);
@@ -56296,8 +56295,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     logout: function logout(_ref2) {
       var commit = _ref2.commit;
-      axios.post('/api/logout').then(function (res) {
-        console.log(res);
+      axios.post('/api/logout').then(function () {
         commit('updateAuth', 'false');
       })["catch"](function (error) {
         console.log(error);
