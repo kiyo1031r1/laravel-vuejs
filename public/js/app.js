@@ -2264,10 +2264,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      user: {}
+      user: {},
+      errors: []
     };
   },
   methods: {
@@ -2278,6 +2293,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push({
           name: 'task.list'
         });
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
       });
     }
   }
@@ -38589,79 +38606,181 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-4 col-form-label text-md-right",
-                      attrs: { for: "email" }
-                    },
-                    [_vm._v("メールアドレス")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.email,
-                          expression: "user.email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "email", type: "email", name: "email" },
-                      domProps: { value: _vm.user.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "email", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-4 col-form-label text-md-right",
-                      attrs: { for: "password" }
-                    },
-                    [_vm._v("パスワード")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.user.password,
-                          expression: "user.password"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "password",
-                        type: "password",
-                        name: "password"
+                _c(
+                  "div",
+                  { staticClass: "form-group row" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 col-form-label text-md-right",
+                        attrs: { for: "email" }
                       },
-                      domProps: { value: _vm.user.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.user, "password", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
+                      [_vm._v("メールアドレス")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.email
+                      ? [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.email,
+                                  expression: "user.email"
+                                }
+                              ],
+                              staticClass: "form-control is-invalid",
+                              attrs: {
+                                id: "email",
+                                type: "email",
+                                name: "email"
+                              },
+                              domProps: { value: _vm.user.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.email[0]))
+                            ])
+                          ])
+                        ]
+                      : [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.email,
+                                  expression: "user.email"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "email",
+                                type: "email",
+                                name: "email"
+                              },
+                              domProps: { value: _vm.user.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group row" },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-4 col-form-label text-md-right",
+                        attrs: { for: "password" }
+                      },
+                      [_vm._v("パスワード")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.passowrd
+                      ? [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control is-invalid",
+                              attrs: {
+                                id: "password",
+                                type: "password",
+                                name: "password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.password[0]))
+                            ])
+                          ])
+                        ]
+                      : [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "password",
+                                type: "password",
+                                name: "password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]
+                  ],
+                  2
+                ),
                 _vm._v(" "),
                 _vm._m(0)
               ]

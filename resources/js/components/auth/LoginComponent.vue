@@ -9,18 +9,32 @@
                         <form @submit.prevent="login">
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" v-model="user.email">
-                                </div>
+                                <template v-if="errors.email">
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control is-invalid" name="email" v-model="user.email">
+                                        <div class="invalid-feedback">{{ errors.email[0]}}</div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control" name="email" v-model="user.email">
+                                    </div>
+                                </template>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" v-model="user.password">
-                                </div>
+                                <template v-if="errors.passowrd">
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
+                                        <div class="invalid-feedback">{{ errors.password[0] }}</div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control" name="password" v-model="user.password">
+                                    </div>
+                                </template>
                             </div>
 
                             <div class="form-group row mb-0">
@@ -50,7 +64,8 @@
 export default {
     data(){
         return{
-            user:{}
+            user:{},
+            errors:[]
         }
     },
     methods:{
@@ -58,7 +73,10 @@ export default {
             this.$store.dispatch('login', this.user)
             .then(() => {
                 this.$router.push({ name: 'task.list'});
-            });
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            })
         }
     }
 
