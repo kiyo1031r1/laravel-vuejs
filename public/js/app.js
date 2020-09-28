@@ -2264,7 +2264,7 @@ __webpack_require__.r(__webpack_exports__);
       user: {}
     };
   },
-  method: {
+  methods: {
     login: function login() {
       this.$store.dispatch('login', this.user);
     }

@@ -53,7 +53,7 @@ export default {
             user:{}
         }
     },
-    method:{
+    methods:{
         login(){
             this.$store.dispatch('login', this.user);
         }
