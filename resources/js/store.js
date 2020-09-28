@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -22,7 +23,6 @@ export default new Vuex.Store({
                 axios.post('/api/login',authData)
                 .then(res => {
                     commit('updateAuth', 'true');
-                    this.$router.push('/tasks/list');
                 });
             })
         },
@@ -30,7 +30,6 @@ export default new Vuex.Store({
             axios.post('/api/logout')
             .then(res => {
                 commit('updateAuth', null);
-                this.$router.push('/task/list');
             });
         }
     }

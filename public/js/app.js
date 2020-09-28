@@ -1945,7 +1945,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      this.$store.dispatch('logout');
+      var _this = this;
+
+      this.$store.dispatch('logout').then(function () {
+        _this.$router.push({
+          name: 'task.list'
+        });
+      });
     }
   }
 });
@@ -2266,7 +2272,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      this.$store.dispatch('login', this.user);
+      var _this = this;
+
+      this.$store.dispatch('login', this.user).then(function () {
+        _this.$router.push({
+          name: 'task.list'
+        });
+      });
     }
   }
 });
@@ -56272,25 +56284,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   actions: {
     login: function login(_ref, authData) {
-      var _this = this;
-
       var commit = _ref.commit;
       axios.get('sanctum/csrf-cookie').then(function (res) {
         axios.post('/api/login', authData).then(function (res) {
           commit('updateAuth', 'true');
-
-          _this.$router.push('/tasks/list');
         });
       });
     },
     logout: function logout(_ref2) {
-      var _this2 = this;
-
       var commit = _ref2.commit;
       axios.post('/api/logout').then(function (res) {
         commit('updateAuth', null);
-
-        _this2.$router.push('/task/list');
       });
     }
   }

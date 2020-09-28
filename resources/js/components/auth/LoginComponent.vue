@@ -55,7 +55,10 @@ export default {
     },
     methods:{
         login(){
-            this.$store.dispatch('login', this.user);
+            this.$store.dispatch('login', this.user)
+            .then(() => {
+                this.$router.push({ name: 'task.list'});
+            });
         }
     }
 
