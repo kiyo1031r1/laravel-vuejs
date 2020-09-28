@@ -12,15 +12,15 @@
                         <button class="btn btn-success">新規作成</button>
                     </router-link>
 
-                    <templete v-if="!isAuthenticated">
+                    <template v-if="!isAuthenticated">
                         <router-link :to="{ name: 'login'}">
                             <button class="btn btn-success">ログイン</button>
                         </router-link>
-                    </templete>
+                    </template>
 
                     <template v-else>
                         <button @click="logout" class="btn btn-success">ログアウト</button>
-                    </template>>
+                    </template>
                 </div>
             </nav>
         </div>

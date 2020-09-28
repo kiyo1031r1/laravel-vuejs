@@ -38009,17 +38009,13 @@ var render = function() {
             ]),
             _vm._v(" "),
             !_vm.isAuthenticated
-              ? _c(
-                  "templete",
-                  [
-                    _c("router-link", { attrs: { to: { name: "login" } } }, [
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("ログイン")
-                      ])
+              ? [
+                  _c("router-link", { attrs: { to: { name: "login" } } }, [
+                    _c("button", { staticClass: "btn btn-success" }, [
+                      _vm._v("ログイン")
                     ])
-                  ],
-                  1
-                )
+                  ])
+                ]
               : [
                   _c(
                     "button",
@@ -38029,8 +38025,7 @@ var render = function() {
                     },
                     [_vm._v("ログアウト")]
                   )
-                ],
-            _vm._v(">\n            ")
+                ]
           ],
           2
         )
