@@ -1930,6 +1930,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     isAuthenticated: function isAuthenticated() {
@@ -38001,19 +38008,31 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "login" } } }, [
-              _c("button", { staticClass: "btn btn-success" }, [
-                _vm._v("ログイン")
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-success", on: { click: _vm.logout } },
-              [_vm._v("ログアウト")]
-            )
+            !_vm.isAuthenticated
+              ? _c(
+                  "templete",
+                  [
+                    _c("router-link", { attrs: { to: { name: "login" } } }, [
+                      _c("button", { staticClass: "btn btn-success" }, [
+                        _vm._v("ログイン")
+                      ])
+                    ])
+                  ],
+                  1
+                )
+              : [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: { click: _vm.logout }
+                    },
+                    [_vm._v("ログアウト")]
+                  )
+                ],
+            _vm._v(">\n            ")
           ],
-          1
+          2
         )
       ])
     ])
