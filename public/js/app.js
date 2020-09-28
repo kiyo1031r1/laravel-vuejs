@@ -1932,7 +1932,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
-    logout: function logout() {}
+    logout: function logout() {
+      this.$store.dispatch('logout');
+    }
   }
 });
 
@@ -56255,6 +56257,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
           _this.$router.push('/tasks/list');
         });
+      });
+    },
+    logout: function logout(_ref2) {
+      var _this2 = this;
+
+      var commit = _ref2.commit;
+      axios.post('/api/logout').then(function (res) {
+        commit('updateAuth', false);
+
+        _this2.$router.push('/task/list');
       });
     }
   }

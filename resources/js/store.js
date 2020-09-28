@@ -20,8 +20,15 @@ export default new Vuex.Store({
                 .then(res => {
                     commit('updateAuth', true);
                     this.$router.push('/tasks/list');
-                })
+                });
             })
+        },
+        logout({ commit }) {
+            axios.post('/api/logout')
+            .then(res => {
+                commit('updateAuth', false);
+                this.$router.push('/task/list');
+            });
         }
     }
 });
