@@ -17,17 +17,8 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        login({ commit }, user ){
-            axios.get('sanctum/csrf-cookie')
-            .then(() => {
-                axios.post('/api/login',user)
-                .then(() => {
-                    commit('updateAuth', 'true');
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            })
+        login({ commit }) {
+            commit('updateAuth', 'true');
         },
         logout({ commit }) {
             axios.post('/api/logout')

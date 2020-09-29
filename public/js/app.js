@@ -2292,6 +2292,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/login', this.user).then(function (res) {
+        _this.$store.dispatch('login');
+
         _this.$router.push({
           name: 'task.list'
         });
@@ -56406,15 +56408,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   actions: {
-    login: function login(_ref, user) {
+    login: function login(_ref) {
       var commit = _ref.commit;
-      axios.get('sanctum/csrf-cookie').then(function () {
-        axios.post('/api/login', user).then(function () {
-          commit('updateAuth', 'true');
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      });
+      commit('updateAuth', 'true');
     },
     logout: function logout(_ref2) {
       var commit = _ref2.commit;

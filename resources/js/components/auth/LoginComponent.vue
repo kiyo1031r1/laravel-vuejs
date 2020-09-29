@@ -74,6 +74,7 @@ export default {
         login(){
             axios.post('/api/login', this.user)
             .then((res) => {
+                this.$store.dispatch('login');
                 this.$router.push({name: 'task.list'});
             })
             .catch((error) =>{
