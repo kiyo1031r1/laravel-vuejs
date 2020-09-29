@@ -9,6 +9,7 @@ import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
 import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
 import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
+import SendMailComponent from './components/auth/SendMailComponent'
 
 Vue.use(Router);
 
@@ -69,6 +70,11 @@ const router = new Router({
             name: 'reset_password',
             component: ResetPasswordComponent
         },
+        {
+            path:'/send_mail',
+            name: 'send_mail',
+            component: SendMailComponent
+        }
     ]
 });
 
