@@ -7,6 +7,7 @@ import TaskShowComponent from './components/TaskShowComponent'
 import TaskEditComponent from './components/TaskEditComponent'
 import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
+import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
 
 Vue.use(Router);
 
@@ -56,12 +57,16 @@ const router = new Router({
             meta: {
                 guestOnly: true
             }
+        },
+        {
+            path:'/forgot_password',
+            name: 'forgot_password',
+            component: ForgotPasswordComponent
         }
     ]
 });
 
 function isAuthenticated(){
-    //this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
     return localStorage.getItem('auth');
 }
 

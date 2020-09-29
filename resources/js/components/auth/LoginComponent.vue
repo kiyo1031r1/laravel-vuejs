@@ -49,7 +49,7 @@
                             </div>
                         </form>
 
-                        <router-link :to="{}">
+                        <router-link :to="{ name: 'forgot_password'}">
                             <p class="text-right">パスワードを忘れてしまった場合</p>
                         </router-link>
 
