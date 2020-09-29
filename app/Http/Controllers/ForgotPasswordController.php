@@ -13,9 +13,15 @@ class ForgotPasswordController extends Controller
         ]);
 
         $token = $this.createToken();
+        $resetPassword = new ResetPassword();
+        $resetPassword->email = $request->input('email');
+        $resetPassword->token = $token;
+        $resetPassword->save();
+
     }
 
     public function createToken(){
         return hash_hmac('sha256', Str::random(40), config('app.key'));
     }
+
 }
