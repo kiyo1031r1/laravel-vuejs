@@ -21,13 +21,7 @@ export default new Vuex.Store({
             commit('updateAuth', 'true');
         },
         logout({ commit }) {
-            axios.post('/api/logout')
-            .then(() => {
-                commit('updateAuth', 'false');
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            commit('updateAuth', 'false');
         }
     }
 });

@@ -1947,10 +1947,8 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this = this;
 
-      this.$store.dispatch('logout').then(function () {
-        _this.$router.push({
-          name: 'login'
-        });
+      axios.post('/api/logout').then(function () {
+        _this.$store.dispatch('logout');
       });
     }
   }
@@ -56414,11 +56412,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     logout: function logout(_ref2) {
       var commit = _ref2.commit;
-      axios.post('/api/logout').then(function () {
-        commit('updateAuth', 'false');
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      commit('updateAuth', 'false');
     }
   }
 }));

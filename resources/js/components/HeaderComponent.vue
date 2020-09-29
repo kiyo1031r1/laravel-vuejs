@@ -36,9 +36,9 @@ export default {
     },
     methods:{
         logout(){
-            this.$store.dispatch('logout')
+            axios.post('/api/logout')
             .then(() => {
-                this.$router.push({ name: 'login'});
+                this.$store.dispatch('logout');
             });
         }
     }
