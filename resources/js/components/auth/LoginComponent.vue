@@ -75,7 +75,8 @@ export default {
         login(){
             axios.post('/api/login', this.user)
             .then((res) => {
-                this.$store.dispatch('login');
+                localStorage.setItem('auth', 'true');
+                this.$store.dispatch('updateAuth', 'true');
                 this.$router.push({name: 'task.list'});
             })
             .catch((error) =>{

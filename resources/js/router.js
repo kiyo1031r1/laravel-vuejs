@@ -61,7 +61,8 @@ const router = new Router({
 });
 
 function isAuthenticated(){
-    return store.getters.auth === 'true';
+    //this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
+    return localStorage.getItem('auth');
 }
 
 router.beforeEach((to, from, next) => {

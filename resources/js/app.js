@@ -15,4 +15,7 @@ const app = new Vue({
     router,
     store,
     render: h => h(App),
+    mounted(){
+        this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
+    }
 });

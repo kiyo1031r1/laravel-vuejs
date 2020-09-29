@@ -38,7 +38,8 @@ export default {
         logout(){
             axios.post('/api/logout')
             .then(() => {
-                this.$store.dispatch('logout');
+                localStorage.removeItem('auth');
+                this.$store.dispatch('updateAuth', null);
             });
         }
     }

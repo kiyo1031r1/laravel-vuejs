@@ -1948,7 +1948,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/logout').then(function () {
-        _this.$store.dispatch('logout');
+        localStorage.removeItem('auth');
+
+        _this.$store.dispatch('updateAuth', null);
       });
     }
   }
@@ -2291,7 +2293,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/login', this.user).then(function (res) {
-        _this.$store.dispatch('login');
+        localStorage.setItem('auth', 'true');
+
+        _this.$store.dispatch('updateAuth', 'true');
 
         _this.$router.push({
           name: 'task.list'
@@ -55792,6 +55796,9 @@ var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  },
+  mounted: function mounted() {
+    this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
   }
 });
 
@@ -56398,7 +56405,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 
 function isAuthenticated() {
-  return _store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.auth === 'true';
+  //this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
+  return localStorage.getItem('auth');
 }
 
 router.beforeEach(function (to, from, next) {
@@ -56460,13 +56468,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   actions: {
-    login: function login(_ref) {
+    updateAuth: function updateAuth(_ref, auth) {
       var commit = _ref.commit;
-      commit('updateAuth', 'true');
-    },
-    logout: function logout(_ref2) {
-      var commit = _ref2.commit;
-      commit('updateAuth', 'false');
+      commit('updateAuth', auth);
     }
   }
 }));

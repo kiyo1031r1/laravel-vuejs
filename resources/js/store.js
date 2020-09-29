@@ -17,11 +17,8 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        login({ commit }) {
-            commit('updateAuth', 'true');
-        },
-        logout({ commit }) {
-            commit('updateAuth', 'false');
+        updateAuth({ commit}, auth){
+            commit('updateAuth', auth);
         }
     }
 });
