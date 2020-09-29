@@ -38,7 +38,7 @@ export default {
         logout(){
             this.$store.dispatch('logout')
             .then(() => {
-                this.$router.push({ name: 'task.list'});
+                this.$router.push({ name: 'login'});
             });
         }
     }

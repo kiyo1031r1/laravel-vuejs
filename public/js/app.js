@@ -1949,7 +1949,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$store.dispatch('logout').then(function () {
         _this.$router.push({
-          name: 'task.list'
+          name: 'login'
         });
       });
     }
