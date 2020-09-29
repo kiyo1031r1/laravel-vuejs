@@ -11,15 +11,12 @@ include 'ChromePhp.php';
 class LoginController extends Controller
 {
     public function login(Request $request){
-        // $credentials = $request->validate([
-        //      'email' => ['required', 'email'],
-        //      'password' => ['required']
-        // ]);
+        $credentials = $request->validate([
+             'email' => ['required', 'email'],
+             'password' => ['required']
+        ]);
 
-        if(Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ])){
+        if(Auth::attempt($credentials)){
             return response()->json();
         }
         throw ValidationException::withMessages([

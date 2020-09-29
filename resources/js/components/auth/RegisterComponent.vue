@@ -84,13 +84,16 @@ export default {
     },
     methods:{
         submit() {
-            axios.post('/api/register', this.user)
-            .then((res) => {
-                this.$router.push({name: 'task.list'});
-            })
-            .catch((error) =>{
-                this.errors = error.response.data.errors;
-            });
+            axios.get('sanctum/csrf-cookie')
+            .then(() => {
+                axios.post('/api/register', this.user)
+                .then((res) => {
+                    this.$router.push({name: 'task.list'});
+                })
+                .catch((error) =>{
+                    this.errors = error.response.data.errors;
+                });
+            }); 
         }
     }
 }

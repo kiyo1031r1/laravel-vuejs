@@ -2278,6 +2278,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2289,7 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
-      this.$store.dispatch('login', this.user).then(function () {
+      axios.post('/api/login', this.user).then(function (res) {
         _this.$router.push({
           name: 'task.list'
         });
@@ -2398,12 +2400,14 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios.post('/api/register', this.user).then(function (res) {
-        _this.$router.push({
-          name: 'task.list'
+      axios.get('sanctum/csrf-cookie').then(function () {
+        axios.post('/api/register', _this.user).then(function (res) {
+          _this.$router.push({
+            name: 'task.list'
+          });
+        })["catch"](function (error) {
+          _this.errors = error.response.data.errors;
         });
-      })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
       });
     }
   }
@@ -38707,7 +38711,7 @@ var render = function() {
                       [_vm._v("パスワード")]
                     ),
                     _vm._v(" "),
-                    _vm.errors.passowrd
+                    _vm.errors.password
                       ? [
                           _c("div", { staticClass: "col-md-6" }, [
                             _c("input", {
