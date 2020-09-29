@@ -8,6 +8,7 @@ import TaskEditComponent from './components/TaskEditComponent'
 import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
 import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
+import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
 
 Vue.use(Router);
 
@@ -62,7 +63,12 @@ const router = new Router({
             path:'/forgot_password',
             name: 'forgot_password',
             component: ForgotPasswordComponent
-        }
+        },
+        {
+            path:'/reset_password',
+            name: 'reset_password',
+            component: ResetPasswordComponent
+        },
     ]
 });
 

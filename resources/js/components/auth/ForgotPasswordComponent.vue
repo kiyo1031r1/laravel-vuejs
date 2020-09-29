@@ -30,6 +30,11 @@
                                 </div>
                             </div>
                         </form>
+
+                        <router-link :to="{ name: 'reset_password'}">
+                            <p>仮の再設定用ページリンク</p>
+                        </router-link>
+                        
                     </div>
                 </div>
             </div>
