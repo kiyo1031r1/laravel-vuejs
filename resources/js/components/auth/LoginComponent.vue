@@ -49,7 +49,11 @@
                             </div>
                         </form>
 
-                        <div class='float-right'>
+                        <router-link :to="{}">
+                            <p class="text-right">パスワードを忘れてしまった場合</p>
+                        </router-link>
+
+                        <div class='text-right'>
                             <router-link :to="{ name: 'register'}">
                                 <button type="submit" class="btn btn-success">
                                     ユーザー新規作成
