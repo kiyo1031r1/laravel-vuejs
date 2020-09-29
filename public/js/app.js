@@ -56337,12 +56337,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_TaskListComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/TaskListComponent */ "./resources/js/components/TaskListComponent.vue");
-/* harmony import */ var _components_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TaskCreateComponent */ "./resources/js/components/TaskCreateComponent.vue");
-/* harmony import */ var _components_TaskShowComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TaskShowComponent */ "./resources/js/components/TaskShowComponent.vue");
-/* harmony import */ var _components_TaskEditComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TaskEditComponent */ "./resources/js/components/TaskEditComponent.vue");
-/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
-/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _components_TaskListComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TaskListComponent */ "./resources/js/components/TaskListComponent.vue");
+/* harmony import */ var _components_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TaskCreateComponent */ "./resources/js/components/TaskCreateComponent.vue");
+/* harmony import */ var _components_TaskShowComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TaskShowComponent */ "./resources/js/components/TaskShowComponent.vue");
+/* harmony import */ var _components_TaskEditComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/TaskEditComponent */ "./resources/js/components/TaskEditComponent.vue");
+/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
+/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
+
 
 
 
@@ -56352,36 +56354,79 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
     path: '/tasks',
     name: 'task.list',
-    component: _components_TaskListComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_TaskListComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/tasks/create',
     name: 'task.create',
-    component: _components_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _components_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    meta: {
+      authOnly: true
+    }
   }, {
     path: '/tasks/:taskId',
     name: 'task.show',
-    component: _components_TaskShowComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    component: _components_TaskShowComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
     props: true
   }, {
     path: '/tasks/:taskId/edit',
     name: 'task.edit',
-    component: _components_TaskEditComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
-    props: true
+    component: _components_TaskEditComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    props: true,
+    meta: {
+      authOnly: true
+    }
   }, {
     path: '/login',
     name: 'login',
-    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
+    meta: {
+      guestOnly: true
+    }
   }, {
     path: '/register',
     name: 'register',
-    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
+    meta: {
+      guestOnly: true
+    }
   }]
-}));
+});
+
+function isAuthenticated() {
+  return _store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.auth === 'true';
+}
+
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.authOnly;
+  })) {
+    if (!isAuthenticated()) {
+      next({
+        name: 'login'
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.guestOnly;
+  })) {
+    if (isAuthenticated()) {
+      next({
+        name: 'tasks'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
 

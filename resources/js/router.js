@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import TaskListComponent from './components/TaskListComponent'
 import TaskCreateComponent from './components/TaskCreateComponent'
 import TaskShowComponent from './components/TaskShowComponent'
@@ -9,7 +10,7 @@ import RegisterComponent from './components/auth/RegisterComponent'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [
         {
@@ -20,7 +21,10 @@ export default new Router({
         {
             path:'/tasks/create',
             name: 'task.create',
-            component: TaskCreateComponent
+            component: TaskCreateComponent,
+            meta: {
+                authOnly : true
+            }
         },
         {
             path:'/tasks/:taskId',
@@ -32,17 +36,55 @@ export default new Router({
             path:'/tasks/:taskId/edit',
             name: 'task.edit',
             component: TaskEditComponent,
-            props: true
+            props: true,
+            meta: {
+                authOnly : true
+            }
         },
         {
             path:'/login',
             name: 'login',
             component: LoginComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/register',
             name: 'register',
             component: RegisterComponent,
+            meta: {
+                guestOnly: true
+            }
         }
     ]
 });
+
+function isAuthenticated(){
+    return store.getters.auth === 'true';
+}
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.authOnly)){
+        if(!isAuthenticated()) {
+            next({name: 'login'});
+        }
+        else{
+            next();
+        }
+    }
+    else if(to.matched.some(record => record.meta.guestOnly)){
+        if(isAuthenticated()) {
+            next({name: 'tasks'});
+        }
+        else{
+            next();
+        }
+    }
+    else{
+        next();
+    }
+});
+
+
+export default router;
