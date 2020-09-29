@@ -2278,6 +2278,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38614,6 +38615,14 @@ var render = function() {
                   "div",
                   { staticClass: "form-group row" },
                   [
+                    _vm.errors.not_found
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "text-danger text-center" }, [
+                            _vm._v(_vm._s(_vm.errors.not_found[0]))
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "label",
                       {

@@ -20,8 +20,7 @@ class LoginController extends Controller
             return response()->json();
         }
         throw ValidationException::withMessages([
-            'email' => ['メールアドレスかパスワードが間違っています'],
-            'password' => ['メールアドレスかパスワードが間違っています']
+            'not_found' => ['メールアドレスかパスワードが間違っています'],
         ]);
     }
 

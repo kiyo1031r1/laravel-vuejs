@@ -8,6 +8,9 @@
                     <div class="card-body">
                         <form @submit.prevent="login">
                             <div class="form-group row">
+                                <div v-if="errors.not_found" class="col-md-12">
+                                    <p class="text-danger text-center">{{ errors.not_found[0] }}</p>
+                                </div>
                                 <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                                 <template v-if="errors.email">
                                     <div class="col-md-6">
@@ -24,14 +27,12 @@
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
-
                                 <template v-if="errors.password">
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
                                         <div class="invalid-feedback">{{ errors.password[0] }}</div>
                                     </div>
                                 </template>
-
                                 <template v-else>
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control" name="password" v-model="user.password">
