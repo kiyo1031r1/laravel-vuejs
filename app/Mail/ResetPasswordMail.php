@@ -16,9 +16,9 @@ class ResetPasswordMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -28,6 +28,13 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $subject = 'パスワードの再設定';
+
+        $baseUrl = config('app.url');
+        $token = $this.token;
+        $url = '{$baseUrl}/reset-password/{$token}';
+        $from = config('mail.from.address');
+        
+        return $this->from($from)->subject($subject)->view('reset_password_mail')->with('url', $url);
     }
 }
