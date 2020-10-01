@@ -19,11 +19,11 @@ class ForgotPasswordController extends Controller
 
         $resetPassword = new PasswordReset();
         $resetPassword->email = $request->input('email');
-        $token = $this.createToken();
+        $token = $this->createToken();
         $resetPassword->token = $token;
         $resetPassword->save();
         
-        $this.sendResetPasswordMail($resetPassword->email, $token);
+        $this->sendResetPasswordMail($resetPassword->email, $token);
 
         return $resetPassword;
     }
