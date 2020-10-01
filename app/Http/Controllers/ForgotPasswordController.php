@@ -14,11 +14,11 @@ class ForgotPasswordController extends Controller
             'email' => ['required', 'email']
         ]);
 
-        ResetPassword::destroy($request->email);
-        
-        $token = $this.createToken();
+        ResetPassword::destroy($request->input('email'));
+
         $resetPassword = new ResetPassword();
         $resetPassword->email = $request->input('email');
+        $token = $this.createToken();
         $resetPassword->token = $token;
         $resetPassword->save();
         
