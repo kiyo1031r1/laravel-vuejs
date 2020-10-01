@@ -17,15 +17,15 @@ class ForgotPasswordController extends Controller
 
         PasswordReset::where('email', $request->input('email'))->delete();
 
-        $resetPassword = new PasswordReset();
-        $resetPassword->email = $request->input('email');
+        $passwordReset = new PasswordReset();
+        $passwordReset->email = $request->input('email');
         $token = $this->createToken();
-        $resetPassword->token = $token;
-        $resetPassword->save();
+        $passwordReset->token = $token;
+        $passwordReset->save();
         
-        $this->sendResetPasswordMail($resetPassword->email, $token);
+        $this->sendResetPasswordMail($passwordReset->email, $token);
 
-        return $resetPassword;
+        return $passwordReset;
     }
 
     private function createToken(){
