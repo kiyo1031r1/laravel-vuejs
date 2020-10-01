@@ -2263,14 +2263,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      email: '',
+      user: {},
       errors: []
     };
   },
   methods: {
     submit: function submit() {
-      this.$router.push({
-        name: 'send_mail'
+      var _this = this;
+
+      axios.post('/api/forgot', this.user).then(function () {
+        _this.$router.push({
+          name: 'send_mail'
+        });
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
       });
     }
   }
@@ -38787,8 +38793,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.email,
-                                    expression: "email"
+                                    value: _vm.user.email,
+                                    expression: "user.email"
                                   }
                                 ],
                                 staticClass: "form-control is-invalid",
@@ -38797,13 +38803,17 @@ var render = function() {
                                   type: "email",
                                   name: "email"
                                 },
-                                domProps: { value: _vm.email },
+                                domProps: { value: _vm.user.email },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
-                                    _vm.email = $event.target.value
+                                    _vm.$set(
+                                      _vm.user,
+                                      "email",
+                                      $event.target.value
+                                    )
                                   }
                                 }
                               }),
@@ -38820,8 +38830,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.email,
-                                    expression: "email"
+                                    value: _vm.user.email,
+                                    expression: "user.email"
                                   }
                                 ],
                                 staticClass: "form-control",
@@ -38830,13 +38840,17 @@ var render = function() {
                                   type: "email",
                                   name: "email"
                                 },
-                                domProps: { value: _vm.email },
+                                domProps: { value: _vm.user.email },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
-                                    _vm.email = $event.target.value
+                                    _vm.$set(
+                                      _vm.user,
+                                      "email",
+                                      $event.target.value
+                                    )
                                   }
                                 }
                               })

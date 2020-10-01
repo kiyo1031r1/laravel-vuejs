@@ -11,13 +11,13 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                                 <template v-if="errors.email">
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control is-invalid" name="email" v-model="email">
+                                        <input id="email" type="email" class="form-control is-invalid" name="email" v-model="user.email">
                                         <div class="invalid-feedback">{{ errors.email[0]}}</div>
                                     </div>
                                 </template>
                                 <template v-else>
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" v-model="email">
+                                        <input id="email" type="email" class="form-control" name="email" v-model="user.email">
                                     </div>
                                 </template>
                             </div>
@@ -46,13 +46,19 @@
 export default {
     data(){
         return {
-            email: '',
+            user: {},
             errors: []
         }
     },
     methods: {
         submit(){
-            this.$router.push({ name: 'send_mail' });
+            axios.post('/api/forgot', this.user)
+            .then(() => {
+                this.$router.push({ name: 'send_mail' });
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            });
         }
     }
 }
