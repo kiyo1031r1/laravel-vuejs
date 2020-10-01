@@ -15,7 +15,7 @@ class ForgotPasswordController extends Controller
             'email' => ['required', 'email']
         ]);
 
-        PasswordReset::destroy($request->input('email'));
+        PasswordReset::where('email', $request->input('email'))->delete();
 
         $resetPassword = new PasswordReset();
         $resetPassword->email = $request->input('email');
