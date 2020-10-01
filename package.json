@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "js-cookie": "^2.2.1",
+        "vue-cookies": "^1.7.4",
         "vue-router": "^3.4.3",
         "vuex": "^3.5.1"
     }
