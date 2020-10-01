@@ -31,7 +31,7 @@ class ResetPasswordMail extends Mailable
         $subject = 'パスワードの再設定';
 
         $baseUrl = config('app.url');
-        $token = $this.token;
+        $token = $this->token;
         $url = '{$baseUrl}/reset-password/{$token}';
         $from = config('mail.from.address');
         
