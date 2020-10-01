@@ -39607,7 +39607,7 @@ var render = function() {
                         staticClass: "col-md-4 col-form-label text-md-right",
                         attrs: { for: "password" }
                       },
-                      [_vm._v("パスワード")]
+                      [_vm._v("新パスワード")]
                     ),
                     _vm._v(" "),
                     _vm.errors.password
@@ -39684,7 +39684,7 @@ var render = function() {
                       staticClass: "col-md-4 col-form-label text-md-right",
                       attrs: { for: "password_confirmation" }
                     },
-                    [_vm._v("パスワードの確認")]
+                    [_vm._v("新パスワードの確認")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [

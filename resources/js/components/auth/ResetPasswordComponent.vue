@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <form @submit.prevent="submit">
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">新パスワード</label>
                                 <template v-if="errors.password">
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control is-invalid" name="password" v-model="password">
@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">パスワードの確認</label>
+                                <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">新パスワードの確認</label>
 
                                 <div class="col-md-6">
                                     <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" v-model="password_confirmation">
