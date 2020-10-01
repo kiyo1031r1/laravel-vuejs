@@ -27,6 +27,6 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
-Route::post('/reset', [ResetPasswordController::class], 'reset');
+Route::post('/reset', [ResetPasswordController::class, 'reset']);
 
 Route::apiResource('/tasks',TaskController::class);
