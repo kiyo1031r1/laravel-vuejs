@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">パスワードリセット</div>
                     <div class="card-body">
-                        <a href="">こちらのリンク</a>をクリックして、パスワードをリセットしてください。
+                        <a href="{{ $url }}">こちらのリンク</a>をクリックして、パスワードをリセットしてください。
                     </div>
                 </div>
             </div>
