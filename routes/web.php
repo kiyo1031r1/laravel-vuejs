@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/reset/{token}', [ResetPasswordController::class, 'checkToken']);
+Route::get('/reset_password/{token}', [ResetPasswordController::class, 'checkToken']);
 
 Route::get('/{any}', function () {
     return view('index');
