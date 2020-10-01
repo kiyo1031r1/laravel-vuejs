@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\support\str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPasswordMail;
+use App\Models\PasswordReset;
 
 class ForgotPasswordController extends Controller
 {
@@ -14,9 +15,9 @@ class ForgotPasswordController extends Controller
             'email' => ['required', 'email']
         ]);
 
-        ResetPassword::destroy($request->input('email'));
+        PasswordReset::destroy($request->input('email'));
 
-        $resetPassword = new ResetPassword();
+        $resetPassword = new PasswordReset();
         $resetPassword->email = $request->input('email');
         $token = $this.createToken();
         $resetPassword->token = $token;
