@@ -32,7 +32,7 @@ class ResetPasswordMail extends Mailable
 
         $baseUrl = config('app.url');
         $token = $this->token;
-        $url = '{$baseUrl}/reset-password/{$token}';
+        $url = "{$baseUrl}/reset-password/{$token}";
         $from = config('mail.from.address');
         
         return $this->from($from)->subject($subject)->view('reset_password_mail')->with('url', $url);
