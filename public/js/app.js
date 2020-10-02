@@ -2563,19 +2563,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      password: '',
-      password_confirmation: '',
-      errors: [],
-      token: ''
+      user: {
+        password: '',
+        password_confirmation: '',
+        token: ''
+      },
+      errors: []
     };
   },
   methods: {
-    submit: function submit() {}
+    submit: function submit() {
+      var _this = this;
+
+      axios.post('/api/reset', user).then(function () {
+        _this.$router.push();
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+      });
+    }
   },
   created: function created() {
     this.token = vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('RESET_TOKEN');
 
-    if (this.token == null) {
+    if (this.user.token == null) {
       this.$router.push({
         name: 'login'
       });
@@ -39784,8 +39794,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.password,
-                                  expression: "password"
+                                  value: _vm.user.password,
+                                  expression: "user.password"
                                 }
                               ],
                               staticClass: "form-control is-invalid",
@@ -39794,13 +39804,17 @@ var render = function() {
                                 type: "password",
                                 name: "password"
                               },
-                              domProps: { value: _vm.password },
+                              domProps: { value: _vm.user.password },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
-                                  _vm.password = $event.target.value
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
                                 }
                               }
                             }),
@@ -39817,8 +39831,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.password,
-                                  expression: "password"
+                                  value: _vm.user.password,
+                                  expression: "user.password"
                                 }
                               ],
                               staticClass: "form-control",
@@ -39827,13 +39841,17 @@ var render = function() {
                                 type: "password",
                                 name: "password"
                               },
-                              domProps: { value: _vm.password },
+                              domProps: { value: _vm.user.password },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return
                                   }
-                                  _vm.password = $event.target.value
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
                                 }
                               }
                             })
@@ -39859,8 +39877,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.password_confirmation,
-                          expression: "password_confirmation"
+                          value: _vm.user.password_confirmation,
+                          expression: "user.password_confirmation"
                         }
                       ],
                       staticClass: "form-control",
@@ -39869,13 +39887,17 @@ var render = function() {
                         type: "password",
                         name: "password_confirmation"
                       },
-                      domProps: { value: _vm.password_confirmation },
+                      domProps: { value: _vm.user.password_confirmation },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.password_confirmation = $event.target.value
+                          _vm.$set(
+                            _vm.user,
+                            "password_confirmation",
+                            $event.target.value
+                          )
                         }
                       }
                     })

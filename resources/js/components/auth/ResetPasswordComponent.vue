@@ -11,13 +11,13 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">新パスワード</label>
                                 <template v-if="errors.password">
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control is-invalid" name="password" v-model="password">
+                                        <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
                                         <div class="invalid-feedback">{{ errors.password[0]}}</div>
                                     </div>
                                 </template>
                                 <template v-else>
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control" name="password" v-model="password">
+                                        <input id="password" type="password" class="form-control" name="password" v-model="user.password">
                                     </div>
                                 </template>
                             </div>
@@ -26,7 +26,7 @@
                                 <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">新パスワードの確認</label>
 
                                 <div class="col-md-6">
-                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" v-model="password_confirmation">
+                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" v-model="user.password_confirmation">
                                 </div>
                             </div>
 
@@ -51,20 +51,29 @@ import VueCookies from 'vue-cookies'
 export default {
     data(){
         return {
-            password: '',
-            password_confirmation: '',
+            user:{
+                password: '',
+                password_confirmation: '',
+                token: ''
+            },
             errors: [],
-            token: ''
         }
     },
     methods: {
         submit(){
+            axios.post('/api/reset', user)
+            .then(() => {
+                this.$router.push();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            });
         }
     },
     created(){
        this.token = VueCookies.get('RESET_TOKEN');
 
-       if(this.token == null) {
+       if(this.user.token == null) {
            this.$router.push({name: 'login'});
        }
        else{
