@@ -2576,7 +2576,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/reset', user).then(function () {
-        _this.$router.push();
+        _this.$router.push({
+          name: 'changed_password'
+        });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
