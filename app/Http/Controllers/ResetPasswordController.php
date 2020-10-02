@@ -21,7 +21,7 @@ class ResetPasswordController extends Controller
 
     public function __construct(){
         $this->middleware('guest');
-        $this->expire = config('auth.passwords.users.expire');
+        $this->expire = config('auth.passwords.users.expire') * 60;
     }
 
     public function checkToken($token = null){
