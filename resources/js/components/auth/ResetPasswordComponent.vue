@@ -75,6 +75,7 @@ export default {
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
+                this.user.password_confirmation = ''
             });
         }
     },

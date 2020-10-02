@@ -2497,6 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
+          _this.user.password_confirmation = '';
         });
       });
     }
@@ -2595,6 +2596,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
+        _this.user.password_confirmation = '';
       });
     }
   },
