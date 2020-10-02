@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,11 @@ class ResetPasswordController extends Controller
 
     private $login_path = 'login';
     private $reset_password_path = 'reset_password';
+    private $expire = '';
 
     public function __construct(){
         $this->middleware('guest');
+        $this->expire = config('auth.passwords.users.expire');
     }
 
     public function checkToken($token = null){
@@ -47,6 +50,13 @@ class ResetPasswordController extends Controller
         if(!$passwordReset){
             throw ValidationException::withMessages([
                 'token' => ['処理に失敗しました。再度メールを送信してください']
+            ]);
+        }
+
+        $validity_period = Carbon::parse($passwordReset->created_at)->addSecond($this->expire);
+        if($validity_period->isPast()){
+            throw ValidationException::withMessages([
+                'token' => ['有効期限が切れています。再度メールを送信してください']
             ]);
         }
 
