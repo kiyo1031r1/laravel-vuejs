@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\PasswordReset;
+use App\Models\User;
+use ChromePhp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
+include 'ChromePhp.php';
 
 class ResetPasswordController extends Controller
 {
@@ -31,35 +36,27 @@ class ResetPasswordController extends Controller
     }
 
     public function reset(Request $request){
-        $validator = $this->validator($request->all());
-
-        $validator->after(function ($validator, $request) {
-            $token = Crypt::decryptString($request->input('token'));
-
-            $passwordReset = PasswordReset::where('token', $token)->first();
-            if(!$passwordReset){
-                $validator->errors()->add('token', '処理に失敗しました。再度メールを送信してください');
-            }
-
-            $user = User::where('email', $passwordReset->email)->first();
-            if(!$user) {
-                $validator->errors()->add('user', '登録ユーザーが見つかりませんでした');
-            }
-            
-            if($user) {
-                $validator->errors()->add('user', 'テスト');
-            }
-        });
-        
-        $validator->validate();
-
-
-    }
-
-    private function validator($data) {
-        return Validator::make($data, [
+        $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'token' => ['required'] 
         ]);
+
+        $token = Crypt::decryptString($request->input('token'));
+        $token = explode('|', $token)[1];
+        $passwordReset = PasswordReset::where('token', $token)->first();
+
+        if(!$passwordReset){
+            throw ValidationException::withMessages([
+                'token' => ['処理に失敗しました。再度メールを送信してください']
+            ]);
+        }
+
+        $user = User::where('email', $passwordReset->email)->first();
+        if(!$user){
+            throw ValidationException::withMessages([
+                'user' => ['登録ユーザーが見つかりませんでした']
+            ]);
+        }
+        
     }
 }
