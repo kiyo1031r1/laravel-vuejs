@@ -46,17 +46,30 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
+
 export default {
     data(){
         return {
             password: '',
             password_confirmation: '',
-            errors: []
+            errors: [],
+            token: ''
         }
     },
     methods: {
         submit(){
         }
-    }
+    },
+    created(){
+       this.token = VueCookies.get('RESET_TOKEN');
+
+       if(this.token == null) {
+           this.$router.push({name: 'login'});
+       }
+       else{
+           VueCookies.remove('RESET_TOKEN');
+       }
+   }
 }
 </script>
