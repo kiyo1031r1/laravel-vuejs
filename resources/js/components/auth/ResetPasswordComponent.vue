@@ -8,6 +8,12 @@
                     <div class="card-body">
                         <form @submit.prevent="submit">
                             <div class="form-group row">
+                                <div v-if="errors.user" class="col-md-12">
+                                    <p class="text-danger text-center">{{ errors.user[0] }}</p>
+                                </div>
+                                <div v-if="errors.token" class="col-md-12">
+                                    <p class="text-danger text-center">{{ errors.token[0] }}</p>
+                                </div>
                                 <label for="password" class="col-md-4 col-form-label text-md-right">新パスワード</label>
                                 <template v-if="errors.password">
                                     <div class="col-md-6">
@@ -61,7 +67,7 @@ export default {
     },
     methods: {
         submit(){
-            axios.post('/api/reset', user)
+            axios.post('/api/reset', this.user)
             .then(() => {
                 this.$router.push({name: 'changed_password'});
             })
@@ -71,7 +77,7 @@ export default {
         }
     },
     created(){
-       this.token = VueCookies.get('RESET_TOKEN');
+       this.user.token = VueCookies.get('RESET_TOKEN');
 
        if(this.user.token == null) {
            this.$router.push({name: 'login'});

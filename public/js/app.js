@@ -2559,6 +2559,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2575,7 +2581,7 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios.post('/api/reset', user).then(function () {
+      axios.post('/api/reset', this.user).then(function () {
         _this.$router.push({
           name: 'changed_password'
         });
@@ -2585,7 +2591,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.token = vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('RESET_TOKEN');
+    this.user.token = vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('RESET_TOKEN');
 
     if (this.user.token == null) {
       this.$router.push({
@@ -39826,6 +39832,22 @@ var render = function() {
                   "div",
                   { staticClass: "form-group row" },
                   [
+                    _vm.errors.user
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "text-danger text-center" }, [
+                            _vm._v(_vm._s(_vm.errors.user[0]))
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.errors.token
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("p", { staticClass: "text-danger text-center" }, [
+                            _vm._v(_vm._s(_vm.errors.token[0]))
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c(
                       "label",
                       {
