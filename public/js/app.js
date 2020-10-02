@@ -2488,6 +2488,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('sanctum/csrf-cookie').then(function () {
         axios.post('/api/register', _this.user).then(function (res) {
+          localStorage.setItem('auth', 'true');
+
+          _this.$store.dispatch('updateAuth', 'true');
+
           _this.$router.push({
             name: 'task.list'
           });
