@@ -20,11 +20,11 @@ class ResetPasswordController extends Controller
         $baseUrl = config('app.url');
         if($isToken) {
             $route = "{$baseUrl}/{$this->reset_password_path}";
-            return redirect($route)->cookie('RESET_TOKEN', $token);
+            return redirect($route)->cookie('RESET_TOKEN', $token, 0, '', '', false, false);
         }
         else{
             $route = "{$baseUrl}/{$this->login_path}";
-            return redirect($route)->cookie('ERROR_MESSAGE', $token);
+            return redirect($route)->cookie('ERROR_MESSAGE', $token, 0, '', '', false, false);
         }
     }
 }
