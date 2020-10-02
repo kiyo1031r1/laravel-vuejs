@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
 import TaskListComponent from './components/TaskListComponent'
 import TaskCreateComponent from './components/TaskCreateComponent'
 import TaskShowComponent from './components/TaskShowComponent'
@@ -10,6 +9,7 @@ import RegisterComponent from './components/auth/RegisterComponent'
 import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
 import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
 import SendMailComponent from './components/auth/SendMailComponent'
+import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
 
 Vue.use(Router);
 
@@ -74,6 +74,11 @@ const router = new Router({
             path:'/send_mail',
             name: 'send_mail',
             component: SendMailComponent
+        },
+        {
+            path:'/changed_password',
+            name: 'changed_password',
+            component: ChangedPasswordComponent
         }
     ]
 });
