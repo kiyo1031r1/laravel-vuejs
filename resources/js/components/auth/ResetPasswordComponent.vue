@@ -63,7 +63,7 @@ export default {
         submit(){
             axios.post('/api/reset', user)
             .then(() => {
-                this.$router.push();
+                this.$router.push({name: 'changed_password'});
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
