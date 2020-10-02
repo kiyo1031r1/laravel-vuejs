@@ -2582,6 +2582,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/reset', this.user).then(function () {
+        localStorage.setItem('auth', 'true');
+
+        _this.$store.dispatch('updateAuth', 'true');
+
         _this.$router.push({
           name: 'changed_password'
         });

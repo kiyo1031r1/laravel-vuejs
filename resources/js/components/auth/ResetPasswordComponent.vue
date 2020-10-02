@@ -69,6 +69,8 @@ export default {
         submit(){
             axios.post('/api/reset', this.user)
             .then(() => {
+                localStorage.setItem('auth', 'true');
+                this.$store.dispatch('updateAuth', 'true');
                 this.$router.push({name: 'changed_password'});
             })
             .catch(error => {
