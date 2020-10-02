@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\PasswordReset;
 use App\Models\User;
-use ChromePhp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
-include 'ChromePhp.php';
 
 class ResetPasswordController extends Controller
 {
@@ -57,6 +56,16 @@ class ResetPasswordController extends Controller
                 'user' => ['登録ユーザーが見つかりませんでした']
             ]);
         }
-        
+
+        $user = DB::transaction(function() use($passwordReset, $user, $request){
+            PasswordReset::where('email', $passwordReset->email)->delete();
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+            return $user;
+        });
+
+        Auth::login($user);
+
+        return $user;
     }
 }
