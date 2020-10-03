@@ -29,11 +29,12 @@ class LoginController extends Controller
         return response()->json();
     }
 
-    public function redirectToProvider(){
+    public function redirectToProvider($provider){
+        return Socialite::driver($provider)->redirect();
 
     }
 
-    public function handleProviderCallback(){
-        
+    public function handleProviderCallback($provider){
+        $providerUser = Socialite::driver($provider)->user();
     }
 }
