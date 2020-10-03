@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login/{provider}/callback',[LoginController::class, 'redirectToProvider']);
+Route::get('/login/{provider}/callback',[LoginController::class, 'handleProviderCallback']);
+
 Route::get('/reset_password/{token}', [ResetPasswordController::class, 'checkToken']);
 
 Route::get('/{any}', function () {

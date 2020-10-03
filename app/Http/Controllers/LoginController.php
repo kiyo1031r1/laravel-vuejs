@@ -28,4 +28,12 @@ class LoginController extends Controller
         Auth::logout();
         return response()->json();
     }
+
+    public function redirectToProvider(){
+
+    }
+
+    public function handleProviderCallback(){
+        
+    }
 }
