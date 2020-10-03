@@ -11,7 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
-    private $home_path = '/tasks';
+    private $login_path = 'login';
 
     public function login(Request $request){
         $credentials = $request->validate([
@@ -37,36 +37,40 @@ class LoginController extends Controller
     }
 
     public function handleProviderCallback($provider){
-        $providerUser = Socialite::driver($provider)->user();
-        $email = $providerUser->getEmail();
-        $provider_id = $providerUser->getId();
-        if($email) {
-            $user = User::firstOrCreate(['email' => $email],[
+        $baseUrl = config('app.url');
+        $route = "{$baseUrl}/{$this->login_path}";
+
+        try{
+            $providerUser = Socialite::driver($provider)->user();
+            $email = $providerUser->getEmail();
+            $provider_id = $providerUser->getId();
+            if($email) {
+                $user = User::firstOrCreate(['email' => $email],[
+                        'provider_id' => $provider_id ,
+                        'provider_name' => $provider,
+                        'email' => $email,
+                        'name' => $providerUser->getName(),
+                        'nickname' => $providerUser->getNickname(),
+                ]);
+            }
+            elseif($provider_id) {
+                $user = User::firstOrCreate(['provider_id' => $provider_id],[
                     'provider_id' => $provider_id ,
                     'provider_name' => $provider,
                     'email' => $email,
-                    'name' => $provider->getName(),
-                    'nickname' => $provider->getNickname(),
-            ]);
-        }
-        elseif($provider_id) {
-            $user = User::firstOrCreate(['provider_id' => $provider_id],[
-                'provider_id' => $provider_id ,
-                'provider_name' => $provider,
-                'email' => $email,
-                'name' => $provider->getName(),
-                'nickname' => $provider->getNickname(),
-            ]);
-        }
-        else{
-            throw new Exception();
-        }
+                    'name' => $providerUser->getName(),
+                    'nickname' => $providerUser->getNickname(),
+                ]);
+            }
+            else{
+                throw new Exception();
+            }
+    
+            Auth::login($user);
+            return redirect($route)->cookie('SOCIAL_LOGIN_SUCCESS', '', 0, '', '', false, false);
 
-        Auth::login($user);
-
-        $baseUrl = config('app.url');
-        $route = "{$baseUrl}/{$this->home_path}";
-
-        return redirect($route);
+        } catch (Exception $e) {
+            return redirect($route)->cookie('SOCIAL_LOGIN_FAILED', '', 0, '', '', false, false);
+        }
     }
 }

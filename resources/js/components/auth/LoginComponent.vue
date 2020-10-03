@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
+
 export default {
     data(){
         return{
@@ -89,15 +91,27 @@ export default {
         login(){
             axios.post('/api/login', this.user)
             .then((res) => {
-                localStorage.setItem('auth', 'true');
-                this.$store.dispatch('updateAuth', 'true');
-                this.$router.push({name: 'task.list'});
+                this.auth();
             })
             .catch((error) =>{
                 this.errors = error.response.data.errors;
             });
         },
-    }
+        auth(){
+            localStorage.setItem('auth', 'true');
+            this.$store.dispatch('updateAuth', 'true');
+            this.$router.push({name: 'task.list'});
+        }
+    },
+    created(){
+        if(VueCookies.get('SOCIAL_LOGIN_SUCCESS')) {
+            VueCookies.remove('SOCIAL_LOGIN_SUCCESS');
+            this.auth();
+        }
+        else if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
+            VueCookies.remove('SOCIAL_LOGIN_FAILED');
+       }
+   }
 
 }
 </script>

@@ -2293,6 +2293,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-cookies */ "./node_modules/vue-cookies/vue-cookies.js");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_cookies__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2372,6 +2374,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2384,16 +2387,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/login', this.user).then(function (res) {
-        localStorage.setItem('auth', 'true');
-
-        _this.$store.dispatch('updateAuth', 'true');
-
-        _this.$router.push({
-          name: 'task.list'
-        });
+        _this.auth();
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
+    },
+    auth: function auth() {
+      localStorage.setItem('auth', 'true');
+      this.$store.dispatch('updateAuth', 'true');
+      this.$router.push({
+        name: 'task.list'
+      });
+    }
+  },
+  created: function created() {
+    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
+      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
+      this.auth();
+    } else if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
+      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_FAILED');
     }
   }
 });
