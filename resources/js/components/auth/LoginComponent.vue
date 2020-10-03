@@ -4,7 +4,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">ログイン</div>
-
                     <div class="card-body">
                         <form @submit.prevent="login">
                             <div class="form-group row">
@@ -59,6 +58,17 @@
                                     ユーザー新規作成
                                 </button>
                             </router-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">ソーシャルアカウントでログイン</div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <button class="btn btn-primary">Googleアカウントでログイン</button>
                         </div>
                     </div>
                 </div>
