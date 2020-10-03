@@ -68,7 +68,7 @@
                     <div class="card-header">ソーシャルアカウントでログイン</div>
                     <div class="card-body">
                         <div class="text-center">
-                            <button @click="social_login" class="btn btn-primary">Googleアカウントでログイン</button>
+                            <button onclick="location.href='/login/google'" class="btn btn-primary">Googleアカウントでログイン</button>
                         </div>
                     </div>
                 </div>
@@ -97,9 +97,6 @@ export default {
                 this.errors = error.response.data.errors;
             });
         },
-        social_login(){
-            
-        }
     }
 
 }
