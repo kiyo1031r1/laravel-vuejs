@@ -2394,7 +2394,8 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
-    }
+    },
+    social_login: function social_login() {}
   }
 });
 
@@ -39415,7 +39416,26 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("ソーシャルアカウントでログイン")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: { click: _vm.social_login }
+                },
+                [_vm._v("Googleアカウントでログイン")]
+              )
+            ])
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -39435,26 +39455,6 @@ var staticRenderFns = [
             )
           ]
         )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v("ソーシャルアカウントでログイン")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "text-center" }, [
-            _c("button", { staticClass: "btn btn-primary" }, [
-              _vm._v("Googleアカウントでログイン")
-            ])
-          ])
-        ])
       ])
     ])
   }
