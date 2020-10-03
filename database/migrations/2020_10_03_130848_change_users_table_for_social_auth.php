@@ -18,7 +18,7 @@ class ChangeUsersTableForSocialAuth extends Migration
             $table->string('password')->nullable()->change();
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
-            $table->string('nickName')->nullable();
+            $table->string('nickname')->nullable();
         });
     }
 
