@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-
-include 'ChromePhp.php';
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -31,7 +30,6 @@ class LoginController extends Controller
 
     public function redirectToProvider($provider){
         return Socialite::driver($provider)->redirect();
-
     }
 
     public function handleProviderCallback($provider){
