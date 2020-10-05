@@ -41,4 +41,10 @@ return [
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_CALLBACK_URL')
     ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_API_KEY'),
+        'client_secret' => env('TWITTER_API_KEY_SECRET'),
+        'redirect' => env('TWITTER_CALLBACK_URL')
+    ],
 ];

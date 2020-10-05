@@ -68,7 +68,13 @@
                     <div class="card-header">ソーシャルアカウントでログイン</div>
                     <div class="card-body">
                         <div class="text-center">
-                            <button onclick="location.href='/login/google'" class="btn btn-primary">Googleアカウントでログイン</button>
+                            <button onclick="location.href='/login/google'" class="btn btn-danger">Googleアカウントでログイン</button>
+                        </div>
+                        <div class="text-center">
+                            <button onclick="location.href='/login/facebook'" class="btn btn-primary mt-3" style="background-color: blue; border-color: blue;">Facebookアカウントでログイン</button>
+                        </div>
+                        <div class="text-center">
+                            <button onclick="location.href='/login/twitter'" class="btn btn-primary mt-3 ">Twitterアカウントでログイン</button>
                         </div>
                     </div>
                 </div>

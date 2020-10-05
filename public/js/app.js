@@ -2374,6 +2374,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -39466,10 +39472,36 @@ var staticRenderFns = [
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
+                staticClass: "btn btn-danger",
                 attrs: { onclick: "location.href='/login/google'" }
               },
               [_vm._v("Googleアカウントでログイン")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary mt-3",
+                staticStyle: {
+                  "background-color": "blue",
+                  "border-color": "blue"
+                },
+                attrs: { onclick: "location.href='/login/facebook'" }
+              },
+              [_vm._v("Facebookアカウントでログイン")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary mt-3 ",
+                attrs: { onclick: "location.href='/login/twitter'" }
+              },
+              [_vm._v("Twitterアカウントでログイン")]
             )
           ])
         ])
