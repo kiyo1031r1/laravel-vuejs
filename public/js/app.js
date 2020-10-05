@@ -2379,7 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: {},
-      errors: []
+      errors: {}
     };
   },
   methods: {
@@ -2405,6 +2405,7 @@ __webpack_require__.r(__webpack_exports__);
       vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
       this.auth();
     } else if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
+      this.errors.not_found = ['ユーザー登録に失敗しました'];
       vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_FAILED');
     }
   }

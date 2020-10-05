@@ -84,7 +84,7 @@ export default {
     data(){
         return{
             user:{},
-            errors:[]
+            errors:{}
         }
     },
     methods:{
@@ -109,9 +109,9 @@ export default {
             this.auth();
         }
         else if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
+            this.errors.not_found = ['ユーザー登録に失敗しました'];
             VueCookies.remove('SOCIAL_LOGIN_FAILED');
        }
    }
-
 }
 </script>
