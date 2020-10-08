@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\Users\ForgotPasswordController;
+use App\Http\Controllers\Users\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Users\LoginController;
+use App\Http\Controllers\Users\RegisterController;
 
 /*
 |--------------------------------------------------------------------------

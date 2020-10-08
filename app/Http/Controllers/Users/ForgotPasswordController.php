@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
 use Illuminate\support\str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPasswordMail;
 use App\Models\PasswordReset;
+use App\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
