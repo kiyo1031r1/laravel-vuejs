@@ -16,9 +16,8 @@ class AdminLoginController extends Controller
              'password' => ['required']
         ]);
 
-        $user = User::where('email', $request->email)->where('password', $request->password)->first();
-
-        if($user == null){
+        $user = User::where('email', $request->email)->first();
+        if($user == null) {
             throw ValidationException::withMessages([
                 'not_found' => ['メールアドレスかパスワードが間違っています'],
             ]);
