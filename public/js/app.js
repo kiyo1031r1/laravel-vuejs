@@ -1985,7 +1985,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     auth: function auth() {
       localStorage.setItem('admin_auth', 'true'); //this.$store.dispatch('updateAuth', 'true');
-      //this.$router.push({name: 'task.list'});
+
+      this.$router.push({
+        name: 'admin'
+      });
     }
   }
 });
