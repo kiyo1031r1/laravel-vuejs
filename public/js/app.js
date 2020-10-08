@@ -1915,13 +1915,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: {
+        email: 'default'
+      }
+    };
+  },
   methods: {
     logout: function logout() {
       axios.post('/api/admin/logout'); // .then(() => {
       //     localStorage.removeItem('auth');
       //     this.$store.dispatch('updateAuth', null);
       // });
+    },
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get('/api/user').then(function (res) {
+        _this.user = res.data;
+      });
     }
   }
 });
@@ -38534,7 +38550,15 @@ var render = function() {
       "button",
       { staticClass: "btn btn-success", on: { click: _vm.logout } },
       [_vm._v("ログアウト")]
-    )
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn btn-success", on: { click: _vm.getUser } },
+      [_vm._v("ユーザー取得")]
+    ),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.user.email))])
   ])
 }
 var staticRenderFns = []
