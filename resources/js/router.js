@@ -10,6 +10,7 @@ import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
 import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
 import SendMailComponent from './components/auth/SendMailComponent'
 import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
+import AdminLoginComponent from './components/auth/AdminLoginComponent'
 
 Vue.use(Router);
 
@@ -79,7 +80,15 @@ const router = new Router({
             path:'/changed_password',
             name: 'changed_password',
             component: ChangedPasswordComponent
-        }
+        },
+        {
+            path:'/admin/login',
+            name: 'admin_login',
+            component: AdminLoginComponent,
+            //meta: {
+            //    guestOnly: true
+            //}
+        },
     ]
 });
 
