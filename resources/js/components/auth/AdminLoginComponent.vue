@@ -78,7 +78,7 @@ export default {
         auth(){
             localStorage.setItem('admin_auth', 'true');
             //this.$store.dispatch('updateAuth', 'true');
-            //this.$router.push({name: 'task.list'});
+            this.$router.push({name: 'admin'});
         }
     }
 }
