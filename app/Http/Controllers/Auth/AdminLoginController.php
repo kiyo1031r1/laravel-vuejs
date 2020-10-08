@@ -16,6 +16,14 @@ class AdminLoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
+            $user_roles = auth()->user()->with('roles')->all();
+            foreach($user_roles as $role) {
+                if($role->name === 'subscriber'){
+                    throw ValidationException::withMessages([
+                        'not_found' => ['権限がありません']
+                    ]);
+                }
+            }
             return response()->json();
         }
         throw ValidationException::withMessages([
