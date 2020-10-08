@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Users\LoginController;
-use App\Http\Controllers\Users\ResetPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
