@@ -16,8 +16,15 @@ class AdminLoginController extends Controller
              'password' => ['required']
         ]);
 
-        $user = User::where('email', $request->email)->where('password', $request->password)->get();
-        $user_roles = $user->with('roles')->get();
+        $user = User::where('email', $request->email)->where('password', $request->password)->first();
+
+        if($user == null){
+            throw ValidationException::withMessages([
+                'not_found' => ['メールアドレスかパスワードが間違っています'],
+            ]);
+        }
+
+        $user_roles = $user->roles;
         foreach($user_roles as $role) {
             if($role->name === 'subscriber'){
                 throw ValidationException::withMessages([
