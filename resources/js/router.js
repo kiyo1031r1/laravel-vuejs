@@ -11,6 +11,8 @@ import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
 import SendMailComponent from './components/auth/SendMailComponent'
 import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
+import AdminHomeComponent from './components/admin/AdminHomeComponent'
+
 
 Vue.use(Router);
 
@@ -88,6 +90,11 @@ const router = new Router({
             //meta: {
             //    guestOnly: true
             //}
+        },
+        {
+            path:'/admin',
+            name: 'admin',
+            component: AdminHomeComponent,
         },
     ]
 });
