@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
@@ -28,5 +29,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
 Route::post('/reset', [ResetPasswordController::class, 'reset']);
+
+Route::post('/admin/login', [AdminLoginController::class, 'login']);
 
 Route::apiResource('/tasks',TaskController::class);
