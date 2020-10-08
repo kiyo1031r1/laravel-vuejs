@@ -2081,14 +2081,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    //TODO:sanctamをいれる。
     login: function login() {
       var _this = this;
 
-      axios.post('/api/login', this.user).then(function (res) {
-        _this.auth();
-      })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
+      axios.get('sanctum/csrf-cookie').then(function () {
+        axios.post('/api/login', _this.user).then(function (res) {
+          _this.auth();
+        })["catch"](function (error) {
+          _this.errors = error.response.data.errors;
+        });
       });
     },
     auth: function auth() {

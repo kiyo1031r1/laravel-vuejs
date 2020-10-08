@@ -94,14 +94,16 @@ export default {
         }
     },
     methods:{
-        //TODO:sanctamをいれる。
         login(){
-            axios.post('/api/login', this.user)
-            .then((res) => {
-                this.auth();
-            })
-            .catch((error) =>{
+            axios.get('sanctum/csrf-cookie')
+            .then(() => {
+                axios.post('/api/login', this.user)
+                .then((res) => {
+                    this.auth();
+                })
+                .catch((error) =>{
                 this.errors = error.response.data.errors;
+                })
             });
         },
         auth(){
