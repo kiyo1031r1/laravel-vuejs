@@ -94,6 +94,7 @@ export default {
         }
     },
     methods:{
+        //TODO:sanctamをいれる。
         login(){
             axios.post('/api/login', this.user)
             .then((res) => {

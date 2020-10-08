@@ -2081,6 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    //TODO:sanctamをいれる。
     login: function login() {
       var _this = this;
 
