@@ -31,5 +31,6 @@ Route::post('/forgot', [ForgotPasswordController::class, 'forgot']);
 Route::post('/reset', [ResetPasswordController::class, 'reset']);
 
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
+Route::post('/admin/logout', [AdminLoginController::class, 'logout']);
 
 Route::apiResource('/tasks',TaskController::class);
