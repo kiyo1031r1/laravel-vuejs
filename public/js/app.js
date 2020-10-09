@@ -40653,48 +40653,44 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluif bg-dark mb-3" }, [
     _c("div", { staticClass: "container" }, [
-      _c("nav", { staticClass: "navbar navbar-dark" }, [
-        _c("span", { staticClass: "nabvar-brand mb-0 h1 text-light" }, [
-          _vm._v("Laravel-vuejs")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "" } } }, [
-              _c("button", { staticClass: "btn btn-success" }, [_vm._v("一覧")])
-            ]),
-            _vm._v(" "),
-            _c("router-link", { attrs: { to: { name: "" } } }, [
-              _c("button", { staticClass: "btn btn-success" }, [
-                _vm._v("プレミアム登録")
-              ])
-            ]),
-            _vm._v(" "),
-            !_vm.isAuthenticated
-              ? [
-                  _c("router-link", { attrs: { to: { name: "login" } } }, [
-                    _c("button", { staticClass: "btn btn-success" }, [
-                      _vm._v("ログイン")
-                    ])
+      _c(
+        "nav",
+        { staticClass: "navbar navbar-dark" },
+        [
+          _c("span", { staticClass: "h1 text-light" }, [
+            _vm._v("Laravel-vuejs")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: { name: "" } } }, [
+            _c("button", { staticClass: "btn btn-success" }, [_vm._v("一覧")])
+          ]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: { name: "" } } }, [
+            _c("button", { staticClass: "btn btn-success" }, [
+              _vm._v("プレミアム登録")
+            ])
+          ]),
+          _vm._v(" "),
+          !_vm.isAuthenticated
+            ? [
+                _c("router-link", { attrs: { to: { name: "login" } } }, [
+                  _c("button", { staticClass: "btn btn-success" }, [
+                    _vm._v("ログイン")
                   ])
-                ]
-              : [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: { click: _vm.logout }
-                    },
-                    [_vm._v("ログアウト")]
-                  )
-                ]
-          ],
-          2
-        )
-      ])
+                ])
+              ]
+            : [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-success", on: { click: _vm.logout } },
+                  [_vm._v("ログアウト")]
+                )
+              ]
+        ],
+        2
+      )
     ])
   ])
 }
@@ -40703,10 +40699,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", [
-      _c("label", { attrs: { name: "search" } }, [_vm._v("検索")]),
+    return _c("form", { staticClass: "form-inline" }, [
+      _c("input", {
+        staticClass: "form-controll mr-sm-2",
+        attrs: { type: "search" }
+      }),
       _vm._v(" "),
-      _c("input", { attrs: { type: "text", id: "search" } })
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success my-sm-0",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("検索")]
+      )
     ])
   }
 ]
