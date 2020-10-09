@@ -14,7 +14,7 @@ import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
 import AdminLoggedInComponent from './components/admin/AdminLoggedInComponent'
-
+import UserHomeComponent from './components/users/UserHomeComponent'
 
 Vue.use(Router);
 
@@ -48,6 +48,11 @@ const router = new Router({
             meta: {
                 authOnly : true
             }
+        },
+        {
+            path:'/',
+            name: 'home',
+            component: UserHomeComponent
         },
         {
             path:'/login',
