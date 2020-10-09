@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,7 @@ class LoginController extends Controller
                         'email' => $email,
                         'name' => $providerUser->getName(),
                         'nickname' => $providerUser->getNickname(),
+                        'role_id' => Role::find(1)->id,
                 ]);
             }
             elseif($provider_id) {
@@ -61,6 +63,7 @@ class LoginController extends Controller
                     'email' => $email,
                     'name' => $providerUser->getName(),
                     'nickname' => $providerUser->getNickname(),
+                    'role_id' => Role::find(1)->id,
                 ]);
             }
             else{

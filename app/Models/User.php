@@ -23,6 +23,7 @@ class User extends Authenticatable
         'provider_id',
         'provider_name',
         'nickname',
+        'role_id',
     ];
 
     /**
