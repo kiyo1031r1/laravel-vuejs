@@ -2248,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.setItem('auth', 'true');
       this.$store.dispatch('updateAuth', 'true');
       this.$router.push({
-        name: 'task.list'
+        name: 'home'
       });
     }
   },
@@ -58479,7 +58479,7 @@ router.beforeEach(function (to, from, next) {
   })) {
     if (isAuthenticated()) {
       next({
-        name: 'tasks'
+        name: 'home'
       });
     } else {
       next();

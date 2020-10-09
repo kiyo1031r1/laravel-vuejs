@@ -137,7 +137,7 @@ router.beforeEach((to, from, next) => {
     }
     else if(to.matched.some(record => record.meta.guestOnly)){
         if(isAuthenticated()) {
-            next({name: 'tasks'});
+            next({name: 'home'});
         }
         else{
             next();

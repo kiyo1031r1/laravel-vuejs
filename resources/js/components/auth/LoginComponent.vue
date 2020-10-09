@@ -114,7 +114,7 @@ export default {
         auth(){
             localStorage.setItem('auth', 'true');
             this.$store.dispatch('updateAuth', 'true');
-            this.$router.push({name: 'task.list'});
+            this.$router.push({name: 'home'});
         }
     },
     created(){
