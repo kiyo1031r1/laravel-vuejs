@@ -23,13 +23,10 @@ class AdminLoginController extends Controller
             ]);
         }
 
-        $user_roles = $user->roles;
-        foreach($user_roles as $role) {
-            if($role->name === 'subscriber'){
-                throw ValidationException::withMessages([
-                    'not_found' => ['権限がありません']
-                ]);
-            }
+        if($user->role_id === 1) {
+            throw ValidationException::withMessages([
+                'not_found' => ['権限がありません']
+            ]);
         }
 
         if(Auth::attempt($credentials)){
