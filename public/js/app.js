@@ -58089,18 +58089,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_tasks_TaskListComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/tasks/TaskListComponent */ "./resources/js/components/tasks/TaskListComponent.vue");
-/* harmony import */ var _components_tasks_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/tasks/TaskCreateComponent */ "./resources/js/components/tasks/TaskCreateComponent.vue");
-/* harmony import */ var _components_tasks_TaskShowComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/tasks/TaskShowComponent */ "./resources/js/components/tasks/TaskShowComponent.vue");
-/* harmony import */ var _components_tasks_TaskEditComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/tasks/TaskEditComponent */ "./resources/js/components/tasks/TaskEditComponent.vue");
-/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
-/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
-/* harmony import */ var _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/ForgotPasswordComponent */ "./resources/js/components/auth/ForgotPasswordComponent.vue");
-/* harmony import */ var _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/ResetPasswordComponent */ "./resources/js/components/auth/ResetPasswordComponent.vue");
-/* harmony import */ var _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/SendMailComponent */ "./resources/js/components/auth/SendMailComponent.vue");
-/* harmony import */ var _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/auth/ChangedPasswordComponent */ "./resources/js/components/auth/ChangedPasswordComponent.vue");
-/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
-/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_tasks_TaskListComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/tasks/TaskListComponent */ "./resources/js/components/tasks/TaskListComponent.vue");
+/* harmony import */ var _components_tasks_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/tasks/TaskCreateComponent */ "./resources/js/components/tasks/TaskCreateComponent.vue");
+/* harmony import */ var _components_tasks_TaskShowComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/tasks/TaskShowComponent */ "./resources/js/components/tasks/TaskShowComponent.vue");
+/* harmony import */ var _components_tasks_TaskEditComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/tasks/TaskEditComponent */ "./resources/js/components/tasks/TaskEditComponent.vue");
+/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
+/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
+/* harmony import */ var _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/ForgotPasswordComponent */ "./resources/js/components/auth/ForgotPasswordComponent.vue");
+/* harmony import */ var _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/ResetPasswordComponent */ "./resources/js/components/auth/ResetPasswordComponent.vue");
+/* harmony import */ var _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/auth/SendMailComponent */ "./resources/js/components/auth/SendMailComponent.vue");
+/* harmony import */ var _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/auth/ChangedPasswordComponent */ "./resources/js/components/auth/ChangedPasswordComponent.vue");
+/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
+/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
+
 
 
 
@@ -58121,23 +58124,23 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/tasks',
     name: 'task.list',
-    component: _components_tasks_TaskListComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_tasks_TaskListComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/tasks/create',
     name: 'task.create',
-    component: _components_tasks_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
+    component: _components_tasks_TaskCreateComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
     meta: {
       authOnly: true
     }
   }, {
     path: '/tasks/:taskId',
     name: 'task.show',
-    component: _components_tasks_TaskShowComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    component: _components_tasks_TaskShowComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
     props: true
   }, {
     path: '/tasks/:taskId/edit',
     name: 'task.edit',
-    component: _components_tasks_TaskEditComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    component: _components_tasks_TaskEditComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
     props: true,
     meta: {
       authOnly: true
@@ -58145,46 +58148,47 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/login',
     name: 'login',
-    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/register',
     name: 'register',
-    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
+    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/forgot_password',
     name: 'forgot_password',
-    component: _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: '/reset_password',
     name: 'reset_password',
-    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_10__["default"]
   }, {
     path: '/send_mail',
     name: 'send_mail',
-    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: '/changed_password',
     name: 'changed_password',
-    component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: '/admin/login',
     name: 'admin_login',
-    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
+    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
     meta: {
       admin_guestOnly: true
     }
   }, {
     path: '/admin',
     name: 'admin',
-    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
+    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_14__["default"],
     meta: {
-      admin_authOnly: true
+      admin_authOnly: true,
+      adminOnly: true
     }
   }]
 });
@@ -58195,6 +58199,18 @@ function isAuthenticated() {
 
 function isAdminAuthenticated() {
   return localStorage.getItem('admin_auth');
+}
+
+function isAdmin() {
+  axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/user').then(function (res) {
+    $user = res.data;
+
+    if ($user.role === 2) {
+      return true;
+    }
+
+    return false;
+  });
 }
 
 router.beforeEach(function (to, from, next) {
@@ -58214,6 +58230,21 @@ router.beforeEach(function (to, from, next) {
     if (isAuthenticated()) {
       next({
         name: 'tasks'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.adminOnly;
+  })) {
+    if (!isAdmin) {
+      next({
+        name: 'login'
       });
     } else {
       next();

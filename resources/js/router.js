@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import axios from 'axios'
 import TaskListComponent from './components/tasks/TaskListComponent'
 import TaskCreateComponent from './components/tasks/TaskCreateComponent'
 import TaskShowComponent from './components/tasks/TaskShowComponent'
@@ -96,7 +97,8 @@ const router = new Router({
             name: 'admin',
             component: AdminHomeComponent,
             meta: {
-                admin_authOnly: true
+                admin_authOnly: true,
+                adminOnly: true,
              }
         },
     ]
@@ -108,6 +110,17 @@ function isAuthenticated(){
 
 function isAdminAuthenticated(){
     return localStorage.getItem('admin_auth');
+}
+
+function isAdmin(){
+    axios.get('/api/user')
+    .then(res => {
+        $user = res.data;
+        if($user.role === 2){
+            return true;
+        }
+        return false;
+    });
 }
 
 router.beforeEach((to, from, next) => {
@@ -122,6 +135,20 @@ router.beforeEach((to, from, next) => {
     else if(to.matched.some(record => record.meta.guestOnly)){
         if(isAuthenticated()) {
             next({name: 'tasks'});
+        }
+        else{
+            next();
+        }
+    }
+    else{
+        next();
+    }
+});
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.adminOnly)){
+        if(!isAdmin){
+            next({name: 'login'});
         }
         else{
             next();
