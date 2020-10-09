@@ -99,6 +99,11 @@ export default {
             .then(() => {
                 axios.post('/api/login', this.user)
                 .then((res) => {
+                    axios.get('/api/user')
+                    .then(res => {
+                        this.$store.dispatch('updateUser', res.data);
+                    });
+
                     this.auth();
                 })
                 .catch((error) =>{
