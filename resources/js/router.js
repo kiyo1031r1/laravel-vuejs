@@ -87,20 +87,27 @@ const router = new Router({
             path:'/admin/login',
             name: 'admin_login',
             component: AdminLoginComponent,
-            //meta: {
-            //    guestOnly: true
-            //}
+            meta: {
+               admin_guestOnly: true
+            }
         },
         {
             path:'/admin',
             name: 'admin',
             component: AdminHomeComponent,
+            meta: {
+                admin_authOnly: true
+             }
         },
     ]
 });
 
 function isAuthenticated(){
     return localStorage.getItem('auth');
+}
+
+function isAdminAuthenticated(){
+    return localStorage.getItem('admin_auth');
 }
 
 router.beforeEach((to, from, next) => {
@@ -125,5 +132,26 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.admin_authOnly)){
+        if(!isAdminAuthenticated()) {
+            next({name: 'admin_login'});
+        }
+        else{
+            next();
+        }
+    }
+    else if(to.matched.some(record => record.meta.admin_guestOnly)){
+        if(isAdminAuthenticated()) {
+            next({name: 'admin'});
+        }
+        else{
+            next();
+        }
+    }
+    else{
+        next();
+    }
+});
 
 export default router;

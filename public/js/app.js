@@ -2029,8 +2029,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     auth: function auth() {
-      localStorage.setItem('admin_auth', 'true'); //this.$store.dispatch('updateAuth', 'true');
-
+      localStorage.setItem('admin_auth', 'true');
+      this.$store.dispatch('updateAdminAuth', 'true');
       this.$router.push({
         name: 'admin'
       });
@@ -58172,19 +58172,26 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: '/admin/login',
     name: 'admin_login',
-    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_12__["default"] //meta: {
-    //    guestOnly: true
-    //}
-
+    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
+    meta: {
+      admin_guestOnly: true
+    }
   }, {
     path: '/admin',
     name: 'admin',
-    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_13__["default"],
+    meta: {
+      admin_authOnly: true
+    }
   }]
 });
 
 function isAuthenticated() {
   return localStorage.getItem('auth');
+}
+
+function isAdminAuthenticated() {
+  return localStorage.getItem('admin_auth');
 }
 
 router.beforeEach(function (to, from, next) {
@@ -58204,6 +58211,31 @@ router.beforeEach(function (to, from, next) {
     if (isAuthenticated()) {
       next({
         name: 'tasks'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.admin_authOnly;
+  })) {
+    if (!isAdminAuthenticated()) {
+      next({
+        name: 'admin_login'
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.admin_guestOnly;
+  })) {
+    if (isAdminAuthenticated()) {
+      next({
+        name: 'admin'
       });
     } else {
       next();
@@ -58233,22 +58265,33 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    auth: null
+    auth: null,
+    admin_auth: null
   },
   getters: {
     auth: function auth(state) {
       return state.auth;
+    },
+    admin_auth: function admin_auth(state) {
+      return state.admin_auth;
     }
   },
   mutations: {
     updateAuth: function updateAuth(state, auth) {
       state.auth = auth;
+    },
+    updateAdminAuth: function updateAdminAuth(state, admin_auth) {
+      state.admin_auth = admin_auth;
     }
   },
   actions: {
     updateAuth: function updateAuth(_ref, auth) {
       var commit = _ref.commit;
       commit('updateAuth', auth);
+    },
+    updateAdminAuth: function updateAdminAuth(_ref2, admin_auth) {
+      var commit = _ref2.commit;
+      commit('updateAuth', admin_auth);
     }
   }
 }));

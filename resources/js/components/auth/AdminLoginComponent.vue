@@ -77,7 +77,7 @@ export default {
         },
         auth(){
             localStorage.setItem('admin_auth', 'true');
-            //this.$store.dispatch('updateAuth', 'true');
+            this.$store.dispatch('updateAdminAuth', 'true');
             this.$router.push({name: 'admin'});
         }
     }
