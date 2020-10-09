@@ -18,11 +18,11 @@ export default {
     },
     methods:{
         logout(){
-            axios.post('/api/admin/logout');
-            // .then(() => {
-            //     localStorage.removeItem('auth');
-            //     this.$store.dispatch('updateAuth', null);
-            // });
+            axios.post('/api/admin/logout')
+            .then(() => {
+                localStorage.removeItem('admin_auth');
+                this.$store.dispatch('updateAdminAuth', null);
+            });
         },
         getUser(){
             axios.get('/api/user')

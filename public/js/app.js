@@ -1927,16 +1927,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      axios.post('/api/admin/logout'); // .then(() => {
-      //     localStorage.removeItem('auth');
-      //     this.$store.dispatch('updateAuth', null);
-      // });
-    },
-    getUser: function getUser() {
       var _this = this;
 
+      axios.post('/api/admin/logout').then(function () {
+        localStorage.removeItem('admin_auth');
+
+        _this.$store.dispatch('updateAdminAuth', null);
+      });
+    },
+    getUser: function getUser() {
+      var _this2 = this;
+
       axios.get('/api/user').then(function (res) {
-        _this.user = res.data;
+        _this2.user = res.data;
       });
     }
   }
