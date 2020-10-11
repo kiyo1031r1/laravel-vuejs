@@ -1952,6 +1952,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$store.dispatch('updateAdminAuth', null);
 
+        _this.$store.dispatch('udateUser', null);
+
         _this.$router.push({
           name: 'admin_login'
         });
@@ -2753,6 +2755,8 @@ __webpack_require__.r(__webpack_exports__);
         localStorage.removeItem('auth');
 
         _this.$store.dispatch('updateAuth', null);
+
+        _this.$store.dispatch('udateUser', null);
       });
     }
   }

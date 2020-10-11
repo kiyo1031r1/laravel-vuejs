@@ -44,6 +44,7 @@ export default {
             .then(() => {
                 localStorage.removeItem('auth');
                 this.$store.dispatch('updateAuth', null);
+                this.$store.dispatch('udateUser', null);
             });
         }
     }
