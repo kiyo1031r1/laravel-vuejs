@@ -32,7 +32,7 @@ export default new Vuex.Store({
             commit('updateAuth', auth);
         },
         updateAdminAuth({ commit}, admin_auth){
-            commit('updateAuth', admin_auth);
+            commit('updateAdminAuth', admin_auth);
         },
         updateUser({ commit}, user){
             commit('updateUser', user);

@@ -59045,7 +59045,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     updateAdminAuth: function updateAdminAuth(_ref2, admin_auth) {
       var commit = _ref2.commit;
-      commit('updateAuth', admin_auth);
+      commit('updateAdminAuth', admin_auth);
     },
     updateUser: function updateUser(_ref3, user) {
       var commit = _ref3.commit;
