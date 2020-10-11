@@ -13,5 +13,6 @@ const app = new Vue({
     render: h => h(App),
     mounted(){
         this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
+        this.$store.dispatch('updateAuth', localStorage.getItem('admin_auth'));
     }
 });
