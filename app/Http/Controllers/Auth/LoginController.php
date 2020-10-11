@@ -24,6 +24,10 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            $user->remember_token = $this->createToken();
+            $user->save();
+
             return response()->json();
         }
         throw ValidationException::withMessages([
@@ -32,6 +36,10 @@ class LoginController extends Controller
     }
 
     public function logout(){
+        $user = Auth::user();
+        $user->remember_token = null;
+        $user->save();
+
         Auth::logout();
         return response()->json();
     }
@@ -53,22 +61,26 @@ class LoginController extends Controller
                         'provider_id' => $provider_id ,
                         'provider_name' => $provider,
                         'email' => $email,
-                        'remember_token' => $this->createToken(),
                         'name' => $providerUser->getName(),
                         'nickname' => $providerUser->getNickname(),
                         'role_id' => Role::find(1)->id,
                 ]);
+
+                $user->remember_token = $this->createToken();
+                $user->save();
             }
             elseif($provider_id) {
                 $user = User::firstOrCreate(['provider_id' => $provider_id],[
                     'provider_id' => $provider_id ,
                     'provider_name' => $provider,
                     'email' => $email,
-                    'remember_token' => $this->createToken(),
                     'name' => $providerUser->getName(),
                     'nickname' => $providerUser->getNickname(),
                     'role_id' => Role::find(1)->id,
                 ]);
+
+                $user->remember_token = $this->createToken();
+                $user->save();
             }
             else{
                 throw new Exception();
