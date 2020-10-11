@@ -1929,20 +1929,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {
-    isAuthenticated: function isAuthenticated() {
-      return this.$store.getters.admin_auth;
-    }
-  },
   methods: {
     logout: function logout() {
       var _this = this;
@@ -1981,38 +1968,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      user: {
-        email: 'default'
-      }
-    };
-  },
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  methods: {
-    logout: function logout() {
-      var _this = this;
-
-      axios.post('/api/admin/logout').then(function () {
-        localStorage.removeItem('admin_auth');
-
-        _this.$store.dispatch('updateAdminAuth', null);
-      });
-    },
-    getUser: function getUser() {
-      var _this2 = this;
-
-      axios.get('/api/user').then(function (res) {
-        _this2.user = res.data;
-      });
-    }
   }
 });
 
@@ -38543,26 +38502,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            !_vm.isAuthenticated
-              ? [
-                  _c("router-link", { attrs: { to: { name: "" } } }, [
-                    _c("button", { staticClass: "btn btn-success" }, [
-                      _vm._v("ログイン")
-                    ])
-                  ])
-                ]
-              : [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      on: { click: _vm.logout }
-                    },
-                    [_vm._v("ログアウト")]
-                  )
-                ]
+            _c(
+              "button",
+              { staticClass: "btn btn-success", on: { click: _vm.logout } },
+              [_vm._v("ログアウト")]
+            )
           ],
-          2
+          1
         )
       ])
     ])
@@ -38590,27 +38536,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("AdminHeader"),
-      _vm._v("\n    dashboad\n    "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", on: { click: _vm.logout } },
-        [_vm._v("ログアウト")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", on: { click: _vm.getUser } },
-        [_vm._v("ユーザー取得")]
-      ),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.user.email))])
-    ],
-    1
-  )
+  return _c("div", [_c("AdminHeader"), _vm._v("\n    dashboad\n")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

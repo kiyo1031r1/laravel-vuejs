@@ -11,16 +11,8 @@
                     <router-link :to="{ name: ''}">
                         <button class="btn btn-success">ビデオ管理</button>
                     </router-link>
-
-                    <template v-if="!isAuthenticated">
-                        <router-link :to="{ name: ''}">
-                            <button class="btn btn-success">ログイン</button>
-                        </router-link>
-                    </template>
-
-                    <template v-else>
-                        <button @click="logout" class="btn btn-success">ログアウト</button>
-                    </template>
+                    
+                    <button @click="logout" class="btn btn-success">ログアウト</button>
                 </div>
             </nav>
         </div>
@@ -29,11 +21,6 @@
 
 <script>
 export default {
-    computed:{
-        isAuthenticated(){
-            return this.$store.getters.admin_auth;
-        }
-    },
     methods:{
         logout(){
             axios.post('/api/admin/logout')

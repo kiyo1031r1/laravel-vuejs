@@ -2,9 +2,6 @@
     <div>
         <AdminHeader></AdminHeader>
         dashboad
-        <button @click="logout" class="btn btn-success">ログアウト</button>
-        <button @click="getUser" class="btn btn-success">ユーザー取得</button>
-        <p>{{user.email}}</p>
     </div>
 </template>
 
@@ -12,30 +9,8 @@
 import AdminHeader from './AdminHeaderComponent'
 
 export default {
-    data(){
-        return{
-            user:{
-                email: 'default'
-            }
-        }
-    },
     components:{
         AdminHeader
-    },
-    methods:{
-        logout(){
-            axios.post('/api/admin/logout')
-            .then(() => {
-                localStorage.removeItem('admin_auth');
-                this.$store.dispatch('updateAdminAuth', null);
-            });
-        },
-        getUser(){
-            axios.get('/api/user')
-            .then(res => {
-                this.user = res.data;
-            });
-        }
     }
 }
 </script>
