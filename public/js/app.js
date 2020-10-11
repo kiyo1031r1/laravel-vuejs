@@ -2040,10 +2040,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {
+    var vm = this;
+    setTimeout(function () {
+      vm.$router.push({
+        name: 'admin'
+      });
+    }, 3000);
   }
 });
 
@@ -38929,6 +38938,10 @@ var staticRenderFns = [
             _c("div", { staticClass: "card-body" }, [
               _c("p", { staticClass: "text-center mb-0 my-4" }, [
                 _vm._v("ログインしました")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-center mb-0 my-4" }, [
+                _vm._v("3秒後にホーム画面に遷移します")
               ])
             ])
           ])
