@@ -35,7 +35,7 @@
 export default {
     computed:{
         isAuthenticated(){
-            return this.$store.getters.auth === 'true';
+            return this.$store.getters.auth;
         }
     },
     methods:{

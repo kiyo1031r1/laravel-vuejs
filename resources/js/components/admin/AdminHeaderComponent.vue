@@ -31,7 +31,7 @@
 export default {
     computed:{
         isAuthenticated(){
-            return this.$store.getters.admin_auth === 'true';
+            return this.$store.getters.admin_auth;
         }
     },
     methods:{

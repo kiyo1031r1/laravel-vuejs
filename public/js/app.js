@@ -1940,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     isAuthenticated: function isAuthenticated() {
-      return this.$store.getters.admin_auth === 'true';
+      return this.$store.getters.admin_auth;
     }
   },
   methods: {
@@ -2785,7 +2785,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     isAuthenticated: function isAuthenticated() {
-      return this.$store.getters.auth === 'true';
+      return this.$store.getters.auth;
     }
   },
   methods: {
