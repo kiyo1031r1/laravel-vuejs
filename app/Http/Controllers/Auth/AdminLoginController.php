@@ -32,7 +32,7 @@ class AdminLoginController extends Controller
 
         if(Auth::attempt($credentials)){
             $user = Auth::user();
-            $user->remember_token = $this->createToken();
+            $user->token = $this->createToken();
             $user->save();
 
             return response()->json();
@@ -44,7 +44,7 @@ class AdminLoginController extends Controller
 
     public function logout(){
         $user = Auth::user();
-        $user->remember_token = null;
+        $user->token = null;
         $user->save();
 
         Auth::logout();
