@@ -57677,7 +57677,6 @@ var app = new Vue({
   },
   mounted: function mounted() {
     this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
-    this.$store.dispatch('updateAuth', localStorage.getItem('admin_auth'));
   }
 });
 
