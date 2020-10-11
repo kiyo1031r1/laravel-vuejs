@@ -56747,7 +56747,11 @@ var app = new Vue({
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },
   mounted: function mounted() {
-    this.$store.dispatch('updateAuth', localStorage.getItem('auth'));
+    var _this = this;
+
+    axios.get('/api/user').then(function (res) {
+      _this.$store.dispatch('updateUser', res.data);
+    });
   }
 });
 
