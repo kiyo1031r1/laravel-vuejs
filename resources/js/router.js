@@ -144,7 +144,6 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
-        console.log(isAdmin());
         if(!isAdmin()) {
             next({name: 'admin_login'});
         }
