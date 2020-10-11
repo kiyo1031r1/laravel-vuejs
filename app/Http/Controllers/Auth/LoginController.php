@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\support\Str;
+
 
 class LoginController extends Controller
 {
@@ -51,6 +53,7 @@ class LoginController extends Controller
                         'provider_id' => $provider_id ,
                         'provider_name' => $provider,
                         'email' => $email,
+                        'remember_token' => $this->createToken(),
                         'name' => $providerUser->getName(),
                         'nickname' => $providerUser->getNickname(),
                         'role_id' => Role::find(1)->id,
@@ -61,6 +64,7 @@ class LoginController extends Controller
                     'provider_id' => $provider_id ,
                     'provider_name' => $provider,
                     'email' => $email,
+                    'remember_token' => $this->createToken(),
                     'name' => $providerUser->getName(),
                     'nickname' => $providerUser->getNickname(),
                     'role_id' => Role::find(1)->id,
@@ -76,5 +80,9 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return redirect($route)->cookie('SOCIAL_LOGIN_FAILED', '', 0, '', '', false, false);
         }
+    }
+
+    private function createToken(){
+        return hash_hmac('sha256', Str::random(40), config('app.key'));
     }
 }
