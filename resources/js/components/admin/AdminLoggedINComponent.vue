@@ -1,6 +1,12 @@
 <template>
     <div>
-        <AdminHeader></AdminHeader>
+        <div class="container-fluif bg-dark mb-3">
+            <div class="container">
+                <nav class="navbar navbar-dark">
+                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
+                </nav>
+            </div>
+        </div>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -18,12 +24,8 @@
 </template>
 
 <script>
-import AdminHeader from './AdminHeaderComponent'
 
 export default {
-    components:{
-        AdminHeader
-    },
     mounted(){
         let vm = this;
         setTimeout(()=> {
