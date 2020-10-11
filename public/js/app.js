@@ -1951,6 +1951,10 @@ __webpack_require__.r(__webpack_exports__);
         localStorage.removeItem('admin_auth');
 
         _this.$store.dispatch('updateAdminAuth', null);
+
+        _this.$router.push({
+          name: 'admin_login'
+        });
       });
     }
   }
@@ -57786,8 +57790,6 @@ router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.admin_authOnly;
   })) {
-    console.log(isAdmin());
-
     if (!isAdmin()) {
       next({
         name: 'admin_login'
