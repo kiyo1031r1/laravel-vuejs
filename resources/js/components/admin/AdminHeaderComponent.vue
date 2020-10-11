@@ -31,16 +31,16 @@
 export default {
     computed:{
         isAuthenticated(){
-            //return this.$store.getters.auth === 'true';
+            return this.$store.getters.admin_auth === 'true';
         }
     },
     methods:{
         logout(){
-            // axios.post('/api/logout')
-            // .then(() => {
-            //     localStorage.removeItem('auth');
-            //     this.$store.dispatch('updateAuth', null);
-            // });
+            axios.post('/api/admin/logout')
+            .then(() => {
+                localStorage.removeItem('admin_auth');
+                this.$store.dispatch('updateAdminAuth', null);
+            });
         }
     }
 }

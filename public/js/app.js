@@ -1939,15 +1939,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
-    isAuthenticated: function isAuthenticated() {//return this.$store.getters.auth === 'true';
+    isAuthenticated: function isAuthenticated() {
+      return this.$store.getters.admin_auth === 'true';
     }
   },
   methods: {
-    logout: function logout() {// axios.post('/api/logout')
-      // .then(() => {
-      //     localStorage.removeItem('auth');
-      //     this.$store.dispatch('updateAuth', null);
-      // });
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/api/admin/logout').then(function () {
+        localStorage.removeItem('admin_auth');
+
+        _this.$store.dispatch('updateAdminAuth', null);
+      });
     }
   }
 });
