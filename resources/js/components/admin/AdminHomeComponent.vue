@@ -1,5 +1,6 @@
 <template>
     <div>
+        <AdminHeader></AdminHeader>
         dashboad
         <button @click="logout" class="btn btn-success">ログアウト</button>
         <button @click="getUser" class="btn btn-success">ユーザー取得</button>
@@ -8,6 +9,8 @@
 </template>
 
 <script>
+import AdminHeader from './AdminHeaderComponent'
+
 export default {
     data(){
         return{
@@ -15,6 +18,9 @@ export default {
                 email: 'default'
             }
         }
+    },
+    components:{
+        AdminHeader
     },
     methods:{
         logout(){
