@@ -2406,17 +2406,17 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/api/login', _this.user).then(function (res) {
           axios.get('/api/user').then(function (res) {
             _this.$store.dispatch('updateUser', res.data);
-          });
 
-          _this.auth();
+            _this.auth();
+          });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
         });
       });
     },
     auth: function auth() {
-      localStorage.setItem('auth', 'true');
-      this.$store.dispatch('updateAuth', 'true');
+      localStorage.setItem('auth', this.$store.getters.user.token);
+      this.$store.dispatch('updateAuth', this.$store.getters.user.token);
       this.$router.push({
         name: 'home'
       });

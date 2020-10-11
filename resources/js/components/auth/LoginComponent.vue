@@ -110,9 +110,8 @@ export default {
                     axios.get('/api/user')
                     .then(res => {
                         this.$store.dispatch('updateUser', res.data);
+                        this.auth();
                     });
-
-                    this.auth();
                 })
                 .catch((error) =>{
                 this.errors = error.response.data.errors;
@@ -120,8 +119,8 @@ export default {
             });
         },
         auth(){
-            localStorage.setItem('auth', 'true');
-            this.$store.dispatch('updateAuth', 'true');
+            localStorage.setItem('auth', this.$store.getters.user.token);
+            this.$store.dispatch('updateAuth', this.$store.getters.user.token);
             this.$router.push({name: 'home'});
         }
     },
