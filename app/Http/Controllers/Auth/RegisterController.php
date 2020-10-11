@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 
 class RegisterController extends Controller
 {
+    use CreateTokenTrait;
     public function register(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
@@ -30,9 +30,5 @@ class RegisterController extends Controller
         Auth::login($user);
 
         return $user;
-    }
-
-    private function createToken(){
-        return hash_hmac('sha256', Str::random(40), config('app.key'));
     }
 }

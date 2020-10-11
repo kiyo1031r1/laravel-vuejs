@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
-use Illuminate\support\Str;
-
 
 class LoginController extends Controller
 {
+    use CreateTokenTrait;
     private $login_path = 'login';
 
     public function login(Request $request){
@@ -92,9 +91,5 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return redirect($route)->cookie('SOCIAL_LOGIN_FAILED', '', 0, '', '', false, false);
         }
-    }
-
-    private function createToken(){
-        return hash_hmac('sha256', Str::random(40), config('app.key'));
     }
 }
