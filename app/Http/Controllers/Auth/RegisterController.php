@@ -22,11 +22,16 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'remember_token' => $this->createToken(),
             'role_id' => Role::find(1)->id,
         ]);
 
         Auth::login($user);
 
         return $user;
+    }
+
+    private function createToken(){
+        return hash_hmac('sha256', Str::random(40), config('app.key'));
     }
 }
