@@ -2148,17 +2148,17 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/api/admin/login', _this.user).then(function (res) {
           axios.get('/api/user').then(function (res) {
             _this.$store.dispatch('updateUser', res.data);
-          });
 
-          _this.auth();
+            _this.auth();
+          });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
         });
       });
     },
     auth: function auth() {
-      localStorage.setItem('admin_auth', 'true');
-      this.$store.dispatch('updateAdminAuth', 'true');
+      localStorage.setItem('auth', this.$store.getters.user.token);
+      this.$store.dispatch('updateAdminAuth', this.$store.getters.user.token);
       this.$router.push({
         name: 'admin_logged_in'
       });

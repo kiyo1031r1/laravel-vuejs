@@ -81,9 +81,8 @@ export default {
                     axios.get('/api/user')
                     .then(res => {
                         this.$store.dispatch('updateUser', res.data);
+                        this.auth();
                     });
-
-                    this.auth();
                 })
                 .catch((error) =>{
                 this.errors = error.response.data.errors;
@@ -91,8 +90,8 @@ export default {
             });
         },
         auth(){
-            localStorage.setItem('admin_auth', 'true');
-            this.$store.dispatch('updateAdminAuth', 'true');
+            localStorage.setItem('auth', this.$store.getters.user.token);
+            this.$store.dispatch('updateAdminAuth', this.$store.getters.user.token);
             this.$router.push({name: 'admin_logged_in'});
         }
     }
