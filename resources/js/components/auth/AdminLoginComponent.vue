@@ -92,7 +92,7 @@ export default {
         auth(){
             localStorage.setItem('auth', this.$store.getters.user.token);
             this.$store.dispatch('updateAdminAuth', this.$store.getters.user.token);
-            this.$router.push({name: 'admin_logged_in'});
+            this.$router.push({name: 'admin'});
         }
     }
 }

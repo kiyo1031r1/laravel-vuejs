@@ -13,7 +13,6 @@ import SendMailComponent from './components/auth/SendMailComponent'
 import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
-import AdminLoggedInComponent from './components/admin/AdminLoggedInComponent'
 import UserHomeComponent from './components/users/UserHomeComponent'
 
 Vue.use(Router);
@@ -97,11 +96,6 @@ const router = new Router({
             meta: {
                admin_guestOnly: true
             }
-        },
-        {
-            path:'/admin/logged_in',
-            name: 'admin_logged_in',
-            component: AdminLoggedInComponent,
         },
         {
             path:'/admin',
