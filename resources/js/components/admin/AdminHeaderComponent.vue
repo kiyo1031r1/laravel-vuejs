@@ -40,7 +40,7 @@ export default {
             .then(() => {
                 localStorage.removeItem('admin_auth');
                 this.$store.dispatch('updateAdminAuth', null);
-                this.$store.dispatch('udateUser', null);
+                this.$store.dispatch('updateUser', null);
                 this.$router.push({name: 'admin_login'});
             });
         }
