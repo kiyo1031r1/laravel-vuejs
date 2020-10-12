@@ -96,9 +96,7 @@ export default {
             .then(() => {
                 axios.post('/api/register', this.user)
                 .then((res) => {
-                    localStorage.setItem('auth', 'true');
-                    this.$store.dispatch('updateAuth', 'true');
-                    this.$router.push({name: 'task.list'});
+                    this.$router.push({name: 'home'});
                 })
                 .catch((error) =>{
                     this.errors = error.response.data.errors;
