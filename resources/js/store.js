@@ -6,19 +6,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        auth: null,
+        //auth: null,
     },
     getters: {
-        auth: state => state.auth,
+        //auth: state => state.auth,
     },
     mutations: {
-        updateAuth(state, auth){
-            state.auth = auth;
-        }
+        // updateAuth(state, auth){
+        //     state.auth = auth;
+        // }
     },
     actions: {
-        updateAuth({ commit}, auth){
-            commit('updateAuth', auth);
-        }
+        // updateAuth({ commit}, auth){
+        //     commit('updateAuth', auth);
+        // }
     }
 });
