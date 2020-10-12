@@ -2545,12 +2545,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/reset', this.user).then(function () {
-        localStorage.setItem('auth', 'true');
+        axios.get('api/user') //こちらはauthのtokenで、dataのuser.tokenはパスワード再設定用のtoken
+        .then(function (res) {
+          localStorage.setItem("Laravel-Vuejs", res.data.token);
 
-        _this.$store.dispatch('updateAuth', 'true');
-
-        _this.$router.push({
-          name: 'changed_password'
+          _this.$router.push({
+            name: 'changed_password'
+          });
         });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
