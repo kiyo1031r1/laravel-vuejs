@@ -2438,8 +2438,12 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('sanctum/csrf-cookie').then(function () {
         axios.post('/api/register', _this.user).then(function (res) {
-          _this.$router.push({
-            name: 'home'
+          axios.get('api/user').then(function (res) {
+            localStorage.setItem("Laravel-Vuejs", res.data.token);
+
+            _this.$router.push({
+              name: 'home'
+            });
           });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;

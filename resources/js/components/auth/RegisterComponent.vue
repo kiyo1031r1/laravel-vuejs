@@ -96,7 +96,11 @@ export default {
             .then(() => {
                 axios.post('/api/register', this.user)
                 .then((res) => {
-                    this.$router.push({name: 'home'});
+                    axios.get('api/user')
+                    .then(res => {
+                        localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
+                        this.$router.push({name: 'home'});
+                    })
                 })
                 .catch((error) =>{
                     this.errors = error.response.data.errors;
