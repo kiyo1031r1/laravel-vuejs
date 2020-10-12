@@ -84,7 +84,6 @@ const router = new Router({
             path:'/reset_password',
             name: 'reset_password',
             component: ResetPasswordComponent,
-            component: ForgotPasswordComponent,
             meta: {
                 guestOnly: true
             }
@@ -93,7 +92,6 @@ const router = new Router({
             path:'/send_mail',
             name: 'send_mail',
             component: SendMailComponent,
-            component: ForgotPasswordComponent,
             meta: {
                 guestOnly: true
             }
