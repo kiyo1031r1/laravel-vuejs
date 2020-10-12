@@ -1,6 +1,12 @@
 <template>
     <div>
-        <Header></Header>
+        <div class="container-fluif bg-dark mb-3">
+            <div class="container">
+                <nav class="navbar navbar-dark">
+                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
+                </nav>
+            </div>
+        </div>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -49,47 +55,15 @@
                                     </div>
                                 </div>
                             </form>
-
-                            <router-link :to="{ name: 'forgot_password'}">
-                                <p class="text-right">パスワードを忘れてしまった場合</p>
-                            </router-link>
-
-                            <div class='text-right'>
-                                <router-link :to="{ name: 'register'}">
-                                    <button type="submit" class="btn btn-success">
-                                        ユーザー新規作成
-                                    </button>
-                                </router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">ソーシャルアカウントでログイン</div>
-                        <div class="card-body">
-                            <div class="text-center">
-                                <button onclick="location.href='/login/google'" class="btn btn-danger">Googleアカウントでログイン</button>
-                            </div>
-                            <div class="text-center">
-                                <button onclick="location.href='/login/facebook'" class="btn btn-primary mt-3" style="background-color: blue; border-color: blue;">Facebookアカウントでログイン</button>
-                            </div>
-                            <div class="text-center">
-                                <button onclick="location.href='/login/twitter'" class="btn btn-primary mt-3 ">Twitterアカウントでログイン</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
-import VueCookies from 'vue-cookies'
-import Header from '../users/UsersHeaderComoponent'
 
 export default {
     data(){
@@ -98,19 +72,15 @@ export default {
             errors:{}
         }
     },
-    components:{
-        Header
-    },
     methods:{
         login(){
             axios.get('sanctum/csrf-cookie')
             .then(() => {
-                axios.post('/api/login', this.user)
+                axios.post('/api/admin/login', this.user)
                 .then((res) => {
                     axios.get('/api/user')
                     .then(res => {
-                        localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                        this.$router.push({name: 'home'});
+                        this.$router.push({name: 'admin'});
                     });
                 })
                 .catch((error) =>{
@@ -118,12 +88,6 @@ export default {
                 })
             });
         }
-    },
-    created(){
-        if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
-            this.errors.not_found = ['ユーザー登録に失敗しました'];
-            VueCookies.remove('SOCIAL_LOGIN_FAILED');
-       }
-   }
+    }
 }
 </script>

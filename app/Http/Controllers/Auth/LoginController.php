@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,9 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
+    use CreateTokenTrait;
     private $login_path = 'login';
+    private $sns_login_path = 'sns_login';
 
     public function login(Request $request){
         $credentials = $request->validate([
@@ -21,6 +24,10 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            $user->token = $this->createToken();
+            $user->save();
+
             return response()->json();
         }
         throw ValidationException::withMessages([
@@ -29,6 +36,10 @@ class LoginController extends Controller
     }
 
     public function logout(){
+        $user = Auth::user();
+        $user->token = null;
+        $user->save();
+
         Auth::logout();
         return response()->json();
     }
@@ -39,7 +50,6 @@ class LoginController extends Controller
 
     public function handleProviderCallback($provider){
         $baseUrl = config('app.url');
-        $route = "{$baseUrl}/{$this->login_path}";
 
         try{
             $providerUser = Socialite::driver($provider)->user();
@@ -52,7 +62,11 @@ class LoginController extends Controller
                         'email' => $email,
                         'name' => $providerUser->getName(),
                         'nickname' => $providerUser->getNickname(),
+                        'role_id' => Role::find(1)->id,
                 ]);
+
+                $user->token = $this->createToken();
+                $user->save();
             }
             elseif($provider_id) {
                 $user = User::firstOrCreate(['provider_id' => $provider_id],[
@@ -61,16 +75,22 @@ class LoginController extends Controller
                     'email' => $email,
                     'name' => $providerUser->getName(),
                     'nickname' => $providerUser->getNickname(),
+                    'role_id' => Role::find(1)->id,
                 ]);
+
+                $user->token = $this->createToken();
+                $user->save();
             }
             else{
                 throw new Exception();
             }
     
             Auth::login($user);
+            $route = "{$baseUrl}/{$this->sns_login_path}";
             return redirect($route)->cookie('SOCIAL_LOGIN_SUCCESS', '', 0, '', '', false, false);
 
         } catch (Exception $e) {
+            $route = "{$baseUrl}/{$this->login_path}";
             return redirect($route)->cookie('SOCIAL_LOGIN_FAILED', '', 0, '', '', false, false);
         }
     }

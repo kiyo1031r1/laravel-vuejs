@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 
 class RegisterController extends Controller
 {
+    use CreateTokenTrait;
     public function register(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
@@ -21,6 +23,8 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'token' => $this->createToken(),
+            'role_id' => Role::find(1)->id,
         ]);
 
         Auth::login($user);
