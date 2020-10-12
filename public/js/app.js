@@ -2329,14 +2329,7 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   created: function created() {
-    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
-      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS'); //this.auth();
-
-      localStorage.setItem("Laravel-Vuejs", res.data.token);
-      this.$router.push({
-        name: 'home'
-      });
-    } else if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
+    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
       this.errors.not_found = ['ユーザー登録に失敗しました'];
       vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_FAILED');
     }
@@ -2580,6 +2573,41 @@ __webpack_require__.r(__webpack_exports__);
       });
     } else {
       vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('RESET_TOKEN');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-cookies */ "./node_modules/vue-cookies/vue-cookies.js");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_cookies__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    var _this = this;
+
+    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
+      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
+      axios.get('/api/user').then(function (res) {
+        localStorage.setItem("Laravel-Vuejs", res.data.token);
+
+        _this.$router.push({
+          name: 'home'
+        });
+      });
     }
   }
 });
@@ -40013,6 +40041,30 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/SendMailComponent.vue?vue&type=template&id=a2cffbbc&":
 /*!*************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/auth/SendMailComponent.vue?vue&type=template&id=a2cffbbc& ***!
@@ -57348,6 +57400,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/auth/SNSLoggedInComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/auth/SNSLoggedInComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c& */ "./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c&");
+/* harmony import */ var _SNSLoggedInComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SNSLoggedInComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SNSLoggedInComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/auth/SNSLoggedInComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SNSLoggedInComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SNSLoggedInComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SNSLoggedInComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/auth/SNSLoggedInComponent.vue?vue&type=template&id=e9ab586c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SNSLoggedInComponent_vue_vue_type_template_id_e9ab586c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/auth/SendMailComponent.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/auth/SendMailComponent.vue ***!
@@ -57574,15 +57695,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/ResetPasswordComponent */ "./resources/js/components/auth/ResetPasswordComponent.vue");
 /* harmony import */ var _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/SendMailComponent */ "./resources/js/components/auth/SendMailComponent.vue");
 /* harmony import */ var _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/ChangedPasswordComponent */ "./resources/js/components/auth/ChangedPasswordComponent.vue");
-/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
-/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
-/* harmony import */ var _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/users/UserHomeComponent */ "./resources/js/components/users/UserHomeComponent.vue");
+/* harmony import */ var _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/SNSLoggedInComponent */ "./resources/js/components/auth/SNSLoggedInComponent.vue");
+/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
+/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
+/* harmony import */ var _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/users/UserHomeComponent */ "./resources/js/components/users/UserHomeComponent.vue");
 
 
  // import TaskListComponent from './components/tasks/TaskListComponent'
 // import TaskCreateComponent from './components/tasks/TaskCreateComponent'
 // import TaskShowComponent from './components/tasks/TaskShowComponent'
 // import TaskEditComponent from './components/tasks/TaskEditComponent'
+
 
 
 
@@ -57627,7 +57750,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '/',
     name: 'home',
-    component: _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: '/login',
     name: 'login',
@@ -57659,16 +57782,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'changed_password',
     component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
+    path: '/sns_login',
+    name: 'sns_login',
+    component: _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }, {
     path: '/admin/login',
     name: 'admin_login',
-    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
+    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
     meta: {
       admin_guestOnly: true
     }
   }, {
     path: '/admin',
     name: 'admin',
-    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
+    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
     meta: {
       admin_authOnly: true
     }
