@@ -2717,7 +2717,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     isAuthenticated: function isAuthenticated() {
-      //return this.$store.getters.auth;
       return localStorage.getItem("Laravel-Vuejs");
     }
   },
@@ -2726,9 +2725,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/logout').then(function () {
-        // localStorage.removeItem('auth');
-        // this.$store.dispatch('updateAuth', null);
-        // this.$store.dispatch('updateUser', null);
         localStorage.removeItem("Laravel-Vuejs");
 
         _this.$router.push({
