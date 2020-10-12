@@ -108,26 +108,28 @@ const router = new Router({
     ]
 });
 
-function isAuthenticated(){
-    return localStorage.getItem('auth');
-}
+// function isAuthenticated(){
+//     return localStorage.getItem('auth');
+// }
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
-        if(!isAuthenticated()) {
-            next({name: 'login'});
-        }
-        else{
+        axios.get('/api/user')
+        .then(() => {
             next();
-        }
+        })
+        .catch(() => {
+            next({name: 'login'});
+        });
     }
     else if(to.matched.some(record => record.meta.guestOnly)){
-        if(isAuthenticated()) {
+        axios.get('/api/user')
+        .then(() => {
             next({name: 'home'});
-        }
-        else{
+        })
+        .catch(() => {
             next();
-        }
+        });
     }
     else{
         next();

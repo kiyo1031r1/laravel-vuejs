@@ -57664,33 +57664,31 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       admin_authOnly: true
     }
   }]
-});
-
-function isAuthenticated() {
-  return localStorage.getItem('auth');
-}
+}); // function isAuthenticated(){
+//     return localStorage.getItem('auth');
+// }
 
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.authOnly;
   })) {
-    if (!isAuthenticated()) {
+    axios.get('/api/user').then(function () {
+      next();
+    })["catch"](function () {
       next({
         name: 'login'
       });
-    } else {
-      next();
-    }
+    });
   } else if (to.matched.some(function (record) {
     return record.meta.guestOnly;
   })) {
-    if (isAuthenticated()) {
+    axios.get('/api/user').then(function () {
       next({
         name: 'home'
       });
-    } else {
+    })["catch"](function () {
       next();
-    }
+    });
   } else {
     next();
   }
