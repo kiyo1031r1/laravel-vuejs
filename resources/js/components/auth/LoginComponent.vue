@@ -127,13 +127,7 @@ export default {
         // }
     },
     created(){
-        if(VueCookies.get('SOCIAL_LOGIN_SUCCESS')) {
-            VueCookies.remove('SOCIAL_LOGIN_SUCCESS');
-            //this.auth();
-            localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-            this.$router.push({name: 'home'});
-        }
-        else if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
+        if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
             this.errors.not_found = ['ユーザー登録に失敗しました'];
             VueCookies.remove('SOCIAL_LOGIN_FAILED');
        }
