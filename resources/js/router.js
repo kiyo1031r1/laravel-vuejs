@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
 // import TaskListComponent from './components/tasks/TaskListComponent'
 // import TaskCreateComponent from './components/tasks/TaskCreateComponent'
 // import TaskShowComponent from './components/tasks/TaskShowComponent'
 // import TaskEditComponent from './components/tasks/TaskEditComponent'
+
+//auth
 import LoginComponent from './components/auth/LoginComponent'
 import RegisterComponent from './components/auth/RegisterComponent'
 import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
@@ -13,9 +14,11 @@ import SendMailComponent from './components/auth/SendMailComponent'
 import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
 import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
 
+//admin
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
 
+//user
 import UserHomeComponent from './components/users/UserHomeComponent'
 
 Vue.use(Router);
@@ -100,11 +103,13 @@ const router = new Router({
             path:'/changed_password',
             name: 'changed_password',
             component: ChangedPasswordComponent
+            //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/sns_login',
             name: 'sns_login',
             component: SNSLoggedInComponent,
+            //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/admin/login',

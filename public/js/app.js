@@ -57696,23 +57696,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
-/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
-/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
-/* harmony import */ var _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/auth/ForgotPasswordComponent */ "./resources/js/components/auth/ForgotPasswordComponent.vue");
-/* harmony import */ var _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/ResetPasswordComponent */ "./resources/js/components/auth/ResetPasswordComponent.vue");
-/* harmony import */ var _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/SendMailComponent */ "./resources/js/components/auth/SendMailComponent.vue");
-/* harmony import */ var _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/ChangedPasswordComponent */ "./resources/js/components/auth/ChangedPasswordComponent.vue");
-/* harmony import */ var _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/SNSLoggedInComponent */ "./resources/js/components/auth/SNSLoggedInComponent.vue");
-/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
-/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
-/* harmony import */ var _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/users/UserHomeComponent */ "./resources/js/components/users/UserHomeComponent.vue");
-
+/* harmony import */ var _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/auth/LoginComponent */ "./resources/js/components/auth/LoginComponent.vue");
+/* harmony import */ var _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/auth/RegisterComponent */ "./resources/js/components/auth/RegisterComponent.vue");
+/* harmony import */ var _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/ForgotPasswordComponent */ "./resources/js/components/auth/ForgotPasswordComponent.vue");
+/* harmony import */ var _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/auth/ResetPasswordComponent */ "./resources/js/components/auth/ResetPasswordComponent.vue");
+/* harmony import */ var _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/auth/SendMailComponent */ "./resources/js/components/auth/SendMailComponent.vue");
+/* harmony import */ var _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/auth/ChangedPasswordComponent */ "./resources/js/components/auth/ChangedPasswordComponent.vue");
+/* harmony import */ var _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/auth/SNSLoggedInComponent */ "./resources/js/components/auth/SNSLoggedInComponent.vue");
+/* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
+/* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
+/* harmony import */ var _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/users/UserHomeComponent */ "./resources/js/components/users/UserHomeComponent.vue");
 
  // import TaskListComponent from './components/tasks/TaskListComponent'
 // import TaskCreateComponent from './components/tasks/TaskCreateComponent'
 // import TaskShowComponent from './components/tasks/TaskShowComponent'
 // import TaskEditComponent from './components/tasks/TaskEditComponent'
+//auth
 
 
 
@@ -57720,8 +57719,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ //admin
 
 
+ //user
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -57758,61 +57759,63 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '/',
     name: 'home',
-    component: _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: '/login',
     name: 'login',
-    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
+    component: _components_auth_LoginComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/register',
     name: 'register',
-    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    component: _components_auth_RegisterComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/forgot_password',
     name: 'forgot_password',
-    component: _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    component: _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/reset_password',
     name: 'reset_password',
-    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/send_mail',
     name: 'send_mail',
-    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
+    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
     meta: {
       guestOnly: true
     }
   }, {
     path: '/changed_password',
     name: 'changed_password',
-    component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_7__["default"] //コンポーネントにナビゲーションガードあり
+
   }, {
     path: '/sns_login',
     name: 'sns_login',
-    component: _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _components_auth_SNSLoggedInComponent__WEBPACK_IMPORTED_MODULE_8__["default"] //コンポーネントにナビゲーションガードあり
+
   }, {
     path: '/admin/login',
     name: 'admin_login',
-    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
+    component: _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
     meta: {
       admin_guestOnly: true
     }
   }, {
     path: '/admin',
     name: 'admin',
-    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
+    component: _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
     meta: {
       admin_authOnly: true
     }
