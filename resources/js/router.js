@@ -11,8 +11,11 @@ import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
 import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
 import SendMailComponent from './components/auth/SendMailComponent'
 import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
+import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
+
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
+
 import UserHomeComponent from './components/users/UserHomeComponent'
 
 Vue.use(Router);
@@ -88,6 +91,11 @@ const router = new Router({
             path:'/changed_password',
             name: 'changed_password',
             component: ChangedPasswordComponent
+        },
+        {
+            path:'/sns_login',
+            name: 'sns_login',
+            component: SNSLoggedInComponent,
         },
         {
             path:'/admin/login',
