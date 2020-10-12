@@ -15,6 +15,7 @@ class LoginController extends Controller
 {
     use CreateTokenTrait;
     private $login_path = 'login';
+    private $sns_login_path = 'sns_login';
 
     public function login(Request $request){
         $credentials = $request->validate([
@@ -49,7 +50,6 @@ class LoginController extends Controller
 
     public function handleProviderCallback($provider){
         $baseUrl = config('app.url');
-        $route = "{$baseUrl}/{$this->login_path}";
 
         try{
             $providerUser = Socialite::driver($provider)->user();
@@ -86,9 +86,11 @@ class LoginController extends Controller
             }
     
             Auth::login($user);
+            $route = "{$baseUrl}/{$this->sns_login_path}";
             return redirect($route)->cookie('SOCIAL_LOGIN_SUCCESS', '', 0, '', '', false, false);
 
         } catch (Exception $e) {
+            $route = "{$baseUrl}/{$this->login_path}";
             return redirect($route)->cookie('SOCIAL_LOGIN_FAILED', '', 0, '', '', false, false);
         }
     }
