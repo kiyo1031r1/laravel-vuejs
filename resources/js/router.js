@@ -75,17 +75,28 @@ const router = new Router({
         {
             path:'/forgot_password',
             name: 'forgot_password',
-            component: ForgotPasswordComponent
+            component: ForgotPasswordComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/reset_password',
             name: 'reset_password',
-            component: ResetPasswordComponent
+            component: ResetPasswordComponent,
+            component: ForgotPasswordComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/send_mail',
             name: 'send_mail',
-            component: SendMailComponent
+            component: SendMailComponent,
+            component: ForgotPasswordComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/changed_password',
