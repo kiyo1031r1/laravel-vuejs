@@ -2310,27 +2310,32 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('sanctum/csrf-cookie').then(function () {
         axios.post('/api/login', _this.user).then(function (res) {
           axios.get('/api/user').then(function (res) {
-            _this.$store.dispatch('updateUser', res.data);
+            localStorage.setItem("Laravel-Vuejs", res.data.token);
 
-            _this.auth();
+            _this.$router.push({
+              name: 'home'
+            }); // this.$store.dispatch('updateUser', res.data);
+            // this.auth();
+
           });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
         });
       });
-    },
-    auth: function auth() {
-      localStorage.setItem('auth', this.$store.getters.user.token);
-      this.$store.dispatch('updateAuth', this.$store.getters.user.token);
-      this.$router.push({
-        name: 'home'
-      });
-    }
+    } // auth(){
+    //     this.$store.dispatch('updateAuth', this.$store.getters.user.token);
+    //     this.$router.push({name: 'home'});
+    // }
+
   },
   created: function created() {
     if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
-      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
-      this.auth();
+      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS'); //this.auth();
+
+      localStorage.setItem("Laravel-Vuejs", res.data.token);
+      this.$router.push({
+        name: 'home'
+      });
     } else if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
       this.errors.not_found = ['ユーザー登録に失敗しました'];
       vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_FAILED');
@@ -2690,7 +2695,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     isAuthenticated: function isAuthenticated() {
-      return this.$store.getters.auth;
+      //return this.$store.getters.auth;
+      return localStorage.getItem("Laravel-Vuejs");
     }
   },
   methods: {
@@ -2698,11 +2704,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/logout').then(function () {
-        localStorage.removeItem('auth');
+        // localStorage.removeItem('auth');
+        // this.$store.dispatch('updateAuth', null);
+        // this.$store.dispatch('updateUser', null);
+        localStorage.removeItem("Laravel-Vuejs");
 
-        _this.$store.dispatch('updateAuth', null);
-
-        _this.$store.dispatch('updateUser', null);
+        _this.$router.push({
+          name: 'login'
+        });
       });
     }
   }

@@ -109,8 +109,10 @@ export default {
                 .then((res) => {
                     axios.get('/api/user')
                     .then(res => {
-                        this.$store.dispatch('updateUser', res.data);
-                        this.auth();
+                        localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
+                        this.$router.push({name: 'home'});
+                        // this.$store.dispatch('updateUser', res.data);
+                        // this.auth();
                     });
                 })
                 .catch((error) =>{
@@ -118,16 +120,18 @@ export default {
                 })
             });
         },
-        auth(){
-            localStorage.setItem('auth', this.$store.getters.user.token);
-            this.$store.dispatch('updateAuth', this.$store.getters.user.token);
-            this.$router.push({name: 'home'});
-        }
+        // auth(){
+
+        //     this.$store.dispatch('updateAuth', this.$store.getters.user.token);
+        //     this.$router.push({name: 'home'});
+        // }
     },
     created(){
         if(VueCookies.get('SOCIAL_LOGIN_SUCCESS')) {
             VueCookies.remove('SOCIAL_LOGIN_SUCCESS');
-            this.auth();
+            //this.auth();
+            localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
+            this.$router.push({name: 'home'});
         }
         else if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {
             this.errors.not_found = ['ユーザー登録に失敗しました'];
