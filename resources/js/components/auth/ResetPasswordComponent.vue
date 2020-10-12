@@ -76,12 +76,7 @@ export default {
         submit(){
             axios.post('/api/reset', this.user)
             .then(() => {
-                axios.get('api/user')
-                //こちらはauthのtokenで、dataのuser.tokenはパスワード再設定用のtoken
-                .then(res => {
-                    localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                    this.$router.push({name: 'changed_password'});
-                });
+                this.$router.push({name: 'changed_password'});
             })
             .catch(error => {
                 this.errors = error.response.data.errors;

@@ -2105,6 +2105,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Header: _users_UsersHeaderComoponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    axios.get('/api/user').then(function (res) {
+      if (localStorage.getItem("Laravel-Vuejs")) {
+        next({
+          name: 'home'
+        });
+      } else {
+        localStorage.setItem("Laravel-Vuejs", res.data.token);
+        next();
+      }
+    })["catch"](function () {
+      next({
+        name: 'login'
+      });
+    });
   }
 });
 
@@ -2545,13 +2561,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/reset', this.user).then(function () {
-        axios.get('api/user') //こちらはauthのtokenで、dataのuser.tokenはパスワード再設定用のtoken
-        .then(function (res) {
-          localStorage.setItem("Laravel-Vuejs", res.data.token);
-
-          _this.$router.push({
-            name: 'changed_password'
-          });
+        _this.$router.push({
+          name: 'changed_password'
         });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
@@ -57685,10 +57696,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_auth_AdminLoginComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/auth/AdminLoginComponent */ "./resources/js/components/auth/AdminLoginComponent.vue");
 /* harmony import */ var _components_admin_AdminHomeComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/admin/AdminHomeComponent */ "./resources/js/components/admin/AdminHomeComponent.vue");
 /* harmony import */ var _components_users_UserHomeComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/users/UserHomeComponent */ "./resources/js/components/users/UserHomeComponent.vue");
-var _ref, _ref2;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
  // import TaskListComponent from './components/tasks/TaskListComponent'
@@ -57762,19 +57769,21 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     meta: {
       guestOnly: true
     }
-  }, (_ref = {
+  }, {
     path: '/reset_password',
     name: 'reset_password',
-    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }, _defineProperty(_ref, "component", _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_5__["default"]), _defineProperty(_ref, "meta", {
-    guestOnly: true
-  }), _ref), (_ref2 = {
+    component: _components_auth_ResetPasswordComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
+    meta: {
+      guestOnly: true
+    }
+  }, {
     path: '/send_mail',
     name: 'send_mail',
-    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }, _defineProperty(_ref2, "component", _components_auth_ForgotPasswordComponent__WEBPACK_IMPORTED_MODULE_5__["default"]), _defineProperty(_ref2, "meta", {
-    guestOnly: true
-  }), _ref2), {
+    component: _components_auth_SendMailComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
+    meta: {
+      guestOnly: true
+    }
+  }, {
     path: '/changed_password',
     name: 'changed_password',
     component: _components_auth_ChangedPasswordComponent__WEBPACK_IMPORTED_MODULE_8__["default"]
