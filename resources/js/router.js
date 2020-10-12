@@ -170,16 +170,13 @@ router.beforeEach((to, from, next) => {
         .then(res => {
             let user = res.data;
             if(user.role_id != 2){
-                console.log('1');
                 next({name: 'admin_login'});
             }
             else{
-                console.log('2');
                 next();
             }
         })
         .catch(() => {
-            console.log('3');
             next({name: 'admin_login'});
         });
     }

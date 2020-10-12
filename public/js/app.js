@@ -1935,12 +1935,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/admin/logout').then(function () {
-        localStorage.removeItem('admin_auth');
-
-        _this.$store.dispatch('updateAdminAuth', null);
-
-        _this.$store.dispatch('updateUser', null);
-
         _this.$router.push({
           name: 'admin_login'
         });
@@ -2065,20 +2059,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('sanctum/csrf-cookie').then(function () {
         axios.post('/api/admin/login', _this.user).then(function (res) {
           axios.get('/api/user').then(function (res) {
-            _this.$store.dispatch('updateUser', res.data);
-
-            _this.auth();
+            _this.$router.push({
+              name: 'admin'
+            });
           });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
         });
-      });
-    },
-    auth: function auth() {
-      localStorage.setItem('auth', this.$store.getters.user.token);
-      this.$store.dispatch('updateAdminAuth', this.$store.getters.user.token);
-      this.$router.push({
-        name: 'admin'
       });
     }
   }
@@ -57744,16 +57731,13 @@ router.beforeEach(function (to, from, next) {
       var user = res.data;
 
       if (user.role_id != 2) {
-        console.log('1');
         next({
           name: 'admin_login'
         });
       } else {
-        console.log('2');
         next();
       }
     })["catch"](function () {
-      console.log('3');
       next({
         name: 'admin_login'
       });
@@ -57802,45 +57786,39 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   state: {
-    auth: null,
-    admin_auth: null,
-    user: null
+    auth: null // admin_auth: null,
+    // user: null,
+
   },
   getters: {
     auth: function auth(state) {
       return state.auth;
-    },
-    admin_auth: function admin_auth(state) {
-      return state.admin_auth;
-    },
-    user: function user(state) {
-      return state.user;
-    }
+    } // admin_auth: state => state.admin_auth,
+    // user: state => state.user
+
   },
   mutations: {
     updateAuth: function updateAuth(state, auth) {
       state.auth = auth;
-    },
-    updateAdminAuth: function updateAdminAuth(state, admin_auth) {
-      state.admin_auth = admin_auth;
-    },
-    updateUser: function updateUser(state, user) {
-      state.user = user;
-    }
+    } // updateAdminAuth(state, admin_auth){
+    //     state.admin_auth = admin_auth;
+    // },
+    // updateUser(state, user){
+    //     state.user = user;
+    // },
+
   },
   actions: {
     updateAuth: function updateAuth(_ref, auth) {
       var commit = _ref.commit;
       commit('updateAuth', auth);
-    },
-    updateAdminAuth: function updateAdminAuth(_ref2, admin_auth) {
-      var commit = _ref2.commit;
-      commit('updateAdminAuth', admin_auth);
-    },
-    updateUser: function updateUser(_ref3, user) {
-      var commit = _ref3.commit;
-      commit('updateUser', user);
-    }
+    } // updateAdminAuth({ commit}, admin_auth){
+    //     commit('updateAdminAuth', admin_auth);
+    // },
+    // updateUser({ commit}, user){
+    //     commit('updateUser', user);
+    // }
+
   }
 }));
 

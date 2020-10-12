@@ -80,19 +80,13 @@ export default {
                 .then((res) => {
                     axios.get('/api/user')
                     .then(res => {
-                        this.$store.dispatch('updateUser', res.data);
-                        this.auth();
+                        this.$router.push({name: 'admin'});
                     });
                 })
                 .catch((error) =>{
                 this.errors = error.response.data.errors;
                 })
             });
-        },
-        auth(){
-            localStorage.setItem('auth', this.$store.getters.user.token);
-            this.$store.dispatch('updateAdminAuth', this.$store.getters.user.token);
-            this.$router.push({name: 'admin'});
         }
     }
 }

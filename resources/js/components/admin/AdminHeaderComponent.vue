@@ -25,9 +25,6 @@ export default {
         logout(){
             axios.post('/api/admin/logout')
             .then(() => {
-                localStorage.removeItem('admin_auth');
-                this.$store.dispatch('updateAdminAuth', null);
-                this.$store.dispatch('updateUser', null);
                 this.$router.push({name: 'admin_login'});
             });
         }
