@@ -12,9 +12,9 @@ const app = new Vue({
     store,
     render: h => h(App),
     mounted(){
-        axios.get('/api/user')
-        .then(res => {
-            this.$store.dispatch('updateUser', res.data);
-        });
+        // axios.get('/api/user')
+        // .then(res => {
+        //     this.$store.dispatch('updateUser', res.data);
+        // });
     }
 });

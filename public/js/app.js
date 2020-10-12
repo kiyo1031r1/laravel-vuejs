@@ -56746,12 +56746,10 @@ var app = new Vue({
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/api/user').then(function (res) {
-      _this.$store.dispatch('updateUser', res.data);
-    });
+  mounted: function mounted() {// axios.get('/api/user')
+    // .then(res => {
+    //     this.$store.dispatch('updateUser', res.data);
+    // });
   }
 });
 
@@ -57683,17 +57681,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 function isAuthenticated() {
   return localStorage.getItem('auth');
-}
+} // function isAdmin(){
+//     let user = store.getters.user;
+//     if(user != null && user.role_id === 2){
+//         return true;
+//     }
+//     return false;
+// }
 
-function isAdmin() {
-  var user = _store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.user;
-
-  if (user != null && user.role_id === 2) {
-    return true;
-  }
-
-  return false;
-}
 
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
@@ -57719,28 +57714,66 @@ router.beforeEach(function (to, from, next) {
   } else {
     next();
   }
-});
+}); // router.beforeEach((to, from, next) => {
+//     if(to.matched.some(record => record.meta.admin_authOnly)){
+//         if(!isAdmin()) {
+//             next({name: 'admin_login'});
+//         }
+//         else{
+//             next();
+//         }
+//     }
+//     else if(to.matched.some(record => record.meta.admin_guestOnly)){
+//         if(isAdmin()) {
+//             next({name: 'admin'});
+//         }
+//         else{
+//             next();
+//         }
+//     }
+//     else{
+//         next();
+//     }
+// });
+
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.admin_authOnly;
   })) {
-    if (!isAdmin()) {
+    axios.get('/api/user').then(function (res) {
+      var user = res.data;
+
+      if (user.role_id != 2) {
+        console.log('1');
+        next({
+          name: 'admin_login'
+        });
+      } else {
+        console.log('2');
+        next();
+      }
+    })["catch"](function () {
+      console.log('3');
       next({
         name: 'admin_login'
       });
-    } else {
-      next();
-    }
+    });
   } else if (to.matched.some(function (record) {
     return record.meta.admin_guestOnly;
   })) {
-    if (isAdmin()) {
-      next({
-        name: 'admin'
-      });
-    } else {
+    axios.get('/api/user').then(function (res) {
+      var user = res.data;
+
+      if (user.role_id === 2) {
+        next({
+          name: 'admin'
+        });
+      } else {
+        next();
+      }
+    })["catch"](function () {
       next();
-    }
+    });
   } else {
     next();
   }

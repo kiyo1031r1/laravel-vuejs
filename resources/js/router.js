@@ -112,13 +112,13 @@ function isAuthenticated(){
     return localStorage.getItem('auth');
 }
 
-function isAdmin(){
-    let user = store.getters.user;
-    if(user != null && user.role_id === 2){
-        return true;
-    }
-    return false;
-}
+// function isAdmin(){
+//     let user = store.getters.user;
+//     if(user != null && user.role_id === 2){
+//         return true;
+//     }
+//     return false;
+// }
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
@@ -142,22 +142,61 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+// router.beforeEach((to, from, next) => {
+//     if(to.matched.some(record => record.meta.admin_authOnly)){
+//         if(!isAdmin()) {
+//             next({name: 'admin_login'});
+//         }
+//         else{
+//             next();
+//         }
+//     }
+//     else if(to.matched.some(record => record.meta.admin_guestOnly)){
+//         if(isAdmin()) {
+//             next({name: 'admin'});
+//         }
+//         else{
+//             next();
+//         }
+//     }
+//     else{
+//         next();
+//     }
+// });
+
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
-        if(!isAdmin()) {
+        axios.get('/api/user')
+        .then(res => {
+            let user = res.data;
+            if(user.role_id != 2){
+                console.log('1');
+                next({name: 'admin_login'});
+            }
+            else{
+                console.log('2');
+                next();
+            }
+        })
+        .catch(() => {
+            console.log('3');
             next({name: 'admin_login'});
-        }
-        else{
-            next();
-        }
+        });
     }
     else if(to.matched.some(record => record.meta.admin_guestOnly)){
-        if(isAdmin()) {
-            next({name: 'admin'});
-        }
-        else{
+        axios.get('/api/user')
+        .then(res => {
+            let user = res.data;
+            if(user.role_id === 2){
+                next({name: 'admin'});
+            }
+            else{
+                next();
+            }
+        })
+        .catch(() => {
             next();
-        }
+        });
     }
     else{
         next();
