@@ -57905,24 +57905,17 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    auth: null
+  state: {//auth: null,
   },
-  getters: {
-    auth: function auth(state) {
-      return state.auth;
-    }
+  getters: {//auth: state => state.auth,
   },
-  mutations: {
-    updateAuth: function updateAuth(state, auth) {
-      state.auth = auth;
-    }
+  mutations: {// updateAuth(state, auth){
+    //     state.auth = auth;
+    // }
   },
-  actions: {
-    updateAuth: function updateAuth(_ref, auth) {
-      var commit = _ref.commit;
-      commit('updateAuth', auth);
-    }
+  actions: {// updateAuth({ commit}, auth){
+    //     commit('updateAuth', auth);
+    // }
   }
 }));
 
