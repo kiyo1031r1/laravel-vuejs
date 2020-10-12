@@ -2602,19 +2602,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    var _this = this;
-
-    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
-      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
-      axios.get('/api/user').then(function (res) {
-        localStorage.setItem("Laravel-Vuejs", res.data.token);
-
-        _this.$router.push({
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    axios.get('/api/user').then(function (res) {
+      if (localStorage.getItem("Laravel-Vuejs")) {
+        next({
           name: 'home'
         });
+      } else {
+        localStorage.setItem("Laravel-Vuejs", res.data.token);
+        next();
+      }
+    })["catch"](function () {
+      next({
+        name: 'login'
       });
+    });
+  },
+  created: function created() {
+    if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_SUCCESS')) {
+      vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('SOCIAL_LOGIN_SUCCESS');
     }
+
+    this.$router.push({
+      name: 'home'
+    });
   }
 });
 

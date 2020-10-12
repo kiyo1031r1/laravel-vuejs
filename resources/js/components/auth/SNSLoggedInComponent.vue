@@ -6,15 +6,28 @@
 import VueCookies from 'vue-cookies'
 
 export default {
+    beforeRouteEnter(to, from, next){
+        axios.get('/api/user')
+        .then(res => {
+            if(localStorage.getItem(process.env.MIX_APP_NAME)){
+                next({name: 'home'});
+            }
+            else{
+                localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
+                next();
+            }
+        })
+        .catch(() => {
+            next({name: 'login'});
+        });
+    },
+
     created(){
         if(VueCookies.get('SOCIAL_LOGIN_SUCCESS')) {
             VueCookies.remove('SOCIAL_LOGIN_SUCCESS');
-            axios.get('/api/user')
-            .then(res => {
-                localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                this.$router.push({name: 'home'});
-            });
         }
-    }
+
+        this.$router.push({name: 'home'});
+    },
 }
 </script>
