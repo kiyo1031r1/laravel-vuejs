@@ -35,7 +35,6 @@
 export default {
     computed:{
         isAuthenticated(){
-            //return this.$store.getters.auth;
             return localStorage.getItem(process.env.MIX_APP_NAME);
         }
     },
@@ -43,9 +42,6 @@ export default {
         logout(){
             axios.post('/api/logout')
             .then(() => {
-                // localStorage.removeItem('auth');
-                // this.$store.dispatch('updateAuth', null);
-                // this.$store.dispatch('updateUser', null);
                 localStorage.removeItem(process.env.MIX_APP_NAME);
                 this.$router.push({name: 'login'});
             });
