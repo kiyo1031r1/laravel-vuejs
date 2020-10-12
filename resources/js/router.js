@@ -116,10 +116,6 @@ const router = new Router({
     ]
 });
 
-// function isAuthenticated(){
-//     return localStorage.getItem('auth');
-// }
-
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
         axios.get('/api/user')

@@ -2314,19 +2314,13 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.$router.push({
               name: 'home'
-            }); // this.$store.dispatch('updateUser', res.data);
-            // this.auth();
-
+            });
           });
         })["catch"](function (error) {
           _this.errors = error.response.data.errors;
         });
       });
-    } // auth(){
-    //     this.$store.dispatch('updateAuth', this.$store.getters.user.token);
-    //     this.$router.push({name: 'home'});
-    // }
-
+    }
   },
   created: function created() {
     if (vue_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.get('SOCIAL_LOGIN_FAILED')) {
@@ -56793,11 +56787,6 @@ var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
-  },
-  mounted: function mounted() {// axios.get('/api/user')
-    // .then(res => {
-    //     this.$store.dispatch('updateUser', res.data);
-    // });
   }
 });
 
@@ -57800,10 +57789,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       admin_authOnly: true
     }
   }]
-}); // function isAuthenticated(){
-//     return localStorage.getItem('auth');
-// }
-
+});
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.authOnly;

@@ -111,20 +111,13 @@ export default {
                     .then(res => {
                         localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
                         this.$router.push({name: 'home'});
-                        // this.$store.dispatch('updateUser', res.data);
-                        // this.auth();
                     });
                 })
                 .catch((error) =>{
                 this.errors = error.response.data.errors;
                 })
             });
-        },
-        // auth(){
-
-        //     this.$store.dispatch('updateAuth', this.$store.getters.user.token);
-        //     this.$router.push({name: 'home'});
-        // }
+        }
     },
     created(){
         if(VueCookies.get('SOCIAL_LOGIN_FAILED')) {

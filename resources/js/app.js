@@ -11,10 +11,4 @@ const app = new Vue({
     router,
     store,
     render: h => h(App),
-    mounted(){
-        // axios.get('/api/user')
-        // .then(res => {
-        //     this.$store.dispatch('updateUser', res.data);
-        // });
-    }
 });
