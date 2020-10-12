@@ -57668,14 +57668,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 function isAuthenticated() {
   return localStorage.getItem('auth');
-} // function isAdmin(){
-//     let user = store.getters.user;
-//     if(user != null && user.role_id === 2){
-//         return true;
-//     }
-//     return false;
-// }
-
+}
 
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
@@ -57701,28 +57694,7 @@ router.beforeEach(function (to, from, next) {
   } else {
     next();
   }
-}); // router.beforeEach((to, from, next) => {
-//     if(to.matched.some(record => record.meta.admin_authOnly)){
-//         if(!isAdmin()) {
-//             next({name: 'admin_login'});
-//         }
-//         else{
-//             next();
-//         }
-//     }
-//     else if(to.matched.some(record => record.meta.admin_guestOnly)){
-//         if(isAdmin()) {
-//             next({name: 'admin'});
-//         }
-//         else{
-//             next();
-//         }
-//     }
-//     else{
-//         next();
-//     }
-// });
-
+});
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.admin_authOnly;
@@ -57775,50 +57747,31 @@ router.beforeEach(function (to, from, next) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    auth: null // admin_auth: null,
-    // user: null,
-
+    auth: null
   },
   getters: {
     auth: function auth(state) {
       return state.auth;
-    } // admin_auth: state => state.admin_auth,
-    // user: state => state.user
-
+    }
   },
   mutations: {
     updateAuth: function updateAuth(state, auth) {
       state.auth = auth;
-    } // updateAdminAuth(state, admin_auth){
-    //     state.admin_auth = admin_auth;
-    // },
-    // updateUser(state, user){
-    //     state.user = user;
-    // },
-
+    }
   },
   actions: {
     updateAuth: function updateAuth(_ref, auth) {
       var commit = _ref.commit;
       commit('updateAuth', auth);
-    } // updateAdminAuth({ commit}, admin_auth){
-    //     commit('updateAdminAuth', admin_auth);
-    // },
-    // updateUser({ commit}, user){
-    //     commit('updateUser', user);
-    // }
-
+    }
   }
 }));
 

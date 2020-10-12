@@ -112,14 +112,6 @@ function isAuthenticated(){
     return localStorage.getItem('auth');
 }
 
-// function isAdmin(){
-//     let user = store.getters.user;
-//     if(user != null && user.role_id === 2){
-//         return true;
-//     }
-//     return false;
-// }
-
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
         if(!isAuthenticated()) {
@@ -141,28 +133,6 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
-
-// router.beforeEach((to, from, next) => {
-//     if(to.matched.some(record => record.meta.admin_authOnly)){
-//         if(!isAdmin()) {
-//             next({name: 'admin_login'});
-//         }
-//         else{
-//             next();
-//         }
-//     }
-//     else if(to.matched.some(record => record.meta.admin_guestOnly)){
-//         if(isAdmin()) {
-//             next({name: 'admin'});
-//         }
-//         else{
-//             next();
-//         }
-//     }
-//     else{
-//         next();
-//     }
-// });
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
