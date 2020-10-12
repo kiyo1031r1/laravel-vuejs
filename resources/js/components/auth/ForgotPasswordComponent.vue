@@ -42,6 +42,7 @@
 
 <script>
 import Header from '../users/UsersHeaderComoponent'
+import VueCookies from 'vue-cookies'
 
 export default {
     data(){
@@ -57,6 +58,7 @@ export default {
         submit(){
             axios.post('/api/forgot', this.user)
             .then(() => {
+                VueCookies.set('SEND_MAIL');
                 this.$router.push({ name: 'send_mail' });
             })
             .catch(error => {

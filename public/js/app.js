@@ -2136,6 +2136,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_UsersHeaderComoponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../users/UsersHeaderComoponent */ "./resources/js/components/users/UsersHeaderComoponent.vue");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-cookies */ "./node_modules/vue-cookies/vue-cookies.js");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_cookies__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2178,6 +2180,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2194,6 +2197,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/forgot', this.user).then(function () {
+        vue_cookies__WEBPACK_IMPORTED_MODULE_1___default.a.set('SEND_MAIL');
+
         _this.$router.push({
           name: 'send_mail'
         });
@@ -2641,6 +2646,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_UsersHeaderComoponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../users/UsersHeaderComoponent */ "./resources/js/components/users/UsersHeaderComoponent.vue");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-cookies */ "./node_modules/vue-cookies/vue-cookies.js");
+/* harmony import */ var vue_cookies__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_cookies__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2660,7 +2667,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    if (vue_cookies__WEBPACK_IMPORTED_MODULE_1___default.a.get('SEND_MAIL')) {
+      vue_cookies__WEBPACK_IMPORTED_MODULE_1___default.a.remove('SEND_MAIL');
+      next();
+    } else {
+      next({
+        name: 'home'
+      });
+    }
+  },
   components: {
     Header: _users_UsersHeaderComoponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }

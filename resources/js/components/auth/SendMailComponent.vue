@@ -18,8 +18,18 @@
 
 <script>
 import Header from '../users/UsersHeaderComoponent'
+import VueCookies from 'vue-cookies'
 
 export default {
+    beforeRouteEnter(to, from, next){
+        if(VueCookies.get('SEND_MAIL')){
+            VueCookies.remove('SEND_MAIL');
+            next();
+        }
+        else{
+            next({name: 'home'});
+        }
+    },
     components:{
         Header
     }
