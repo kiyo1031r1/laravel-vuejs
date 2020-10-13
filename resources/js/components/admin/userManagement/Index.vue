@@ -61,9 +61,6 @@ export default {
     },
     created(){
         this.getUser();
-    },
-    updated(){
-        this.getUser();
     }
 }
 </script>
