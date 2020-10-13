@@ -59,6 +59,9 @@ export default {
     components:{
         AdminHeader
     },
+    created(){
+        this.getUser();
+    },
     updated(){
         this.getUser();
     }

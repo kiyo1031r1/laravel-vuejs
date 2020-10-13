@@ -2041,6 +2041,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  created: function created() {
+    this.getUser();
+  },
   updated: function updated() {
     this.getUser();
   }
