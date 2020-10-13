@@ -38571,7 +38571,7 @@ var render = function() {
         _c(
           "div",
           [
-            _c("router-link", { attrs: { to: { name: "" } } }, [
+            _c("router-link", { attrs: { to: { name: "user_management" } } }, [
               _c("button", { staticClass: "btn btn-success" }, [
                 _vm._v("ユーザー管理")
               ])

@@ -4,7 +4,7 @@
             <nav class="navbar navbar-dark">
                 <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
                 <div>
-                    <router-link :to="{ name: ''}">
+                    <router-link :to="{ name: 'user_management'}">
                         <button class="btn btn-success">ユーザー管理</button>
                     </router-link>
 
