@@ -17,6 +17,7 @@ import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
 //admin
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
+import UserManagementIndex from './components/admin/userManagement/Index'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
@@ -127,6 +128,14 @@ const router = new Router({
                 admin_authOnly: true,
              }
         },
+        {
+            path:'/admin/user_management',
+            name: 'user_management',
+            component: UserManagementIndex,
+            meta: {
+                admin_authOnly: true,
+             }
+        }
     ]
 });
 
