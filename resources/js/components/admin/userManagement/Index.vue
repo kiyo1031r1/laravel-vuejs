@@ -58,7 +58,7 @@ export default {
             users:[]
         }
     },
-    computed:{
+    methods:{
         getUser(){
             axios.get('/api/users')
             .then(res => {
@@ -69,5 +69,8 @@ export default {
     components:{
         AdminHeader
     },
+    updated(){
+        this.getUser();
+    }
 }
 </script>
