@@ -38,6 +38,6 @@ Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::post('/admin/logout', [AdminLoginController::class, 'logout']);
 
 //user
-Route::apiResource('/users', UserController::class);
+Route::apiResource('/users',UserController::class);
 
 Route::apiResource('/tasks',TaskController::class);
