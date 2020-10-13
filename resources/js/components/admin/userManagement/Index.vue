@@ -21,24 +21,14 @@
                         <th scope="col">削除</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-for="user in users" :key="user.id">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>名前</td>
-                        <td>メール</td>
-                        <td>登録日</td>
-                        <td>ステータス</td>
-                        <td>次回更新日</td>
-                        <td><button class="btn btn-primary px-2 py-0">編集</button></td>
-                        <td><button class="btn btn-danger px-2 py-0">削除</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>名前</td>
-                        <td>メール</td>
-                        <td>登録日</td>
-                        <td>ステータス</td>
-                        <td>次回更新日</td>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.created_at}}</td>
+                        <td>{{user.status}}</td>
+                        <td>{{user.next_update}}</td>
                         <td><button class="btn btn-primary px-2 py-0">編集</button></td>
                         <td><button class="btn btn-danger px-2 py-0">削除</button></td>
                     </tr>
