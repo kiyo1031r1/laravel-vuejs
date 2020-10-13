@@ -2039,6 +2039,15 @@ __webpack_require__.r(__webpack_exports__);
       users: []
     };
   },
+  computed: {
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get('/api/users').then(function (res) {
+        _this.users = res.data;
+      });
+    }
+  },
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }

@@ -58,8 +58,16 @@ export default {
             users:[]
         }
     },
+    computed:{
+        getUser(){
+            axios.get('/api/users')
+            .then(res => {
+                this.users = res.data;
+            });
+        }
+    },
     components:{
         AdminHeader
-    }
+    },
 }
 </script>
