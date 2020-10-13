@@ -26,7 +26,7 @@
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{user.created_at}}</td>
+                        <td>{{user.created_at | moment}}
                         <td>{{user.status}}</td>
                         <td>{{user.next_update}}</td>
                         <td><button class="btn btn-primary px-2 py-0">編集</button></td>
