@@ -18,6 +18,7 @@ import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
 import UserManagementIndex from './components/admin/userManagement/Index'
+import UserManagementEdit from './components/admin/userManagement/Edit'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
@@ -135,7 +136,16 @@ const router = new Router({
             meta: {
                 admin_authOnly: true,
              }
-        }
+        },
+        {
+            path:'/admin/user_management/:id',
+            name: 'user_management',
+            component: UserManagementEdit,
+            props: true,
+            meta: {
+                admin_authOnly: true,
+             }
+        },
     ]
 });
 
