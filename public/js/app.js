@@ -2039,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
       users: []
     };
   },
-  computed: {
+  methods: {
     getUser: function getUser() {
       var _this = this;
 
@@ -2050,6 +2050,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  updated: function updated() {
+    this.getUser();
   }
 });
 
