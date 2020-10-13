@@ -53,6 +53,11 @@
 import AdminHeader from '../AdminHeaderComponent'
 
 export default {
+    data(){
+        return{
+            users:[]
+        }
+    },
     components:{
         AdminHeader
     }
