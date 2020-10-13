@@ -1988,6 +1988,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -38641,9 +38685,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("AdminHeader"), _vm._v("\n    ユーザー一覧\n")], 1)
+  return _c("div", [_c("AdminHeader"), _vm._v(" "), _vm._m(0)], 1)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("form", { staticClass: "my-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "ユーザー検索" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-sm table-bordered table-hover text-center"
+        },
+        [
+          _c("thead", { staticClass: "thead-dark" }, [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("ユーザー名")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("email")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("登録日")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("ステータス")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("次回更新日")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("編集")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("削除")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("名前")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("メール")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("登録日")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("ステータス")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("次回更新日")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-primary px-2 py-0" }, [
+                  _vm._v("編集")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-danger px-2 py-0" }, [
+                  _vm._v("削除")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("2")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("名前")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("メール")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("登録日")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("ステータス")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("次回更新日")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-primary px-2 py-0" }, [
+                  _vm._v("編集")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", { staticClass: "btn btn-danger px-2 py-0" }, [
+                  _vm._v("削除")
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
