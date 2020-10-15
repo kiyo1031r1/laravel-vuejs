@@ -60371,179 +60371,187 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("AdminHeader"), _vm._v(" "), _vm._m(0)], 1)
+  return _c(
+    "div",
+    [
+      _c("AdminHeader"),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "col-md-6 mx-auto" }, [
+          _c("ul", { staticClass: "list-group" }, [
+            _c(
+              "li",
+              {
+                staticClass: "list-group-item",
+                staticStyle: { "background-color": "#00000008" }
+              },
+              [_vm._v("ユーザー情報")]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("ID: " + _vm._s(_vm.user.id))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("ユーザー名: " + _vm._s(_vm.user.name))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("email: " + _vm._s(_vm.user.email))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("作成日: " + _vm._s(_vm._f("moment")(_vm.user.created_at)))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("ステータス: " + _vm._s(_vm.user.status))
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "list-group-item" }, [
+              _vm._v("次回更新日: " + _vm._s(_vm.user.next_update))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "col-md-6 mx-auto" }, [
-        _c("ul", { staticClass: "list-group" }, [
-          _c(
-            "li",
-            {
-              staticClass: "list-group-item",
-              staticStyle: { "background-color": "#00000008" }
-            },
-            [_vm._v("ユーザー情報")]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [_vm._v("ID: *****")]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("ユーザー名: *****")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("email: *****")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("作成日: *****")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("ステータス: *****")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _vm._v("次回更新日: *****")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 mx-auto" }, [
-        _c("div", { staticClass: "card my-4" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("form", [
-              _c("fieldset", { staticClass: "form-group" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "legend",
-                    { staticClass: "col-form-label col-md-4 pt-0" },
-                    [_vm._v("ステータス")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "status_nomal" }
-                        },
-                        [_vm._v("ノーマル")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "status",
-                          id: "status_nomal",
-                          value: "nomal"
-                        }
-                      })
-                    ]),
+    return _c("div", { staticClass: "col-md-6 mx-auto" }, [
+      _c("div", { staticClass: "card my-4" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("form", [
+            _c("fieldset", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("legend", { staticClass: "col-form-label col-md-4 pt-0" }, [
+                  _vm._v("ステータス")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "status_nomal" }
+                      },
+                      [_vm._v("ノーマル")]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "status_premium" }
-                        },
-                        [_vm._v("プレミアム")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          name: "status",
-                          id: "status_premium",
-                          value: "premium"
-                        }
-                      })
-                    ])
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "status",
+                        id: "status_nomal",
+                        value: "nomal"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check form-check-inline" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "status_premium" }
+                      },
+                      [_vm._v("プレミアム")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "radio",
+                        name: "status",
+                        id: "status_premium",
+                        value: "premium"
+                      }
+                    })
                   ])
                 ])
-              ]),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-4 col-form-label",
+                  attrs: { for: "time" }
+                },
+                [_vm._v("期間")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
                 _c(
-                  "label",
+                  "select",
                   {
-                    staticClass: "col-md-4 col-form-label",
-                    attrs: { for: "time" }
+                    staticClass: "form-control",
+                    attrs: { name: "time", id: "time" }
                   },
-                  [_vm._v("期間")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { name: "time", id: "time" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label",
-                    attrs: { for: "role" }
-                  },
-                  [_vm._v("権限")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { name: "role", id: "role" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "subscriber" } }, [
-                        _vm._v("ユーザー")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "admin" } }, [
-                        _vm._v("管理者")
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4 mx-auto mt-5" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary btn-block",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("更新")]
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
+                  ]
                 )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-4 col-form-label",
+                  attrs: { for: "role" }
+                },
+                [_vm._v("権限")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-control",
+                    attrs: { name: "role", id: "role" }
+                  },
+                  [
+                    _c("option", { attrs: { value: "subscriber" } }, [
+                      _vm._v("ユーザー")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "admin" } }, [
+                      _vm._v("管理者")
+                    ])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 mx-auto mt-5" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("更新")]
+              )
             ])
           ])
         ])

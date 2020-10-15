@@ -5,12 +5,12 @@
             <div class="col-md-6 mx-auto">
                 <ul class="list-group">
                     <li class="list-group-item" style="background-color:#00000008;">ユーザー情報</li>
-                    <li class="list-group-item">ID: *****</li>
-                    <li class="list-group-item">ユーザー名: *****</li>
-                    <li class="list-group-item">email: *****</li>
-                    <li class="list-group-item">作成日: *****</li>
-                    <li class="list-group-item">ステータス: *****</li>
-                    <li class="list-group-item">次回更新日: *****</li>
+                    <li class="list-group-item">ID: {{user.id}}</li>
+                    <li class="list-group-item">ユーザー名: {{user.name}}</li>
+                    <li class="list-group-item">email: {{user.email}}</li>
+                    <li class="list-group-item">作成日: {{user.created_at | moment}}</li>
+                    <li class="list-group-item">ステータス: {{user.status}}</li>
+                    <li class="list-group-item">次回更新日: {{user.next_update}}</li>
                 </ul>
             </div>
         
