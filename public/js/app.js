@@ -2108,6 +2108,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60587,9 +60591,32 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(user.next_update))]),
                   _vm._v(" "),
-                  _vm._m(2, true),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "user_management_edit",
+                              params: { id: user.id }
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "button",
+                            { staticClass: "btn btn-primary px-2 py-0" },
+                            [_vm._v("編集")]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._m(3, true)
+                  _vm._m(2, true)
                 ])
               ])
             })
@@ -60636,16 +60663,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("編集")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("削除")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-primary px-2 py-0" }, [
-        _vm._v("編集")
       ])
     ])
   },
@@ -80060,7 +80077,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     }
   }, {
     path: '/admin/user_management/:id',
-    name: 'user_management',
+    name: 'user_management_edit',
     component: _components_admin_userManagement_Edit__WEBPACK_IMPORTED_MODULE_12__["default"],
     props: true,
     meta: {

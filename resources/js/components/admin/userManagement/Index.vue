@@ -29,7 +29,11 @@
                         <td>{{user.created_at | moment}}
                         <td>{{user.status}}</td>
                         <td>{{user.next_update}}</td>
-                        <td><button class="btn btn-primary px-2 py-0">編集</button></td>
+                        <td>
+                            <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
+                                <button class="btn btn-primary px-2 py-0">編集</button>
+                            </router-link>
+                        </td>
                         <td><button class="btn btn-danger px-2 py-0">削除</button></td>
                     </tr>
                 </tbody>

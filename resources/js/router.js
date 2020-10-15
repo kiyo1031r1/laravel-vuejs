@@ -139,7 +139,7 @@ const router = new Router({
         },
         {
             path:'/admin/user_management/:id',
-            name: 'user_management',
+            name: 'user_management_edit',
             component: UserManagementEdit,
             props: true,
             meta: {
