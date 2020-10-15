@@ -2050,8 +2050,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      user: {},
+      props: ['id']
+    };
+  },
   components: {
     AdminHeader: _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get('/api/users/' + this.id).then(function (res) {
+        _this.user = res.data;
+      });
+    }
+  },
+  created: function created() {
+    this.getUser();
   }
 });
 

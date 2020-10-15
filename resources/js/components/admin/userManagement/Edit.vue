@@ -69,8 +69,25 @@
 import AdminHeader from '../AdminHeaderComponent'
 
 export default {
+    data(){
+        return {
+            user:{},
+            props: ['id']
+        }
+    },
     components:{
         AdminHeader
+    },
+    methods:{
+        getUser(){
+            axios.get('/api/users/'+ this.id)
+            .then(res => {
+                this.user = res.data;
+            });
+        }
+    },
+    created(){
+        this.getUser();
     }
 }
 </script>
