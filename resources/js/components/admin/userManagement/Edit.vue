@@ -72,15 +72,16 @@ export default {
     data(){
         return {
             user:{},
-            props: ['id']
         }
     },
+    props: ['id']
+    ,
     components:{
         AdminHeader
     },
     methods:{
         getUser(){
-            axios.get('/api/users/'+ this.id)
+            axios.get('/api/users/' + this.id)
             .then(res => {
                 this.user = res.data;
             });
