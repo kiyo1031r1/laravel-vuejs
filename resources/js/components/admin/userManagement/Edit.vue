@@ -44,7 +44,7 @@
                 <div class="card my-4">
                     <div class="card-header">ステータス変更</div>
                     <div class="card-body">
-                        <form>
+                        <form @submit.prevent="edit">
                             <fieldset class="form-group">
                                 <div class="row">
                                     <legend class="col-form-label col-md-4 pt-0">ステータス</legend>
@@ -94,6 +94,7 @@
 
 <script>
 import AdminHeader from '../AdminHeaderComponent'
+import moment from 'moment'
 
 export default {
     data(){
@@ -123,6 +124,8 @@ export default {
         },
         selectPremium(){
             this.time = this.time ?? '1';
+        },
+        edit(){
         }
     },
     created(){

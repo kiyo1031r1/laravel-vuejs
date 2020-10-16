@@ -1981,6 +1981,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AdminHeaderComponent */ "./resources/js/components/admin/AdminHeaderComponent.vue");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2075,6 +2077,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2106,7 +2109,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this$time;
 
       this.time = (_this$time = this.time) !== null && _this$time !== void 0 ? _this$time : '1';
-    }
+    },
+    edit: function edit() {}
   },
   created: function created() {
     this.getUser();
@@ -60471,175 +60475,194 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", [
-              _c("fieldset", { staticClass: "form-group" }, [
-                _c("div", { staticClass: "row" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.edit($event)
+                  }
+                }
+              },
+              [
+                _c("fieldset", { staticClass: "form-group" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "legend",
+                      { staticClass: "col-form-label col-md-4 pt-0" },
+                      [_vm._v("ステータス")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-inline" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "status_normal" }
+                            },
+                            [_vm._v("ノーマル")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.status,
+                                expression: "user.status"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "status_normal",
+                              value: "normal"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.user.status, "normal")
+                            },
+                            on: {
+                              click: _vm.selectNormal,
+                              change: function($event) {
+                                return _vm.$set(_vm.user, "status", "normal")
+                              }
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-inline" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "status_premium" }
+                            },
+                            [_vm._v("プレミアム")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.status,
+                                expression: "user.status"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "status_premium",
+                              value: "premium"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.user.status, "premium")
+                            },
+                            on: {
+                              click: _vm.selectPremium,
+                              change: function($event) {
+                                return _vm.$set(_vm.user, "status", "premium")
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "legend",
-                    { staticClass: "col-form-label col-md-4 pt-0" },
-                    [_vm._v("ステータス")]
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label",
+                      attrs: { for: "time" }
+                    },
+                    [_vm._v("期間")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "status_normal" }
-                        },
-                        [_vm._v("ノーマル")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.status,
-                            expression: "user.status"
-                          }
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          id: "status_normal",
-                          value: "normal"
-                        },
-                        domProps: {
-                          checked: _vm._q(_vm.user.status, "normal")
-                        },
-                        on: {
-                          click: _vm.selectNormal,
-                          change: function($event) {
-                            return _vm.$set(_vm.user, "status", "normal")
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-check form-check-inline" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "status_premium" }
-                        },
-                        [_vm._v("プレミアム")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.status,
-                            expression: "user.status"
-                          }
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "radio",
-                          id: "status_premium",
-                          value: "premium"
-                        },
-                        domProps: {
-                          checked: _vm._q(_vm.user.status, "premium")
-                        },
-                        on: {
-                          click: _vm.selectPremium,
-                          change: function($event) {
-                            return _vm.$set(_vm.user, "status", "premium")
-                          }
-                        }
-                      })
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label",
-                    attrs: { for: "time" }
-                  },
-                  [_vm._v("期間")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _vm.user.status == "normal"
-                    ? _c("input", {
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "time", disabled: "" }
-                      })
-                    : _c(
-                        "select",
-                        {
+                    _vm.user.status == "normal"
+                      ? _c("input", {
                           staticClass: "form-control",
-                          attrs: { name: "time", id: "time" },
-                          domProps: { value: _vm.time },
-                          on: {
-                            change: function($event) {
-                              _vm.time = $event.target.value
+                          attrs: { type: "text", id: "time", disabled: "" }
+                        })
+                      : _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "time", id: "time" },
+                            domProps: { value: _vm.time },
+                            on: {
+                              change: function($event) {
+                                _vm.time = $event.target.value
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("1")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "7" } }, [
-                            _vm._v("7")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "14" } }, [
-                            _vm._v("14")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "28" } }, [
-                            _vm._v("28")
-                          ])
-                        ]
-                      )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label",
-                    attrs: { for: "role" }
-                  },
-                  [_vm._v("権限")]
-                ),
+                          },
+                          [
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("1")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("7")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "14" } }, [
+                              _vm._v("14")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "28" } }, [
+                              _vm._v("28")
+                            ])
+                          ]
+                        )
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "select",
+                    "label",
                     {
-                      staticClass: "form-control",
-                      attrs: { name: "role", id: "role" },
-                      domProps: { value: _vm.user.role_id }
+                      staticClass: "col-md-4 col-form-label",
+                      attrs: { for: "role" }
                     },
-                    [
-                      _c("option", { attrs: { value: "1" } }, [
-                        _vm._v("一般ユーザー")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("管理者")
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
+                    [_vm._v("権限")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "role", id: "role" },
+                        domProps: { value: _vm.user.role_id }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("一般ユーザー")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("管理者")
+                        ])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
           ])
         ])
       ])
