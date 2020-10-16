@@ -2089,7 +2089,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.role_id = _this.user.role_id;
       });
     },
-    edit: function edit() {}
+    edit: function edit() {
+      if (this.status == 'normal' && this.user.status == 'premium') {
+        this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()().add(1, 'M').format('YYYY-MM-DD');
+      } else if (this.status == 'premium' && this.user.status == 'normal') {
+        this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
+      }
+    }
   },
   created: function created() {
     this.getUser();
