@@ -2080,7 +2080,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: {},
       status: '',
-      time: '1'
+      time: '1',
+      role_id: ''
     };
   },
   props: ['id'],
@@ -2094,6 +2095,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/users/' + this.id).then(function (res) {
         _this.user = res.data;
         _this.status = _this.user.status;
+        _this.role_id = _this.user.role_id;
       });
     }
   },
@@ -60449,7 +60451,7 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("権限")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm._f("role")(_vm.user.role_id)))])
+              _c("td", [_vm._v(_vm._s(_vm._f("role")(_vm.role_id)))])
             ])
           ])
         ])

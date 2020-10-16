@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td scope="row">権限</td>
-                            <td>{{user.role_id | role}}</td>
+                            <td>{{role_id | role}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -99,7 +99,8 @@ export default {
         return {
             user:{},
             status:'',
-            time: '1'
+            time: '1',
+            role_id: '',
         }
     },
     props: ['id']  
@@ -113,6 +114,7 @@ export default {
             .then(res => {
                 this.user = res.data;
                 this.status = this.user.status;
+                this.role_id = this.user.role_id;
             });
         }
     },
