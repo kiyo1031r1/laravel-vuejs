@@ -61,18 +61,6 @@
                                 </div>
                             </fieldset>
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label" for="time">期間</label>
-                                <div class="col-md-6">
-                                    <input v-if="user.status == 'normal'" class="form-control" type="text" id="time" disabled>
-                                    <select v-else :value="time" @change="time = $event.target.value" class="form-control" name="time" id="time">
-                                        <option value="1">1</option>
-                                        <option value="7">7</option>
-                                        <option value="14">14</option>
-                                        <option value="28">28</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="role">権限</label>
                                 <div class="col-md-6">
                                     <select :value="user.role_id" class="form-control" name="role" id="role">
@@ -101,7 +89,7 @@ export default {
         return {
             user:{},
             status:'',
-            time: '1',
+            time: '',
             role_id: '',
         }
     },
@@ -123,9 +111,10 @@ export default {
             this.time = null;
         },
         selectPremium(){
-            this.time = this.time ?? '1';
+            this.time = this.time ?? '30';
         },
         edit(){
+
         }
     },
     created(){
