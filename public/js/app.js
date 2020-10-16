@@ -60583,9 +60583,38 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 col-form-label",
+                    attrs: { for: "role" }
+                  },
+                  [_vm._v("権限")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { name: "role", id: "role" },
+                      domProps: { value: _vm.user.role_id }
+                    },
+                    [
+                      _c("option", { attrs: { value: "subscriber" } }, [
+                        _vm._v("一般ユーザー")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "admin" } }, [
+                        _vm._v("管理者")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(1)
             ])
           ])
         ])
@@ -60611,32 +60640,6 @@ var staticRenderFns = [
         _c("td")
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-4 col-form-label", attrs: { for: "role" } },
-        [_vm._v("権限")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { name: "role", id: "role" } },
-          [
-            _c("option", { attrs: { value: "subscriber" } }, [
-              _vm._v("一般ユーザー")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "admin" } }, [_vm._v("管理者")])
-          ]
-        )
-      ])
-    ])
   },
   function() {
     var _vm = this
