@@ -2159,6 +2159,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60431,7 +60432,15 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("作成日")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm._f("moment")(_vm.user.created_at)))])
+              _c("td", [
+                _vm._v(
+                  _vm._s(
+                    _vm
+                      .moment(_vm.user.created_at)
+                      .format("YYYY-MM-DD HH:MM:SS")
+                  )
+                )
+              ])
             ]),
             _vm._v(" "),
             _c("tr", [
@@ -60443,7 +60452,11 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("次回更新日")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.user.next_update))])
+              _c("td", [
+                _vm._v(
+                  _vm._s(_vm.moment(_vm.user.next_update).format("YYYY-MM-DD"))
+                )
+              ])
             ]),
             _vm._v(" "),
             _c("tr", [
@@ -60685,13 +60698,24 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(
-                      _vm._s(_vm._f("moment")(user.created_at)) +
-                        "\n                    "
+                      _vm._s(
+                        _vm
+                          .moment(user.created_at)
+                          .format("YYYY-MM-DD HH:MM:SS")
+                      ) + "\n                    "
                     )
                   ]),
                   _c("td", [_vm._v(_vm._s(user.status))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.next_update))]),
+                  user.next_update != null
+                    ? _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            _vm.moment(user.next_update).format("YYYY-MM-DD")
+                          )
+                        )
+                      ])
+                    : _c("td"),
                   _vm._v(" "),
                   _c(
                     "td",
@@ -79006,9 +79030,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.filter('moment', function (value) {
-  return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD');
-});
+Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_3___default.a;
 Vue.filter('role', function (value) {
   if (value == 1) {
     return '一般ユーザー';

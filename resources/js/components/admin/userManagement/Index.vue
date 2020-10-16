@@ -26,9 +26,10 @@
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{user.created_at | moment}}
+                        <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}
                         <td>{{user.status}}</td>
-                        <td>{{user.next_update}}</td>
+                        <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                        <td v-else></td>
                         <td>
                             <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
                                 <button class="btn btn-primary px-2 py-0">編集</button>

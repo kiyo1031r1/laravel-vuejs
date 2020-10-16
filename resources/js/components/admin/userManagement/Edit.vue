@@ -22,7 +22,7 @@
                         </tr>
                         <tr>
                             <td scope="row">作成日</td>
-                            <td>{{user.created_at | moment}}</td>
+                            <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}</td>
                         </tr>
                         <tr>
                             <td scope="row">ステータス</td>
@@ -30,7 +30,7 @@
                         </tr>
                         <tr>
                             <td scope="row">次回更新日</td>
-                            <td>{{user.next_update}}</td>
+                            <td>{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
                         </tr>
                         <tr>
                             <td scope="row">権限</td>

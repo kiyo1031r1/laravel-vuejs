@@ -7,9 +7,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.filter('moment', (value) => {
-    return moment(value).format('YYYY-MM-DD');
-});
+Vue.prototype.moment = moment;
 
 Vue.filter('role', (value) => {
     if(value == 1){
