@@ -30,7 +30,8 @@
                         </tr>
                         <tr>
                             <td scope="row">次回更新日</td>
-                            <td>{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                            <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                            <td v-else></td>
                         </tr>
                         <tr>
                             <td scope="row">権限</td>

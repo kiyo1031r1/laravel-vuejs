@@ -2065,6 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -60452,11 +60453,15 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("次回更新日")]),
               _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  _vm._s(_vm.moment(_vm.user.next_update).format("YYYY-MM-DD"))
-                )
-              ])
+              _vm.user.next_update != null
+                ? _c("td", [
+                    _vm._v(
+                      _vm._s(
+                        _vm.moment(_vm.user.next_update).format("YYYY-MM-DD")
+                      )
+                    )
+                  ])
+                : _c("td")
             ]),
             _vm._v(" "),
             _c("tr", [
