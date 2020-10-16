@@ -2098,6 +2098,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.status = _this.user.status;
         _this.role_id = _this.user.role_id;
       });
+    },
+    selectNormal: function selectNormal() {
+      this.time = null;
+    },
+    selectPremium: function selectPremium() {
+      var _this$time;
+
+      this.time = (_this$time = this.time) !== null && _this$time !== void 0 ? _this$time : '1';
     }
   },
   created: function created() {
@@ -60502,6 +60510,7 @@ var render = function() {
                           checked: _vm._q(_vm.user.status, "normal")
                         },
                         on: {
+                          click: _vm.selectNormal,
                           change: function($event) {
                             return _vm.$set(_vm.user, "status", "normal")
                           }
@@ -60538,6 +60547,7 @@ var render = function() {
                           checked: _vm._q(_vm.user.status, "premium")
                         },
                         on: {
+                          click: _vm.selectPremium,
                           change: function($event) {
                             return _vm.$set(_vm.user, "status", "premium")
                           }
