@@ -2070,6 +2070,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60440,6 +60444,12 @@ var render = function() {
               _c("td", { attrs: { scope: "row" } }, [_vm._v("次回更新日")]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(_vm.user.next_update))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("権限")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm._f("role")(_vm.user.role_id)))])
             ])
           ])
         ])
@@ -60545,7 +60555,7 @@ var render = function() {
                   [_vm._v("期間")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-6" }, [
                   _c(
                     "select",
                     {
@@ -60611,13 +60621,13 @@ var staticRenderFns = [
         [_vm._v("権限")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "col-md-6" }, [
         _c(
           "select",
           { staticClass: "form-control", attrs: { name: "role", id: "role" } },
           [
             _c("option", { attrs: { value: "subscriber" } }, [
-              _vm._v("ユーザー")
+              _vm._v("一般ユーザー")
             ]),
             _vm._v(" "),
             _c("option", { attrs: { value: "admin" } }, [_vm._v("管理者")])
@@ -79012,6 +79022,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.filter('moment', function (value) {
   return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD HH:MM:SS');
+});
+Vue.filter('role', function (value) {
+  if (value == 1) {
+    return '一般ユーザー';
+  } else if (value == 2) {
+    return '管理者';
+  }
 });
 var app = new Vue({
   el: '#app',

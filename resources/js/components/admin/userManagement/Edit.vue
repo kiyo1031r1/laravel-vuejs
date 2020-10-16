@@ -32,6 +32,10 @@
                             <td scope="row">次回更新日</td>
                             <td>{{user.next_update}}</td>
                         </tr>
+                        <tr>
+                            <td scope="row">権限</td>
+                            <td>{{user.role_id | role}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -58,7 +62,7 @@
                             </fieldset>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="time">期間</label>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <select :value="time" @change="time = $event.target.value" class="form-control" name="time" id="time">
                                         <option value="1">1</option>
                                         <option value="7">7</option>
@@ -69,9 +73,9 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="role">権限</label>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <select class="form-control" name="role" id="role">
-                                        <option value="subscriber">ユーザー</option>
+                                        <option value="subscriber">一般ユーザー</option>
                                         <option value="admin">管理者</option>
                                     </select>
                                 </div>
