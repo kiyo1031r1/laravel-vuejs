@@ -2070,14 +2070,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
-      status: true
+      status: ''
     };
   },
   props: ['id'],
@@ -2090,7 +2088,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/users/' + this.id).then(function (res) {
         _this.user = res.data;
-        _this.status = _this.user.status == 'normal' ? true : false;
+        _this.status = _this.user.status;
       });
     }
   },
@@ -60434,7 +60432,7 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("ステータス")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.user.status))])
+              _c("td", [_vm._v(_vm._s(_vm.status))])
             ]),
             _vm._v(" "),
             _c("tr", [
@@ -60466,31 +60464,35 @@ var render = function() {
                         "label",
                         {
                           staticClass: "form-check-label",
-                          attrs: { for: "status_nomal" }
+                          attrs: { for: "status_normal" }
                         },
                         [_vm._v("ノーマル")]
                       ),
                       _vm._v(" "),
-                      _vm.status
-                        ? _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              name: "status",
-                              id: "status_nomal",
-                              value: "nomal",
-                              checked: ""
-                            }
-                          })
-                        : _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              name: "status",
-                              id: "status_nomal",
-                              value: "nomal"
-                            }
-                          })
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.status,
+                            expression: "user.status"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          id: "status_normal",
+                          value: "normal"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.user.status, "normal")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.user, "status", "normal")
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -60503,26 +60505,30 @@ var render = function() {
                         [_vm._v("プレミアム")]
                       ),
                       _vm._v(" "),
-                      _vm.status
-                        ? _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              name: "status",
-                              id: "status_premium",
-                              value: "premium"
-                            }
-                          })
-                        : _c("input", {
-                            staticClass: "form-check-input",
-                            attrs: {
-                              type: "radio",
-                              name: "status",
-                              id: "status_premium",
-                              value: "premium",
-                              checked: ""
-                            }
-                          })
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.status,
+                            expression: "user.status"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          id: "status_premium",
+                          value: "premium"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.user.status, "premium")
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(_vm.user, "status", "premium")
+                          }
+                        }
+                      })
                     ])
                   ])
                 ])
