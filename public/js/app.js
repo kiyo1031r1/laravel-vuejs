@@ -2048,6 +2048,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60376,51 +60398,73 @@ var render = function() {
     [
       _c("AdminHeader"),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "col-md-6 mx-auto" }, [
-          _c("ul", { staticClass: "list-group" }, [
-            _c(
-              "li",
-              {
-                staticClass: "list-group-item",
-                staticStyle: { "background-color": "#00000008" }
-              },
-              [_vm._v("ユーザー情報")]
-            ),
+      _c("div", { staticClass: "col-md-6 mx-auto" }, [
+        _c("table", { staticClass: "table table-bordered bg-white" }, [
+          _c("tbody", [
+            _vm._m(0),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("ID: " + _vm._s(_vm.user.id))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("ID")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.user.id))])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("ユーザー名: " + _vm._s(_vm.user.name))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("ユーザー名")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.user.name))])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("email: " + _vm._s(_vm.user.email))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("email")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.user.email))])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("作成日: " + _vm._s(_vm._f("moment")(_vm.user.created_at)))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("作成日")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm._f("moment")(_vm.user.created_at)))])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("ステータス: " + _vm._s(_vm.user.status))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("ステータス")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.user.status))])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _vm._v("次回更新日: " + _vm._s(_vm.user.next_update))
+            _c("tr", [
+              _c("td", { attrs: { scope: "row" } }, [_vm._v("次回更新日")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.user.next_update))])
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
     ],
     1
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "tr",
+      {
+        staticClass: "table-borderless",
+        staticStyle: { "background-color": "#00000008" }
+      },
+      [
+        _c("td", { attrs: { scope: "row" } }, [_vm._v("ユーザー情報")]),
+        _vm._v(" "),
+        _c("td")
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

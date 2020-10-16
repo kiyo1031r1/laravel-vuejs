@@ -1,17 +1,39 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="container">
             <div class="col-md-6 mx-auto">
-                <ul class="list-group">
-                    <li class="list-group-item" style="background-color:#00000008;">ユーザー情報</li>
-                    <li class="list-group-item">ID: {{user.id}}</li>
-                    <li class="list-group-item">ユーザー名: {{user.name}}</li>
-                    <li class="list-group-item">email: {{user.email}}</li>
-                    <li class="list-group-item">作成日: {{user.created_at | moment}}</li>
-                    <li class="list-group-item">ステータス: {{user.status}}</li>
-                    <li class="list-group-item">次回更新日: {{user.next_update}}</li>
-                </ul>
+                <table class="table table-bordered bg-white">
+                    <tbody>
+                        <tr class="table-borderless" style="background-color:#00000008;">
+                            <td scope="row">ユーザー情報</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row">ID</td>
+                            <td>{{user.id}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">ユーザー名</td>
+                            <td>{{user.name}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">email</td>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">作成日</td>
+                            <td>{{user.created_at | moment}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">ステータス</td>
+                            <td>{{user.status}}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">次回更新日</td>
+                            <td>{{user.next_update}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         
             <div class="col-md-6 mx-auto">
