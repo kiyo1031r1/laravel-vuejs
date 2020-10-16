@@ -2076,7 +2076,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: {},
       status: '',
-      time: ''
+      time: '1'
     };
   },
   props: ['id'],
@@ -60535,11 +60535,45 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 col-form-label",
+                    attrs: { for: "time" }
+                  },
+                  [_vm._v("期間")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { name: "time", id: "time" },
+                      domProps: { value: _vm.time },
+                      on: {
+                        change: function($event) {
+                          _vm.time = $event.target.value
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3)
+              _vm._m(2)
             ])
           ])
         ])
@@ -60565,34 +60599,6 @@ var staticRenderFns = [
         _c("td")
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-4 col-form-label", attrs: { for: "time" } },
-        [_vm._v("期間")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { name: "time", id: "time" } },
-          [
-            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
-          ]
-        )
-      ])
-    ])
   },
   function() {
     var _vm = this

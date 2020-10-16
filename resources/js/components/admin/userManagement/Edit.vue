@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="time">期間</label>
                                 <div class="col-md-4">
-                                    <select class="form-control" name="time" id="time">
+                                    <select :value="time" @change="time = $event.target.value" class="form-control" name="time" id="time">
                                         <option value="1">1</option>
                                         <option value="7">7</option>
                                         <option value="14">14</option>
@@ -95,7 +95,7 @@ export default {
         return {
             user:{},
             status:'',
-            time: ''
+            time: '1'
         }
     },
     props: ['id']  
