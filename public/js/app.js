@@ -2070,11 +2070,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      user: {}
+      user: {},
+      status: true
     };
   },
   props: ['id'],
@@ -2087,6 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/users/' + this.id).then(function (res) {
         _this.user = res.data;
+        _this.status = _this.user.status == 'normal' ? true : false;
       });
     }
   },
@@ -60442,7 +60446,97 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1)
+      _c("div", { staticClass: "col-md-6 mx-auto" }, [
+        _c("div", { staticClass: "card my-4" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("form", [
+              _c("fieldset", { staticClass: "form-group" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "legend",
+                    { staticClass: "col-form-label col-md-4 pt-0" },
+                    [_vm._v("ステータス")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "status_nomal" }
+                        },
+                        [_vm._v("ノーマル")]
+                      ),
+                      _vm._v(" "),
+                      _vm.status
+                        ? _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "status",
+                              id: "status_nomal",
+                              value: "nomal",
+                              checked: ""
+                            }
+                          })
+                        : _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "status",
+                              id: "status_nomal",
+                              value: "nomal"
+                            }
+                          })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check form-check-inline" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "status_premium" }
+                        },
+                        [_vm._v("プレミアム")]
+                      ),
+                      _vm._v(" "),
+                      _vm.status
+                        ? _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "status",
+                              id: "status_premium",
+                              value: "premium"
+                            }
+                          })
+                        : _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              name: "status",
+                              id: "status_premium",
+                              value: "premium",
+                              checked: ""
+                            }
+                          })
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ])
+        ])
+      ])
     ],
     1
   )
@@ -60469,137 +60563,66 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 mx-auto" }, [
-      _c("div", { staticClass: "card my-4" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("form", [
-            _c("fieldset", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("legend", { staticClass: "col-form-label col-md-4 pt-0" }, [
-                  _vm._v("ステータス")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-check form-check-inline" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "status_nomal" }
-                      },
-                      [_vm._v("ノーマル")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "status",
-                        id: "status_nomal",
-                        value: "nomal"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-check form-check-inline" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "status_premium" }
-                      },
-                      [_vm._v("プレミアム")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        name: "status",
-                        id: "status_premium",
-                        value: "premium"
-                      }
-                    })
-                  ])
-                ])
-              ])
-            ]),
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-4 col-form-label", attrs: { for: "time" } },
+        [_vm._v("期間")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { name: "time", id: "time" } },
+          [
+            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-4 col-form-label",
-                  attrs: { for: "time" }
-                },
-                [_vm._v("期間")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "form-control",
-                    attrs: { name: "time", id: "time" }
-                  },
-                  [
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
-                  ]
-                )
-              ])
-            ]),
+            _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-4 col-form-label",
-                  attrs: { for: "role" }
-                },
-                [_vm._v("権限")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "form-control",
-                    attrs: { name: "role", id: "role" }
-                  },
-                  [
-                    _c("option", { attrs: { value: "subscriber" } }, [
-                      _vm._v("ユーザー")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "admin" } }, [
-                      _vm._v("管理者")
-                    ])
-                  ]
-                )
-              ])
-            ]),
+            _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 mx-auto mt-5" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-block",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("更新")]
-              )
-            ])
-          ])
-        ])
+            _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
+          ]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-4 col-form-label", attrs: { for: "role" } },
+        [_vm._v("権限")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { name: "role", id: "role" } },
+          [
+            _c("option", { attrs: { value: "subscriber" } }, [
+              _vm._v("ユーザー")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "admin" } }, [_vm._v("管理者")])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 mx-auto mt-5" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
+        [_vm._v("更新")]
+      )
     ])
   }
 ]

@@ -47,11 +47,13 @@
                                     <div class="col-md-6">
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="status_nomal">ノーマル</label>
-                                            <input class="form-check-input" type="radio" name="status" id="status_nomal" value="nomal">
+                                            <input v-if="status" class="form-check-input" type="radio" name="status" id="status_nomal" value="nomal" checked>
+                                            <input v-else class="form-check-input" type="radio" name="status" id="status_nomal" value="nomal">
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="status_premium">プレミアム</label>
-                                            <input class="form-check-input" type="radio" name="status" id="status_premium" value="premium">
+                                            <input v-if="status" class="form-check-input" type="radio" name="status" id="status_premium" value="premium">
+                                            <input v-else class="form-check-input" type="radio" name="status" id="status_premium" value="premium" checked>
                                         </div>
                                     </div>
                                 </div>
@@ -94,9 +96,10 @@ export default {
     data(){
         return {
             user:{},
+            status: true
         }
     },
-    props: ['id']
+    props: ['id']  
     ,
     components:{
         AdminHeader
@@ -106,6 +109,7 @@ export default {
             axios.get('/api/users/' + this.id)
             .then(res => {
                 this.user = res.data;
+                this.status = (this.user.status == 'normal') ? true : false;
             });
         }
     },
