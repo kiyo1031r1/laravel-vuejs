@@ -51,11 +51,11 @@
                                     <div class="col-md-6">
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="status_normal">ノーマル</label>
-                                            <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="user.status" @click="selectNormal">
+                                            <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="user.status">
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="status_premium">プレミアム</label>
-                                            <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="user.status" @click="selectPremium">
+                                            <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="user.status">
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,6 @@ export default {
         return {
             user:{},
             status:'',
-            time: '',
             role_id: '',
         }
     },
@@ -106,12 +105,6 @@ export default {
                 this.status = this.user.status;
                 this.role_id = this.user.role_id;
             });
-        },
-        selectNormal(){
-            this.time = null;
-        },
-        selectPremium(){
-            this.time = this.time ?? '30';
         },
         edit(){
 
