@@ -2075,7 +2075,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: {},
-      status: ''
+      status: '',
+      next_update: ''
     };
   },
   props: ['id'],
@@ -2089,6 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/users/' + this.id).then(function (res) {
         _this.user = res.data;
         _this.status = _this.user.status;
+        _this.next_update = _this.user.next_update;
       });
     }
   },
@@ -60438,7 +60440,7 @@ var render = function() {
             _c("tr", [
               _c("td", { attrs: { scope: "row" } }, [_vm._v("次回更新日")]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.user.next_update))])
+              _c("td", [_vm._v(_vm._s(_vm.next_update))])
             ])
           ])
         ])
