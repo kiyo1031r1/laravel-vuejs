@@ -79007,7 +79007,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.filter('moment', function (value) {
-  return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD HH:MM:SS');
+  return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD');
 });
 Vue.filter('role', function (value) {
   if (value == 1) {
