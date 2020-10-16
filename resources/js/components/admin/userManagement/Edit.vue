@@ -114,6 +114,11 @@ export default {
             else if(this.status == 'premium' && this.user.status == 'normal'){
                 this.user.next_update = moment(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
             }
+
+            axios.put('/api/users/' + this.id, this.user)
+            .then(() => {
+                this.$router.push({name: 'user_management'})
+            });
         }
     },
     created(){

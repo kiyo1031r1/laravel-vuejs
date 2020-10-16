@@ -2091,11 +2091,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     edit: function edit() {
+      var _this2 = this;
+
       if (this.status == 'normal' && this.user.status == 'premium') {
         this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()().add(1, 'M').format('YYYY-MM-DD');
       } else if (this.status == 'premium' && this.user.status == 'normal') {
         this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
       }
+
+      axios.put('/api/users/' + this.id, this.user).then(function () {
+        _this2.$router.push({
+          name: 'user_management'
+        });
+      });
     }
   },
   created: function created() {
