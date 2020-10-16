@@ -75,8 +75,8 @@
                                 <label class="col-md-4 col-form-label" for="role">権限</label>
                                 <div class="col-md-6">
                                     <select :value="user.role_id" class="form-control" name="role" id="role">
-                                        <option value="subscriber">一般ユーザー</option>
-                                        <option value="admin">管理者</option>
+                                        <option value="1">一般ユーザー</option>
+                                        <option value="2">管理者</option>
                                     </select>
                                 </div>
                             </div>

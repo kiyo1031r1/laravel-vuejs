@@ -60602,11 +60602,11 @@ var render = function() {
                       domProps: { value: _vm.user.role_id }
                     },
                     [
-                      _c("option", { attrs: { value: "subscriber" } }, [
+                      _c("option", { attrs: { value: "1" } }, [
                         _vm._v("一般ユーザー")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "admin" } }, [
+                      _c("option", { attrs: { value: "2" } }, [
                         _vm._v("管理者")
                       ])
                     ]
