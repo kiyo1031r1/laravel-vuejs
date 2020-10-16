@@ -30,7 +30,7 @@
                         </tr>
                         <tr>
                             <td scope="row">次回更新日</td>
-                            <td>{{next_update}}</td>
+                            <td>{{user.next_update}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,7 +95,7 @@ export default {
         return {
             user:{},
             status:'',
-            next_update: ''
+            time: ''
         }
     },
     props: ['id']  
@@ -109,7 +109,6 @@ export default {
             .then(res => {
                 this.user = res.data;
                 this.status = this.user.status;
-                this.next_update = this.user.next_update;
             });
         }
     },
