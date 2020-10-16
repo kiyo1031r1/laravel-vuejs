@@ -2074,6 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60558,28 +60559,41 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { name: "time", id: "time" },
-                      domProps: { value: _vm.time },
-                      on: {
-                        change: function($event) {
-                          _vm.time = $event.target.value
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "14" } }, [_vm._v("14")]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "28" } }, [_vm._v("28")])
-                    ]
-                  )
+                  _vm.user.status == "normal"
+                    ? _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "time", disabled: "" }
+                      })
+                    : _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          attrs: { name: "time", id: "time" },
+                          domProps: { value: _vm.time },
+                          on: {
+                            change: function($event) {
+                              _vm.time = $event.target.value
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("1")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "7" } }, [
+                            _vm._v("7")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "14" } }, [
+                            _vm._v("14")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "28" } }, [
+                            _vm._v("28")
+                          ])
+                        ]
+                      )
                 ])
               ]),
               _vm._v(" "),

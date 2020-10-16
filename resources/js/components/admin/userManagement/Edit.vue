@@ -63,7 +63,8 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="time">期間</label>
                                 <div class="col-md-6">
-                                    <select :value="time" @change="time = $event.target.value" class="form-control" name="time" id="time">
+                                    <input v-if="user.status == 'normal'" class="form-control" type="text" id="time" disabled>
+                                    <select v-else :value="time" @change="time = $event.target.value" class="form-control" name="time" id="time">
                                         <option value="1">1</option>
                                         <option value="7">7</option>
                                         <option value="14">14</option>
