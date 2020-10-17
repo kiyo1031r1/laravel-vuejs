@@ -2,10 +2,12 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="container">
+            <h4>ユーザー検索</h4>
             <form @submit.prevent="searchUser" class="my-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="ユーザー検索" v-model="searchWord">
+                    <input type="text" class="form-control" placeholder="ユーザー名" v-model="searchWord">
                 </div>
+                <button class="btn btn-primary mt-4" type="submit">検索</button>
             </form>
 
             <table class="table table-sm table-bordered table-hover text-center">
