@@ -60603,9 +60603,35 @@ var render = function() {
                     _c(
                       "select",
                       {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.role_id,
+                            expression: "user.role_id"
+                          }
+                        ],
                         staticClass: "form-control",
                         attrs: { name: "role", id: "role" },
-                        domProps: { value: _vm.user.role_id }
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.user,
+                              "role_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
                       },
                       [
                         _c("option", { attrs: { value: "1" } }, [

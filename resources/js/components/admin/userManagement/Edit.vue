@@ -64,7 +64,7 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label" for="role">権限</label>
                                 <div class="col-md-6">
-                                    <select :value="user.role_id" class="form-control" name="role" id="role">
+                                    <select v-model="user.role_id" class="form-control" name="role" id="role">
                                         <option value="1">一般ユーザー</option>
                                         <option value="2">管理者</option>
                                     </select>
