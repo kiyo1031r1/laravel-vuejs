@@ -11,8 +11,8 @@ class UserController extends Controller
         return User::all();
     }
 
-    public function show($id){
-        return User::findOrFail($id);
+    public function show(User $user){
+        return $user;
     }
 
     public function update(Request $request, User $user){
