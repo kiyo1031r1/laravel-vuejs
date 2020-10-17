@@ -82,7 +82,7 @@ export default {
             axios.get('/api/users')
             .then(res => {
                 this.users = res.data;
-                this.length = Math.ceil(this.users / this.pageSize);
+                this.length = Math.ceil(this.users.length / this.pageSize);
                 this.changePage(1);
             });
         },
