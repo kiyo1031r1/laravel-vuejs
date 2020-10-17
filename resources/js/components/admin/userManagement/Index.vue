@@ -22,7 +22,7 @@
                         <th scope="col">削除</th>
                     </tr>
                 </thead>
-                <tbody v-for="user in users" :key="user.id">
+                <tbody v-for="user in displayUsers" :key="user.id">
                     <tr>
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.name}}</td>
@@ -81,6 +81,7 @@ export default {
             axios.get('/api/users')
             .then(res => {
                 this.users = res.data;
+                this.changePage(1);
             });
         },
         deleteUser(id){
