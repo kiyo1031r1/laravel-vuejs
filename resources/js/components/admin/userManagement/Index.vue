@@ -5,7 +5,7 @@
             <h4>ユーザー検索</h4>
             <form @submit.prevent="searchUser" class="my-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="ユーザー名" v-model="searchWord">
+                    <input type="text" class="form-control" placeholder="ユーザー名" v-model="search.name">
                 </div>
                 <button class="btn btn-primary mt-4" type="submit">検索</button>
             </form>
@@ -77,7 +77,9 @@ export default {
             pageSize: 10,
             page: 1,
             length: 0,
-            searchWord: null
+            search:{
+                name: null
+            }
         }
     },
     methods:{
@@ -104,7 +106,7 @@ export default {
             );
         },
         searchUser(){
-            axios.get('/api/users/' + this.searchWord)
+            axios.post('/api/users/search', this.search)
             .then(res => {
                 this.users = res.data;
                 this.length = Math.ceil(this.users.length / this.pageSize);
