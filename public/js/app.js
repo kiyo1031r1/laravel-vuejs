@@ -2099,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.status == 'normal' && this.user.status == 'premium') {
           this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()().add(1, 'M').format('YYYY-MM-DD');
         } else if (this.status == 'premium' && this.user.status == 'normal') {
-          this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
+          this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.user.next_update).subtract(1, 'M').subtract(1, 'd').format('YYYY-MM-DD');
         }
 
         axios.put('/api/users/' + this.id, this.user).then(function () {

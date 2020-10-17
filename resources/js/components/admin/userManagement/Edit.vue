@@ -114,7 +114,7 @@ export default {
                     this.user.next_update = moment().add(1, 'M').format('YYYY-MM-DD');
                 }
                 else if(this.status == 'premium' && this.user.status == 'normal'){
-                    this.user.next_update = moment(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
+                    this.user.next_update = moment(this.user.next_update).subtract(1, 'M').subtract(1, 'd').format('YYYY-MM-DD');
                 }
 
                 axios.put('/api/users/' + this.id, this.user)
