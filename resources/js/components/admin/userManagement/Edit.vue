@@ -108,17 +108,20 @@ export default {
             });
         },
         edit(){
-            if(this.status == 'normal' && this.user.status == 'premium'){
-                this.user.next_update = moment().add(1, 'M').format('YYYY-MM-DD');
-            }
-            else if(this.status == 'premium' && this.user.status == 'normal'){
-                this.user.next_update = moment(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
-            }
+            const result = confirm('ユーザー情報を変更します。よろしいですか？');
+            if(result){
+                if(this.status == 'normal' && this.user.status == 'premium'){
+                    this.user.next_update = moment().add(1, 'M').format('YYYY-MM-DD');
+                }
+                else if(this.status == 'premium' && this.user.status == 'normal'){
+                    this.user.next_update = moment(this.user.next_update).subtract(1, 'M').format('YYYY-MM-DD');
+                }
 
-            axios.put('/api/users/' + this.id, this.user)
-            .then(() => {
-                this.$router.push({name: 'user_management'})
-            });
+                axios.put('/api/users/' + this.id, this.user)
+                .then(() => {
+                    this.$router.push({name: 'user_management'})
+                });
+            }
         }
     },
     created(){
