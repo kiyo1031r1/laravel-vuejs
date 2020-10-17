@@ -96,7 +96,12 @@ export default {
             if(result){
                 axios.delete('/api/users/'+ id)
                 .then(() => {
-                    this.getUser();
+                    if(this.search){
+                        this.searchUser();
+                    }
+                    else{
+                        this.getUser();
+                    }
                 });
             }
         },
