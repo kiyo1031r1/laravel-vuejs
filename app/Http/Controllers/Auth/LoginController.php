@@ -63,6 +63,7 @@ class LoginController extends Controller
                         'name' => $providerUser->getName(),
                         'nickname' => $providerUser->getNickname(),
                         'role_id' => Role::find(1)->id,
+                        'status' => 'normal',
                 ]);
 
                 $user->token = $this->createToken();
@@ -76,6 +77,7 @@ class LoginController extends Controller
                     'name' => $providerUser->getName(),
                     'nickname' => $providerUser->getNickname(),
                     'role_id' => Role::find(1)->id,
+                    'status' => 'normal',
                 ]);
 
                 $user->token = $this->createToken();
