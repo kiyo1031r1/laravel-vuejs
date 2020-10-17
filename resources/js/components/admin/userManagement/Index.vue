@@ -50,7 +50,7 @@
                         <v-pagination
                         v-model="page"
                         class="my-4"
-                        :length="15"
+                        :length="length"
                         @input = "changePage"
                         ></v-pagination>
                     </v-container>
@@ -73,7 +73,8 @@ export default {
             users:[],
             displayUsers:[],
             pageSize: 10,
-            page: 1
+            page: 1,
+            length: 0,
         }
     },
     methods:{
@@ -81,6 +82,7 @@ export default {
             axios.get('/api/users')
             .then(res => {
                 this.users = res.data;
+                this.length = Math.ceil(this.users / this.pageSize);
                 this.changePage(1);
             });
         },
