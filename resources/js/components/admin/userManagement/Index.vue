@@ -63,10 +63,13 @@ export default {
             });
         },
         deleteUser(id){
-            axios.delete('/api/users/'+ id)
-            .then(() => {
-                this.getUser();
-            })
+            const result = confirm('ユーザーを削除します。よろしいですか？');
+            if(result){
+                axios.delete('/api/users/'+ id)
+                .then(() => {
+                    this.getUser();
+                });
+            }
         }
     },
     components:{

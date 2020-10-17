@@ -2189,9 +2189,13 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser(id) {
       var _this2 = this;
 
-      axios["delete"]('/api/users/' + id).then(function () {
-        _this2.getUser();
-      });
+      var result = confirm('ユーザーを削除します。よろしいですか？');
+
+      if (result) {
+        axios["delete"]('/api/users/' + id).then(function () {
+          _this2.getUser();
+        });
+      }
     }
   },
   components: {
