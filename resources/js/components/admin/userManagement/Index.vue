@@ -77,7 +77,7 @@ export default {
             pageSize: 10,
             page: 1,
             length: 0,
-            searchWord: ''
+            searchWord: null
         }
     },
     methods:{
@@ -104,7 +104,6 @@ export default {
             );
         },
         searchUser(){
-
         }
     },
     components:{
