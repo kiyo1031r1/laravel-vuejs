@@ -2169,6 +2169,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60744,6 +60746,8 @@ var render = function() {
                       ) + "\n                    "
                     )
                   ]),
+                  _c("td", [_vm._v(_vm._s(_vm._f("role")(user.role_id)))]),
+                  _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(user.status))]),
                   _vm._v(" "),
                   user.next_update != null
@@ -60820,6 +60824,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("email")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("登録日")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("権限")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ステータス")]),
         _vm._v(" "),

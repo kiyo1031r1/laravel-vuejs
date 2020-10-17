@@ -15,6 +15,7 @@
                         <th scope="col">ユーザー名</th>
                         <th scope="col">email</th>
                         <th scope="col">登録日</th>
+                        <th scope="col">権限</th>
                         <th scope="col">ステータス</th>
                         <th scope="col">次回更新日</th>
                         <th scope="col">編集</th>
@@ -27,6 +28,7 @@
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
                         <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}
+                        <td>{{user.role_id | role}}</td>
                         <td>{{user.status}}</td>
                         <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
                         <td v-else></td>
