@@ -70,6 +70,8 @@ export default {
     data(){
         return{
             users:[],
+            displayUsers:[],
+            pageSize: 10,
             page: 1
         }
     },
@@ -88,6 +90,11 @@ export default {
                     this.getUser();
                 });
             }
+        },
+        changePage(pageNumber){
+            this.displayUsers = this.users.slice(
+                this.pageSize * pageNumber - 1 , this.pageSize * pageNumber
+            );
         }
     },
     components:{
