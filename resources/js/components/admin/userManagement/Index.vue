@@ -2,9 +2,9 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="container">
-            <form class="my-4">
+            <form @submit.prevent="searchUser" class="my-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="ユーザー検索">
+                    <input type="text" class="form-control" placeholder="ユーザー検索" v-model="searchWord">
                 </div>
             </form>
 
@@ -75,6 +75,7 @@ export default {
             pageSize: 10,
             page: 1,
             length: 0,
+            searchWord: ''
         }
     },
     methods:{
@@ -99,6 +100,9 @@ export default {
             this.displayUsers = this.users.slice(
                 this.pageSize * (pageNumber - 1) , this.pageSize * pageNumber
             );
+        },
+        searchUser(){
+
         }
     },
     components:{
