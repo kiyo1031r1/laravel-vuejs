@@ -104,7 +104,7 @@ export default {
             );
         },
         searchUser(){
-            axios.get('/api/users', this.searchWord)
+            axios.get('/api/users/' + this.searchWord)
             .then(res => {
                 this.users = res.data;
                 this.length = Math.ceil(this.users.length / this.pageSize);
