@@ -83,7 +83,7 @@ export default {
             .then(res => {
                 this.users = res.data;
                 this.length = Math.ceil(this.users.length / this.pageSize);
-                this.changePage(1);
+                this.changePage(this.page);
             });
         },
         deleteUser(id){
