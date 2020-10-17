@@ -26,6 +26,6 @@ class UserSeeder extends Seeder
             'status' => 'normal'
         ]);
 
-        User::factory()->times(20)->create();
+        User::factory()->times(100)->create();
     }
 }
