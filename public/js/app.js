@@ -2187,7 +2187,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteUser: function deleteUser(id) {
-      axios["delete"]('/api/users/' + id);
+      var _this2 = this;
+
+      axios["delete"]('/api/users/' + id).then(function () {
+        _this2.getUser();
+      });
     }
   },
   components: {

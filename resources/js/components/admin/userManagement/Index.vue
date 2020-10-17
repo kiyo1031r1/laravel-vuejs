@@ -63,7 +63,10 @@ export default {
             });
         },
         deleteUser(id){
-            axios.delete('/api/users/'+ id);
+            axios.delete('/api/users/'+ id)
+            .then(() => {
+                this.getUser();
+            })
         }
     },
     components:{
