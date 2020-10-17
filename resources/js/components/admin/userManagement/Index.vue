@@ -37,7 +37,7 @@
                                 <button class="btn btn-primary px-2 py-0">編集</button>
                             </router-link>
                         </td>
-                        <td><button class="btn btn-danger px-2 py-0">削除</button></td>
+                        <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,6 +61,9 @@ export default {
             .then(res => {
                 this.users = res.data;
             });
+        },
+        deleteUser(id){
+            axios.delete('/api/users/'+ id);
         }
     },
     components:{
