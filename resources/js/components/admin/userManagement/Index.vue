@@ -51,6 +51,7 @@
                         v-model="page"
                         class="my-4"
                         :length="15"
+                        @input = "changePage"
                         ></v-pagination>
                     </v-container>
                     </v-col>
