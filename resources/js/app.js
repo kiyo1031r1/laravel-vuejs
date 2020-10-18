@@ -2,10 +2,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import moment from 'moment'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import '@mdi/font/css/materialdesignicons.css'
 
 require('./bootstrap');
 
@@ -22,12 +18,9 @@ Vue.filter('role', (value) => {
     }
 });
 
-Vue.use(Vuetify);
-
 const app = new Vue({
     el: '#app',
     router,
     store,
-    render: h => h(App),
-    vuetify: new Vuetify(),
+    render: h => h(App)
 });
