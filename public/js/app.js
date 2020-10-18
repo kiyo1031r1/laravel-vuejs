@@ -2222,12 +2222,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.last_page > this.page_length) {
         //ページ冒頭処理
-        if (this.current_page < Math.floor(this.page_length / 2)) {
-          start = this.current_page;
+        if (this.current_page < Math.floor(this.page_length / 2) + 1) {
+          start = 1;
           last = this.page_length;
         } //ページ末尾処理
-        else if (this.current_page > this.last_page - this.page_length) {
-            start = this.last_page - this.page_lenght + 1;
+        else if (this.current_page > this.last_page - Math.floor(this.page_length / 2)) {
+            start = this.last_page - this.page_length + 1;
             last = this.last_page;
           } //通常処理
           else {
