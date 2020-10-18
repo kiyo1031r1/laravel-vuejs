@@ -2198,8 +2198,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2214,6 +2212,17 @@ __webpack_require__.r(__webpack_exports__);
         status: 'default'
       }
     };
+  },
+  computed: {
+    pageColumn: function pageColumn() {
+      var column = [];
+
+      for (var i = 1; i <= this.last_page; i++) {
+        column.push(i);
+      }
+
+      return column;
+    }
   },
   methods: {
     getUser: function getUser() {
@@ -61036,7 +61045,26 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _vm._m(1)
+        _c("nav", [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.pageColumn, function(page) {
+                return _c("li", { key: page.index, staticClass: "page-item" }, [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v(_vm._s(page))
+                  ])
+                ])
+              }),
+              _vm._v(" "),
+              _vm._m(2)
+            ],
+            2
+          )
+        ])
       ])
     ],
     1
@@ -61073,37 +61101,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", [
-      _c("ul", { staticClass: "pagination" }, [
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Previous")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("1")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("2")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("3")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Next")
-          ])
-        ])
+    return _c("li", { staticClass: "page-item" }, [
+      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+        _vm._v("Previous")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "page-item" }, [
+      _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+        _vm._v("Next")
       ])
     ])
   }

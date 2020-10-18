@@ -60,9 +60,7 @@
             <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li v-for="page in pageColumn" :key="page.index" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
             </nav>
@@ -87,6 +85,15 @@ export default {
                 status: 'default'
             }
         }
+    },
+    computed:{
+        pageColumn() {
+            const column = [];
+            for(let i = 1; i <= this.last_page; i++){
+                column.push(i);
+            }
+            return column;
+        },
     },
     methods:{
         getUser(){
