@@ -2196,16 +2196,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       users: [],
-      //displayUsers:[],
-      //pageSize: 10,
-      //page: 1,
-      //length: 0,
-      current_page: '',
-      per_page: '',
+      current_page: 1,
       last_page: '',
-      from: '',
-      to: '',
-      total: '',
       search: {
         name: null,
         email: null,
@@ -2218,8 +2210,11 @@ __webpack_require__.r(__webpack_exports__);
     getUser: function getUser() {
       var _this = this;
 
-      axios.get('/api/users').then(function (res) {
-        _this.users = res.data.data; //this.length = Math.ceil(this.users.length / this.pageSize);
+      axios.get('/api/users?page=' + this.current_page).then(function (res) {
+        var resData = res.data;
+        _this.users = resData.data;
+        _this.current_page = resData.current_page;
+        _this.last_page = resData.last_page; //this.length = Math.ceil(this.users.length / this.pageSize);
         //this.changePage(this.page);
       });
     },

@@ -69,17 +69,8 @@ export default {
     data(){
         return{
             users:[],
-            //displayUsers:[],
-            //pageSize: 10,
-            //page: 1,
-            //length: 0,
-            current_page: '',
-            per_page: '',
+            current_page: 1,
             last_page: '',
-            from: '',
-            to: '',
-            total: '',
-            
             search:{
                 name: null,
                 email: null,
@@ -90,9 +81,13 @@ export default {
     },
     methods:{
         getUser(){
-            axios.get('/api/users')
+            axios.get('/api/users?page=' + this.current_page)
             .then(res => {
-                this.users = res.data.data;
+                const resData = res.data;
+                this.users = resData.data;
+                this.current_page = resData.current_page;
+                this.last_page = resData.last_page;
+                
                 //this.length = Math.ceil(this.users.length / this.pageSize);
                 //this.changePage(this.page);
             });
