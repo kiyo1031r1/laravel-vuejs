@@ -60,7 +60,7 @@
             <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li v-for="page in createPageColumn" :key="page.index" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+                <li v-for="page in createPageColumn" :key="page.index" @click="changePage(page)" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
             </nav>
@@ -131,9 +131,6 @@ export default {
                 this.users = resData.data;
                 this.current_page = resData.current_page;
                 this.last_page = resData.last_page;
-                
-                //this.length = Math.ceil(this.users.length / this.pageSize);
-                //this.changePage(this.page);
             });
         },
         deleteUser(id){
@@ -150,10 +147,9 @@ export default {
                 });
             }
         },
-        changePage(pageNumber){
-            this.displayUsers = this.users.slice(
-                this.pageSize * (pageNumber - 1) , this.pageSize * pageNumber
-            );
+        changePage(page){
+            this.current_page = page;
+            this.getUser();
         },
         searchUser(){
             axios.post('/api/users/search', this.search)

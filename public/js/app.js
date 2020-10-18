@@ -2255,8 +2255,7 @@ __webpack_require__.r(__webpack_exports__);
         var resData = res.data;
         _this.users = resData.data;
         _this.current_page = resData.current_page;
-        _this.last_page = resData.last_page; //this.length = Math.ceil(this.users.length / this.pageSize);
-        //this.changePage(this.page);
+        _this.last_page = resData.last_page;
       });
     },
     deleteUser: function deleteUser(id) {
@@ -2274,8 +2273,9 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    changePage: function changePage(pageNumber) {
-      this.displayUsers = this.users.slice(this.pageSize * (pageNumber - 1), this.pageSize * pageNumber);
+    changePage: function changePage(page) {
+      this.current_page = page;
+      this.getUser();
     },
     searchUser: function searchUser() {
       var _this3 = this;
@@ -61076,11 +61076,25 @@ var render = function() {
               _vm._m(1),
               _vm._v(" "),
               _vm._l(_vm.createPageColumn, function(page) {
-                return _c("li", { key: page.index, staticClass: "page-item" }, [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v(_vm._s(page))
-                  ])
-                ])
+                return _c(
+                  "li",
+                  {
+                    key: page.index,
+                    staticClass: "page-item",
+                    on: {
+                      click: function($event) {
+                        return _vm.changePage(page)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "a",
+                      { staticClass: "page-link", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(page))]
+                    )
+                  ]
+                )
               }),
               _vm._v(" "),
               _vm._m(2)
