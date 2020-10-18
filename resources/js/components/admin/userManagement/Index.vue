@@ -60,7 +60,9 @@
             <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li v-for="page in createPageColumn" :key="page.index" @click="changePage(page)" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+                <li v-for="page in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page) ? 'page-item active' : 'page-item inactive'">
+                    <a class="page-link" href="#">{{page}}</a>
+                </li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
             </nav>
@@ -150,6 +152,9 @@ export default {
         changePage(page){
             this.current_page = page;
             this.getUser();
+        },
+        isCurrent(page){
+            return page === this.current_page;
         },
         searchUser(){
             axios.post('/api/users/search', this.search)

@@ -2198,6 +2198,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2276,6 +2278,9 @@ __webpack_require__.r(__webpack_exports__);
     changePage: function changePage(page) {
       this.current_page = page;
       this.getUser();
+    },
+    isCurrent: function isCurrent(page) {
+      return page === this.current_page;
     },
     searchUser: function searchUser() {
       var _this3 = this;
@@ -61080,7 +61085,9 @@ var render = function() {
                   "li",
                   {
                     key: page.index,
-                    staticClass: "page-item",
+                    class: _vm.isCurrent(page)
+                      ? "page-item active"
+                      : "page-item inactive",
                     on: {
                       click: function($event) {
                         return _vm.changePage(page)
