@@ -2204,7 +2204,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       users: [],
       current_page: 1,
-      last_page: '',
+      last_page: null,
+      page_length: 9,
       search: {
         name: null,
         email: null,
@@ -2214,10 +2215,32 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    pageColumn: function pageColumn() {
+    createPageColumn: function createPageColumn() {
       var column = [];
+      var start;
+      var last; //指定ページ数以上
 
-      for (var i = 1; i <= this.last_page; i++) {
+      if (this.last_page > this.page_length) {
+        //ページ冒頭処理
+        if (this.current_page < Math.floor(this.page_length / 2)) {
+          start = this.current_page;
+          last = this.page_length;
+        } //ページ末尾処理
+        else if (this.current_page > this.last_page - this.page_length) {
+            start = this.last_page - this.page_lenght + 1;
+            last = this.last_page;
+          } //通常処理
+          else {
+              start = this.current_page - Math.floor(this.page_length / 2);
+              last = this.current_page + Math.floor(this.page_length / 2);
+            }
+      } //指定ページ数未満
+      else {
+          start = 1;
+          last = this.last_page;
+        }
+
+      for (var i = start; i <= last; i++) {
         column.push(i);
       }
 
@@ -61052,7 +61075,7 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _vm._l(_vm.pageColumn, function(page) {
+              _vm._l(_vm.createPageColumn, function(page) {
                 return _c("li", { key: page.index, staticClass: "page-item" }, [
                   _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
                     _vm._v(_vm._s(page))

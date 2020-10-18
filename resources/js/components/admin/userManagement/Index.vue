@@ -60,7 +60,7 @@
             <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li v-for="page in pageColumn" :key="page.index" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+                <li v-for="page in createPageColumn" :key="page.index" class="page-item"><a class="page-link" href="#">{{page}}</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
             </nav>
@@ -77,7 +77,8 @@ export default {
         return{
             users:[],
             current_page: 1,
-            last_page: '',
+            last_page: null,
+            page_length: 9,
             search:{
                 name: null,
                 email: null,
@@ -87,11 +88,38 @@ export default {
         }
     },
     computed:{
-        pageColumn() {
+        createPageColumn() {
             const column = [];
-            for(let i = 1; i <= this.last_page; i++){
+            let start;
+            let last;
+            //指定ページ数以上
+            if(this.last_page > this.page_length){
+                //ページ冒頭処理
+                if(this.current_page < Math.floor(this.page_length / 2)){
+                    start = this.current_page;
+                    last = this.page_length;
+                }
+                //ページ末尾処理
+                else if(this.current_page > this.last_page - this.page_length){
+                    start = this.last_page - this.page_lenght + 1;
+                    last = this.last_page;
+                }
+                //通常処理
+                else{
+                    start = this.current_page - Math.floor(this.page_length / 2);
+                    last = this.current_page + Math.floor(this.page_length / 2);
+                }
+            }
+            //指定ページ数未満
+            else{
+                start = 1;
+                last = this.last_page;
+            }
+            
+            for(let i = start; i <= last; i++){
                 column.push(i);
             }
+            
             return column;
         },
     },
