@@ -25,7 +25,6 @@
     },
     "dependencies": {
         "ajv": "^6.12.6",
-        "js-cookie": "^2.2.1",
         "moment": "^2.29.1",
         "vue-cookies": "^1.7.4",
         "vue-router": "^3.4.3",
