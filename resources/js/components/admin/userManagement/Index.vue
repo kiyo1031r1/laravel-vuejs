@@ -4,10 +4,23 @@
         <div class="container">
             <h4>ユーザー検索</h4>
             <form @submit.prevent="searchUser" class="my-4">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="ユーザー名" v-model="search.name">
+                <div class="form-inline">
+                    <input class="form-control" type="text" placeholder="ユーザー名" v-model="search.name">
+                    <input class="form-control" type="text" placeholder="email" v-model="search.email">
+                    
+                    <select class="form-control" v-model="search.role">
+                        <option value="default" selected>権限</option>
+                        <option value="一般ユーザー">一般ユーザー</option>
+                        <option value="管理者">管理者</option>
+                    </select>
+                    <select class="form-control" v-model="search.status">
+                        <option value="default" selected>ステータス</option>
+                        <option value="normal">normal</option>
+                        <option value="premium">premium</option>
+                    </select>
+
+                    <button class="btn btn-primary mt-4" type="submit">検索</button>
                 </div>
-                <button class="btn btn-primary mt-4" type="submit">検索</button>
             </form>
 
             <table class="table table-sm table-bordered table-hover text-center">
@@ -78,7 +91,10 @@ export default {
             page: 1,
             length: 0,
             search:{
-                name: null
+                name: null,
+                email: null,
+                role: 'default',
+                status: 'default'
             }
         }
     },
