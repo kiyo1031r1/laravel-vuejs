@@ -2197,9 +2197,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       users: [],
       //displayUsers:[],
-      pageSize: 10,
-      page: 1,
-      length: 0,
+      //pageSize: 10,
+      //page: 1,
+      //length: 0,
+      current_page: '',
+      per_page: '',
+      last_page: '',
+      from: '',
+      to: '',
+      total: '',
       search: {
         name: null,
         email: null,
