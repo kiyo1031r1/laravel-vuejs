@@ -2196,7 +2196,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       users: [],
-      displayUsers: [],
+      //displayUsers:[],
       pageSize: 10,
       page: 1,
       length: 0,
@@ -2213,10 +2213,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/users').then(function (res) {
-        _this.users = res.data;
-        _this.length = Math.ceil(_this.users.length / _this.pageSize);
-
-        _this.changePage(_this.page);
+        _this.users = res.data.data; //this.length = Math.ceil(this.users.length / this.pageSize);
+        //this.changePage(this.page);
       });
     },
     deleteUser: function deleteUser(id) {
@@ -2241,10 +2239,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.post('/api/users/search', this.search).then(function (res) {
-        _this3.users = res.data;
-        _this3.length = Math.ceil(_this3.users.length / _this3.pageSize);
-
-        _this3.changePage(_this3.page);
+        _this3.users = res.data.data; //this.length = Math.ceil(this.users.length / this.pageSize);
+        //this.changePage(this.page);
       });
     }
   },
@@ -60950,7 +60946,7 @@ var render = function() {
           [
             _vm._m(0),
             _vm._v(" "),
-            _vm._l(_vm.displayUsers, function(user) {
+            _vm._l(_vm.users, function(user) {
               return _c("tbody", { key: user.id }, [
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [

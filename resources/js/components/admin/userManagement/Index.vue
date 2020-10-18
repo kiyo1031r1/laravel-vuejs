@@ -37,7 +37,7 @@
                         <th scope="col">削除</th>
                     </tr>
                 </thead>
-                <tbody v-for="user in displayUsers" :key="user.id">
+                <tbody v-for="user in users" :key="user.id">
                     <tr>
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.name}}</td>
@@ -69,7 +69,7 @@ export default {
     data(){
         return{
             users:[],
-            displayUsers:[],
+            //displayUsers:[],
             pageSize: 10,
             page: 1,
             length: 0,
@@ -85,9 +85,9 @@ export default {
         getUser(){
             axios.get('/api/users')
             .then(res => {
-                this.users = res.data;
-                this.length = Math.ceil(this.users.length / this.pageSize);
-                this.changePage(this.page);
+                this.users = res.data.data;
+                //this.length = Math.ceil(this.users.length / this.pageSize);
+                //this.changePage(this.page);
             });
         },
         deleteUser(id){
@@ -112,9 +112,9 @@ export default {
         searchUser(){
             axios.post('/api/users/search', this.search)
             .then(res => {
-                this.users = res.data;
-                this.length = Math.ceil(this.users.length / this.pageSize);
-                this.changePage(this.page);
+                this.users = res.data.data;
+                //this.length = Math.ceil(this.users.length / this.pageSize);
+                //this.changePage(this.page);
             });
         }
     },
