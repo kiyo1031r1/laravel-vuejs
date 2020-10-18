@@ -60,13 +60,12 @@
             <nav>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li v-for="page in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page) ? 'page-item active' : 'page-item inactive'">
-                    <a class="page-link" href="#">{{page}}</a>
+                <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
+                    <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
                 </li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
             </nav>
-
         </div>
     </div>
 </template>
@@ -81,6 +80,7 @@ export default {
             current_page: 1,
             last_page: null,
             page_length: 9,
+            focus_page_index: null,
             search:{
                 name: null,
                 email: null,
@@ -121,7 +121,6 @@ export default {
             for(let i = start; i <= last; i++){
                 column.push(i);
             }
-        
             return column;
         },
     },
@@ -152,16 +151,18 @@ export default {
         changePage(page){
             this.current_page = page;
             this.getUser();
+
         },
-        isCurrent(page){
+        isCurrent(page, index){
+            if(page === this.current_page){
+                this.focus_page_index = index;
+            }
             return page === this.current_page;
         },
         searchUser(){
             axios.post('/api/users/search', this.search)
             .then(res => {
                 this.users = res.data.data;
-                //this.length = Math.ceil(this.users.length / this.pageSize);
-                //this.changePage(this.page);
             });
         }
     },
@@ -170,6 +171,10 @@ export default {
     },
     created(){
         this.getUser();
+    },
+    updated(){
+        this.$refs.focus_page[this.focus_page_index].focus();
     }
 }
 </script>
+

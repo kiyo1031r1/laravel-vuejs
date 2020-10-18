@@ -2199,7 +2199,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2208,6 +2207,7 @@ __webpack_require__.r(__webpack_exports__);
       current_page: 1,
       last_page: null,
       page_length: 9,
+      focus_page_index: null,
       search: {
         name: null,
         email: null,
@@ -2279,15 +2279,18 @@ __webpack_require__.r(__webpack_exports__);
       this.current_page = page;
       this.getUser();
     },
-    isCurrent: function isCurrent(page) {
+    isCurrent: function isCurrent(page, index) {
+      if (page === this.current_page) {
+        this.focus_page_index = index;
+      }
+
       return page === this.current_page;
     },
     searchUser: function searchUser() {
       var _this3 = this;
 
       axios.post('/api/users/search', this.search).then(function (res) {
-        _this3.users = res.data.data; //this.length = Math.ceil(this.users.length / this.pageSize);
-        //this.changePage(this.page);
+        _this3.users = res.data.data;
       });
     }
   },
@@ -2296,6 +2299,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getUser();
+  },
+  updated: function updated() {
+    this.$refs.focus_page[this.focus_page_index].focus();
   }
 });
 
@@ -61080,12 +61086,12 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _vm._l(_vm.createPageColumn, function(page) {
+              _vm._l(_vm.createPageColumn, function(page, index) {
                 return _c(
                   "li",
                   {
                     key: page.index,
-                    class: _vm.isCurrent(page)
+                    class: _vm.isCurrent(page, index)
                       ? "page-item active"
                       : "page-item inactive",
                     on: {
@@ -61097,7 +61103,12 @@ var render = function() {
                   [
                     _c(
                       "a",
-                      { staticClass: "page-link", attrs: { href: "#" } },
+                      {
+                        ref: "focus_page",
+                        refInFor: true,
+                        staticClass: "page-link",
+                        attrs: { href: "#" }
+                      },
                       [_vm._v(_vm._s(page))]
                     )
                   ]
