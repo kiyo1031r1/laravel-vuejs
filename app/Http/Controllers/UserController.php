@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        return User::all();
+        return User::paginate(10);
     }
 
     public function show(User $user){
@@ -36,6 +36,6 @@ class UserController extends Controller
                 $query->where('name', 'like', '%'.$value.'%');
             }
         }
-        return $query->get();
+        return $query->paginate(10);
     }
 }
