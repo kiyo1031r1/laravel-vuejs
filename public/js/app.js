@@ -61106,7 +61106,7 @@ var render = function() {
         _c("nav", [
           _c(
             "ul",
-            { staticClass: "pagination" },
+            { staticClass: "pagination justify-content-center" },
             [
               _c(
                 "li",
