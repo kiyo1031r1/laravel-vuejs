@@ -2199,6 +2199,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61097,6 +61099,23 @@ var render = function() {
               _c(
                 "li",
                 {
+                  staticClass: "page-item mx-2",
+                  on: {
+                    click: function($event) {
+                      return _vm.changePage(1)
+                    }
+                  }
+                },
+                [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v("先頭")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
                   staticClass: "page-item",
                   on: {
                     click: function($event) {
@@ -61106,7 +61125,7 @@ var render = function() {
                 },
                 [
                   _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("前のページ")
+                    _vm._v("前")
                   ])
                 ]
               ),
@@ -61152,7 +61171,24 @@ var render = function() {
                 },
                 [
                   _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("次のページ")
+                    _vm._v("次")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item mx-2",
+                  on: {
+                    click: function($event) {
+                      return _vm.changePage(_vm.last_page)
+                    }
+                  }
+                },
+                [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v("最終")
                   ])
                 ]
               )
