@@ -32,6 +32,6 @@ class UserController extends Controller
                 $query->where('name', 'like', '%'.$value.'%');
             }
         }
-        return $query->paginate(10);
+        return $query->paginate($request->per_page);
     }
 }
