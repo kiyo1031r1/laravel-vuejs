@@ -241,7 +241,9 @@ export default {
 <style scoped>
 .sidebar{
     border-right: 2px solid #dee2e6;
-    height: 100vh;
+    margin-bottom: -10000px;
+    padding-bottom: -10000px;
+    overflow: hidden;
 }
 .main{
     height: 100vh;
