@@ -52,8 +52,17 @@
             </div>
 
             <div class="main col-md-10">
-                <div class="container my-4">
-                    <table class="table table-sm table-bordered table-hover text-center">
+                <div class="container">
+                    <div class="form-inline justify-content-end px-3 my-3">
+                        <label class="col-form-label p-2" for="per_page">表示件数</label>
+                        <select class="form-control" id="per_page">
+                            <option value="10">10件</option>
+                            <option value="30">30件</option>
+                            <option value="50">50件</option>
+                            <option value="100">100件</option>
+                        </select>
+                    </div>
+                    <table class="table table-sm table-bordered table-hover text-center ">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">ID</th>

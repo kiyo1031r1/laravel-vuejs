@@ -2235,6 +2235,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61716,15 +61725,17 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "main col-md-10" }, [
-          _c("div", { staticClass: "container my-4" }, [
+          _c("div", { staticClass: "container" }, [
+            _vm._m(3),
+            _vm._v(" "),
             _c(
               "table",
               {
                 staticClass:
-                  "table table-sm table-bordered table-hover text-center"
+                  "table table-sm table-bordered table-hover text-center "
               },
               [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
                 _vm._l(_vm.users, function(user) {
                   return _c("tbody", { key: user.id }, [
@@ -61987,6 +61998,36 @@ var staticRenderFns = [
         [_vm._v("検索")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "form-inline justify-content-end px-3 my-3" },
+      [
+        _c(
+          "label",
+          { staticClass: "col-form-label p-2", attrs: { for: "per_page" } },
+          [_vm._v("表示件数")]
+        ),
+        _vm._v(" "),
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { id: "per_page" } },
+          [
+            _c("option", { attrs: { value: "10" } }, [_vm._v("10件")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "30" } }, [_vm._v("30件")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "50" } }, [_vm._v("50件")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "100" } }, [_vm._v("100件")])
+          ]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
