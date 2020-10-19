@@ -2313,7 +2313,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/users/search?page=' + this.current_page, this.search).then(function (res) {
         var resData = res.data;
         _this.users = resData.data;
-        _this.current_page = resData.current_page;
         _this.last_page = resData.last_page;
       });
     },
@@ -2327,6 +2326,10 @@ __webpack_require__.r(__webpack_exports__);
           _this2.getUser();
         });
       }
+    },
+    changePerPage: function changePerPage() {
+      this.current_page = 1;
+      this.getUser();
     },
     changePage: function changePage(page) {
       this.current_page = page;
@@ -61773,7 +61776,7 @@ var render = function() {
                           )
                         },
                         function($event) {
-                          return _vm.getUser()
+                          return _vm.changePerPage()
                         }
                       ]
                     }

@@ -55,7 +55,7 @@
                 <div class="container">
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
-                        <select @change="getUser()" v-model="search.per_page" class="form-control" id="per_page">
+                        <select @change="changePerPage()" v-model="search.per_page" class="form-control" id="per_page">
                             <option value="10">10件</option>
                             <option value="30">30件</option>
                             <option value="50">50件</option>
@@ -189,7 +189,6 @@ export default {
             .then(res => {
                 const resData = res.data;
                 this.users = resData.data;
-                this.current_page = resData.current_page;
                 this.last_page = resData.last_page;
             });
         },
@@ -201,6 +200,10 @@ export default {
                     this.getUser();
                 });
             }
+        },
+        changePerPage(){
+            this.current_page = 1;
+            this.getUser();
         },
         changePage(page){
             this.current_page = page;
