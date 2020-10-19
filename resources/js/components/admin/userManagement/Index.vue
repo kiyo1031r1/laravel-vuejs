@@ -2,7 +2,7 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="row">
-            <div class="sidebar col-md-2 pr-0 border-right">
+            <div class="sidebar col-md-2 pr-0">
                 <h5 class="bg-primary font-italic text-white text-center py-2">ユーザー検索</h5>
                 <div class="font-weight-bold px-4">
                     <form @submit.prevent="searchUser">
@@ -227,6 +227,7 @@ export default {
 
 <style scoped>
 .sidebar{
+    border-right: 2px solid #dee2e6;
     height: 100vh;
 }
 .main{

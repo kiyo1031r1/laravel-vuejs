@@ -7592,7 +7592,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.sidebar[data-v-e3e8bac8]{\n    height: 100vh;\n}\n.main[data-v-e3e8bac8]{\n    height: 100vh;\n}\n", ""]);
+exports.push([module.i, "\n.sidebar[data-v-e3e8bac8]{\n    border-right: 2px solid #dee2e6;\n    height: 100vh;\n}\n.main[data-v-e3e8bac8]{\n    height: 100vh;\n}\n", ""]);
 
 // exports
 
@@ -61517,7 +61517,7 @@ var render = function() {
       _c("AdminHeader"),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "sidebar col-md-2 pr-0 border-right" }, [
+        _c("div", { staticClass: "sidebar col-md-2 pr-0" }, [
           _c(
             "h5",
             {
