@@ -2243,7 +2243,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2261,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         role: '',
         status: '',
-        per_page: '10'
+        per_page: '20'
       }
     };
   },
@@ -61782,9 +61781,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "10" } }, [_vm._v("10件")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "30" } }, [_vm._v("30件")]),
+                    _c("option", { attrs: { value: "20" } }, [_vm._v("20件")]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "50" } }, [_vm._v("50件")]),
                     _vm._v(" "),
