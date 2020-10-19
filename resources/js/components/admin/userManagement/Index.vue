@@ -59,11 +59,11 @@
 
             <nav>
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前のページ</a></li>
                 <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
                     <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次のページ</a></li>
             </ul>
             </nav>
         </div>
@@ -151,7 +151,16 @@ export default {
         changePage(page){
             this.current_page = page;
             this.getUser();
-
+        },
+        changePreviousPage(){
+            if(this.current_page > 1) {
+                this.changePage(this.current_page - 1);
+            }
+        },
+        changeNextPage(){
+            if(this.current_page < this.last_page) {
+                this.changePage(this.current_page + 1);
+            }
         },
         isCurrent(page, index){
             if(page === this.current_page){
