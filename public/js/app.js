@@ -61230,7 +61230,7 @@ var render = function() {
     [
       _c("AdminHeader"),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 mx-auto" }, [
+      _c("div", { staticClass: "col-md-6 mx-auto mt-4" }, [
         _c("table", { staticClass: "table table-bordered bg-white" }, [
           _c("tbody", [
             _vm._m(0),
@@ -61296,8 +61296,8 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 mx-auto" }, [
-        _c("div", { staticClass: "card my-4" }, [
+      _c("div", { staticClass: "col-md-6 mx-auto my-4" }, [
+        _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [_vm._v("ステータス変更")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [

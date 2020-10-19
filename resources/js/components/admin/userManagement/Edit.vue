@@ -1,7 +1,7 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-6 mx-auto mt-4">
                 <table class="table table-bordered bg-white">
                     <tbody>
                         <tr class="table-borderless" style="background-color:#00000008;">
@@ -41,8 +41,8 @@
                 </table>
             </div>
         
-            <div class="col-md-6 mx-auto">
-                <div class="card my-4">
+            <div class="col-md-6 mx-auto my-4">
+                <div class="card">
                     <div class="card-header">ステータス変更</div>
                     <div class="card-body">
                         <form @submit.prevent="edit">
