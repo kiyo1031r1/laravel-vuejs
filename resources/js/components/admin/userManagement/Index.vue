@@ -61,9 +61,11 @@
             <ul class="pagination">
                 <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
                 <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
+                <span class="mx-2">...</span>
                 <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
                     <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
                 </li>
+                <span class="mx-2">...</span>
                 <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
                 <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
             </ul>

@@ -2201,6 +2201,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61130,6 +61132,8 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
+              _c("span", { staticClass: "mx-2" }, [_vm._v("...")]),
+              _vm._v(" "),
               _vm._l(_vm.createPageColumn, function(page, index) {
                 return _c(
                   "li",
@@ -61158,6 +61162,8 @@ var render = function() {
                   ]
                 )
               }),
+              _vm._v(" "),
+              _c("span", { staticClass: "mx-2" }, [_vm._v("...")]),
               _vm._v(" "),
               _c(
                 "li",
