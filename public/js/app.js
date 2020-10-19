@@ -2203,6 +2203,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60839,159 +60871,177 @@ var render = function() {
     [
       _c("AdminHeader"),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("h4", [_vm._v("ユーザー検索")]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "my-4",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.searchUser($event)
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-3 bg-primary" }, [
+          _c("h4", [_vm._v("ユーザー検索")]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "my-4",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.searchUser($event)
+                }
               }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-inline" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search.name,
-                    expression: "search.name"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "ユーザー名" },
-                domProps: { value: _vm.search.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            },
+            [
+              _c("div", { staticClass: "form-row" }, [
+                _c("div", { staticClass: "col-md-3 mr-2" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search.name,
+                        expression: "search.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "ユーザー名" },
+                    domProps: { value: _vm.search.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.search, "name", $event.target.value)
+                      }
                     }
-                    _vm.$set(_vm.search, "name", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search.email,
-                    expression: "search.email"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "email" },
-                domProps: { value: _vm.search.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3 mr-2" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search.email,
+                        expression: "search.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "email" },
+                    domProps: { value: _vm.search.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.search, "email", $event.target.value)
+                      }
                     }
-                    _vm.$set(_vm.search, "email", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2 mr-2" }, [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search.role,
-                      expression: "search.role"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.search,
-                        "role",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "default", selected: "" } }, [
-                    _vm._v("権限")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "一般ユーザー" } }, [
-                    _vm._v("一般ユーザー")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "管理者" } }, [
-                    _vm._v("管理者")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.role,
+                          expression: "search.role"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.search,
+                            "role",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "default", selected: "" } },
+                        [_vm._v("権限")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "一般ユーザー" } }, [
+                        _vm._v("一般ユーザー")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "管理者" } }, [
+                        _vm._v("管理者")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2 mr-2" }, [
+                  _c(
+                    "select",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search.status,
-                      expression: "search.status"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.search,
-                        "status",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "default", selected: "" } }, [
-                    _vm._v("ステータス")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "normal" } }, [
-                    _vm._v("normal")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "premium" } }, [
-                    _vm._v("premium")
-                  ])
-                ]
-              ),
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.status,
+                          expression: "search.status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.search,
+                            "status",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        { attrs: { value: "default", selected: "" } },
+                        [_vm._v("ステータス")]
+                      ),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "normal" } }, [
+                        _vm._v("normal")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "premium" } }, [
+                        _vm._v("premium")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "button",
@@ -61001,210 +61051,225 @@ var render = function() {
                 },
                 [_vm._v("検索")]
               )
-            ])
-          ]
-        ),
+            ]
+          )
+        ]),
         _vm._v(" "),
-        _c(
-          "table",
-          {
-            staticClass: "table table-sm table-bordered table-hover text-center"
-          },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._l(_vm.users, function(user) {
-              return _c("tbody", { key: user.id }, [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(user.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.email))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      _vm._s(
-                        _vm
-                          .moment(user.created_at)
-                          .format("YYYY-MM-DD HH:MM:SS")
-                      ) + "\n                    "
-                    )
-                  ]),
-                  _c("td", [_vm._v(_vm._s(_vm._f("role")(user.role_id)))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.status))]),
-                  _vm._v(" "),
-                  user.next_update != null
-                    ? _c("td", [
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-sm table-bordered table-hover text-center"
+              },
+              [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._l(_vm.users, function(user) {
+                  return _c("tbody", { key: user.id }, [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(user.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.email))]),
+                      _vm._v(" "),
+                      _c("td", [
                         _vm._v(
                           _vm._s(
-                            _vm.moment(user.next_update).format("YYYY-MM-DD")
-                          )
+                            _vm
+                              .moment(user.created_at)
+                              .format("YYYY-MM-DD HH:MM:SS")
+                          ) + "\n                            "
                         )
-                      ])
-                    : _c("td"),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
+                      ]),
+                      _c("td", [_vm._v(_vm._s(_vm._f("role")(user.role_id)))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(user.status))]),
+                      _vm._v(" "),
+                      user.next_update != null
+                        ? _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                _vm
+                                  .moment(user.next_update)
+                                  .format("YYYY-MM-DD")
+                              )
+                            )
+                          ])
+                        : _c("td"),
+                      _vm._v(" "),
                       _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "user_management_edit",
-                              params: { id: user.id }
-                            }
-                          }
-                        },
+                        "td",
                         [
                           _c(
-                            "button",
-                            { staticClass: "btn btn-primary px-2 py-0" },
-                            [_vm._v("編集")]
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "user_management_edit",
+                                  params: { id: user.id }
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                { staticClass: "btn btn-primary px-2 py-0" },
+                                [_vm._v("編集")]
+                              )
+                            ]
                           )
-                        ]
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger px-2 py-0",
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteUser(user.id)
+                              }
+                            }
+                          },
+                          [_vm._v("削除")]
+                        )
+                      ])
+                    ])
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("nav", [
+              _c(
+                "ul",
+                { staticClass: "pagination justify-content-center" },
+                [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item mx-2",
+                      on: {
+                        click: function($event) {
+                          return _vm.changePage(1)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { staticClass: "page-link", attrs: { href: "#" } },
+                        [_vm._v("先頭")]
                       )
-                    ],
-                    1
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      on: {
+                        click: function($event) {
+                          return _vm.changePreviousPage()
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { staticClass: "page-link", attrs: { href: "#" } },
+                        [_vm._v("前")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.leftMorePage
+                    ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.createPageColumn, function(page, index) {
+                    return _c(
+                      "li",
                       {
-                        staticClass: "btn btn-danger px-2 py-0",
+                        key: page.index,
+                        class: _vm.isCurrent(page, index)
+                          ? "page-item active"
+                          : "page-item inactive",
                         on: {
                           click: function($event) {
-                            return _vm.deleteUser(user.id)
+                            return _vm.changePage(page)
                           }
                         }
                       },
-                      [_vm._v("削除")]
+                      [
+                        _c(
+                          "a",
+                          {
+                            ref: "focus_page",
+                            refInFor: true,
+                            staticClass: "page-link",
+                            attrs: { href: "#" }
+                          },
+                          [_vm._v(_vm._s(page))]
+                        )
+                      ]
                     )
-                  ])
-                ])
-              ])
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("nav", [
-          _c(
-            "ul",
-            { staticClass: "pagination justify-content-center" },
-            [
-              _c(
-                "li",
-                {
-                  staticClass: "page-item mx-2",
-                  on: {
-                    click: function($event) {
-                      return _vm.changePage(1)
-                    }
-                  }
-                },
-                [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("先頭")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "page-item",
-                  on: {
-                    click: function($event) {
-                      return _vm.changePreviousPage()
-                    }
-                  }
-                },
-                [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("前")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _vm.leftMorePage
-                ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.createPageColumn, function(page, index) {
-                return _c(
-                  "li",
-                  {
-                    key: page.index,
-                    class: _vm.isCurrent(page, index)
-                      ? "page-item active"
-                      : "page-item inactive",
-                    on: {
-                      click: function($event) {
-                        return _vm.changePage(page)
+                  }),
+                  _vm._v(" "),
+                  _vm.rightMorePage
+                    ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      on: {
+                        click: function($event) {
+                          return _vm.changeNextPage()
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        ref: "focus_page",
-                        refInFor: true,
-                        staticClass: "page-link",
-                        attrs: { href: "#" }
-                      },
-                      [_vm._v(_vm._s(page))]
-                    )
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _vm.rightMorePage
-                ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "page-item",
-                  on: {
-                    click: function($event) {
-                      return _vm.changeNextPage()
-                    }
-                  }
-                },
-                [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("次")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "page-item mx-2",
-                  on: {
-                    click: function($event) {
-                      return _vm.changePage(_vm.last_page)
-                    }
-                  }
-                },
-                [
-                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-                    _vm._v("最終")
-                  ])
-                ]
+                    },
+                    [
+                      _c(
+                        "a",
+                        { staticClass: "page-link", attrs: { href: "#" } },
+                        [_vm._v("次")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item mx-2",
+                      on: {
+                        click: function($event) {
+                          return _vm.changePage(_vm.last_page)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { staticClass: "page-link", attrs: { href: "#" } },
+                        [_vm._v("最終")]
+                      )
+                    ]
+                  )
+                ],
+                2
               )
-            ],
-            2
-          )
+            ])
+          ])
         ])
       ])
     ],
@@ -61212,6 +61277,46 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row mt-4" }, [
+      _c("label", { staticClass: "col-md-1 col-form-label" }, [
+        _vm._v("登録日")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v(" ~ ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row mt-4" }, [
+      _c("label", { staticClass: "col-md-1 col-form-label" }, [
+        _vm._v("次回更新日")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v(" ~ ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
