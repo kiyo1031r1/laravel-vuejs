@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluif bg-dark mb-3">
+    <div class="container-fluif bg-dark">
         <div class="container">
             <nav class="navbar navbar-dark">
                 <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>

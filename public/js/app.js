@@ -60488,7 +60488,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluif bg-dark mb-3" }, [
+  return _c("div", { staticClass: "container-fluif bg-dark" }, [
     _c("div", { staticClass: "container" }, [
       _c("nav", { staticClass: "navbar navbar-dark" }, [
         _c("span", { staticClass: "nabvar-brand mb-0 h1 text-light" }, [
