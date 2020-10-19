@@ -2212,6 +2212,8 @@ __webpack_require__.r(__webpack_exports__);
       last_page: null,
       page_length: 9,
       focus_page_index: null,
+      leftMorePage: false,
+      rightMorePage: false,
       search: {
         name: null,
         email: null,
@@ -2231,19 +2233,27 @@ __webpack_require__.r(__webpack_exports__);
         if (this.current_page < Math.floor(this.page_length / 2) + 1) {
           start = 1;
           last = this.page_length;
+          this.leftMorePage = false;
+          this.rightMorePage = true;
         } //ページ末尾処理
         else if (this.current_page > this.last_page - Math.floor(this.page_length / 2)) {
             start = this.last_page - this.page_length + 1;
             last = this.last_page;
+            this.leftMorePage = true;
+            this.rightMorePage = false;
           } //通常処理
           else {
               start = this.current_page - Math.floor(this.page_length / 2);
               last = this.current_page + Math.floor(this.page_length / 2);
+              this.leftMorePage = true;
+              this.rightMorePage = true;
             }
       } //指定ページ数未満
       else {
           start = 1;
           last = this.last_page;
+          this.leftMorePage = false;
+          this.rightMorePage = false;
         }
 
       for (var i = start; i <= last; i++) {
@@ -61132,7 +61142,9 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("span", { staticClass: "mx-2" }, [_vm._v("...")]),
+              _vm.leftMorePage
+                ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
+                : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.createPageColumn, function(page, index) {
                 return _c(
@@ -61163,7 +61175,9 @@ var render = function() {
                 )
               }),
               _vm._v(" "),
-              _c("span", { staticClass: "mx-2" }, [_vm._v("...")]),
+              _vm.rightMorePage
+                ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "li",

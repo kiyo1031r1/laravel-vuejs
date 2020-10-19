@@ -61,11 +61,11 @@
             <ul class="pagination">
                 <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
                 <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
-                <span class="mx-2">...</span>
+                <span v-if="leftMorePage" class="mx-2">...</span>
                 <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
                     <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
                 </li>
-                <span class="mx-2">...</span>
+                <span v-if="rightMorePage" class="mx-2">...</span>
                 <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
                 <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
             </ul>
@@ -85,6 +85,8 @@ export default {
             last_page: null,
             page_length: 9,
             focus_page_index: null,
+            leftMorePage: false,
+            rightMorePage: false,
             search:{
                 name: null,
                 email: null,
@@ -104,22 +106,30 @@ export default {
                 if(this.current_page < Math.floor(this.page_length / 2) + 1){
                     start = 1;
                     last = this.page_length;
+                    this.leftMorePage = false;
+                    this.rightMorePage = true;
                 }
                 //ページ末尾処理
                 else if(this.current_page > this.last_page - Math.floor(this.page_length / 2)){
                     start = this.last_page - this.page_length + 1;
                     last = this.last_page;
+                    this.leftMorePage = true;
+                    this.rightMorePage = false;
                 }
                 //通常処理
                 else{
                     start = this.current_page - Math.floor(this.page_length / 2);
                     last = this.current_page + Math.floor(this.page_length / 2);
+                    this.leftMorePage = true;
+                    this.rightMorePage = true;
                 }
             }
             //指定ページ数未満
             else{
                 start = 1;
                 last = this.last_page;
+                this.leftMorePage = false;
+                this.rightMorePage = false;
             }
             
             for(let i = start; i <= last; i++){
