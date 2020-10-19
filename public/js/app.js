@@ -2208,6 +2208,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       users: [],
+      //ページネート
       current_page: 1,
       last_page: null,
       page_length: 9,
@@ -2267,7 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
     getUser: function getUser() {
       var _this = this;
 
-      axios.get('/api/users?page=' + this.current_page).then(function (res) {
+      axios.post('/api/users/search?page=' + this.current_page, this.search).then(function (res) {
         var resData = res.data;
         _this.users = resData.data;
         _this.current_page = resData.current_page;
@@ -2281,11 +2282,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (result) {
         axios["delete"]('/api/users/' + id).then(function () {
-          if (_this2.search) {
-            _this2.searchUser();
-          } else {
-            _this2.getUser();
-          }
+          _this2.getUser();
         });
       }
     },
@@ -2309,13 +2306,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return page === this.current_page;
-    },
-    searchUser: function searchUser() {
-      var _this3 = this;
-
-      axios.post('/api/users/search', this.search).then(function (res) {
-        _this3.users = res.data.data;
-      });
     }
   },
   components: {

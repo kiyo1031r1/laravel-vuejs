@@ -81,12 +81,15 @@ export default {
     data(){
         return{
             users:[],
+
+            //ページネート
             current_page: 1,
             last_page: null,
             page_length: 9,
             focus_page_index: null,
             leftMorePage: false,
             rightMorePage: false,
+            
             search:{
                 name: null,
                 email: null,
@@ -140,7 +143,7 @@ export default {
     },
     methods:{
         getUser(){
-            axios.get('/api/users?page=' + this.current_page)
+            axios.post('/api/users/search?page=' + this.current_page, this.search)
             .then(res => {
                 const resData = res.data;
                 this.users = resData.data;
@@ -153,12 +156,7 @@ export default {
             if(result){
                 axios.delete('/api/users/'+ id)
                 .then(() => {
-                    if(this.search){
-                        this.searchUser();
-                    }
-                    else{
-                        this.getUser();
-                    }
+                    this.getUser();
                 });
             }
         },
@@ -182,12 +180,6 @@ export default {
             }
             return page === this.current_page;
         },
-        searchUser(){
-            axios.post('/api/users/search', this.search)
-            .then(res => {
-                this.users = res.data.data;
-            });
-        }
     },
     components:{
         AdminHeader
