@@ -61531,14 +61531,15 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "sidebar col-md-2 pr-0" }, [
           _c(
-            "h5",
+            "p",
             {
-              staticClass: "bg-primary font-italic text-white text-center py-2"
+              staticClass:
+                "font-weight-bold text-center border-bottom py-4 mb-0"
             },
             [_vm._v("ユーザー検索")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "font-weight-bold px-4" }, [
+          _c("div", { staticClass: "px-4" }, [
             _c(
               "form",
               {

@@ -3,8 +3,8 @@
         <AdminHeader></AdminHeader>
         <div class="row">
             <div class="sidebar col-md-2 pr-0">
-                <h5 class="bg-primary font-italic text-white text-center py-2">ユーザー検索</h5>
-                <div class="font-weight-bold px-4">
+                <p class="font-weight-bold text-center border-bottom py-4 mb-0">ユーザー検索</p>
+                <div class="px-4">
                     <form @submit.prevent="searchUser">
                         <div class="form-group">
                             <div class="form-group">
