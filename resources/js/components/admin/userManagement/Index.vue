@@ -2,57 +2,57 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="row">
-            <div class="col-md-3 bg-primary">
-                <h4>ユーザー検索</h4>
-                <form @submit.prevent="searchUser" class="my-4">
-                    <div class="form-row">
-                        <div class="col-md-3 mr-2">
-                            <input class="form-control" type="text" placeholder="ユーザー名" v-model="search.name">
+            <div class="sidebar col-md-2 pr-0 border-right">
+                <h5 class="bg-primary font-italic text-white text-center py-2">ユーザー検索</h5>
+                <div class="font-weight-bold px-4">
+                    <form @submit.prevent="searchUser">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">ユーザー名</label>
+                                <input v-model="search.name" class="form-control" type="text" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="email">メールアドレス</label>
+                                <input  v-model="search.email" class="form-control" type="text" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">権限</label>
+                                <select v-model="search.role" class="form-control">
+                                    <option selected></option>
+                                    <option value="一般ユーザー">一般ユーザー</option>
+                                    <option value="管理者">管理者</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">ステータス</label>
+                                <select v-model="search.status" class="form-control">
+                                    <option selected></option>
+                                    <option value="normal">normal</option>
+                                    <option value="premium">premium</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-md-3 mr-2">
-                            <input class="form-control" type="text" placeholder="email" v-model="search.email">
+
+                        <div class="form-group">
+                            <label class="col-form-label">登録日</label>
+                            <input type="text" class="form-control my-2" placeholder="〜から">
+                            <input type="text" class="form-control my-2" placeholder="〜まで">
                         </div>
-                        <div class="col-md-2 mr-2">
-                            <select class="form-control" v-model="search.role">
-                                <option value="default" selected>権限</option>
-                                <option value="一般ユーザー">一般ユーザー</option>
-                                <option value="管理者">管理者</option>
-                            </select>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">次回更新日</label>
+                            <input type="text" class="form-control my-2" placeholder="〜から">
+                            <input type="text" class="form-control my-2" placeholder="〜まで">
                         </div>
-                        <div class="col-md-2 mr-2">
-                            <select class="form-control" v-model="search.status">
-                                <option value="default" selected>ステータス</option>
-                                <option value="normal">normal</option>
-                                <option value="premium">premium</option>
-                            </select>
+                        <div class="col-md-8 mx-auto">
+                            <button class="btn btn-primary btn-block mt-5" type="submit">検索</button>
                         </div>
-                    </div>
-                    <div class="form-row mt-4">
-                        <label class="col-md-1 col-form-label">登録日</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <span> ~ </span>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row mt-4">
-                        <label class="col-md-1 col-form-label">次回更新日</label>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <span> ~ </span>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mt-4" type="submit">検索</button>
-                </form>
+                    </form>
+                </div>
             </div>
 
-            <div class="col-md-9">
-                <div class="container">
+            <div class="main col-md-10">
+                <div class="container my-4">
                     <table class="table table-sm table-bordered table-hover text-center">
                         <thead class="thead-dark">
                             <tr>
@@ -125,8 +125,8 @@ export default {
             search:{
                 name: null,
                 email: null,
-                role: 'default',
-                status: 'default'
+                role: '',
+                status: ''
             }
         }
     },
@@ -225,3 +225,11 @@ export default {
 }
 </script>
 
+<style scoped>
+.sidebar{
+    height: 100vh;
+}
+.main{
+    height: 100vh;
+}
+</style>
