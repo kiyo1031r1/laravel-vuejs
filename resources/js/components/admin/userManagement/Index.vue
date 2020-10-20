@@ -254,7 +254,4 @@ export default {
     padding-bottom: -10000px;
     overflow: hidden;
 }
-.main{
-    height: 100vh;
-}
 </style>
