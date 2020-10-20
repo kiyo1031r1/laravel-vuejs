@@ -36,11 +36,11 @@ class UserController extends Controller
             $this->searchWord($email, 'email', $query);
         }
         if($role != ""){
-            $role_id = Role::where('name', $role);
-            $this->searchWord($role_id, 'role_id', $query);
+            $role_id = Role::where('name', $role)->first()->id;
+            $query->where('role_id', $role_id);
         }
         if($status != ""){
-            $this->searchWord($status, 'status', $query);
+            $query->where('status', $status);
         }
 
         return $query->paginate($request->per_page);
