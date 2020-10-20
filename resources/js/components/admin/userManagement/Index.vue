@@ -139,6 +139,7 @@
 
 <script>
 import AdminHeader from '../AdminHeaderComponent'
+import Datepicer from 'vuejs-datepicker'
 
 export default {
     data(){
@@ -266,7 +267,8 @@ export default {
         },
     },
     components:{
-        AdminHeader
+        AdminHeader,
+        Datepicker
     },
     created(){
         this.getUser();
