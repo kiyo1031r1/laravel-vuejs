@@ -65,55 +65,72 @@
                         </select>
                     </div>
 
-                    <!-- ユーザーリスト -->
-                    <table class="table table-sm table-bordered table-hover text-center ">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">ユーザー名</th>
-                                <th scope="col">email</th>
-                                <th scope="col">登録日</th>
-                                <th scope="col">権限</th>
-                                <th scope="col">ステータス</th>
-                                <th scope="col">次回更新日</th>
-                                <th scope="col">編集</th>
-                                <th scope="col">削除</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="user in users" :key="user.id">
-                            <tr>
-                                <th scope="row">{{user.id}}</th>
-                                <td>{{user.name}}</td>
-                                <td>{{user.email}}</td>
-                                <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}
-                                <td>{{user.role_id | role}}</td>
-                                <td>{{user.status}}</td>
-                                <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
-                                <td v-else></td>
-                                <td>
-                                    <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
-                                        <button class="btn btn-primary px-2 py-0">編集</button>
-                                    </router-link>
-                                </td>
-                                <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
+                    <template v-if="users.length > 0">
+                        <!-- ユーザーリスト -->
+                        <table class="table table-sm table-bordered table-hover text-center ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">ユーザー名</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">登録日</th>
+                                    <th scope="col">権限</th>
+                                    <th scope="col">ステータス</th>
+                                    <th scope="col">次回更新日</th>
+                                    <th scope="col">編集</th>
+                                    <th scope="col">削除</th>
+                                </tr>
+                            </thead>
+                            <tbody v-for="user in users" :key="user.id">
+                                <tr>
+                                    <th scope="row">{{user.id}}</th>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}
+                                    <td>{{user.role_id | role}}</td>
+                                    <td>{{user.status}}</td>
+                                    <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                                    <td v-else></td>
+                                    <td>
+                                        <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
+                                            <button class="btn btn-primary px-2 py-0">編集</button>
+                                        </router-link>
+                                    </td>
+                                    <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <!-- ページネーション -->
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
-                            <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
-                            <span v-if="leftMorePage" class="mx-2">...</span>
-                            <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
-                                <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
-                            </li>
-                            <span v-if="rightMorePage" class="mx-2">...</span>
-                            <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
-                            <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
-                        </ul>
-                    </nav>
+                        <!-- ページネーション -->
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
+                                <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
+                                <span v-if="leftMorePage" class="mx-2">...</span>
+                                <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
+                                    <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
+                                </li>
+                                <span v-if="rightMorePage" class="mx-2">...</span>
+                                <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
+                                <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
+                            </ul>
+                        </nav>
+                    </template>
+
+                    <!-- ユーザー非存在時(検索結果が0件) -->
+                    <template v-if="!isUsers">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">ユーザー検索結果</div>
+                                    <div class="card-body">
+                                        <p class="text-center text-danger mb-0 my-4">一致するユーザーがいませんでした</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
             </div>
@@ -127,6 +144,7 @@ export default {
     data(){
         return{
             users:[],
+            isUsers: true,
 
             //ページネーション
             current_page: 1,
@@ -199,7 +217,15 @@ export default {
             axios.post('/api/users/search?page=' + this.current_page, this.search)
             .then(res => {
                 const resData = res.data;
+
                 this.users = resData.data;
+                if(this.users.length > 0){
+                    this.isUsers = true;
+                }
+                else{
+                    this.isUsers = false;
+                }
+
                 this.last_page = resData.last_page;
             });
         },

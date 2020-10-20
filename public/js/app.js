@@ -2249,11 +2249,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
+      isUsers: true,
       //ページネーション
       current_page: 1,
       last_page: null,
@@ -2323,6 +2341,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/users/search?page=' + this.current_page, this.search).then(function (res) {
         var resData = res.data;
         _this.users = resData.data;
+
+        if (_this.users.length > 0) {
+          _this.isUsers = true;
+        } else {
+          _this.isUsers = false;
+        }
+
         _this.last_page = resData.last_page;
       });
     },
@@ -61739,282 +61764,320 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "main col-md-10" }, [
-          _c("div", { staticClass: "container" }, [
-            _c(
-              "div",
-              { staticClass: "form-inline justify-content-end px-3 my-3" },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-form-label p-2",
-                    attrs: { for: "per_page" }
-                  },
-                  [_vm._v("表示件数")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.search.per_page,
-                        expression: "search.per_page"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "per_page" },
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.search,
-                            "per_page",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                        function($event) {
-                          return _vm.changePerPage()
+          _c(
+            "div",
+            { staticClass: "container" },
+            [
+              _c(
+                "div",
+                { staticClass: "form-inline justify-content-end px-3 my-3" },
+                [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label p-2",
+                      attrs: { for: "per_page" }
+                    },
+                    [_vm._v("表示件数")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.per_page,
+                          expression: "search.per_page"
                         }
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "20" } }, [_vm._v("20件")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "50" } }, [_vm._v("50件")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "100" } }, [_vm._v("100件")])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table table-sm table-bordered table-hover text-center "
-              },
-              [
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._l(_vm.users, function(user) {
-                  return _c("tbody", { key: user.id }, [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v(_vm._s(user.id))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.email))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            _vm
-                              .moment(user.created_at)
-                              .format("YYYY-MM-DD HH:MM:SS")
-                          ) + "\n                            "
-                        )
-                      ]),
-                      _c("td", [_vm._v(_vm._s(_vm._f("role")(user.role_id)))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(user.status))]),
-                      _vm._v(" "),
-                      user.next_update != null
-                        ? _c("td", [
-                            _vm._v(
-                              _vm._s(
-                                _vm
-                                  .moment(user.next_update)
-                                  .format("YYYY-MM-DD")
-                              )
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "per_page" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.search,
+                              "per_page",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             )
-                          ])
-                        : _c("td"),
+                          },
+                          function($event) {
+                            return _vm.changePerPage()
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "20" } }, [
+                        _vm._v("20件")
+                      ]),
                       _vm._v(" "),
+                      _c("option", { attrs: { value: "50" } }, [
+                        _vm._v("50件")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "100" } }, [
+                        _vm._v("100件")
+                      ])
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm.users.length > 0
+                ? [
+                    _c(
+                      "table",
+                      {
+                        staticClass:
+                          "table table-sm table-bordered table-hover text-center "
+                      },
+                      [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._l(_vm.users, function(user) {
+                          return _c("tbody", { key: user.id }, [
+                            _c("tr", [
+                              _c("th", { attrs: { scope: "row" } }, [
+                                _vm._v(_vm._s(user.id))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(user.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(user.email))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm
+                                      .moment(user.created_at)
+                                      .format("YYYY-MM-DD HH:MM:SS")
+                                  ) + "\n                                "
+                                )
+                              ]),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm._f("role")(user.role_id)))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(user.status))]),
+                              _vm._v(" "),
+                              user.next_update != null
+                                ? _c("td", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm
+                                          .moment(user.next_update)
+                                          .format("YYYY-MM-DD")
+                                      )
+                                    )
+                                  ])
+                                : _c("td"),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to: {
+                                          name: "user_management_edit",
+                                          params: { id: user.id }
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-primary px-2 py-0"
+                                        },
+                                        [_vm._v("編集")]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger px-2 py-0",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteUser(user.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("削除")]
+                                )
+                              ])
+                            ])
+                          ])
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("nav", [
                       _c(
-                        "td",
+                        "ul",
+                        { staticClass: "pagination justify-content-center" },
                         [
                           _c(
-                            "router-link",
+                            "li",
                             {
-                              attrs: {
-                                to: {
-                                  name: "user_management_edit",
-                                  params: { id: user.id }
+                              staticClass: "page-item mx-2",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changePage(1)
                                 }
                               }
                             },
                             [
                               _c(
-                                "button",
-                                { staticClass: "btn btn-primary px-2 py-0" },
-                                [_vm._v("編集")]
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("先頭")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "li",
+                            {
+                              staticClass: "page-item",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changePreviousPage()
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("前")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.leftMorePage
+                            ? _c("span", { staticClass: "mx-2" }, [
+                                _vm._v("...")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.createPageColumn, function(page, index) {
+                            return _c(
+                              "li",
+                              {
+                                key: page.index,
+                                class: _vm.isCurrent(page, index)
+                                  ? "page-item active"
+                                  : "page-item inactive",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.changePage(page)
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    ref: "focus_page",
+                                    refInFor: true,
+                                    staticClass: "page-link",
+                                    attrs: { href: "#" }
+                                  },
+                                  [_vm._v(_vm._s(page))]
+                                )
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _vm.rightMorePage
+                            ? _c("span", { staticClass: "mx-2" }, [
+                                _vm._v("...")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "li",
+                            {
+                              staticClass: "page-item",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changeNextPage()
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("次")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "li",
+                            {
+                              staticClass: "page-item mx-2",
+                              on: {
+                                click: function($event) {
+                                  return _vm.changePage(_vm.last_page)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  attrs: { href: "#" }
+                                },
+                                [_vm._v("最終")]
                               )
                             ]
                           )
                         ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger px-2 py-0",
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteUser(user.id)
-                              }
-                            }
-                          },
-                          [_vm._v("削除")]
-                        )
-                      ])
+                        2
+                      )
                     ])
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("nav", [
-              _c(
-                "ul",
-                { staticClass: "pagination justify-content-center" },
-                [
-                  _c(
-                    "li",
-                    {
-                      staticClass: "page-item mx-2",
-                      on: {
-                        click: function($event) {
-                          return _vm.changePage(1)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { staticClass: "page-link", attrs: { href: "#" } },
-                        [_vm._v("先頭")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass: "page-item",
-                      on: {
-                        click: function($event) {
-                          return _vm.changePreviousPage()
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { staticClass: "page-link", attrs: { href: "#" } },
-                        [_vm._v("前")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm.leftMorePage
-                    ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.createPageColumn, function(page, index) {
-                    return _c(
-                      "li",
-                      {
-                        key: page.index,
-                        class: _vm.isCurrent(page, index)
-                          ? "page-item active"
-                          : "page-item inactive",
-                        on: {
-                          click: function($event) {
-                            return _vm.changePage(page)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            ref: "focus_page",
-                            refInFor: true,
-                            staticClass: "page-link",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(page))]
-                        )
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _vm.rightMorePage
-                    ? _c("span", { staticClass: "mx-2" }, [_vm._v("...")])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass: "page-item",
-                      on: {
-                        click: function($event) {
-                          return _vm.changeNextPage()
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { staticClass: "page-link", attrs: { href: "#" } },
-                        [_vm._v("次")]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass: "page-item mx-2",
-                      on: {
-                        click: function($event) {
-                          return _vm.changePage(_vm.last_page)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { staticClass: "page-link", attrs: { href: "#" } },
-                        [_vm._v("最終")]
-                      )
-                    ]
-                  )
-                ],
-                2
-              )
-            ])
-          ])
+                  ]
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.isUsers ? [_vm._m(4)] : _vm._e()
+            ],
+            2
+          )
         ])
       ])
     ],
@@ -62096,6 +62159,26 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("編集")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("削除")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("ユーザー検索結果")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", { staticClass: "text-center text-danger mb-0 my-4" }, [
+              _vm._v("一致するユーザーがいませんでした")
+            ])
+          ])
+        ])
       ])
     ])
   }
