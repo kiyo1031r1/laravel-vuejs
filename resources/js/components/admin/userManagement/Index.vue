@@ -36,6 +36,9 @@
 
                         <div class="form-group">
                             <label class="col-form-label">登録日</label>
+                            <Datepicker
+                                :language="ja">
+                            </Datepicker>
                             <input type="text" class="form-control my-2" placeholder="〜から">
                             <input type="text" class="form-control my-2" placeholder="〜まで">
                         </div>
@@ -139,7 +142,8 @@
 
 <script>
 import AdminHeader from '../AdminHeaderComponent'
-import Datepicer from 'vuejs-datepicker'
+import Datepicker from 'vuejs-datepicker'
+import {ja} from 'vuejs-datepicker/dist/locale'
 
 export default {
     data(){
@@ -161,7 +165,8 @@ export default {
                 role: '',
                 status: '',
                 per_page: '20'
-            }
+            },
+            ja: ja
         }
     },
     computed:{
