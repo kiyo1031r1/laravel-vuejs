@@ -2,6 +2,7 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="row">
+            <!-- サイドバー -->
             <div class="sidebar col-md-2 pr-0">
                 <p class="font-weight-bold text-center border-bottom py-4 mb-0">ユーザー検索</p>
                 <div class="px-4">
@@ -51,8 +52,10 @@
                 </div>
             </div>
 
+            <!-- メイン -->
             <div class="main col-md-10">
                 <div class="container">
+                    <!-- 表示件数 -->
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
                         <select @change="changePerPage()" v-model="search.per_page" class="form-control" id="per_page">
@@ -61,6 +64,8 @@
                             <option value="100">100件</option>
                         </select>
                     </div>
+
+                    <!-- ユーザーリスト -->
                     <table class="table table-sm table-bordered table-hover text-center ">
                         <thead class="thead-dark">
                             <tr>
@@ -95,6 +100,7 @@
                         </tbody>
                     </table>
 
+                    <!-- ページネーション -->
                     <nav>
                         <ul class="pagination justify-content-center">
                             <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
@@ -122,7 +128,7 @@ export default {
         return{
             users:[],
 
-            //ページネート
+            //ページネーション
             current_page: 1,
             last_page: null,
             page_length: 9,

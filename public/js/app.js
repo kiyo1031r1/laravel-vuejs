@@ -2243,12 +2243,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: [],
-      //ページネート
+      //ページネーション
       current_page: 1,
       last_page: null,
       page_length: 9,
