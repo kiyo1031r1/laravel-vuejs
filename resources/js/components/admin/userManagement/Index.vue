@@ -185,6 +185,12 @@ export default {
             for(let i = start; i <= last; i++){
                 column.push(i);
             }
+
+            //ページ番号へフォーカス
+            if(this.focus_page_index != null) {
+                this.$refs.focus_page[this.focus_page_index].focus();
+            }
+
             return column;
         },
     },
@@ -236,9 +242,6 @@ export default {
     },
     created(){
         this.getUser();
-    },
-    updated(){
-        this.$refs.focus_page[this.focus_page_index].focus();
     }
 }
 </script>

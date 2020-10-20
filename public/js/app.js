@@ -2306,6 +2306,11 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = start; i <= last; i++) {
         column.push(i);
+      } //ページ番号へフォーカス
+
+
+      if (this.focus_page_index != null) {
+        this.$refs.focus_page[this.focus_page_index].focus();
       }
 
       return column;
@@ -2363,9 +2368,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getUser();
-  },
-  updated: function updated() {
-    this.$refs.focus_page[this.focus_page_index].focus();
   }
 });
 
