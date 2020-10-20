@@ -132,7 +132,7 @@ export default {
             current_page: 1,
             last_page: null,
             page_length: 9,
-            focus_page_index: null,
+            focus_page_index: 0,
             leftMorePage: false,
             rightMorePage: false,
             
@@ -187,7 +187,7 @@ export default {
             }
 
             //ページ番号へフォーカス
-            if(this.focus_page_index != null) {
+            if(this.focus_page_index > 0) {
                 this.$refs.focus_page[this.focus_page_index].focus();
             }
 
@@ -215,6 +215,7 @@ export default {
         changePerPage(){
             //最初のユーザーから表示する仕様
             this.current_page = 1;
+            this.focus_page_index = 0;
             this.getUser();
         },
         changePage(page){
