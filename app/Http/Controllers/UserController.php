@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,8 @@ class UserController extends Controller
         $query = User::query();
         $name = $request->name;
         $email = $request->email;
+        $role = $request->role;
+        $status = $request->status;
 
         if($name) {
             $this->searchWord($name, 'name', $query);
@@ -32,7 +35,13 @@ class UserController extends Controller
         if($email) {
             $this->searchWord($email, 'email', $query);
         }
-
+        if($role != ""){
+            $role_id = Role::where('name', $role);
+            $this->searchWord($role_id, 'role_id', $query);
+        }
+        if($status != ""){
+            $this->searchWord($status, 'status', $query);
+        }
 
         return $query->paginate($request->per_page);
     }
