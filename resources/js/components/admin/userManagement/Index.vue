@@ -251,5 +251,8 @@ export default {
 <style scoped>
 .sidebar{
     border-right: 2px solid #dee2e6;
+    margin-bottom: -10000px;
+    padding-bottom: -10000px;
+    overflow: hidden;
 }
 </style>
