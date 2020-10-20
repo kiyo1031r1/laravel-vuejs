@@ -213,6 +213,7 @@ export default {
             }
         },
         changePerPage(){
+            //最初のユーザーから表示する仕様
             this.current_page = 1;
             this.getUser();
         },
