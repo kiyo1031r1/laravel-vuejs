@@ -37,6 +37,7 @@
                         <div class="form-group">
                             <label class="col-form-label">登録日</label>
                             <Datepicker
+                                v-model="search.created_at_start"
                                 :language="ja">
                             </Datepicker>
                             <input type="text" class="form-control my-2" placeholder="〜から">
@@ -164,7 +165,11 @@ export default {
                 email: null,
                 role: '',
                 status: '',
-                per_page: '20'
+                per_page: '20',
+                created_at_start: null,
+                created_at_end: null,
+                next_update_start: null,
+                next_update_end: null
             },
             ja: ja
         }

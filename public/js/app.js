@@ -2272,6 +2272,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2292,7 +2293,11 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         role: '',
         status: '',
-        per_page: '20'
+        per_page: '20',
+        created_at_start: null,
+        created_at_end: null,
+        next_update_start: null,
+        next_update_end: null
       },
       ja: vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_2__["ja"]
     };
@@ -61771,7 +61776,16 @@ var render = function() {
                       _vm._v("登録日")
                     ]),
                     _vm._v(" "),
-                    _c("Datepicker", { attrs: { language: _vm.ja } }),
+                    _c("Datepicker", {
+                      attrs: { language: _vm.ja },
+                      model: {
+                        value: _vm.search.created_at_start,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "created_at_start", $$v)
+                        },
+                        expression: "search.created_at_start"
+                      }
+                    }),
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "form-control my-2",
