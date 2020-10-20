@@ -2338,6 +2338,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     changePerPage: function changePerPage() {
+      //最初のユーザーから表示する仕様
       this.current_page = 1;
       this.getUser();
     },
