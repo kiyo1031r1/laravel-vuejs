@@ -27,12 +27,6 @@ class UserController extends Controller
         $email = $request->email;
 
         if($name) {
-            // $name_split = mb_convert_kana($name, 's');
-            // $name_split = preg_split('/[\s]+/', $name_split, 0, PREG_SPLIT_NO_EMPTY);
-
-            // foreach($name_split as $value) {
-            //     $query->where('name', 'like', '%'.$value.'%');
-            // }
             $this->searchWord($name, 'name', $query);
         }
         if($email) {
