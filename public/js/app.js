@@ -61552,7 +61552,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.searchUser($event)
+                    return _vm.getUser($event)
                   }
                 }
               },

@@ -6,7 +6,7 @@
             <div class="sidebar col-md-2 pr-0">
                 <p class="font-weight-bold text-center border-bottom py-4 mb-0">ユーザー検索</p>
                 <div class="px-4">
-                    <form @submit.prevent="searchUser">
+                    <form @submit.prevent="getUser">
                         <div class="form-group">
                             <div class="form-group">
                                 <label class="col-form-label" for="name">ユーザー名</label>
