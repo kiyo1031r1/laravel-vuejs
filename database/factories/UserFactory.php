@@ -28,8 +28,8 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => Hash::make(11111111),
-            'created_at' => DataTime::dateTimeThisDecade(),
-            'next_update' => DataTime::dateTimeThisDecade(),
+            'created_at' => DateTime::dateTimeThisDecade(),
+            'next_update' => DateTime::dateTimeThisDecade(),
             'role_id' => 1,
             'status' => 'normal',
         ];
