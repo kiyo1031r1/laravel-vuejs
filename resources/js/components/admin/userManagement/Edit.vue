@@ -22,7 +22,7 @@
                         </tr>
                         <tr>
                             <td scope="row">作成日</td>
-                            <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}</td>
+                            <td>{{user.created_at | moment_details}}</td>
                         </tr>
                         <tr>
                             <td scope="row">ステータス</td>
@@ -30,7 +30,7 @@
                         </tr>
                         <tr>
                             <td scope="row">次回更新日</td>
-                            <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                            <td v-if="user.next_update != null">{{user.next_update | moment_details}}</td>
                             <td v-else></td>
                         </tr>
                         <tr>
@@ -83,7 +83,6 @@
 
 <script>
 import AdminHeader from '../AdminHeaderComponent'
-import moment from 'moment'
 
 export default {
     data(){

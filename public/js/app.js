@@ -1981,8 +1981,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminHeaderComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AdminHeaderComponent */ "./resources/js/components/admin/AdminHeaderComponent.vue");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2066,7 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2097,9 +2094,9 @@ __webpack_require__.r(__webpack_exports__);
 
       if (result) {
         if (this.status == 'normal' && this.user.status == 'premium') {
-          this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()().add(1, 'M').format('YYYY-MM-DD');
+          this.user.next_update = moment().add(1, 'M').format('YYYY-MM-DD');
         } else if (this.status == 'premium' && this.user.status == 'normal') {
-          this.user.next_update = moment__WEBPACK_IMPORTED_MODULE_1___default()(this.user.next_update).subtract(1, 'M').subtract(1, 'd').format('YYYY-MM-DD');
+          this.user.next_update = moment(this.user.next_update).subtract(1, 'M').subtract(1, 'd').format('YYYY-MM-DD');
         }
 
         axios.put('/api/users/' + this.id, this.user).then(function () {
@@ -2335,7 +2332,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       datepicker: {
         language: vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_2__["ja"],
-        format: 'yyyy-MM-dd',
+        format: 'yyyy-MM-dd (D)',
         input_class: 'bg-white mb-2'
       }
     };
@@ -61345,13 +61342,7 @@ var render = function() {
               _c("td", { attrs: { scope: "row" } }, [_vm._v("作成日")]),
               _vm._v(" "),
               _c("td", [
-                _vm._v(
-                  _vm._s(
-                    _vm
-                      .moment(_vm.user.created_at)
-                      .format("YYYY-MM-DD HH:MM:SS")
-                  )
-                )
+                _vm._v(_vm._s(_vm._f("moment_details")(_vm.user.created_at)))
               ])
             ]),
             _vm._v(" "),
@@ -61367,9 +61358,7 @@ var render = function() {
               _vm.user.next_update != null
                 ? _c("td", [
                     _vm._v(
-                      _vm._s(
-                        _vm.moment(_vm.user.next_update).format("YYYY-MM-DD")
-                      )
+                      _vm._s(_vm._f("moment_details")(_vm.user.next_update))
                     )
                   ])
                 : _c("td")
@@ -62002,23 +61991,16 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [
                                 _vm._v(
-                                  _vm._s(
-                                    _vm
-                                      .moment(user.created_at)
-                                      .format("YYYY-MM-DD")
-                                  ) + "\n                                "
+                                  _vm._s(_vm._f("moment")(user.created_at))
                                 )
                               ]),
+                              _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(user.status))]),
                               _vm._v(" "),
                               user.next_update != null
                                 ? _c("td", [
                                     _vm._v(
-                                      _vm._s(
-                                        _vm
-                                          .moment(user.next_update)
-                                          .format("YYYY-MM-DD")
-                                      )
+                                      _vm._s(_vm._f("moment")(user.next_update))
                                     )
                                   ])
                                 : _c("td"),
@@ -82975,7 +82957,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_3___default.a;
+moment__WEBPACK_IMPORTED_MODULE_3___default.a.locale('ja');
+Vue.filter('moment', function (value) {
+  return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD (dd)');
+});
+Vue.filter('moment_details', function (value) {
+  return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).format('YYYY-MM-DD (dd) HH:MM:SS');
+});
 Vue.filter('role', function (value) {
   if (value == 1) {
     return '一般ユーザー';

@@ -125,9 +125,9 @@
                                     <th scope="row">{{user.id}}</th>
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
-                                    <td>{{moment(user.created_at).format('YYYY-MM-DD')}}
+                                    <td>{{user.created_at | moment}}</td>
                                     <td>{{user.status}}</td>
-                                    <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
+                                    <td v-if="user.next_update != null">{{user.next_update | moment}}</td>
                                     <td v-else></td>
                                     <td>{{user.role_id | role}}</td>
                                     <td>
@@ -208,7 +208,7 @@ export default {
 
             datepicker:{
                 language: ja,
-                format: 'yyyy-MM-dd',
+                format: 'yyyy-MM-dd (D)',
                 input_class: 'bg-white mb-2',
             }
         }
