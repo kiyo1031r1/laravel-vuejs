@@ -8,30 +8,13 @@
                 <div class="px-4">
                     <form @submit.prevent="getUser">
                         <div class="form-group">
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">ユーザー名</label>
-                                <input v-model="search.name" class="form-control" type="text" id="name">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="email">メールアドレス</label>
-                                <input  v-model="search.email" class="form-control" type="text" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">権限</label>
-                                <select v-model="search.role" class="form-control">
-                                    <option selected></option>
-                                    <option value="一般ユーザー">一般ユーザー</option>
-                                    <option value="管理者">管理者</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label">ステータス</label>
-                                <select v-model="search.status" class="form-control">
-                                    <option selected></option>
-                                    <option value="normal">normal</option>
-                                    <option value="premium">premium</option>
-                                </select>
-                            </div>
+                            <label class="col-form-label" for="name">ユーザー名</label>
+                            <input v-model="search.name" class="form-control" type="text" id="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="email">メールアドレス</label>
+                            <input  v-model="search.email" class="form-control" type="text" id="email">
                         </div>
 
                         <div class="form-group">
@@ -73,7 +56,26 @@
                                 :placeholder="'〜まで'">
                             </Datepicker>
                         </div>
-                        <div class="col-md-8 mx-auto mt-5">
+
+                        <div class="form-group">
+                            <label class="col-form-label">権限</label>
+                            <select v-model="search.role" class="form-control">
+                                <option selected></option>
+                                <option value="一般ユーザー">一般ユーザー</option>
+                                <option value="管理者">管理者</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">ステータス</label>
+                            <select v-model="search.status" class="form-control">
+                                <option selected></option>
+                                <option value="normal">normal</option>
+                                <option value="premium">premium</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-8 mx-auto mt-5 pt-3">
                             <button class="btn btn-primary btn-block" type="submit">検索</button>
                         </div>
                     </form>

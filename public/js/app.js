@@ -2297,6 +2297,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -61630,170 +61632,63 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      { staticClass: "col-form-label", attrs: { for: "name" } },
-                      [_vm._v("ユーザー名")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search.name,
-                          expression: "search.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "name" },
-                      domProps: { value: _vm.search.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.search, "name", $event.target.value)
-                        }
+                  _c(
+                    "label",
+                    { staticClass: "col-form-label", attrs: { for: "name" } },
+                    [_vm._v("ユーザー名")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search.name,
+                        expression: "search.name"
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-form-label",
-                        attrs: { for: "email" }
-                      },
-                      [_vm._v("メールアドレス")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search.email,
-                          expression: "search.email"
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name" },
+                    domProps: { value: _vm.search.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "email" },
-                      domProps: { value: _vm.search.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.search, "email", $event.target.value)
-                        }
+                        _vm.$set(_vm.search, "name", $event.target.value)
                       }
-                    })
-                  ]),
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-form-label", attrs: { for: "email" } },
+                    [_vm._v("メールアドレス")]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-form-label" }, [
-                      _vm._v("権限")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
+                  _c("input", {
+                    directives: [
                       {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.search.role,
-                            expression: "search.role"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.search,
-                              "role",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search.email,
+                        expression: "search.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "email" },
+                    domProps: { value: _vm.search.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "" } }),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "一般ユーザー" } }, [
-                          _vm._v("一般ユーザー")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "管理者" } }, [
-                          _vm._v("管理者")
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "col-form-label" }, [
-                      _vm._v("ステータス")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.search.status,
-                            expression: "search.status"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.search,
-                              "status",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "" } }),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "normal" } }, [
-                          _vm._v("normal")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "premium" } }, [
-                          _vm._v("premium")
-                        ])
-                      ]
-                    )
-                  ])
+                        _vm.$set(_vm.search, "email", $event.target.value)
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c(
@@ -61885,6 +61780,108 @@ var render = function() {
                   ],
                   1
                 ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { staticClass: "col-form-label" }, [
+                    _vm._v("権限")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.role,
+                          expression: "search.role"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.search,
+                            "role",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "一般ユーザー" } }, [
+                        _vm._v("一般ユーザー")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "管理者" } }, [
+                        _vm._v("管理者")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { staticClass: "col-form-label" }, [
+                    _vm._v("ステータス")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.status,
+                          expression: "search.status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.search,
+                            "status",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "normal" } }, [
+                        _vm._v("normal")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "premium" } }, [
+                        _vm._v("premium")
+                      ])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _vm._m(0)
               ]
@@ -62218,7 +62215,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8 mx-auto mt-5" }, [
+    return _c("div", { staticClass: "col-md-8 mx-auto mt-5 pt-3" }, [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
