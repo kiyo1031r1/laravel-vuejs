@@ -24,14 +24,20 @@ class UserController extends Controller
 
     public function search(Request $request){
         $query = User::query();
-        $name = $request->name;
-        $email = $request->email;
-        $created_at_start = $request->created_at_start;
-        $created_at_end = $request->created_at_end;
-        $next_update_start = $request->next_update_start;
-        $next_update_end = $request->next_update_end;
-        $role = $request->role;
-        $status = $request->status;
+
+        $data = $request->all();
+        $search = $data['search'];
+        $sort = $data['sort'];
+
+        //検索
+        $name = $search['name'];
+        $email = $search['email'];
+        $created_at_start = $search['created_at_start'];
+        $created_at_end = $search['created_at_end'];
+        $next_update_start = $search['next_update_start'];
+        $next_update_end = $search['next_update_end'];
+        $role = $search['role'];
+        $status = $search['status'];
 
         if($name) {
             $this->searchWord($name, 'name', $query);
@@ -57,6 +63,29 @@ class UserController extends Controller
         }
         if($status != ""){
             $query->where('status', $status);
+        }
+
+        //ソート
+        $sort_id = $sort['id'];
+        $sort_created_at = $sort['created_at'];
+        $sort_status = $sort['status'];
+        $sort_next_update = $sort['next_update'];
+        $sort_role = $sort['role'];
+
+        if($sort_id){
+            $query->orderBy('id', $sort_id);
+        }
+        if($sort_created_at){
+            $query->orderBy('created_at', $sort_created_at);
+        }
+        if($sort_status){
+            $query->orderBy('status', $sort_status);
+        }
+        if($sort_next_update){
+            $query->orderBy('next_update', $sort_next_update);
+        }
+        if($sort_role){
+            $query->orderBy('role_id', $sort_role);
         }
 
         return $query->paginate($request->per_page);
