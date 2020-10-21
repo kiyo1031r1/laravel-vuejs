@@ -26,7 +26,8 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜から(未指定可)'">
+                                :placeholder="'〜から(未指定可)'"
+                                :disabled-dates="{from: search.created_at_end}">
                             </Datepicker>
                             <Datepicker
                                 v-model="search.created_at_end"
@@ -35,7 +36,8 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜まで(未指定可)'">
+                                :placeholder="'〜まで(未指定可)'"
+                                :disabled-dates="{to: search.created_at_start}">
                             </Datepicker>
                         </div>
 
@@ -57,7 +59,8 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜から(未指定可)'">
+                                :placeholder="'〜から(未指定可)'"
+                                :disabled-dates="{from: search.next_update_end}">
                             </Datepicker>
                             <Datepicker
                                 v-model="search.next_update_end"
@@ -66,7 +69,8 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜まで(未指定可)'">
+                                :placeholder="'〜まで(未指定可)'"
+                                :disabled-dates="{to: search.next_update_start}">
                             </Datepicker>
                         </div>
 
