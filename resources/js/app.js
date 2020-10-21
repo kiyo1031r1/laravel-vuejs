@@ -2,6 +2,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import moment from 'moment'
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
 
 require('./bootstrap');
 
@@ -23,6 +25,8 @@ Vue.filter('role', (value) => {
         return '管理者';
     }
 });
+
+Vue.component('v-icon', Icon);
 
 const app = new Vue({
     el: '#app',
