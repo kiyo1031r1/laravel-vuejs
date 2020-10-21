@@ -61997,7 +61997,7 @@ var render = function() {
                                   _vm._s(
                                     _vm
                                       .moment(user.created_at)
-                                      .format("YYYY-MM-DD HH:MM:SS")
+                                      .format("YYYY-MM-DD")
                                   ) + "\n                                "
                                 )
                               ]),

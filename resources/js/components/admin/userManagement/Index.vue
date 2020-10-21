@@ -121,7 +121,7 @@
                                     <th scope="row">{{user.id}}</th>
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
-                                    <td>{{moment(user.created_at).format('YYYY-MM-DD HH:MM:SS')}}
+                                    <td>{{moment(user.created_at).format('YYYY-MM-DD')}}
                                     <td>{{user.role_id | role}}</td>
                                     <td>{{user.status}}</td>
                                     <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
