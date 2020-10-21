@@ -111,30 +111,30 @@
                                 <tr>
                                     <th scope="col">
                                         <span class="mr-1">ID</span>
-                                        <v-icon @click="sort.id = 'asc'; getUser();" name="caret-square-up"/>
-                                        <v-icon @click="sort.id = 'desc'; getUser();" name="caret-square-down"/>
+                                        <v-icon @click="sortList('id', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('id', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">ユーザー名</th>
                                     <th scope="col">email</th>
                                     <th scope="col">
                                         <span class="mr-1">登録日</span>
-                                        <v-icon @click="sort.created_at = 'asc'; getUser();" name="caret-square-up"/>
-                                        <v-icon @click="sort.created_at = 'desc'; getUser();" name="caret-square-down"/>
+                                        <v-icon @click="sortList('created_at', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('created_at', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">
                                         <span class="mr-1">ステータス</span>
-                                        <v-icon @click="sort.status = 'asc'; getUser();" name="caret-square-up"/>
-                                        <v-icon @click="sort.status = 'desc'; getUser();" name="caret-square-down"/>
+                                        <v-icon @click="sortList('status', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">
                                         <span class="mr-1">次回更新日</span>
-                                        <v-icon @click="sort.next_update = 'asc'; getUser();" name="caret-square-up"/>
-                                        <v-icon @click="sort.next_update = 'desc'; getUser();" name="caret-square-down"/>
+                                        <v-icon @click="sortList('next_update', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('next_update', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">
                                         <span class="mr-1">権限</span>
-                                        <v-icon @click="sort.role = 'asc'; getUser();" name="caret-square-up"/>
-                                        <v-icon @click="sort.role = 'desc'; getUser();" name="caret-square-down"/>
+                                        <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">編集</th>
                                     <th scope="col">削除</th>
@@ -345,6 +345,29 @@ export default {
             }
             return page === this.current_page;
         },
+        sortList(column, order){
+            this.sort.id = null;
+            this.sort.created_at = null;
+            this.sort.status = null;
+            this.sort.next_update = null;
+            this.sort.role = null;
+            if(column === 'id'){
+                this.sort.id = order;
+            }
+            if(column === 'created_at'){
+                this.sort.created_at = order;
+            }
+            if(column === 'status'){
+                this.sort.status = order;
+            }
+            if(column === 'next_update'){
+                this.sort.next_update = order;
+            }
+            if(column === 'role'){
+                this.sort.role = order;
+            }
+            this.getUser();
+        }
     },
     components:{
         AdminHeader,
