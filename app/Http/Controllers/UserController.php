@@ -26,6 +26,10 @@ class UserController extends Controller
         $query = User::query();
         $name = $request->name;
         $email = $request->email;
+        $created_at_start = $request->created_at_start;
+        $created_at_end = $request->created_at_end;
+        $next_update_start = $request->next_update_start;
+        $next_update_end = $request->next_update_end;
         $role = $request->role;
         $status = $request->status;
 
@@ -34,6 +38,18 @@ class UserController extends Controller
         }
         if($email) {
             $this->searchWord($email, 'email', $query);
+        }
+        if($created_at_start){
+            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        }
+        if($created_at_end){
+            $query->whereDate('created_at', '<=', $created_at_end)->get();
+        }
+        if($next_update_start){
+            $query->whereDate('next_update', '>=', $next_update_start)->get();
+        }
+        if($next_update_end){
+            $query->whereDate('next_update', '<=', $next_update_end)->get();
         }
         if($role != ""){
             $role_id = Role::where('name', $role)->first()->id;
