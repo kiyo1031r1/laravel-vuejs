@@ -15,7 +15,7 @@ class AddBillingSystemToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('status');
-            $table->string('next_update')->nullable();
+            $table->timestamp('next_update')->nullable();
         });
     }
 
