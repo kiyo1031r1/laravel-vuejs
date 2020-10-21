@@ -4,7 +4,7 @@
         <div class="row">
             <!-- サイドバー -->
             <div class="sidebar col-md-2 pr-0">
-                <p class="font-weight-bold text-center border-bottom py-4 mb-0">ユーザー検索</p>
+                <p class="font-weight-bold text-center border-bottom py-1 mb-0">ユーザー検索</p>
                 <div class="px-4">
                     <form @submit.prevent="getUser">
                         <div class="form-group">
@@ -38,7 +38,16 @@
                                 :placeholder="'〜まで(未指定可)'">
                             </Datepicker>
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label class="col-form-label">ステータス</label>
+                            <select v-model="search.status" class="form-control">
+                                <option selected></option>
+                                <option value="normal">normal</option>
+                                <option value="premium">premium</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-form-label">次回更新日</label>
                             <Datepicker
@@ -69,17 +78,8 @@
                                 <option value="管理者">管理者</option>
                             </select>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">ステータス</label>
-                            <select v-model="search.status" class="form-control">
-                                <option selected></option>
-                                <option value="normal">normal</option>
-                                <option value="premium">premium</option>
-                            </select>
-                        </div>
                         
-                        <div class="col-md-8 mx-auto mt-5 pt-3">
+                        <div class="col-md-8 mx-auto mt-5 pt-5">
                             <button class="btn btn-primary btn-block" type="submit">検索</button>
                         </div>
                     </form>
@@ -109,9 +109,9 @@
                                     <th scope="col">ユーザー名</th>
                                     <th scope="col">email</th>
                                     <th scope="col">登録日</th>
-                                    <th scope="col">権限</th>
                                     <th scope="col">ステータス</th>
                                     <th scope="col">次回更新日</th>
+                                    <th scope="col">権限</th>
                                     <th scope="col">編集</th>
                                     <th scope="col">削除</th>
                                 </tr>
@@ -122,10 +122,10 @@
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
                                     <td>{{moment(user.created_at).format('YYYY-MM-DD')}}
-                                    <td>{{user.role_id | role}}</td>
                                     <td>{{user.status}}</td>
                                     <td v-if="user.next_update != null">{{moment(user.next_update).format('YYYY-MM-DD')}}</td>
                                     <td v-else></td>
+                                    <td>{{user.role_id | role}}</td>
                                     <td>
                                         <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
                                             <button class="btn btn-primary px-2 py-0">編集</button>

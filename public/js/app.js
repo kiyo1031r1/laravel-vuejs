@@ -61618,7 +61618,7 @@ var render = function() {
             "p",
             {
               staticClass:
-                "font-weight-bold text-center border-bottom py-4 mb-0"
+                "font-weight-bold text-center border-bottom py-1 mb-0"
             },
             [_vm._v("ユーザー検索")]
           ),
@@ -61742,6 +61742,57 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { staticClass: "col-form-label" }, [
+                    _vm._v("ステータス")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search.status,
+                          expression: "search.status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.search,
+                            "status",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "normal" } }, [
+                        _vm._v("normal")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "premium" } }, [
+                        _vm._v("premium")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -61835,57 +61886,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("option", { attrs: { value: "管理者" } }, [
                         _vm._v("管理者")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { staticClass: "col-form-label" }, [
-                    _vm._v("ステータス")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search.status,
-                          expression: "search.status"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.search,
-                            "status",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "normal" } }, [
-                        _vm._v("normal")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "premium" } }, [
-                        _vm._v("premium")
                       ])
                     ]
                   )
@@ -62001,10 +62001,6 @@ var render = function() {
                                   ) + "\n                                "
                                 )
                               ]),
-                              _c("td", [
-                                _vm._v(_vm._s(_vm._f("role")(user.role_id)))
-                              ]),
-                              _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(user.status))]),
                               _vm._v(" "),
                               user.next_update != null
@@ -62018,6 +62014,10 @@ var render = function() {
                                     )
                                   ])
                                 : _c("td"),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(_vm._f("role")(user.role_id)))
+                              ]),
                               _vm._v(" "),
                               _c(
                                 "td",
@@ -62223,7 +62223,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8 mx-auto mt-5 pt-3" }, [
+    return _c("div", { staticClass: "col-md-8 mx-auto mt-5 pt-5" }, [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
@@ -62245,11 +62245,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("登録日")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("権限")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ステータス")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("次回更新日")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("権限")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("編集")]),
         _vm._v(" "),
