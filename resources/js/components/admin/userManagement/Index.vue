@@ -329,7 +329,7 @@ export default {
     overflow: hidden;
 }
 .vdp-datepicker >>> .vdp-datepicker__calendar{
-    width: 100%;
+    width: 110%;
 }
 .vdp-datepicker >>> .vdp-datepicker__clear-button{
     height: calc(1.6em + 0.75rem + 2px);

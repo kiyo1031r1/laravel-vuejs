@@ -7688,7 +7688,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.sidebar[data-v-e3e8bac8]{\n    border-right: 2px solid #dee2e6;\n    margin-bottom: -10000px;\n    padding-bottom: -10000px;\n    overflow: hidden;\n}\n.vdp-datepicker[data-v-e3e8bac8] .vdp-datepicker__calendar{\n    width: 100%;\n}\n.vdp-datepicker[data-v-e3e8bac8] .vdp-datepicker__clear-button{\n    height: calc(1.6em + 0.75rem + 2px);\n    margin-bottom: 0.5rem;\n}\n\n", ""]);
+exports.push([module.i, "\n.sidebar[data-v-e3e8bac8]{\n    border-right: 2px solid #dee2e6;\n    margin-bottom: -10000px;\n    padding-bottom: -10000px;\n    overflow: hidden;\n}\n.vdp-datepicker[data-v-e3e8bac8] .vdp-datepicker__calendar{\n    width: 110%;\n}\n.vdp-datepicker[data-v-e3e8bac8] .vdp-datepicker__clear-button{\n    height: calc(1.6em + 0.75rem + 2px);\n    margin-bottom: 0.5rem;\n}\n\n", ""]);
 
 // exports
 
