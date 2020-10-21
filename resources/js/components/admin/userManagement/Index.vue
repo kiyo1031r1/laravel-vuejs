@@ -322,4 +322,7 @@ export default {
     padding-bottom: -10000px;
     overflow: hidden;
 }
+.vdp-datepicker >>> .vdp-datepicker__calendar{
+    width: 100%;
+}
 </style>
