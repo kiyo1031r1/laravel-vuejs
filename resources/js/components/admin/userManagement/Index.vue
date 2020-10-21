@@ -112,7 +112,11 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">ユーザー名</th>
                                     <th scope="col">email</th>
-                                    <th scope="col">登録日</th>
+                                    <th scope="col">
+                                        <span class="mr-1">登録日</span>
+                                        <v-icon name="caret-square-up"/>
+                                        <v-icon name="caret-square-down"/>
+                                    </th>
                                     <th scope="col">ステータス</th>
                                     <th scope="col">次回更新日</th>
                                     <th scope="col">権限</th>
