@@ -2273,6 +2273,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2299,7 +2323,11 @@ __webpack_require__.r(__webpack_exports__);
         next_update_start: null,
         next_update_end: null
       },
-      ja: vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_2__["ja"]
+      datepicker: {
+        language: vuejs_datepicker_dist_locale__WEBPACK_IMPORTED_MODULE_2__["ja"],
+        format: 'yyyy-MM-dd',
+        input_class: 'bg-white mb-2'
+      }
     };
   },
   computed: {
@@ -61777,7 +61805,13 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("Datepicker", {
-                      attrs: { language: _vm.ja },
+                      attrs: {
+                        language: _vm.datepicker.language,
+                        format: _vm.datepicker.format,
+                        "input-class": _vm.datepicker.input_class,
+                        "bootstrap-styling": true,
+                        placeholder: "〜から"
+                      },
                       model: {
                         value: _vm.search.created_at_start,
                         callback: function($$v) {
@@ -61787,22 +61821,72 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control my-2",
-                      attrs: { type: "text", placeholder: "〜から" }
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control my-2",
-                      attrs: { type: "text", placeholder: "〜まで" }
+                    _c("Datepicker", {
+                      attrs: {
+                        language: _vm.datepicker.language,
+                        format: _vm.datepicker.format,
+                        "input-class": _vm.datepicker.input_class,
+                        "bootstrap-styling": true,
+                        placeholder: "〜まで"
+                      },
+                      model: {
+                        value: _vm.search.created_at_end,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "created_at_end", $$v)
+                        },
+                        expression: "search.created_at_end"
+                      }
                     })
                   ],
                   1
                 ),
                 _vm._v(" "),
-                _vm._m(0),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { staticClass: "col-form-label" }, [
+                      _vm._v("次回更新日")
+                    ]),
+                    _vm._v(" "),
+                    _c("Datepicker", {
+                      attrs: {
+                        language: _vm.datepicker.language,
+                        format: _vm.datepicker.format,
+                        "input-class": _vm.datepicker.input_class,
+                        "bootstrap-styling": true,
+                        placeholder: "〜から"
+                      },
+                      model: {
+                        value: _vm.search.next_update_start,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "next_update_start", $$v)
+                        },
+                        expression: "search.next_update_start"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("Datepicker", {
+                      attrs: {
+                        language: _vm.datepicker.language,
+                        format: _vm.datepicker.format,
+                        "input-class": _vm.datepicker.input_class,
+                        "bootstrap-styling": true,
+                        placeholder: "〜まで"
+                      },
+                      model: {
+                        value: _vm.search.next_update_end,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "next_update_end", $$v)
+                        },
+                        expression: "search.next_update_end"
+                      }
+                    })
+                  ],
+                  1
+                ),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ]
             )
           ])
@@ -61890,7 +61974,7 @@ var render = function() {
                           "table table-sm table-bordered table-hover text-center "
                       },
                       [
-                        _vm._m(2),
+                        _vm._m(1),
                         _vm._v(" "),
                         _vm._l(_vm.users, function(user) {
                           return _c("tbody", { key: user.id }, [
@@ -62119,7 +62203,7 @@ var render = function() {
                   ]
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.isUsers ? [_vm._m(3)] : _vm._e()
+              !_vm.isUsers ? [_vm._m(2)] : _vm._e()
             ],
             2
           )
@@ -62134,31 +62218,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "col-form-label" }, [_vm._v("次回更新日")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control my-2",
-        attrs: { type: "text", placeholder: "〜から" }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control my-2",
-        attrs: { type: "text", placeholder: "〜まで" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8 mx-auto" }, [
+    return _c("div", { staticClass: "col-md-8 mx-auto mt-5" }, [
       _c(
         "button",
-        {
-          staticClass: "btn btn-primary btn-block mt-5",
-          attrs: { type: "submit" }
-        },
+        { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
         [_vm._v("検索")]
       )
     ])

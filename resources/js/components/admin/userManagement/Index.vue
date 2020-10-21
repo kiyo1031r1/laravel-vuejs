@@ -38,19 +38,43 @@
                             <label class="col-form-label">登録日</label>
                             <Datepicker
                                 v-model="search.created_at_start"
-                                :language="ja">
+                                :language="datepicker.language"
+                                :format="datepicker.format"
+                                :input-class="datepicker.input_class"
+                                :bootstrap-styling="true"
+                                :placeholder="'〜から'">
                             </Datepicker>
-                            <input type="text" class="form-control my-2" placeholder="〜から">
-                            <input type="text" class="form-control my-2" placeholder="〜まで">
+                            <Datepicker
+                                v-model="search.created_at_end"
+                                :language="datepicker.language"
+                                :format="datepicker.format"
+                                :input-class="datepicker.input_class"
+                                :bootstrap-styling="true"
+                                :placeholder="'〜まで'">
+                            </Datepicker>
                         </div>
                         
                         <div class="form-group">
                             <label class="col-form-label">次回更新日</label>
-                            <input type="text" class="form-control my-2" placeholder="〜から">
-                            <input type="text" class="form-control my-2" placeholder="〜まで">
+                            <Datepicker
+                                v-model="search.next_update_start"
+                                :language="datepicker.language"
+                                :format="datepicker.format"
+                                :input-class="datepicker.input_class"
+                                :bootstrap-styling="true"
+                                :placeholder="'〜から'">
+                            </Datepicker>
+                            <Datepicker
+                                v-model="search.next_update_end"
+                                :language="datepicker.language"
+                                :format="datepicker.format"
+                                :input-class="datepicker.input_class"
+                                :bootstrap-styling="true"
+                                :placeholder="'〜まで'">
+                            </Datepicker>
                         </div>
-                        <div class="col-md-8 mx-auto">
-                            <button class="btn btn-primary btn-block mt-5" type="submit">検索</button>
+                        <div class="col-md-8 mx-auto mt-5">
+                            <button class="btn btn-primary btn-block" type="submit">検索</button>
                         </div>
                     </form>
                 </div>
@@ -171,7 +195,12 @@ export default {
                 next_update_start: null,
                 next_update_end: null
             },
-            ja: ja
+
+            datepicker:{
+                language: ja,
+                format: 'yyyy-MM-dd',
+                input_class: 'bg-white mb-2',
+            }
         }
     },
     computed:{
