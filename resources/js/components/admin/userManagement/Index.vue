@@ -109,17 +109,33 @@
                         <table class="table table-sm table-bordered table-hover text-center ">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">ID</th>
+                                    <th scope="col">
+                                        <span class="mr-1">ID</span>
+                                        <v-icon @click="sort.id = 'asc'; getUser();" name="caret-square-up"/>
+                                        <v-icon @click="sort.id = 'desc'; getUser();" name="caret-square-down"/>
+                                    </th>
                                     <th scope="col">ユーザー名</th>
                                     <th scope="col">email</th>
                                     <th scope="col">
                                         <span class="mr-1">登録日</span>
-                                        <v-icon name="caret-square-up"/>
-                                        <v-icon name="caret-square-down"/>
+                                        <v-icon @click="sort.created_at = 'asc'; getUser();" name="caret-square-up"/>
+                                        <v-icon @click="sort.created_at = 'desc'; getUser();" name="caret-square-down"/>
                                     </th>
-                                    <th scope="col">ステータス</th>
-                                    <th scope="col">次回更新日</th>
-                                    <th scope="col">権限</th>
+                                    <th scope="col">
+                                        <span class="mr-1">ステータス</span>
+                                        <v-icon @click="sort.status = 'asc'; getUser();" name="caret-square-up"/>
+                                        <v-icon @click="sort.status = 'desc'; getUser();" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="mr-1">次回更新日</span>
+                                        <v-icon @click="sort.next_update = 'asc'; getUser();" name="caret-square-up"/>
+                                        <v-icon @click="sort.next_update = 'desc'; getUser();" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="mr-1">権限</span>
+                                        <v-icon @click="sort.role = 'asc'; getUser();" name="caret-square-up"/>
+                                        <v-icon @click="sort.role = 'desc'; getUser();" name="caret-square-down"/>
+                                    </th>
                                     <th scope="col">編集</th>
                                     <th scope="col">削除</th>
                                 </tr>
@@ -214,6 +230,14 @@ export default {
                 language: ja,
                 format: 'yyyy-MM-dd (D)',
                 input_class: 'bg-white mb-2',
+            },
+
+            sort:{
+                id: null,
+                created_at: null,
+                status: null,
+                next_update: null,
+                role: null
             }
         }
     },
@@ -268,7 +292,10 @@ export default {
     },
     methods:{
         getUser(){
-            axios.post('/api/users/search?page=' + this.current_page, this.search)
+            axios.post('/api/users/search?page=' + this.current_page,{
+                search: this.search, 
+                sort: this.sort
+            })
             .then(res => {
                 const resData = res.data;
 
