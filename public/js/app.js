@@ -61710,7 +61710,7 @@ var render = function() {
                         "input-class": _vm.datepicker.input_class,
                         "bootstrap-styling": true,
                         "clear-button": true,
-                        placeholder: "〜から"
+                        placeholder: "〜から(未指定可)"
                       },
                       model: {
                         value: _vm.search.created_at_start,
@@ -61728,7 +61728,7 @@ var render = function() {
                         "input-class": _vm.datepicker.input_class,
                         "bootstrap-styling": true,
                         "clear-button": true,
-                        placeholder: "〜まで"
+                        placeholder: "〜まで(未指定可)"
                       },
                       model: {
                         value: _vm.search.created_at_end,
@@ -61757,7 +61757,7 @@ var render = function() {
                         "input-class": _vm.datepicker.input_class,
                         "bootstrap-styling": true,
                         "clear-button": true,
-                        placeholder: "〜から"
+                        placeholder: "〜から(未指定可)"
                       },
                       model: {
                         value: _vm.search.next_update_start,
@@ -61775,7 +61775,7 @@ var render = function() {
                         "input-class": _vm.datepicker.input_class,
                         "bootstrap-styling": true,
                         "clear-button": true,
-                        placeholder: "〜まで"
+                        placeholder: "〜まで(未指定可)"
                       },
                       model: {
                         value: _vm.search.next_update_end,

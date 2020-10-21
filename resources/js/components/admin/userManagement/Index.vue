@@ -26,7 +26,7 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜から'">
+                                :placeholder="'〜から(未指定可)'">
                             </Datepicker>
                             <Datepicker
                                 v-model="search.created_at_end"
@@ -35,7 +35,7 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜まで'">
+                                :placeholder="'〜まで(未指定可)'">
                             </Datepicker>
                         </div>
                         
@@ -48,7 +48,7 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜から'">
+                                :placeholder="'〜から(未指定可)'">
                             </Datepicker>
                             <Datepicker
                                 v-model="search.next_update_end"
@@ -57,7 +57,7 @@
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
                                 :clear-button="true"
-                                :placeholder="'〜まで'">
+                                :placeholder="'〜まで(未指定可)'">
                             </Datepicker>
                         </div>
 
