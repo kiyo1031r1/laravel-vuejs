@@ -25,6 +25,7 @@
                                 :format="datepicker.format"
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
+                                :clear-button="true"
                                 :placeholder="'〜から'">
                             </Datepicker>
                             <Datepicker
@@ -33,6 +34,7 @@
                                 :format="datepicker.format"
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
+                                :clear-button="true"
                                 :placeholder="'〜まで'">
                             </Datepicker>
                         </div>
@@ -45,6 +47,7 @@
                                 :format="datepicker.format"
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
+                                :clear-button="true"
                                 :placeholder="'〜から'">
                             </Datepicker>
                             <Datepicker
@@ -53,6 +56,7 @@
                                 :format="datepicker.format"
                                 :input-class="datepicker.input_class"
                                 :bootstrap-styling="true"
+                                :clear-button="true"
                                 :placeholder="'〜まで'">
                             </Datepicker>
                         </div>
@@ -327,4 +331,9 @@ export default {
 .vdp-datepicker >>> .vdp-datepicker__calendar{
     width: 100%;
 }
+.vdp-datepicker >>> .vdp-datepicker__clear-button{
+    height: calc(1.6em + 0.75rem + 2px);
+    margin-bottom: 0.5rem;
+}
+
 </style>
