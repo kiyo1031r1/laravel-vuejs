@@ -96,7 +96,7 @@
                     <!-- 表示件数 -->
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
-                        <select @change="changePerPage()" v-model="search.per_page" class="form-control" id="per_page">
+                        <select @change="changePerPage()" v-model="sort.per_page" class="form-control" id="per_page">
                             <option value="20">20件</option>
                             <option value="50">50件</option>
                             <option value="100">100件</option>
@@ -219,7 +219,6 @@ export default {
                 email: null,
                 role: '',
                 status: '',
-                per_page: '20',
                 created_at_start: null,
                 created_at_end: null,
                 next_update_start: null,
@@ -237,7 +236,8 @@ export default {
                 created_at: null,
                 status: null,
                 next_update: null,
-                role: null
+                role: null,
+                per_page: '20',
             }
         }
     },

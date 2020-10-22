@@ -88,7 +88,7 @@ class UserController extends Controller
             $query->orderBy('role_id', $sort_role);
         }
 
-        return $query->paginate($request->per_page);
+        return $query->paginate($sort['per_page']);
     }
 
     private function searchWord($word, $column, $query){
