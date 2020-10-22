@@ -105,7 +105,7 @@
                     </div>
 
                     <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
-                    <template v-if="isUsers">
+                    <div v-show="isUsers">
                         <!-- ユーザーリスト -->
                         <table class="table table-sm table-bordered table-hover text-center ">
                             <thead class="thead-dark">
@@ -175,21 +175,20 @@
                                 <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
                             </ul>
                         </nav>
-                    </template>
+                    </div>
 
                     <!-- ユーザー非存在時(検索結果が0件) -->
-                    <template v-else>
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-header">ユーザー検索結果</div>
-                                    <div class="card-body">
-                                        <p class="text-center text-danger mb-0 my-4">一致するユーザーがいませんでした</p>
-                                    </div>
+                    <div v-show="!isUsers" class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">ユーザー検索結果</div>
+                                <div class="card-body">
+                                    <p class="text-center text-danger mb-0 my-4">一致するユーザーがいませんでした</p>
                                 </div>
                             </div>
                         </div>
-                    </template>
+                    </div>
+                    
                 </div>
             </div>
             </div>
