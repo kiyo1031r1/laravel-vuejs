@@ -25,6 +25,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password']),
             'token' => $this->createToken(),
             'role_id' => Role::find(1)->id,
+            'status' => 'normal',
         ]);
 
         Auth::login($user);

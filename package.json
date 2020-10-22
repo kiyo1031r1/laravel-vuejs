@@ -24,9 +24,12 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "js-cookie": "^2.2.1",
+        "ajv": "^6.12.6",
+        "moment": "^2.29.1",
+        "vue-awesome": "^4.1.0",
         "vue-cookies": "^1.7.4",
         "vue-router": "^3.4.3",
+        "vuejs-datepicker": "^1.6.2",
         "vuex": "^3.5.1"
     }
 }

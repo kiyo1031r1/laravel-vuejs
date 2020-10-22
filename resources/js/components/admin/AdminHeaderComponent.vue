@@ -1,10 +1,10 @@
 <template>
-    <div class="container-fluif bg-dark mb-3">
+    <div class="container-fluif bg-dark">
         <div class="container">
-            <nav class="navbar navbar-dark">
+            <nav class="navbar">
                 <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
                 <div>
-                    <router-link :to="{ name: ''}">
+                    <router-link :to="{ name: 'user_management'}">
                         <button class="btn btn-success">ユーザー管理</button>
                     </router-link>
 
