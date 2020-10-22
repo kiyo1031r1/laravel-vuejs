@@ -97,6 +97,7 @@
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
                         <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                            <option value="10">10件</option>
                             <option value="20">20件</option>
                             <option value="50">50件</option>
                             <option value="100">100件</option>
@@ -104,7 +105,7 @@
                     </div>
 
                     <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
-                    <template v-if="users.length > 0">
+                    <template v-if="isUsers">
                         <!-- ユーザーリスト -->
                         <table class="table table-sm table-bordered table-hover text-center ">
                             <thead class="thead-dark">
@@ -165,11 +166,11 @@
                             <ul class="pagination justify-content-center">
                                 <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
                                 <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
-                                <span v-if="leftMorePage" class="mx-2">...</span>
+                                <li v-show="leftMorePage" class="mx-2">...</li>
                                 <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
                                     <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
                                 </li>
-                                <span v-if="rightMorePage" class="mx-2">...</span>
+                                <li v-show="rightMorePage" class="mx-2">...</li>
                                 <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
                                 <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
                             </ul>
@@ -177,7 +178,7 @@
                     </template>
 
                     <!-- ユーザー非存在時(検索結果が0件) -->
-                    <template v-if="!isUsers">
+                    <template v-else>
                         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="card">
@@ -237,7 +238,7 @@ export default {
                 status: null,
                 next_update: null,
                 role: null,
-                per_page: '20',
+                per_page: '10',
             }
         }
     },
