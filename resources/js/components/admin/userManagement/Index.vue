@@ -6,7 +6,7 @@
             <div class="sidebar col-md-2 pr-0">
                 <p class="font-weight-bold text-center border-bottom py-1 mb-0">ユーザー検索</p>
                 <div class="px-4">
-                    <form @submit.prevent="getUser">
+                    <form @submit.prevent="changeFirstPage()">
                         <div class="form-group">
                             <label class="col-form-label" for="name">ユーザー名</label>
                             <input v-model="search.name" class="form-control" type="text" id="name">
@@ -96,7 +96,7 @@
                     <!-- 表示件数 -->
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
-                        <select @change="changePerPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
                             <option value="20">20件</option>
                             <option value="50">50件</option>
                             <option value="100">100件</option>
@@ -319,7 +319,7 @@ export default {
                 });
             }
         },
-        changePerPage(){
+        changeFirstPage(){
             //最初のユーザーから表示する仕様
             this.current_page = 1;
             this.focus_page_index = 0;
