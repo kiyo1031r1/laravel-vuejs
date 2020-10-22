@@ -14,4 +14,9 @@ class Video extends Model
         'about',
         'thumbnail',
     ];
+
+    public function video_categories(){
+        return $this->belongsToMany(VideoCategory::class);
+    }
+
 }
