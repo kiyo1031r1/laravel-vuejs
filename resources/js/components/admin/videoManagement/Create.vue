@@ -24,6 +24,7 @@
 
                         <div class="col-md-8 offset-md-2 mb-2">
                             <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
+                                    @click="removeCategory(selectCategory)"
                                     class="btn btn-success mr-2 my-2">{{selectCategory}}
                             </button>
                         </div>
@@ -74,6 +75,11 @@ export default {
         },
         addCategory(){
             this.selectCategories.push(this.selectCategory);
+        },
+        removeCategory(selectCategory){
+            this.selectCategories = this.selectCategories.filter((removeCategory) => {
+                return removeCategory !== selectCategory;
+            });
         }
     },
     created(){
