@@ -22,6 +22,10 @@
                             <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
                         </div>
 
+                        <div class="col-md-8 offset-md-2">
+                            <span v-for="selectCategory in selectCategories" :key="selectCategory.id">{{selectCategory}}</span>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="about">概要</label>
                             <div class="col-md-8">
