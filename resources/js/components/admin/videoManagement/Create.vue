@@ -48,3 +48,25 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return{
+            categories:[]
+        }
+    },
+    methods:{
+        getCategory(){
+            axios.get('/api/video_category')
+            .then((res) => {
+                this.categories = res.data;
+            });
+        }
+    },
+    created(){
+        this.getCategory();
+    }
+
+}
+</script>
