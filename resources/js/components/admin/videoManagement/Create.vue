@@ -91,7 +91,7 @@ export default {
             });
         },
         createCategory(){
-            axios.post('/api/video_category')
+            axios.post('/api/video_category', this.inputCategory)
             .then(() => {
                 this.getCategory();
             });
