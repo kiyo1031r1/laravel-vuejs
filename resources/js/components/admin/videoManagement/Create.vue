@@ -19,7 +19,7 @@
                                     <option v-for="category in categories" :key="category.id" :value="category.name">{{category.name}}</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary ml-2">追加</button>
+                            <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
                         </div>
 
                         <div class="form-group row">
@@ -55,7 +55,8 @@ export default {
     data(){
         return{
             categories:[],
-            selectCategory: null
+            selectCategory: null,
+            selectCategories: []
         }
     },
     methods:{
@@ -64,6 +65,9 @@ export default {
             .then((res) => {
                 this.categories = res.data;
             });
+        },
+        addCategory(){
+            this.selectCategories.push(this.selectCategory);
         }
     },
     created(){
