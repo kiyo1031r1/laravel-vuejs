@@ -16,7 +16,7 @@
                             <label class="col-form-label col-md-2" for="category">カテゴリー</label>
                             <div class="col-md-6">
                                 <select  v-model="selectCategory" class="form-control" id="category">
-                                    <option v-for="category in categories" :key="category.id" :value="category.name">{{category.name}}</option>
+                                    <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                 </select>
                             </div>
                             <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
@@ -25,7 +25,7 @@
                         <div class="col-md-8 offset-md-2 mb-2">
                             <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
                                 @click="removeCategory(selectCategory)" class="btn btn-success mr-2 my-2">
-                                {{selectCategory}}<v-icon class="ml-2" name="times"/>
+                                {{selectCategory.name}}<v-icon class="ml-2" name="times"/>
                             </button>
                         </div>
 
