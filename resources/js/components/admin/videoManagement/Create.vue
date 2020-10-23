@@ -15,8 +15,8 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="category">カテゴリー</label>
                             <div class="col-md-6">
-                                <select class="form-control" id="category">
-                                    <option v-for="category in categories" :key="category.id" value="">{{category.name}}</option>
+                                <select  v-model="selectCategory" class="form-control" id="category">
+                                    <option v-for="category in categories" :key="category.id" :value="category.name">{{category.name}}</option>
                                 </select>
                             </div>
                             <button class="btn btn-primary ml-2">追加</button>
@@ -54,7 +54,8 @@
 export default {
     data(){
         return{
-            categories:[]
+            categories:[],
+            selectCategory: null
         }
     },
     methods:{
