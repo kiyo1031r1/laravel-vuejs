@@ -24,8 +24,8 @@
 
                         <div class="col-md-8 offset-md-2 mb-2">
                             <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
-                                    @click="removeCategory(selectCategory)"
-                                    class="btn btn-success mr-2 my-2">{{selectCategory}}
+                                @click="removeCategory(selectCategory)" class="btn btn-success mr-2 my-2">
+                                {{selectCategory}}<v-icon class="ml-2" name="times"/>
                             </button>
                         </div>
 
