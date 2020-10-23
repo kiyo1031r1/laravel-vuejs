@@ -22,8 +22,10 @@
                             <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
                         </div>
 
-                        <div class="col-md-8 offset-md-2">
-                            <span v-for="selectCategory in selectCategories" :key="selectCategory.id">{{selectCategory}}</span>
+                        <div class="col-md-8 offset-md-2 mb-2">
+                            <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
+                                    class="btn btn-success mr-2 my-2">{{selectCategory}}
+                            </button>
                         </div>
 
                         <div class="form-group row">
