@@ -19,6 +19,7 @@
                                     <option v-for="category in categories" :key="category.id" value="">{{category.name}}</option>
                                 </select>
                             </div>
+                            <button class="btn btn-primary ml-2">追加</button>
                         </div>
 
                         <div class="form-group row">
