@@ -22,6 +22,14 @@
                             <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2" for="create_category">カテゴリー作成</label>
+                            <div class="col-md-6">
+                                <input class="form-control" id="create_category">
+                            </div>
+                            <button class="btn btn-primary ml-2">作成</button>
+                        </div>
+
                         <div class="col-md-8 offset-md-2 mb-2">
                             <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
                                 @click="removeCategory(selectCategory)" class="btn btn-success mr-2 my-2">
