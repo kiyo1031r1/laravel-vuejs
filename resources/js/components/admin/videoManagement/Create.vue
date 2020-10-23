@@ -16,7 +16,7 @@
                             <label class="col-form-label col-md-2" for="category">カテゴリー</label>
                             <div class="col-md-6">
                                 <select class="form-control" id="category">
-                                    <option value="1">カテゴリー</option>
+                                    <option v-for="category in categories" :key="category.id" value="">{{category.name}}</option>
                                 </select>
                             </div>
                         </div>
