@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class VideoCategoryController extends Controller
 {
     public function index(){
-        return VideoCategory::all();
+        return VideoCategory::get(['id', 'name']);
     }
 }
