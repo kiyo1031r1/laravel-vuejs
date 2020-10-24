@@ -45,7 +45,7 @@ Route::apiResource('/users',UserController::class);
 Route::post('/users/search',[UserController::class, 'search']);
 
 //video
-Route::get('video_category', [VideoCategoryController::class, 'index']);
+Route::apiResource('video_category', VideoCategoryController::class);
 
 
 Route::apiResource('/tasks',TaskController::class);

@@ -10,4 +10,8 @@ class VideoCategoryController extends Controller
     public function index(){
         return VideoCategory::get(['id', 'name']);
     }
+
+    public function store(Request $request){
+        return VideoCategory::create($request->all());
+    }
 }

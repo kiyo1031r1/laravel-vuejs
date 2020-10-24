@@ -25,9 +25,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="create_category">カテゴリー作成</label>
                             <div class="col-md-6">
-                                <input v-model="inputCategory" class="form-control" id="create_category">
+                                <input v-model="inputCategory.name" class="form-control" id="create_category">
                             </div>
-                            <button @click="createCategory(inputCategory)" class="btn btn-primary ml-2">作成</button>
+                            <button @click="createCategory()" class="btn btn-primary ml-2">作成</button>
                         </div>
 
                         <div class="col-md-8 offset-md-2 mb-2">
@@ -72,7 +72,9 @@ export default {
             categories:[],
             selectCategory: null,
             selectCategories: [],
-            inputCategory: null,
+            inputCategory: {
+                name: null
+            }
         }
     },
     methods:{
@@ -93,7 +95,7 @@ export default {
         createCategory(){
             axios.post('/api/video_category', this.inputCategory)
             .then(() => {
-                this.getCategory();
+                //this.getCategory();
             });
         }
     },
