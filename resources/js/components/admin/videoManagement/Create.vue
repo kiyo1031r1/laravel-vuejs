@@ -62,7 +62,7 @@
                     <div class="card-header">カテゴリー管理</div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="col-form-label" for="create_category">カテゴリー新規作成</label>
+                            <label class="col-form-label" for="create_category">新規作成</label>
                             <div class="form-row">
                                 <div class="col-md-8">
                                     <input v-model="inputCategory.name" class="form-control" id="create_category">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="delete_category">カテゴリー削除</label>
+                            <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
                                     <select  v-model="selectCategory" class="form-control" id="delete_category">
