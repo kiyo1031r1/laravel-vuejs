@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="row justify-content-center">
+        <AdminHeader></AdminHeader>
+        <div class="row justify-content-center mt-4">
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">ビデオ新規作成</div>
@@ -56,7 +57,7 @@
                 </div>
             </div>
             
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">カテゴリー管理</div>
                     <div class="card-body">
@@ -79,6 +80,8 @@
 </template>
 
 <script>
+import AdminHeader from '../AdminHeaderComponent'
+
 export default {
     data(){
         return{
@@ -89,6 +92,9 @@ export default {
                 name: null
             }
         }
+    },
+    components:{
+        AdminHeader
     },
     methods:{
         getCategory(){
