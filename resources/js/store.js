@@ -9,6 +9,7 @@ export default new Vuex.Store({
         flashMessage: null,
     },
     getters: {
+        flashMessage: state => state.flashMessage
     },
     mutations: {
         setFlashMessage(state, {message, time = 3000}) {
