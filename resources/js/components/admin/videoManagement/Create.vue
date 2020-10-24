@@ -72,6 +72,21 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="delete_category">カテゴリー削除</label>
+                            <div class="form-row">
+                                <div class="col-md-8">
+                                    <select  v-model="selectCategory" class="form-control" id="delete_category">
+                                        <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button @click="deleteCategory()" class="btn btn-primary ml-2">削除</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
