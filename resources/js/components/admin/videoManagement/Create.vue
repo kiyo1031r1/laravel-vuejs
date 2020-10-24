@@ -95,6 +95,7 @@ export default {
         createCategory(){
             axios.post('/api/video_category', this.inputCategory)
             .then(() => {
+                this.inputCategory.name = null;
                 this.getCategory();
             });
         }
