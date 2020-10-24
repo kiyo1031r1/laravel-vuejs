@@ -77,7 +77,7 @@
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <select  v-model="selectCategory" class="form-control" id="delete_category">
+                                    <select  v-model="deleteCategory" class="form-control" id="delete_category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
@@ -105,7 +105,8 @@ export default {
             selectCategories: [],
             inputCategory: {
                 name: null
-            }
+            },
+            deleteCategory: null
         }
     },
     components:{
