@@ -77,12 +77,12 @@
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <select  v-model="deleteCategory" class="form-control" id="delete_category">
+                                    <select  v-model="deleteSelectCategory" class="form-control" id="delete_category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory()" class="btn btn-primary ml-2">削除</button>
+                                    <button @click="deleteCategory(deleteSelectCategory.id)" class="btn btn-primary ml-2">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ export default {
             inputCategory: {
                 name: null
             },
-            deleteCategory: null
+            deleteSelectCategory: null
         }
     },
     components:{
@@ -131,6 +131,13 @@ export default {
             axios.post('/api/video_category', this.inputCategory)
             .then(() => {
                 this.inputCategory.name = null;
+                this.getCategory();
+            });
+        },
+        deleteCategory(id){
+            axios.delete('/api/video_category/' + id)
+            .then(() => {
+                this.deleteSelectCategory = null;
                 this.getCategory();
             });
         }
