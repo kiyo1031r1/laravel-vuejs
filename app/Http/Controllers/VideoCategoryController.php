@@ -14,4 +14,8 @@ class VideoCategoryController extends Controller
     public function store(Request $request){
         return VideoCategory::create($request->all());
     }
+
+    public function destroy(VideoCategory $videoCategory){
+        return $videoCategory->delete();
+    }
 }
