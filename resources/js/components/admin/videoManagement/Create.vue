@@ -86,9 +86,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
+                <FlashMessage></FlashMessage>
             </div>
         </div>
     </div>
@@ -130,6 +130,9 @@ export default {
         createCategory(){
             axios.post('/api/video_category', this.inputCategory)
             .then(() => {
+                this.$store.dispatch('setFlashMessage', {
+                    message:'カテゴリーを作成しました'
+                });
                 this.inputCategory.name = null;
                 this.getCategory();
             });
@@ -137,6 +140,9 @@ export default {
         deleteCategory(id){
             axios.delete('/api/video_category/' + id)
             .then(() => {
+                this.$store.dispatch('setFlashMessage', {
+                    message:'カテゴリーを削除しました'
+                });
                 this.deleteSelectCategory = null;
                 this.getCategory();
             });
