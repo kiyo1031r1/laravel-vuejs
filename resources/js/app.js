@@ -27,6 +27,7 @@ Vue.filter('role', (value) => {
 });
 
 Vue.component('v-icon', Icon);
+Vue.component('flashMessage', 'FlashMessage');
 
 const app = new Vue({
     el: '#app',
