@@ -20,7 +20,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        setFlashMessage({commit}, {message, time = 1500}) {
+        setFlashMessage({commit}, {message, time = 3000}) {
             commit('setFlashMessage', {message, time});
         }
     }
