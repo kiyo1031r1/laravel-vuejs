@@ -12,16 +12,16 @@ export default new Vuex.Store({
         flashMessage: state => state.flashMessage
     },
     mutations: {
-        setFlashMessage(state, {message, time = 3000}) {
+        setFlashMessage(state, {message, time}) {
             state.flashMessage = message;
             setTimeout(() => {
-                state.message = null;
+                state.flashMessage = null
             }, time);
         }
     },
     actions: {
-        setFlashMessage({commit}, {message, time = 3000}) {
-            commit('setFlashMessage', message, time);
+        setFlashMessage({commit}, {message, time = 1500}) {
+            commit('setFlashMessage', {message, time});
         }
     }
 });
