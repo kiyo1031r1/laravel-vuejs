@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div v-show="message" class="alert alert-primary" role="alert">
+        <div v-show="message" :class="'alert alert-' + color" role="alert">
             {{message}}
         </div>
     </transition>
@@ -11,6 +11,9 @@ export default {
     computed: {
         message(){
             return this.$store.getters.flashMessage;
+        },
+        color(){
+            return this.$store.getters.flashColor;
         }
     }
 }

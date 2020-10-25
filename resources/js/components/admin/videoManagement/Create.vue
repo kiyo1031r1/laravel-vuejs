@@ -146,7 +146,8 @@ export default {
             axios.delete('/api/video_category/' + id)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
-                    message:'カテゴリーを削除しました'
+                    message:'カテゴリーを削除しました',
+                    color: 'danger'
                 });
                 this.deleteSelectCategory = null;
                 this.getCategory();

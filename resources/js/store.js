@@ -7,12 +7,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         flashMessage: null,
+        flashColor: null
     },
     getters: {
-        flashMessage: state => state.flashMessage
+        flashMessage: state => state.flashMessage,
+        flashColor: state => state.flashColor
     },
     mutations: {
-        setFlashMessage(state, {message, time}) {
+        setFlashMessage(state, {message, time, color}) {
+            state.flashColor = color;
             state.flashMessage = message;
             setTimeout(() => {
                 state.flashMessage = null
@@ -20,8 +23,8 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        setFlashMessage({commit}, {message, time = 3000}) {
-            commit('setFlashMessage', {message, time});
+        setFlashMessage({commit}, {message, time = 3000, color = 'primary'}) {
+            commit('setFlashMessage', {message, time, color});
         }
     }
 });
