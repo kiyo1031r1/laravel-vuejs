@@ -4,6 +4,7 @@ import store from './store'
 import moment from 'moment'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
+import FlashMessage from './components/FlashMessage.vue'
 
 require('./bootstrap');
 
@@ -27,7 +28,7 @@ Vue.filter('role', (value) => {
 });
 
 Vue.component('v-icon', Icon);
-Vue.component('flashMessage', 'FlashMessage');
+Vue.component('FlashMessage', FlashMessage);
 
 const app = new Vue({
     el: '#app',
