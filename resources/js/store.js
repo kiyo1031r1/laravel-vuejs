@@ -7,18 +7,23 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         flashMessage: null,
-        flashColor: null
+        flashColor: null,
+        flashTime: null
     },
     getters: {
         flashMessage: state => state.flashMessage,
-        flashColor: state => state.flashColor
+        flashColor: state => state.flashColor,
+        flashTime: state => state.flashTime
     },
     mutations: {
         setFlashMessage(state, {message, time, color}) {
+            state.flashTime = time;
             state.flashColor = color;
             state.flashMessage = message;
             setTimeout(() => {
-                state.flashMessage = null
+                state.flashMessage = null;
+                state.flashColor = null;
+                state.flashTime = null;
             }, time);
         }
     },
