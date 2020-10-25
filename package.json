@@ -27,6 +27,7 @@
         "ajv": "^6.12.6",
         "animejs": "^3.2.1",
         "moment": "^2.29.1",
+        "velocityjs": "^2.0.2",
         "vue-awesome": "^4.1.0",
         "vue-cookies": "^1.7.4",
         "vue-router": "^3.4.3",
