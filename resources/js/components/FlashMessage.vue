@@ -1,5 +1,11 @@
 <template>
-    <transition name="fade">
+    <transition 
+        name="fade"
+        :css="false" 
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        >
         <div v-show="message" :class="'alert alert-' + color" role="alert">
             {{message}}
         </div>
@@ -7,6 +13,8 @@
 </template>
 
 <script>
+import Velocity from 'velocity-animate'
+
 export default {
     computed: {
         message(){
@@ -14,19 +22,28 @@ export default {
         },
         color(){
             return this.$store.getters.flashColor;
+        },
+        time(){
+            return this.$store.getters.flashTime;
+        }
+    },
+    methods: {
+        beforeEnter(el) {
+            el.style.opacity = 0;
+        },
+        enter(el){
+            el.style.opacity = 1;
+        },
+        afterEnter(el) {
+            Velocity(el,
+                {opacity: 0},
+                {
+                    duration: this.time,
+                    easing: 'easelnQuint'
+                }
+            );
         }
     }
 }
 </script>
 
-<style scoped>
-.fade-enter{
-    opacity: 1;
-}
-.fade-enter-to, .fade-leave{
-    opacity: 0;
-}
-.fade-enter-active{
-    transition: opacity 3s cubic-bezier(1.0, 0.0, 1.0, 1.0); 
-}
-</style>
