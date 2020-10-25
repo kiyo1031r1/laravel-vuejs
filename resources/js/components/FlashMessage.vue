@@ -17,11 +17,11 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-to, .fade-leave{
-    opacity: 0;
-}
 .fade-enter{
     opacity: 1;
+}
+.fade-enter-to, .fade-leave{
+    opacity: 0;
 }
 .fade-enter-active{
     transition: opacity 3s cubic-bezier(1.0, 0.0, 1.0, 1.0); 
