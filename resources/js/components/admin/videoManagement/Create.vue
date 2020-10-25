@@ -68,7 +68,7 @@
                                     <input v-model="inputCategory.name" class="form-control" id="create_category">
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="createCategory()" class="btn btn-primary ml-2">作成</button>
+                                    <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isMessage">作成</button>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory(deleteSelectCategory.id)" class="btn btn-primary ml-2">削除</button>
+                                    <button @click="deleteCategory(deleteSelectCategory.id)" class="btn btn-primary ml-2" :disabled="isMessage">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +111,11 @@ export default {
     },
     components:{
         AdminHeader
+    },
+    computed: {
+        isMessage(){
+            return this.$store.getters.flashMessage;
+        }
     },
     methods:{
         getCategory(){
