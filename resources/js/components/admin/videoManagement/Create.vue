@@ -78,14 +78,12 @@
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <select  v-model="deleteSelectCategory" @change="isDeleteSelected"
-                                    :class="errors.delete_category? 'form-control is-invalid' : 'form-control'" id="delete_category">
+                                    <select  v-model="deleteSelectCategory" class="form-control" id="delete_category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
-                                    <div v-if="errors.delete_category" class="invalid-feedback">{{ errors.delete_category[0]}}</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isMessage">削除</button>
+                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isMessage || !deleteSelectCategory">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -151,26 +149,16 @@ export default {
             });
         },
         deleteCategory(){
-            if(!this.deleteSelectCategory){
-                this.$set(this.errors, 'delete_category', ['カテゴリーが選択されていません']);
-            }
-            else{
-                axios.delete('/api/video_category/' + this.deleteSelectCategory.id)
-                .then(() => {
-                    this.$store.dispatch('setFlashMessage', {
-                        message:'カテゴリーを削除しました',
-                        color: 'danger'
-                    });
-                    this.errors = {};
-                    this.deleteSelectCategory = null;
-                    this.getCategory();
+            axios.delete('/api/video_category/' + this.deleteSelectCategory.id)
+            .then(() => {
+                this.$store.dispatch('setFlashMessage', {
+                    message:'カテゴリーを削除しました',
+                    color: 'danger'
                 });
-            }
-        },
-        isDeleteSelected(){
-            if(this.deleteSelectCategory){
-                this.errors.delete_category = null;
-            }
+                this.errors = {};
+                this.deleteSelectCategory = null;
+                this.getCategory();
+            });
         }
     },
     created(){
