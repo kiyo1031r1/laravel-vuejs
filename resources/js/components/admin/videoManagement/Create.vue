@@ -65,7 +65,7 @@
                             <label class="col-form-label" for="create_category">新規作成</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <input v-model="inputCategory.name" :class="errors.name? 'form-control is-invalid' : 'form-control'" id="create_category">
+                                    <input v-model.lazy="inputCategory.name" @change="clearCategoryCreate()" :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="create_category">
                                     <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
                                 </div>
                                 <div class="col-md-4">
@@ -159,6 +159,11 @@ export default {
                 this.deleteSelectCategory = null;
                 this.getCategory();
             });
+        },
+        clearCategoryCreate(){
+            if(this.errors.name) {
+                delete this.errors.name;
+            }
         }
     },
     created(){
