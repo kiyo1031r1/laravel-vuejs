@@ -26,6 +26,7 @@
     "dependencies": {
         "ajv": "^6.12.6",
         "moment": "^2.29.1",
+        "vee-validate": "^3.4.3",
         "velocity-animate": "^1.5.2",
         "vue-awesome": "^4.1.0",
         "vue-cookies": "^1.7.4",
