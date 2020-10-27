@@ -21,7 +21,7 @@
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
-                                <button @click="addCategory()" class="btn btn-primary ml-2">追加</button>
+                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
                             </div>
 
                             <div class="col-md-8 offset-md-2 mb-2">
@@ -117,6 +117,9 @@ export default {
     computed: {
         isMessage(){
             return this.$store.getters.flashMessage;
+        },
+        isSelectedCategory(){
+            return this.selectCategories.includes(this.selectCategory);
         }
     },
     methods:{
