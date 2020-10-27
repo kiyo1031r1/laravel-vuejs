@@ -65,7 +65,8 @@
                             <label class="col-form-label" for="create_category">新規作成</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <input v-model="inputCategory.name" class="form-control" id="create_category">
+                                    <input v-model="inputCategory.name" :class="errors.name? 'form-control is-invalid' : 'form-control'" id="create_category">
+                                    <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
                                 </div>
                                 <div class="col-md-4">
                                     <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isMessage">作成</button>
@@ -77,12 +78,14 @@
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <select  v-model="deleteSelectCategory" class="form-control" id="delete_category">
+                                    <select  v-model="deleteSelectCategory" @change="isDeleteSelected"
+                                    :class="errors.delete_category? 'form-control is-invalid' : 'form-control'" id="delete_category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
+                                    <div v-if="errors.delete_category" class="invalid-feedback">{{ errors.delete_category[0]}}</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory(deleteSelectCategory.id)" class="btn btn-primary ml-2" :disabled="isMessage">削除</button>
+                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isMessage">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +109,8 @@ export default {
             inputCategory: {
                 name: null
             },
-            deleteSelectCategory: null
+            deleteSelectCategory: null,
+            errors:{}
         }
     },
     components:{
@@ -138,20 +142,35 @@ export default {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを作成しました'
                 });
+                if(this.errors)this.errors = {};
                 this.inputCategory.name = null;
                 this.getCategory();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
             });
         },
-        deleteCategory(id){
-            axios.delete('/api/video_category/' + id)
-            .then(() => {
-                this.$store.dispatch('setFlashMessage', {
-                    message:'カテゴリーを削除しました',
-                    color: 'danger'
+        deleteCategory(){
+            if(!this.deleteSelectCategory){
+                this.$set(this.errors, 'delete_category', ['カテゴリーが選択されていません']);
+            }
+            else{
+                axios.delete('/api/video_category/' + this.deleteSelectCategory.id)
+                .then(() => {
+                    this.$store.dispatch('setFlashMessage', {
+                        message:'カテゴリーを削除しました',
+                        color: 'danger'
+                    });
+                    this.errors = {};
+                    this.deleteSelectCategory = null;
+                    this.getCategory();
                 });
-                this.deleteSelectCategory = null;
-                this.getCategory();
-            });
+            }
+        },
+        isDeleteSelected(){
+            if(this.deleteSelectCategory){
+                this.errors.delete_category = null;
+            }
         }
     },
     created(){

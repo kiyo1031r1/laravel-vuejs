@@ -12,6 +12,10 @@ class VideoCategoryController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:video_categories']
+        ]);
+
         return VideoCategory::create($request->all());
     }
 
