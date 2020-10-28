@@ -167,6 +167,7 @@ export default {
                     message:'カテゴリーを削除しました',
                     color: 'danger'
                 });
+                this.removeCategory(this.deleteSelectCategory);
                 this.deleteSelectCategory = null;
                 this.getCategory();
             });
