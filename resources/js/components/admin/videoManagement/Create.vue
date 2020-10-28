@@ -155,12 +155,8 @@ export default {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを作成しました'
                 });
-                if(this.errors)this.errors = {};
                 this.inputCategory.name = null;
                 this.getCategory();
-            })
-            .catch(error => {
-                this.errors = error.response.data.errors;
             });
         },
         deleteCategory(){
@@ -170,15 +166,9 @@ export default {
                     message:'カテゴリーを削除しました',
                     color: 'danger'
                 });
-                this.errors = {};
                 this.deleteSelectCategory = null;
                 this.getCategory();
             });
-        },
-        clearCategoryCreate(){
-            if(this.errors.name) {
-                delete this.errors.name;
-            }
         }
     },
     created(){
