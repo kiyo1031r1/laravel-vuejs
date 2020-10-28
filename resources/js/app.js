@@ -5,6 +5,11 @@ import moment from 'moment'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import FlashMessage from './components/FlashMessage.vue'
+import { localize, extend, ValidationProvider, ValidationObserver } from 'vee-validate'
+import ja from 'vee-validate/dist/locale/ja.json'
+import { required } from 'vee-validate/dist/rules'
+extend('required', required);
+localize('ja', ja);
 
 require('./bootstrap');
 
@@ -29,6 +34,9 @@ Vue.filter('role', (value) => {
 
 Vue.component('v-icon', Icon);
 Vue.component('FlashMessage', FlashMessage);
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
 
 const app = new Vue({
     el: '#app',

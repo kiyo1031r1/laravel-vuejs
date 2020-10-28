@@ -65,8 +65,10 @@
                             <label class="col-form-label" for="create_category">新規作成</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <input v-model.lazy="inputCategory.name" @change="clearCategoryCreate()" :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="create_category">
-                                    <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
+                                    <Validation-provider name="カテゴリー名" rules="required" v-slot="{ errors }">
+                                        <input v-model="inputCategory.name" :class="errors.length ? 'form-control is-invalid' : 'form-control'" id="create_category">
+                                        <div class="invalid-feedback">{{ errors[0] }}</div>
+                                    </Validation-provider>
                                 </div>
                                 <div class="col-md-4">
                                     <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isMessage">作成</button>
