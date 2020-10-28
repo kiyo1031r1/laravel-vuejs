@@ -7,8 +7,10 @@ import Icon from 'vue-awesome/components/Icon'
 import FlashMessage from './components/FlashMessage.vue'
 import { localize, extend, ValidationProvider, ValidationObserver } from 'vee-validate'
 import ja from 'vee-validate/dist/locale/ja.json'
-import { required } from 'vee-validate/dist/rules'
+import { required, max, excluded} from 'vee-validate/dist/rules'
 extend('required', required);
+extend('max', max);
+extend('excluded', excluded);
 localize('ja', ja);
 
 require('./bootstrap');

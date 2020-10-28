@@ -65,7 +65,12 @@
                             <label class="col-form-label" for="create_category">新規作成</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <Validation-provider name="カテゴリー名" rules="required" v-slot="{ errors }">
+                                    <Validation-provider name="カテゴリー名" v-slot="{ errors }"
+                                        :rules="{
+                                            required: true,
+                                            max: 255,
+                                            excluded: categoryNames
+                                        }">
                                         <input v-model="inputCategory.name" :class="errors.length ? 'form-control is-invalid' : 'form-control'" id="create_category">
                                         <div class="invalid-feedback">{{ errors[0] }}</div>
                                     </Validation-provider>
@@ -122,6 +127,11 @@ export default {
         },
         isSelectedCategory(){
             return this.selectCategories.includes(this.selectCategory);
+        },
+        categoryNames(){
+            return this.categories.map((value) => {
+                return value.name;
+            });
         }
     },
     methods:{
