@@ -11,7 +11,10 @@ import ja from 'vee-validate/dist/locale/ja.json'
 import { required, max, excluded} from 'vee-validate/dist/rules'
 extend('required', required);
 extend('max', max);
-extend('excluded', excluded);
+extend('excluded', {
+    ...excluded,
+    message: "入力された{_field_}は既に存在します"
+});
 localize('ja', ja);
 
 //moment

@@ -61,7 +61,7 @@
                 <div class="card">
                     <div class="card-header">カテゴリー管理</div>
                     <div class="card-body">
-                        <Validation-provider name="カテゴリー名" v-slot="{ errors }"
+                        <Validation-provider name="カテゴリー" v-slot="{ errors }"
                             :rules="{
                                 required: true,
                                 max: 255,
