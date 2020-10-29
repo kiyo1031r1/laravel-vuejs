@@ -40,7 +40,7 @@
 
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="thumbnail">サムネイル</label>
-                                <input class="form-control-file col-md-8" type="file" id="thumbnail">
+                                <input @change="uploadThumbnail($event)" class="form-control-file col-md-8" type="file" id="thumbnail">
                                 <img src="" class="img-thumbnail">
                             </div>
 
@@ -171,6 +171,9 @@ export default {
                 this.deleteSelectCategory = null;
                 this.getCategory();
             });
+        },
+        uploadThumbnail(e){
+
         }
     },
     created(){
