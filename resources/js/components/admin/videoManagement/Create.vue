@@ -120,6 +120,7 @@ import AdminHeader from '../AdminHeaderComponent'
 export default {
     data(){
         return{
+            //カテゴリー
             categories:[],
             selectCategory: null,
             selectCategories: [],
@@ -127,7 +128,6 @@ export default {
                 name: null
             },
             deleteSelectCategory: null,
-            errors:{}
         }
     },
     components:{
