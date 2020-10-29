@@ -134,6 +134,7 @@ export default {
         AdminHeader
     },
     computed: {
+        //カテゴリー
         isFlashMessage(){
             return this.$store.getters.flashMessage;
         },
