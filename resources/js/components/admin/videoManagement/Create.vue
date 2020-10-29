@@ -2,11 +2,13 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="row justify-content-center mt-4">
+            <!-- ビデオ作成フォーム -->
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">ビデオ新規作成</div>
                     <div class="card-body">
                         <form @submit.prevent="">
+                            <!-- タイトル -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="title">タイトル</label>
                                 <div class="col-md-8">
@@ -14,6 +16,7 @@
                                 </div>
                             </div>
 
+                            <!-- カテゴリー追加 -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="category">カテゴリー</label>
                                 <div class="col-md-6">
@@ -24,6 +27,7 @@
                                 <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
                             </div>
 
+                            <!-- 選択カテゴリーからの削除 -->
                             <div class="col-md-8 offset-md-2 mb-2">
                                 <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
                                     @click="removeCategory(selectCategory)" class="btn btn-success mr-2 my-2">
@@ -31,24 +35,28 @@
                                 </button>
                             </div>
 
+                            <!-- 概要 -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="about">概要</label>
                                 <div class="col-md-8">
                                     <textarea class="form-control" id="about" rows="3"></textarea>
                                 </div>
                             </div>
-
+                            
+                            <!-- サムネイル -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="thumbnail">サムネイル</label>
                                 <input @change="uploadThumbnail($event)" class="form-control-file col-md-8" type="file" id="thumbnail">
                                 <img src="" class="img-thumbnail">
                             </div>
 
+                            <!-- 動画ファイル -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="capture">動画ファイル</label>
                                 <input class="form-control-file col-md-8" type="file">
                             </div>
 
+                            <!-- 作成ボタン -->
                             <div class="col-md-4 mx-auto mt-5">
                                 <button class="btn btn-primary btn-block" type="submit">作成</button>
                             </div>
@@ -57,10 +65,12 @@
                 </div>
             </div>
             
+            <!-- カテゴリー作成フォーム -->
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">カテゴリー管理</div>
                     <div class="card-body">
+                        <!-- カテゴリー新規作成 -->
                         <Validation-provider name="カテゴリー" v-slot="{ errors }"
                             :rules="{
                                 required: true,
@@ -76,12 +86,13 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isMessage || !inputCategory.name || errors.length > 0 ">作成</button>
+                                        <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !inputCategory.name || errors.length > 0 ">作成</button>
                                     </div>
                                 </div>
                             </div>
                         </Validation-provider>
 
+                        <!-- カテゴリー削除 -->
                         <div class="form-group">
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
@@ -91,7 +102,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isMessage || !deleteSelectCategory">削除</button>
+                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !deleteSelectCategory">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +134,7 @@ export default {
         AdminHeader
     },
     computed: {
-        isMessage(){
+        isFlashMessage(){
             return this.$store.getters.flashMessage;
         },
         isSelectedCategory(){
@@ -136,6 +147,7 @@ export default {
         }
     },
     methods:{
+        //カテゴリー
         getCategory(){
             axios.get('/api/video_category')
             .then((res) => {
@@ -172,6 +184,7 @@ export default {
                 this.getCategory();
             });
         },
+
         uploadThumbnail(e){
 
         }
