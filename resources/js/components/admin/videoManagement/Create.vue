@@ -52,7 +52,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p>{{thumbnail_file_name}}</p>
-                                    <img v-if="thumbnail_preview" :src="thumbnail_preview" class="img-thumbnail">
+                                    <div style="position:relative">
+                                        <img v-if="thumbnail_preview" :src="thumbnail_preview" class="img-thumbnail" >
+                                        <div v-if="thumbnail_preview" style="position:absolute; top:0; right:0;">
+                                            <v-icon class="ml-2" name="window-close" inverse/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
