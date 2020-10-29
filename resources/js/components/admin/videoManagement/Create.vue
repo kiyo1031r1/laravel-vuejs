@@ -45,9 +45,15 @@
                             
                             <!-- サムネイル -->
                             <div class="form-group row">
-                                <label class="col-form-label col-md-2" for="thumbnail">サムネイル</label>
-                                <input @change="uploadThumbnail($event)" class="form-control-file col-md-8" type="file" id="thumbnail">
-                                <img src="" class="img-thumbnail">
+                                <label class="col-form-label col-md-2">サムネイル</label>
+                                <div class="col-md-3">
+                                    <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
+                                    <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{thumbnail_file_name}}</p>
+                                    <img v-if="thumbnail_preview" :src="thumbnail_preview" class="img-thumbnail">
+                                </div>
                             </div>
 
                             <!-- 動画ファイル -->
@@ -128,6 +134,10 @@ export default {
                 name: null
             },
             deleteSelectCategory: null,
+
+            thumbnail_file: null,
+            thumbnail_file_name: '選択されていません',
+            thumbnail_preview: null,
         }
     },
     components:{
@@ -186,8 +196,10 @@ export default {
             });
         },
 
-        uploadThumbnail(e){
-
+        uploadThumbnail(){
+            this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
+            this.thumbnail_file_name = this.thumbnail_file.name;
+            this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
         }
     },
     created(){
@@ -196,3 +208,24 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.thumbnail_label{
+    border: solid 1px black;
+    border-radius: 2px;
+    background-color: #EFEFEF;
+    padding: 2px 5px 2px 5px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.thumbnail_label:hover{
+    background-color: #e7e7e7;
+}
+
+#thumbnail{
+    display: none;
+}
+
+</style>
