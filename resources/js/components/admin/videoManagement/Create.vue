@@ -50,11 +50,11 @@
                                     <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
                                     <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <p>{{thumbnail_file_name}}</p>
-                                    <div style="position:relative">
-                                        <img v-if="thumbnail_preview" :src="thumbnail_preview" class="img-thumbnail" >
-                                        <div v-if="thumbnail_preview" style="position:absolute; top:0; right:0;">
+                                    <div v-if="thumbnail_preview" style="position:relative">
+                                        <img :src="thumbnail_preview" class="img-thumbnail" >
+                                        <div @click="removeThumbnail()" style="position:absolute; top:0; right:0;">
                                             <v-icon class="ml-2" name="window-close" inverse/>
                                         </div>
                                     </div>
@@ -205,6 +205,12 @@ export default {
             this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
             this.thumbnail_file_name = this.thumbnail_file.name;
             this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
+        },
+        removeThumbnail(){
+            this.thumbnail_file = null;
+            this.thumbnail_file_name = null;
+            this.thumbnail_preview = null;
+            this.$refs.thumbnail_preview.value = null;
         }
     },
     created(){
