@@ -203,8 +203,43 @@ export default {
 
         uploadThumbnail(){
             this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
-            this.thumbnail_file_name = this.thumbnail_file.name;
+            this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, 20);
             this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
+        },
+        replaceFileName(file_name, length){
+            //文字数制限
+            const name_max_length = length;
+            const name = file_name.split('.');
+            const name_bytes = encodeURIComponent(name[0]).replace(/%../g, 'x').length;
+
+            //※「…」の分を差し引いておく
+            if(name_bytes > name_max_length - 2){
+                let name_bytes = 0;
+                let str_bytes = 0;
+                for(let i = 0; i < name[0].length; i++){
+                    //半角カナ
+                    if(name[0][i].match(/[ｦ-ﾟ]/)){
+                        str_bytes = 1;
+                    }
+                    else{
+                        str_bytes = encodeURIComponent(name[0][i]).replace(/%../g, 'x').length;
+                        //全角
+                        if(str_bytes === 3) {
+                            str_bytes = 2;
+                        }
+                    }
+                    
+                    if(name_bytes + str_bytes <= name_max_length){
+                        name_bytes += str_bytes;
+                    }
+                    else{
+                        return name[0].substring(0, i) + '…' + name[1];
+                    }
+                }
+            }
+            else{
+                return file_name;
+            }
         },
         removeThumbnail(){
             this.thumbnail_file = null;
