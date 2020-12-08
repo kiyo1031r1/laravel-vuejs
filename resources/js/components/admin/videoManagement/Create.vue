@@ -143,6 +143,7 @@ export default {
             thumbnail_file: null,
             thumbnail_file_name: '選択されていません',
             thumbnail_preview: null,
+            thumbnail_file_name_length: 20
         }
     },
     components:{
@@ -203,7 +204,7 @@ export default {
 
         uploadThumbnail(){
             this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
-            this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, 20);
+            this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, this.thumbnail_file_name_length);
             this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
         },
         replaceFileName(file_name, length){
