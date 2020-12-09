@@ -64,7 +64,10 @@
                             <!-- 動画ファイル -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="capture">動画ファイル</label>
-                                <input class="form-control-file col-md-8" type="file">
+                                <div class="col-md-3">
+                                    <label class="thumbnail_label" for="video">ファイルを選択</label>
+                                    <input @change="uploadVideo()" type="file" id="video" ref="video">
+                                </div>
                             </div>
 
                             <!-- 作成ボタン -->
@@ -140,10 +143,14 @@ export default {
             },
             deleteSelectCategory: null,
 
+            //サムネイル
             thumbnail_file: null,
             thumbnail_file_name: '選択されていません',
             thumbnail_preview: null,
-            thumbnail_file_name_length: 20
+            thumbnail_file_name_length: 20,
+
+            //動画
+            videos:[],
         }
     },
     components:{
@@ -247,6 +254,11 @@ export default {
             this.thumbnail_file_name = null;
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
+        },
+        uploadVideo(){
+            const video_file = this.$refs.video.files[0];
+            const video_name = this.replaceFileName(video_file.name, 20);
+            this.videos.push(video_file);
         }
     },
     created(){
@@ -271,7 +283,7 @@ export default {
     background-color: #e7e7e7;
 }
 
-#thumbnail{
+#thumbnail, #video{
     display: none;
 }
 
