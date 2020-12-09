@@ -8,7 +8,7 @@
                         <button class="btn btn-success">ユーザー管理</button>
                     </router-link>
 
-                    <router-link :to="{ name: ''}">
+                    <router-link :to="{ name: 'video_management'}">
                         <button class="btn btn-success">ビデオ管理</button>
                     </router-link>
                     
