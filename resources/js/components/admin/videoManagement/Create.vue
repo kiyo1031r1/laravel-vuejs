@@ -70,10 +70,11 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-10 offset-md-2">
-                                    <p v-for="video in videos" :key="video.id" style="margin-bottom: 0px">
-                                        {{replaceFileName(video.name, 20)}}
-                                    </p>
+                                <div class="col-md-8 offset-md-2">
+                                    <button class="btn btn-success btn-block text-left"
+                                        v-for="video in videos" :key="video.id">
+                                        {{replaceFileName(video.name, 40)}}
+                                    </button>
                                 </div>
                             </div>
 
