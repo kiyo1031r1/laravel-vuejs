@@ -1,7 +1,9 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <button class="btn btn-primary" type="submit">ビデオ新規作成</button>
+        <router-link :to="{ name: 'video_management_create'}">
+            <button class="btn btn-primary">ビデオ新規作成</button>
+        </router-link>
     </div>
 </template>
 
