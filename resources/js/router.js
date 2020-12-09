@@ -19,6 +19,7 @@ import AdminLoginComponent from './components/auth/AdminLoginComponent'
 import AdminHomeComponent from './components/admin/AdminHomeComponent'
 import UserManagementIndex from './components/admin/userManagement/Index'
 import UserManagementEdit from './components/admin/userManagement/Edit'
+import VideoManagementIndex from './components/admin/videoManagement/Index'
 import VideoManagementCreate from './components/admin/videoManagement/Create'
 
 //user
@@ -143,6 +144,14 @@ const router = new Router({
             name: 'user_management_edit',
             component: UserManagementEdit,
             props: true,
+            meta: {
+                admin_authOnly: true,
+             }
+        },
+        {
+            path:'/admin/video_management',
+            name: 'video_management',
+            component: VideoManagementIndex,
             meta: {
                 admin_authOnly: true,
              }
