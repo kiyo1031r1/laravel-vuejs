@@ -62,14 +62,16 @@
                             </div>
 
                             <!-- 動画ファイル -->
-                            <div class="form-group row">
+                            <div class="form-group row mb-0">
                                 <label class="col-form-label col-md-2" for="capture">動画ファイル</label>
                                 <div class="col-md-3">
                                     <label class="thumbnail_label" for="video">ファイルを選択</label>
                                     <input @change="uploadVideo()" type="file" id="video" ref="video">
                                 </div>
-                                <div>
-                                    <p v-for="video in videos" :key="video.id">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-10 offset-md-2">
+                                    <p v-for="video in videos" :key="video.id" style="margin-bottom: 0px">
                                         {{replaceFileName(video.name, 20)}}
                                     </p>
                                 </div>
