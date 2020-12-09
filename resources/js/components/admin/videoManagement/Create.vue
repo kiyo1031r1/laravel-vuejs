@@ -68,6 +68,11 @@
                                     <label class="thumbnail_label" for="video">ファイルを選択</label>
                                     <input @change="uploadVideo()" type="file" id="video" ref="video">
                                 </div>
+                                <div>
+                                    <p v-for="video in videos" :key="video.id">
+                                        {{replaceFileName(video.name, 20)}}
+                                    </p>
+                                </div>
                             </div>
 
                             <!-- 作成ボタン -->
@@ -150,7 +155,7 @@ export default {
             thumbnail_file_name_length: 20,
 
             //動画
-            videos:[],
+            videos:[]
         }
     },
     components:{
@@ -257,7 +262,6 @@ export default {
         },
         uploadVideo(){
             const video_file = this.$refs.video.files[0];
-            const video_name = this.replaceFileName(video_file.name, 20);
             this.videos.push(video_file);
         }
     },
