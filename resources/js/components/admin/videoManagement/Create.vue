@@ -298,7 +298,7 @@ export default {
     border: solid 1px black;
     border-radius: 2px;
     background-color: #EFEFEF;
-    padding: 2px 5px 2px 5px;
+    padding: 6px 12px;
     width: 100%;
     text-align: center;
     cursor: pointer;
