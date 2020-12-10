@@ -63,7 +63,7 @@
 
                             <!-- 動画ファイル -->
                             <div class="form-group row mb-0">
-                                <label class="col-form-label col-md-2" for="capture">動画ファイル</label>
+                                <label class="col-form-label col-md-2" for="capture">動画</label>
                                 <div class="col-md-3">
                                     <label class="thumbnail_label" for="video">ファイルを選択</label>
                                     <input @change="uploadVideo()" type="file" id="video" ref="video">
@@ -71,9 +71,12 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2">
-                                    <button class="btn btn-success btn-block text-left"
+                                    <button class="btn btn-outline-secondary btn-block text-left py-0"
+                                        style="position:relative"
                                         v-for="video in videos" :key="video.id">
                                         {{replaceFileName(video.name, 40)}}
+                                        <v-icon class="ml-2" 
+                                        style="position:absolute; top:3; right:5;" name="times"/>
                                     </button>
                                 </div>
                             </div>
