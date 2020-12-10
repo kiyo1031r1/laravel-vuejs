@@ -71,9 +71,9 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2">
-                                    <button class="btn btn-outline-secondary btn-block text-left py-0"
-                                        style="position:relative"
-                                        v-for="video in videos" :key="video.id">
+                                    <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
+                                        v-for="video in videos" :key="video.id"
+                                        @click="removeVideo(video)">
                                         {{replaceFileName(video.name, 40)}}
                                         <v-icon class="ml-2" 
                                         style="position:absolute; top:3; right:5;" name="times"/>
@@ -271,6 +271,11 @@ export default {
                 let video_file = this.$refs.video.files[i];
                 this.videos.push(video_file);
             }
+        },
+        removeVideo(video){
+            this.videos = this.videos.filter((removeVideo) => {
+                return removeVideo !== video;
+            });
         }
     },
     created(){
