@@ -149,7 +149,7 @@ export default {
     data(){
         return{
             //カテゴリー
-            categories:[],
+            categories: [],
             select_category: null,
             select_categories: [],
             input_category: {
@@ -162,9 +162,11 @@ export default {
             thumbnail_file_name: null,
             thumbnail_preview: null,
             thumbnail_file_name_length: 20,
+            allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
-            videos:[]
+            videos: [],
+            allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv']
         }
     },
     components:{
@@ -225,8 +227,15 @@ export default {
 
         uploadThumbnail(){
             this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
-            this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, this.thumbnail_file_name_length);
-            this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
+            //拡張子をチェック
+            if(!this.checkExt(this.thumbnail_file.name, this.allow_thumbnail_ext)){
+                alert(this.allow_thumbnail_ext + 'から選択してください');
+                this.$refs.thumbnail_preview.value = null;
+            }
+            else{
+                this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, this.thumbnail_file_name_length);
+                this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
+            }
         },
         replaceFileName(file_name, length){
             //文字数制限
@@ -272,6 +281,11 @@ export default {
         uploadVideo(){
             for(let i = 0; i < this.$refs.video.files.length; i++){
                 let video_file = this.$refs.video.files[i];
+                if(!this.checkExt(video_file.name, this.allow_video_ext)){
+                    alert(this.allow_video_ext + 'から選択してください');
+                    this.$refs.video.value = null;
+                    break;
+                }
                 this.videos.push(video_file);
             }
         },
@@ -284,6 +298,16 @@ export default {
         removeVideoAll(){
             this.videos = [];
             this.$refs.video.value = null;
+        },
+        checkExt(file_name, allow_ext){
+            let ext = this.getExt(file_name).toLowerCase();
+            if(allow_ext.indexOf(ext) === -1) return false;
+            return true;
+        },
+        getExt(file_name){
+            let pos = file_name.lastIndexOf('.');
+            if(pos === -1) return '';
+            return file_name.slice(pos + 1);
         }
     },
     created(){
