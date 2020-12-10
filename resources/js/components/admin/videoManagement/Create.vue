@@ -29,7 +29,7 @@
 
                             <!-- 選択カテゴリーからの削除 -->
                             <div class="col-md-8 offset-md-2 mb-2">
-                                <button v-for="select_category in selectCategories" :key="select_category.id" 
+                                <button v-for="select_category in select_categories" :key="select_category.id" 
                                     @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
                                     {{select_category.name}}<v-icon class="ml-2" name="times"/>
                                 </button>
@@ -151,7 +151,7 @@ export default {
             //カテゴリー
             categories:[],
             select_category: null,
-            selectCategories: [],
+            select_categories: [],
             inputCategory: {
                 name: null
             },
@@ -176,7 +176,7 @@ export default {
             return this.$store.getters.flashMessage;
         },
         isSelectedCategory(){
-            return this.selectCategories.includes(this.select_category);
+            return this.select_categories.includes(this.select_category);
         },
         categoryNames(){
             return this.categories.map((value) => {
@@ -193,10 +193,10 @@ export default {
             });
         },
         addCategory(){
-            this.selectCategories.push(this.select_category);
+            this.select_categories.push(this.select_category);
         },
         removeCategory(select_category){
-            this.selectCategories = this.selectCategories.filter((removeCategory) => {
+            this.select_categories = this.select_categories.filter((removeCategory) => {
                 return removeCategory !== select_category;
             });
         },
