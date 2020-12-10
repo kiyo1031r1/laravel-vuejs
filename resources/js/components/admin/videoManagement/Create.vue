@@ -7,88 +7,87 @@
                 <div class="card">
                     <div class="card-header">ビデオ新規作成</div>
                     <div class="card-body">
-                        <form @submit.prevent="createVideo()">
-                            <!-- タイトル -->
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2" for="title">タイトル</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" id="title" v-model="video_data.name">
-                                </div>
+                        <!-- タイトル -->
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2" for="title">タイトル</label>
+                            <div class="col-md-8">
+                                <input class="form-control" id="title" v-model="title">
                             </div>
+                        </div>
 
-                            <!-- カテゴリー追加 -->
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2" for="category">カテゴリー</label>
-                                <div class="col-md-6">
-                                    <select  v-model="select_category" class="form-control" id="category">
-                                        <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
-                                    </select>
-                                </div>
-                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
+                        <!-- カテゴリー追加 -->
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2" for="category">カテゴリー</label>
+                            <div class="col-md-6">
+                                <select  v-model="select_category" class="form-control" id="category">
+                                    <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
+                                </select>
                             </div>
+                            <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
+                        </div>
 
-                            <!-- 選択カテゴリーからの削除 -->
-                            <div class="col-md-8 offset-md-2 mb-2">
-                                <button v-for="select_category in select_categories" :key="select_category.id" 
-                                    @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
-                                    {{select_category.name}}<v-icon class="ml-2" name="times"/>
-                                </button>
-                            </div>
+                        <!-- 選択カテゴリーからの削除 -->
+                        <div class="col-md-8 offset-md-2 mb-2">
+                            <button v-for="select_category in select_categories" :key="select_category.id" 
+                                @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
+                                {{select_category.name}}<v-icon class="ml-2" name="times"/>
+                            </button>
+                        </div>
 
-                            <!-- 概要 -->
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2" for="about">概要</label>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" id="about" rows="3" v-model="video_data.about"></textarea>
-                                </div>
+                        <!-- 概要 -->
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2" for="about">概要</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="about" rows="3" v-model="about"></textarea>
                             </div>
-                            
-                            <!-- サムネイル -->
-                            <div class="form-group row">
-                                <label class="col-form-label col-md-2">サムネイル</label>
-                                <div class="col-md-3">
-                                    <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
-                                    <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
-                                </div>
-                                <div class="col-md-5">
-                                    <p>{{thumbnail_file_name}}</p>
-                                    <div v-if="thumbnail_preview" style="position:relative">
-                                        <img :src="thumbnail_preview" class="img-thumbnail" >
-                                        <div @click="removeThumbnail()" style="position:absolute; top:0; right:0;">
-                                            <v-icon class="ml-2" name="window-close" inverse/>
-                                        </div>
+                        </div>
+                        
+                        <!-- サムネイル -->
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">サムネイル</label>
+                            <div class="col-md-3">
+                                <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
+                                <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
+                            </div>
+                            <div class="col-md-5">
+                                <p>{{thumbnail_file_name}}</p>
+                                <div v-if="thumbnail_preview" style="position:relative">
+                                    <img :src="thumbnail_preview" class="img-thumbnail" >
+                                    <div @click="removeThumbnail()" style="position:absolute; top:0; right:0;">
+                                        <v-icon class="ml-2" name="window-close" inverse/>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- 動画ファイル -->
-                            <div class="form-group row mb-0">
-                                <label class="col-form-label col-md-2" for="capture">動画</label>
-                                <div class="col-md-3">
-                                    <label class="thumbnail_label" for="video">ファイルを選択</label>
-                                    <input @change="uploadVideo()" type="file" id="video" ref="video" multiple="multiple">
-                                </div>
-                                <div v-if="videos.length !== 0" class="col-md-2 offset-md-3">
-                                    <button class="btn btn-danger" @click="removeVideoAll()">全削除</button>
-                                </div>
+                        <!-- 動画ファイル -->
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-md-2" for="capture">動画</label>
+                            <div class="col-md-3">
+                                <label class="thumbnail_label" for="video">ファイルを選択</label>
+                                <input @change="uploadVideo()" type="file" id="video" ref="video" multiple="multiple">
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-8 offset-md-2">
-                                    <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
-                                        v-for="video in videos" :key="video.id"
-                                        @click="removeVideo(video)">
-                                        {{replaceFileName(video.name, 40)}}
-                                        <v-icon class="ml-2" 
-                                        style="position:absolute; top:3; right:5;" name="times"/>
-                                    </button>
-                                </div>
+                            <div v-if="videos.length !== 0" class="col-md-2 offset-md-3">
+                                <button class="btn btn-danger" @click="removeVideoAll()">全削除</button>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8 offset-md-2">
+                                <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
+                                    v-for="video in videos" :key="video.id"
+                                    @click="removeVideo(video)">
+                                    {{replaceFileName(video.name, 40)}}
+                                    <v-icon class="ml-2" 
+                                    style="position:absolute; top:3; right:5;" name="times"/>
+                                </button>
+                            </div>
+                        </div>
 
-                            <!-- 作成ボタン -->
-                            <div class="col-md-4 mx-auto mt-5">
-                                <button class="btn btn-primary btn-block" type="submit">作成</button>
-                            </div>
-                        </form>
+                        <!-- 作成ボタン -->
+                        <div class="col-md-4 mx-auto mt-5">
+                            <button class="btn btn-primary btn-block" type="submit"
+                            @click="createVideo()">作成</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -168,14 +167,8 @@ export default {
             videos: [],
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
-            //送信データ
-            video_data: {
-                name: null,
-                category: null,
-                about: null,
-                thumbnail: null,
-                video: null
-            }
+            title: null,
+            about: null,
         }
     },
     components:{
@@ -319,9 +312,14 @@ export default {
             return file_name.slice(pos + 1);
         },
         createVideo(){
-            this.video_data.thumbnail = this.thumbnail_file;
-            this.video_data.video = this.videos;
-            axios.post('/api/videos', this.video_data)
+            let formData = new FormData();
+            formData.append('name', this.title);
+            formData.append('category', this.select_categories);
+            formData.append('about', this.about);
+            formData.append('thumbnail', this.thumbnail_file);
+            formData.append('video', this.videos);
+
+            axios.post('/api/videos', formData)
             .then(() => {
                 this.$router.push({name:'video_management'});
             });
