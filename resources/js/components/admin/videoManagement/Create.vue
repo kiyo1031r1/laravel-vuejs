@@ -68,6 +68,9 @@
                                     <label class="thumbnail_label" for="video">ファイルを選択</label>
                                     <input @change="uploadVideo()" type="file" id="video" ref="video" multiple="multiple">
                                 </div>
+                                <div v-if="videos.length !== 0" class="col-md-2 offset-md-3">
+                                    <button class="btn btn-danger" @click="removeVideoAll()">全削除</button>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2">
@@ -276,6 +279,9 @@ export default {
             this.videos = this.videos.filter((removeVideo) => {
                 return removeVideo !== video;
             });
+        },
+        removeVideoAll(){
+            this.videos = [];
         }
     },
     created(){
