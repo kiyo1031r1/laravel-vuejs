@@ -7,12 +7,12 @@
                 <div class="card">
                     <div class="card-header">ビデオ新規作成</div>
                     <div class="card-body">
-                        <form @submit.prevent="">
+                        <form @submit.prevent="createVideo()">
                             <!-- タイトル -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="title">タイトル</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" id="title">
+                                    <input class="form-control" id="title" v-model="video_data.name">
                                 </div>
                             </div>
 
@@ -39,7 +39,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="about">概要</label>
                                 <div class="col-md-8">
-                                    <textarea class="form-control" id="about" rows="3"></textarea>
+                                    <textarea class="form-control" id="about" rows="3" v-model="video_data.about"></textarea>
                                 </div>
                             </div>
                             
@@ -166,7 +166,16 @@ export default {
 
             //動画
             videos: [],
-            allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv']
+            allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
+
+            //送信データ
+            video_data: {
+                name: null,
+                category: null,
+                about: null,
+                thumbnail: null,
+                video: null
+            }
         }
     },
     components:{
@@ -308,6 +317,14 @@ export default {
             let pos = file_name.lastIndexOf('.');
             if(pos === -1) return '';
             return file_name.slice(pos + 1);
+        },
+        createVideo(){
+            this.video_data.thumbnail = this.thumbnail_file;
+            this.video_data.video = this.videos;
+            axios.post('/api/videos', this.video_data)
+            .then(() => {
+                this.$router.push({name:'video_management'});
+            });
         }
     },
     created(){
