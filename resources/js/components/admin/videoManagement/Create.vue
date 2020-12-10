@@ -159,7 +159,7 @@ export default {
 
             //サムネイル
             thumbnail_file: null,
-            thumbnail_file_name: '選択されていません',
+            thumbnail_file_name: null,
             thumbnail_preview: null,
             thumbnail_file_name_length: 20,
 
