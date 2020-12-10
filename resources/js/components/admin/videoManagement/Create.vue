@@ -66,7 +66,7 @@
                                 <label class="col-form-label col-md-2" for="capture">動画</label>
                                 <div class="col-md-3">
                                     <label class="thumbnail_label" for="video">ファイルを選択</label>
-                                    <input @change="uploadVideo()" type="file" id="video" ref="video">
+                                    <input @change="uploadVideo()" type="file" id="video" ref="video" multiple="multiple">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -267,8 +267,10 @@ export default {
             this.$refs.thumbnail_preview.value = null;
         },
         uploadVideo(){
-            const video_file = this.$refs.video.files[0];
-            this.videos.push(video_file);
+            for(let i = 0; i < this.$refs.video.files.length; i++){
+                let video_file = this.$refs.video.files[i];
+                this.videos.push(video_file);
+            }
         }
     },
     created(){
