@@ -109,12 +109,12 @@
                                 <label class="col-form-label" for="create_category">新規作成</label>
                                 <div class="form-row">
                                     <div class="col-md-8">
-                                        <input v-model="inputCategory.name" :class="errors.length ? 'form-control is-invalid' : 'form-control'" id="create_category">
+                                        <input v-model="input_category.name" :class="errors.length ? 'form-control is-invalid' : 'form-control'" id="create_category">
                                         <div class="invalid-feedback">{{ errors[0] }}</div>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !inputCategory.name || errors.length > 0 ">作成</button>
+                                        <button @click="createCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !input_category.name || errors.length > 0 ">作成</button>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@ export default {
             categories:[],
             select_category: null,
             select_categories: [],
-            inputCategory: {
+            input_category: {
                 name: null
             },
             deleteSelectCategory: null,
@@ -201,12 +201,12 @@ export default {
             });
         },
         createCategory(){
-            axios.post('/api/video_category', this.inputCategory)
+            axios.post('/api/video_category', this.input_category)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを作成しました'
                 });
-                this.inputCategory.name = null;
+                this.input_category.name = null;
                 this.getCategory();
             });
         },
