@@ -279,9 +279,11 @@ export default {
             this.videos = this.videos.filter((removeVideo) => {
                 return removeVideo !== video;
             });
+            this.$refs.video.value = null;
         },
         removeVideoAll(){
             this.videos = [];
+            this.$refs.video.value = null;
         }
     },
     created(){
