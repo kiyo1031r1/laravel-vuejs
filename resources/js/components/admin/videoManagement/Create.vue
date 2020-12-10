@@ -125,12 +125,12 @@
                             <label class="col-form-label" for="delete_category">削除</label>
                             <div class="form-row">
                                 <div class="col-md-8">
-                                    <select  v-model="deleteSelectCategory" class="form-control" id="delete_category">
+                                    <select  v-model="delete_select_category" class="form-control" id="delete_category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !deleteSelectCategory">削除</button>
+                                    <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !delete_select_category">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@ export default {
             input_category: {
                 name: null
             },
-            deleteSelectCategory: null,
+            delete_select_category: null,
 
             //サムネイル
             thumbnail_file: null,
@@ -211,14 +211,14 @@ export default {
             });
         },
         deleteCategory(){
-            axios.delete('/api/video_category/' + this.deleteSelectCategory.id)
+            axios.delete('/api/video_category/' + this.delete_select_category.id)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを削除しました',
                     color: 'danger'
                 });
-                this.removeCategory(this.deleteSelectCategory);
-                this.deleteSelectCategory = null;
+                this.removeCategory(this.delete_select_category);
+                this.delete_select_category = null;
                 this.getCategory();
             });
         },
