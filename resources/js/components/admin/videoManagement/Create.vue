@@ -20,7 +20,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="category">カテゴリー</label>
                                 <div class="col-md-6">
-                                    <select  v-model="selectCategory" class="form-control" id="category">
+                                    <select  v-model="select_category" class="form-control" id="category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
@@ -29,9 +29,9 @@
 
                             <!-- 選択カテゴリーからの削除 -->
                             <div class="col-md-8 offset-md-2 mb-2">
-                                <button v-for="selectCategory in selectCategories" :key="selectCategory.id" 
-                                    @click="removeCategory(selectCategory)" class="btn btn-success mr-2 my-2">
-                                    {{selectCategory.name}}<v-icon class="ml-2" name="times"/>
+                                <button v-for="select_category in selectCategories" :key="select_category.id" 
+                                    @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
+                                    {{select_category.name}}<v-icon class="ml-2" name="times"/>
                                 </button>
                             </div>
 
@@ -150,7 +150,7 @@ export default {
         return{
             //カテゴリー
             categories:[],
-            selectCategory: null,
+            select_category: null,
             selectCategories: [],
             inputCategory: {
                 name: null
@@ -176,7 +176,7 @@ export default {
             return this.$store.getters.flashMessage;
         },
         isSelectedCategory(){
-            return this.selectCategories.includes(this.selectCategory);
+            return this.selectCategories.includes(this.select_category);
         },
         categoryNames(){
             return this.categories.map((value) => {
@@ -193,11 +193,11 @@ export default {
             });
         },
         addCategory(){
-            this.selectCategories.push(this.selectCategory);
+            this.selectCategories.push(this.select_category);
         },
-        removeCategory(selectCategory){
+        removeCategory(select_category){
             this.selectCategories = this.selectCategories.filter((removeCategory) => {
-                return removeCategory !== selectCategory;
+                return removeCategory !== select_category;
             });
         },
         createCategory(){
