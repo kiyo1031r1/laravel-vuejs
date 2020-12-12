@@ -69,6 +69,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <div v-if="video" class="col-md-8 offset-md-2 embed-responsive embed-responsive-16by9">
+                                <video class="embed-responsive-item thumbnail_label" controls :src="video_preview">
+                                </video>
+                            </div>
                             <div v-if="video" class="col-md-8 offset-md-2">
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeVideo()">
@@ -161,6 +165,7 @@ export default {
 
             //動画
             video: null,
+            video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
             title: null,
@@ -283,6 +288,9 @@ export default {
                 alert(this.allow_video_ext + 'から選択してください');
                 this.video = null;
                 this.$refs.video.value = null;
+            }
+            else{
+                this.video_preview = URL.createObjectURL(this.video);
             }
         },
         removeVideo(){
