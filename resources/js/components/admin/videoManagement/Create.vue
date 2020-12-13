@@ -319,10 +319,12 @@ export default {
         createVideo(){
             let formData = new FormData();
             formData.append('title', this.title);
-            formData.append('category', this.select_categories);
             formData.append('about', this.about);
             formData.append('thumbnail', this.thumbnail);
             formData.append('video', this.video);
+            this.select_categories.forEach( category => {
+                formData.append('category' + '[]', category.id);
+            });
 
             axios.post('/api/videos', formData)
             .then(() => {
