@@ -11,7 +11,8 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="title">タイトル</label>
                             <div class="col-md-8">
-                                <input class="form-control" id="title" v-model="title">
+                                <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="title" v-model="title">
+                                <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
                             </div>
                         </div>
 
@@ -38,12 +39,13 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="about">概要</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="about" rows="3" v-model="about"></textarea>
+                                <textarea :class="errors.about ? 'form-control is-invalid' : 'form-control'" id="about" rows="3" v-model="about"></textarea>
+                                <div v-if="errors.about" class="invalid-feedback">{{ errors.about[0]}}</div>
                             </div>
                         </div>
                         
                         <!-- サムネイル -->
-                        <div class="form-group row">
+                        <div class="form-group row mb-0">
                             <label class="col-form-label col-md-2">サムネイル</label>
                             <div class="col-md-3">
                                 <label class="file_upload_button" for="thumbnail">ファイルを選択</label>
@@ -59,9 +61,10 @@
                                 </button>
                             </div>
                         </div>
+                        <div v-if="errors.thumbnail" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail[0]}}</div>
 
                         <!-- 動画ファイル -->
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mt-3 mb-0">
                             <label class="col-form-label col-md-2" for="capture">動画</label>
                             <div class="col-md-3">
                                 <label class="file_upload_button" for="video">ファイルを選択</label>
@@ -83,6 +86,7 @@
                                 </button>
                             </div>
                         </div>
+                        <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
 
                         <!-- 作成ボタン -->
                         <div class="col-md-4 mx-auto mt-5">
@@ -168,9 +172,15 @@ export default {
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
             //その他
-            title: null,
-            about: null,
+            title: '',
+            about: '',
             upload_file_name_length: 25,
+            errors: {
+                name: null,
+                about: null,
+                thumbnail: null,
+                video: null
+            }
         }
     },
     components:{
@@ -318,6 +328,9 @@ export default {
             axios.post('/api/videos', formData)
             .then(() => {
                 this.$router.push({name:'video_management'});
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
             });
         }
     },
@@ -334,6 +347,7 @@ export default {
     border-radius: 2px;
     background-color: #EFEFEF;
     padding: 6px 12px;
+    margin-bottom: 0px;
     width: 100%;
     text-align: center;
     cursor: pointer;
@@ -345,6 +359,14 @@ export default {
 
 #thumbnail, #video{
     display: none;
+}
+
+.upload_error{
+    color: #e3342f;
+    font-size: 80%;
+    font-family: "Nunito", sans-serif;
+    padding: 0px 5px;
+    margin-top: 4px;
 }
 
 </style>
