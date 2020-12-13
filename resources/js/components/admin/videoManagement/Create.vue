@@ -46,7 +46,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">サムネイル</label>
                             <div class="col-md-3">
-                                <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
+                                <label class="file_upload_button" for="thumbnail">ファイルを選択</label>
                                 <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
                             </div>
                             <div v-if="thumbnail" class="col-md-5">
@@ -64,13 +64,13 @@
                         <div class="form-group row mb-0">
                             <label class="col-form-label col-md-2" for="capture">動画</label>
                             <div class="col-md-3">
-                                <label class="thumbnail_label" for="video">ファイルを選択</label>
+                                <label class="file_upload_button" for="video">ファイルを選択</label>
                                 <input @change="uploadVideo()" type="file" id="video" ref="video">
                             </div>
                             <div v-if="video" class="col-md-5">
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    <video class="embed-responsive-item thumbnail_label" 
-                                    controls :src="video_preview" style="padding:4px">
+                                    <video class="embed-responsive-item img-thumbnail" 
+                                    controls :src="video_preview">
                                     </video>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@ export default {
 </script>
 
 <style scoped>
-.thumbnail_label{
+.file_upload_button{
     border: solid 1px black;
     border-radius: 2px;
     background-color: #EFEFEF;
@@ -338,7 +338,7 @@ export default {
     cursor: pointer;
 }
 
-.thumbnail_label:hover{
+.file_upload_button:hover{
     background-color: #e7e7e7;
 }
 
