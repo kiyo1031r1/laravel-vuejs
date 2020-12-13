@@ -49,14 +49,14 @@
                                 <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
                                 <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
                             </div>
-                            <div class="col-md-5">
-                                <p>{{thumbnail_file_name}}</p>
-                                <div v-if="thumbnail_preview" style="position:relative">
-                                    <img :src="thumbnail_preview" class="img-thumbnail" >
-                                    <div @click="removeThumbnail()" style="position:absolute; top:0; right:0;">
-                                        <v-icon class="ml-2" name="window-close" inverse/>
-                                    </div>
-                                </div>
+                            <div v-if="thumbnail_file" class="col-md-5">
+                                <img :src="thumbnail_preview" class="img-thumbnail" >
+                                <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
+                                    @click="removeThumbnail()">
+                                    {{replaceFileName(thumbnail_file.name, upload_file_name_length)}}
+                                    <v-icon class="ml-2" 
+                                    style="position:absolute; top:3; right:5;" name="times"/>
+                                </button>
                             </div>
                         </div>
 
@@ -67,16 +67,17 @@
                                 <label class="thumbnail_label" for="video">ファイルを選択</label>
                                 <input @change="uploadVideo()" type="file" id="video" ref="video">
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div v-if="video" class="col-md-8 offset-md-2 embed-responsive embed-responsive-16by9">
-                                <video class="embed-responsive-item thumbnail_label" controls :src="video_preview">
-                                </video>
+                            <div v-if="video" class="col-md-5">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <video class="embed-responsive-item thumbnail_label" 
+                                    controls :src="video_preview" style="padding:4px">
+                                    </video>
+                                </div>
                             </div>
-                            <div v-if="video" class="col-md-8 offset-md-2">
+                            <div v-if="video" class="col-md-5 offset-md-5">
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeVideo()">
-                                    {{replaceFileName(video.name, 40)}}
+                                    {{replaceFileName(video.name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -158,9 +159,8 @@ export default {
 
             //サムネイル
             thumbnail_file: null,
-            thumbnail_file_name: null,
             thumbnail_preview: null,
-            thumbnail_file_name_length: 20,
+
             allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
@@ -170,6 +170,7 @@ export default {
 
             title: null,
             about: null,
+            upload_file_name_length: 25,
         }
     },
     components:{
@@ -237,7 +238,6 @@ export default {
                 this.$refs.thumbnail_preview.value = null;
             }
             else{
-                this.thumbnail_file_name = this.replaceFileName(this.thumbnail_file.name, this.thumbnail_file_name_length);
                 this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
             }
         },
