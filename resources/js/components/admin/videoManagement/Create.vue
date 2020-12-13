@@ -49,11 +49,11 @@
                                 <label class="thumbnail_label" for="thumbnail">ファイルを選択</label>
                                 <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
                             </div>
-                            <div v-if="thumbnail_file" class="col-md-5">
+                            <div v-if="thumbnail" class="col-md-5">
                                 <img :src="thumbnail_preview" class="img-thumbnail" >
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeThumbnail()">
-                                    {{replaceFileName(thumbnail_file.name, upload_file_name_length)}}
+                                    {{replaceFileName(thumbnail.name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -158,9 +158,8 @@ export default {
             delete_select_category: null,
 
             //サムネイル
-            thumbnail_file: null,
+            thumbnail: null,
             thumbnail_preview: null,
-
             allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
@@ -168,6 +167,7 @@ export default {
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
+            //その他
             title: null,
             about: null,
             upload_file_name_length: 25,
@@ -230,15 +230,15 @@ export default {
         },
 
         uploadThumbnail(){
-            this.thumbnail_file = this.$refs.thumbnail_preview.files[0];
+            this.thumbnail = this.$refs.thumbnail_preview.files[0];
             //拡張子をチェック
-            if(!this.checkExt(this.thumbnail_file.name, this.allow_thumbnail_ext)){
+            if(!this.checkExt(this.thumbnail.name, this.allow_thumbnail_ext)){
                 alert(this.allow_thumbnail_ext + 'から選択してください');
-                this.thumbnail_file = null;
+                this.thumbnail = null;
                 this.$refs.thumbnail_preview.value = null;
             }
             else{
-                this.thumbnail_preview = URL.createObjectURL(this.thumbnail_file);
+                this.thumbnail_preview = URL.createObjectURL(this.thumbnail);
             }
         },
         replaceFileName(file_name, length){
@@ -277,8 +277,7 @@ export default {
             }
         },
         removeThumbnail(){
-            this.thumbnail_file = null;
-            this.thumbnail_file_name = null;
+            this.thumbnail = null;
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
         },
@@ -312,7 +311,7 @@ export default {
             formData.append('name', this.title);
             formData.append('category', this.select_categories);
             formData.append('about', this.about);
-            formData.append('thumbnail', this.thumbnail_file);
+            formData.append('thumbnail', this.thumbnail);
             formData.append('video', this.video);
 
             axios.post('/api/videos', formData)
