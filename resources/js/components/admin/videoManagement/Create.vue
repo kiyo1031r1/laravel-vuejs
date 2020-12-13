@@ -294,6 +294,7 @@ export default {
         },
         removeVideo(){
             this.video = null;
+            this.video_preview = null;
             this.$refs.video.value = null;
         },
         checkExt(file_name, allow_ext){
