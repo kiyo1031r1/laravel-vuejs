@@ -60,8 +60,8 @@
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
                             </div>
+                            <div v-if="errors.thumbnail" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail[0]}}</div>
                         </div>
-                        <div v-if="errors.thumbnail" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail[0]}}</div>
 
                         <!-- 動画ファイル -->
                         <div class="form-group row mt-3 mb-0">
@@ -76,8 +76,6 @@
                                     controls :src="video_preview">
                                     </video>
                                 </div>
-                            </div>
-                            <div v-if="video" class="col-md-5 offset-md-5">
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeVideo()">
                                     {{replaceFileName(video.name, upload_file_name_length)}}
@@ -85,8 +83,9 @@
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
                             </div>
+                            <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
                         </div>
-                        <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
+
 
                         <!-- 作成ボタン -->
                         <div class="col-md-4 mx-auto mt-5">
@@ -365,7 +364,7 @@ export default {
     color: #e3342f;
     font-size: 80%;
     font-family: "Nunito", sans-serif;
-    padding: 0px 5px;
+    padding: 0px 15px;
     margin-top: 4px;
 }
 
