@@ -11,8 +11,8 @@
                         <div class="form-group row">
                             <label class="col-form-label col-md-2" for="title">タイトル</label>
                             <div class="col-md-8">
-                                <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="title" v-model="title">
-                                <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
+                                <input :class="errors.title ? 'form-control is-invalid' : 'form-control'" id="title" v-model="title">
+                                <div v-if="errors.title" class="invalid-feedback">{{ errors.title[0]}}</div>
                             </div>
                         </div>
 
@@ -176,7 +176,7 @@ export default {
             about: '',
             upload_file_name_length: 25,
             errors: {
-                name: null,
+                title: null,
                 about: null,
                 thumbnail: null,
                 video: null
@@ -319,7 +319,7 @@ export default {
         },
         createVideo(){
             let formData = new FormData();
-            formData.append('name', this.title);
+            formData.append('title', this.title);
             formData.append('category', this.select_categories);
             formData.append('about', this.about);
             formData.append('thumbnail', this.thumbnail);

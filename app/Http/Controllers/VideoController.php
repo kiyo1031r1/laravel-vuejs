@@ -9,13 +9,13 @@ class VideoController extends Controller
 {
     public function store(Video $video){
         $input = request()->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'about' => 'required',
             'thumbnail' => 'file',
             'video' => 'file',
         ]);
 
-        $video->name = $input['name'];
+        $video->title = $input['title'];
         $video->about = $input['about'];
         $video->thumbnail = $input['thumbnail']->store('thumbnails');
         $video->video = $input['video']->store('videos');
