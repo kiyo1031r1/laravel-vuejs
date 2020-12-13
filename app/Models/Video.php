@@ -9,14 +9,16 @@ class Video extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'about',
-        'thumbnail',
-    ];
-
     public function video_categories(){
         return $this->belongsToMany(VideoCategory::class);
+    }
+
+    public function setThumbnailAttribute($value){
+        $this->attributes['thumbnail'] = asset('storage/'. $value);
+    }
+
+    public function setVideoAttribute($value){
+        $this->attributes['video'] = asset('storage/'. $value);
     }
 
 }

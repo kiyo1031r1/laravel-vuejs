@@ -7,7 +7,20 @@ use App\Models\Video;
 
 class VideoController extends Controller
 {
-    public function store(Request $request){
-        return Video::create($request->all());
+    public function store(Video $video){
+        $input = request()->validate([
+            'name' => 'required|max:255',
+            'about' => 'required',
+            'thumbnail' => 'file',
+            'video' => 'file',
+        ]);
+
+        $video->name = $input['name'];
+        $video->about = $input['about'];
+        $video->thumbnail = $input['thumbnail']->store('thumbnails');
+        $video->video = $input['video']->store('videos');
+        $video->save();
+
+        return $video;
     }
 }
