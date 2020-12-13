@@ -125,6 +125,9 @@ return [
         'age' => '年齢',
         'contact' => 'お問い合わせ内容',
         'caution' => '注意事項',
+        'about' => '概要',
+        'thumbnail' => 'サムネイル',
+        'video' => '動画',
     ],
 
 ];
