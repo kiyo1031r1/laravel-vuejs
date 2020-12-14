@@ -21,8 +21,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{video.title}}</h5>
-                                    <p class="card-text">{{video.about}}</p>
+                                    <h5 class="card-title">{{replaceText(video.title, 70)}}</h5>
+                                    <p class="card-text">{{replaceText(video.about, 130)}}</p>
                                 </div>
                             </div>
                             <div class="col-md-2 my-auto px-2">
@@ -85,7 +85,39 @@ export default {
 
                 this.last_page = res.data.last_page;
             });
-        }
+        },
+        replaceText(text, max_length){
+            const text_bytes = encodeURIComponent(text).replace(/%../g, 'x').length;
+
+            //※「…」の分を差し引いておく
+            if(text_bytes > max_length - 2){
+                let sum = 0;
+                let str_bytes = 0;
+                for(let i = 0; i < text.length; i++){
+                    //半角カナ
+                    if(text[i].match(/[ｦ-ﾟ]/)){
+                        str_bytes = 1;
+                    }
+                    else{
+                        str_bytes = encodeURIComponent(text[i]).replace(/%../g, 'x').length;
+                        //全角
+                        if(str_bytes === 3) {
+                            str_bytes = 2;
+                        }
+                    }
+                    
+                    if(sum + str_bytes <= max_length){
+                        sum += str_bytes;
+                    }
+                    else{
+                        return text.substring(0, i) + '…';
+                    }
+                }
+            }
+            else{
+                return text;
+            }
+        },
     },
     created(){
         this.getVideo();
