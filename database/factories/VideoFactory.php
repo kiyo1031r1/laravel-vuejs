@@ -25,7 +25,7 @@ class VideoFactory extends Factory
         return [
             'title' => $this->faker->realText(50),
             'about' => $this->faker->realText(200),
-            'thumbnail' => $this->faker->imageUrl(),
+            'thumbnail' => 'http://127.0.0.1:8000/storage/thumbnails/lwp5VJDlJfsydLwqW81qgg64a7eymVStqExfTBMu.jpeg',
             'video' => 'http://127.0.0.1:8000/storage/videos/aevu5gLVruv6ZN1xIBIR5AtEKFpFTCpqG8oTjH4U.qt',
             'created_at' => DateTime::dateTimeThisDecade(),
             'updated_at' => DateTime::dateTimeThisDecade(),
