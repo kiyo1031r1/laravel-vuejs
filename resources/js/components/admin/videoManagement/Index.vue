@@ -42,8 +42,53 @@
 import AdminHeader from '../AdminHeaderComponent'
 
 export default {
+    data(){
+        return{
+            //ビデオ表示
+            videos: [],
+            is_videos: true,
+
+            //ページネーション
+            current_page: 1,
+            last_page: null,
+
+            //検索
+            search:{
+                title: null,
+            },
+
+            //ソート
+            sort:{
+                id: null,
+                created_at: null,
+                per_page: 10,
+            }
+        }
+    },
     components:{
         AdminHeader
+    },
+    methods:{
+        getVideo(){
+            axios.post('/api/videos/search?page=' + this.current_page, {
+                search: this.search,
+                sort: this.sort,
+            })
+            .then(res => {
+                this.videos = res.data.data;
+                if(this.videos.length > 0) {
+                    this.is_videos = true;
+                }
+                else{
+                    this.is_videos = false;
+                }
+
+                this.last_page = res.data.last_page;
+            });
+        }
+    },
+    created(){
+        this.getVideo();
     }
 }
 </script>
