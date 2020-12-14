@@ -13,16 +13,16 @@
 
             <!-- ビデオ一覧 -->
             <div class="row justify-content-center">
-                <div class="col-md-8 mb-4">
+                <div v-for="video in videos" :key="video.id" class="col-md-8 mb-4">
                     <div class="card">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img class="bd-placeholder-img">
+                                <img class="img-thumbnail" :src="video.thumbnail">
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <h5 class="card-title">タイトル</h5>
-                                    <p class="card-text">概要</p>
+                                    <h5 class="card-title">{{video.title}}</h5>
+                                    <p class="card-text">{{video.about}}</p>
                                 </div>
                             </div>
                             <div class="col-md-2 my-auto px-2">
