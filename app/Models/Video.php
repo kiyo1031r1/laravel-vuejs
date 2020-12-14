@@ -14,7 +14,14 @@ class Video extends Model
     }
 
     public function setThumbnailAttribute($value){
-        $this->attributes['thumbnail'] = asset('storage/'. $value);
+        //seederの自動生成用
+        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false){
+            $this->attributes['thumbnail'] = $value;
+        }
+        //通常保存用
+        else{
+            $this->attributes['thumbnail'] = asset('storage/'. $value);
+        }
     }
 
     public function setVideoAttribute($value){
