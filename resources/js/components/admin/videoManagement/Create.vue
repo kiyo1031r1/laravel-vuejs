@@ -253,20 +253,22 @@ export default {
         replaceFileName(file_name, length){
             //文字数制限
             const name_max_length = length;
-            const name = file_name.split('.');
-            const name_bytes = encodeURIComponent(name[0]).replace(/%../g, 'x').length;
+            let pos = file_name.lastIndexOf('.');
+            const name =  file_name.substring(0, pos + 1);
+            const ext = file_name.slice(pos + 1);
+            const name_bytes = encodeURIComponent(name).replace(/%../g, 'x').length;
 
             //※「…」の分を差し引いておく
             if(name_bytes > name_max_length - 2){
                 let name_bytes = 0;
                 let str_bytes = 0;
-                for(let i = 0; i < name[0].length; i++){
+                for(let i = 0; i < name.length; i++){
                     //半角カナ
-                    if(name[0][i].match(/[ｦ-ﾟ]/)){
+                    if(name[i].match(/[ｦ-ﾟ]/)){
                         str_bytes = 1;
                     }
                     else{
-                        str_bytes = encodeURIComponent(name[0][i]).replace(/%../g, 'x').length;
+                        str_bytes = encodeURIComponent(name[i]).replace(/%../g, 'x').length;
                         //全角
                         if(str_bytes === 3) {
                             str_bytes = 2;
@@ -277,7 +279,7 @@ export default {
                         name_bytes += str_bytes;
                     }
                     else{
-                        return name[0].substring(0, i) + '…' + name[1];
+                        return name.substring(0, i) + '…' + ext;
                     }
                 }
             }
