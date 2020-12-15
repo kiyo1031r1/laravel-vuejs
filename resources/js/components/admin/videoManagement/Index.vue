@@ -29,8 +29,10 @@
                                 </div>
                             </div>
                             <div class="col-md-2 my-auto px-2">
-                                <button class="btn btn-warning btn-block">編集</button>
-                                <button class="btn btn-danger btn-block">削除</button>
+                                <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
+                                    <button class="btn btn-warning btn-block">編集</button>
+                                </router-link>
+                                <button class="btn btn-danger btn-block mt-2">削除</button>
                             </div>
                         </div>
                     </div>
