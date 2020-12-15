@@ -161,14 +161,14 @@ export default {
             delete_select_category: null,
 
             //サムネイル
-            thumbnail: null,
-            thumbnail_name: null,
+            thumbnail: '',
+            thumbnail_name: '',
             thumbnail_preview: null,
             allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
-            video: null,
-            video_name: null,
+            video: '',
+            video_name: '',
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
@@ -245,7 +245,7 @@ export default {
             //拡張子をチェック
             if(!this.checkExt(this.thumbnail.name, this.allow_thumbnail_ext)){
                 alert(this.allow_thumbnail_ext + 'から選択してください');
-                this.thumbnail = null;
+                this.thumbnail = '';
                 this.$refs.thumbnail_preview.value = null;
             }
             else{
@@ -291,8 +291,8 @@ export default {
             }
         },
         removeThumbnail(){
-            this.thumbnail = null;
-            this.thumbnail_name = null;
+            this.thumbnail = '';
+            this.thumbnail_name = '';
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
         },
@@ -300,7 +300,7 @@ export default {
             this.video = this.$refs.video.files[0];
             if(!this.checkExt(this.video.name, this.allow_video_ext)){
                 alert(this.allow_video_ext + 'から選択してください');
-                this.video = null;
+                this.video = '';
                 this.$refs.video.value = null;
             }
             else{
@@ -309,8 +309,8 @@ export default {
             }
         },
         removeVideo(){
-            this.video = null;
-            this.video_name = null;
+            this.video = '';
+            this.video_name = '';
             this.video_preview = null;
             this.$refs.video.value = null;
         },
