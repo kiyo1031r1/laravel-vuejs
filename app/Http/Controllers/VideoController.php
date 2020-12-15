@@ -11,9 +11,9 @@ class VideoController extends Controller
         $input = request()->validate([
             'title' => 'required|max:255',
             'about' => 'required',
-            'thumbnail' => 'file',
+            'thumbnail' => 'required',
             'thumbnail_name' => 'required',
-            'video' => 'file',
+            'video' => 'required',
             'video_name' => 'required',
         ]);
 
