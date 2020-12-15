@@ -55,7 +55,7 @@
                                 <img :src="thumbnail_preview" class="img-thumbnail" >
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeThumbnail()">
-                                    {{replaceFileName(thumbnail.name, upload_file_name_length)}}
+                                    {{replaceFileName(thumbnail_name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -78,7 +78,7 @@
                                 </div>
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeVideo()">
-                                    {{replaceFileName(video.name, upload_file_name_length)}}
+                                    {{replaceFileName(video_name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -161,12 +161,14 @@ export default {
             delete_select_category: null,
 
             //サムネイル
-            thumbnail: null,
+            thumbnail: '',
+            thumbnail_name: '',
             thumbnail_preview: null,
             allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
-            video: null,
+            video: '',
+            video_name: '',
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
@@ -246,10 +248,11 @@ export default {
             //拡張子をチェック
             if(!this.checkExt(this.thumbnail.name, this.allow_thumbnail_ext)){
                 alert(this.allow_thumbnail_ext + 'から選択してください');
-                this.thumbnail = null;
+                this.thumbnail = '';
                 this.$refs.thumbnail_preview.value = null;
             }
             else{
+                this.thumbnail_name = this.thumbnail.name;
                 this.thumbnail_preview = URL.createObjectURL(this.thumbnail);
             }
         },
@@ -291,7 +294,8 @@ export default {
             }
         },
         removeThumbnail(){
-            this.thumbnail = null;
+            this.thumbnail = '';
+            this.thumbnail_name = '';
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
         },
@@ -301,15 +305,17 @@ export default {
             this.video = this.$refs.video.files[0];
             if(!this.checkExt(this.video.name, this.allow_video_ext)){
                 alert(this.allow_video_ext + 'から選択してください');
-                this.video = null;
+                this.video = '';
                 this.$refs.video.value = null;
             }
             else{
+                this.video_name = this.video.name;
                 this.video_preview = URL.createObjectURL(this.video);
             }
         },
         removeVideo(){
-            this.video = null;
+            this.video = '';
+            this.video_name = '';
             this.video_preview = null;
             this.$refs.video.value = null;
         },
@@ -328,7 +334,9 @@ export default {
             formData.append('title', this.title);
             formData.append('about', this.about);
             formData.append('thumbnail', this.thumbnail);
+            formData.append('thumbnail_name', this.thumbnail_name);
             formData.append('video', this.video);
+            formData.append('video_name', this.video_name);
             this.select_categories.forEach( category => {
                 formData.append('category' + '[]', category.id);
             });
@@ -347,10 +355,12 @@ export default {
                 this.title = res.data.title;
                 this.select_categories = res.data.video_category;
                 this.about = res.data.about;
-                //this.thumbnail = res.data.thumbnail;
-                //this.thumbnail_preview = URL.createObjectURL(this.thumbnail);
-                //this.video = res.data.video;
-                //this.video_preview = URL.createObjectURL(this.video);
+                this.thumbnail = res.data.thumbnail;
+                this.thumbnail_name = res.data.thumbnail_name;
+                this.thumbnail_preview = res.data.thumbnail;
+                this.video = res.data.video;
+                this.video_name = res.data.video_name;
+                this.video_preview = res.data.video;
             });
         }
     },
