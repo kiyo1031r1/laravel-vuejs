@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
         ]);
 
         //ランダム生成
-        User::factory()->times(300)->create();
+        User::factory()->times(10)->create();
     }
 }
