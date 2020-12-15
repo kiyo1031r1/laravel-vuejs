@@ -12,13 +12,17 @@ class VideoController extends Controller
             'title' => 'required|max:255',
             'about' => 'required',
             'thumbnail' => 'file',
+            'thumbnail_name' => 'required',
             'video' => 'file',
+            'video_name' => 'required',
         ]);
 
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->thumbnail = $input['thumbnail']->store('thumbnails');
+        $video->thumbnail_name = $input['thumbnail_name'];
         $video->video = $input['video']->store('videos');
+        $video->video_name = $input['video_name'];
         $video->save();
         $video->videoCategory()->attach(request('category'));
 
