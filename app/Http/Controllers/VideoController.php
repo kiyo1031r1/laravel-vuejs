@@ -20,7 +20,7 @@ class VideoController extends Controller
         $video->thumbnail = $input['thumbnail']->store('thumbnails');
         $video->video = $input['video']->store('videos');
         $video->save();
-        $video->video_categories()->attach(request('category'));
+        $video->videoCategory()->attach(request('category'));
 
         return $video;
     }
