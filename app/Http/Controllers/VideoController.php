@@ -25,6 +25,10 @@ class VideoController extends Controller
         return $video;
     }
 
+    public function show(Video $video){
+        return Video::with('videoCategory')->find($video->id);
+    }
+
     public function search(Request $request){
         $query = Video::with('videoCategory');
 

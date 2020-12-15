@@ -182,6 +182,8 @@ export default {
             }
         }
     },
+    props:['id']
+    ,
     components:{
         AdminHeader
     },
@@ -238,6 +240,7 @@ export default {
             });
         },
 
+        //サムネイル
         uploadThumbnail(){
             this.thumbnail = this.$refs.thumbnail_preview.files[0];
             //拡張子をチェック
@@ -292,6 +295,8 @@ export default {
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
         },
+
+        //ビデオ
         uploadVideo(){
             this.video = this.$refs.video.files[0];
             if(!this.checkExt(this.video.name, this.allow_video_ext)){
@@ -335,10 +340,23 @@ export default {
             .catch(error => {
                 this.errors = error.response.data.errors;
             });
+        },
+        getVideo(){
+            axios.get('/api/videos/'+ this.id)
+            .then(res => {
+                this.title = res.data.title;
+                this.select_categories = res.data.video_category;
+                this.about = res.data.about;
+                //this.thumbnail = res.data.thumbnail;
+                //this.thumbnail_preview = URL.createObjectURL(this.thumbnail);
+                //this.video = res.data.video;
+                //this.video_preview = URL.createObjectURL(this.video);
+            });
         }
     },
     created(){
         this.getCategory();
+        this.getVideo();
     }
 
 }

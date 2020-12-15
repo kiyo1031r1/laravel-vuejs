@@ -169,6 +169,7 @@ const router = new Router({
             path:'/admin/video_management/:id',
             name: 'video_management_edit',
             component: VideoManagementEdit,
+            props: true,
             meta: {
                 admin_authOnly: true,
              }
