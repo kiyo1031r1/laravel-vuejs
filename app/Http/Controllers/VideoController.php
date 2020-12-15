@@ -26,7 +26,7 @@ class VideoController extends Controller
     }
 
     public function search(Request $request){
-        $query = Video::query();
+        $query = Video::with('videoCategory');
 
         $data = $request->all();
         $search = $data['search'];
@@ -39,7 +39,6 @@ class VideoController extends Controller
         }
 
         return $query->paginate($sort['per_page']);
-
     }
 
     private function searchWord($word, $column, $query){

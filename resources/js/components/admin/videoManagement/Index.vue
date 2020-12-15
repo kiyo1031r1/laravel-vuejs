@@ -19,10 +19,13 @@
                             <div class="col-md-4">
                                 <img class="img-thumbnail" :src="video.thumbnail">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 border-right">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{replaceText(video.title, 70)}}</h5>
-                                    <p class="card-text">{{replaceText(video.about, 130)}}</p>
+                                    <h5 class="card-title mb-1">{{replaceText(video.title, 65)}}</h5>
+                                    <span v-for="category in video.video_category" :key="category.id"
+                                    class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
+                                    </span>
+                                    <p class="card-text mt-2">{{replaceText(video.about, 130)}}</p>
                                 </div>
                             </div>
                             <div class="col-md-2 my-auto px-2">
