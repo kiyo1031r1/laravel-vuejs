@@ -25,7 +25,14 @@ class Video extends Model
     }
 
     public function setVideoAttribute($value){
-        $this->attributes['video'] = asset('storage/'. $value);
+        //seederの自動生成用
+        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false){
+            $this->attributes['video'] = $value;
+        }
+        //通常保存用
+        else{
+            $this->attributes['video'] = asset('storage/'. $value);
+        }
     }
 
 }
