@@ -341,7 +341,11 @@ export default {
                 formData.append('category' + '[]', category.id);
             });
 
-            axios.post('/api/videos', formData)
+            axios.post('/api/videos/' + this.id, formData, { 
+                headers: {
+                    'X-HTTP-Method-Override': 'PUT'
+                }
+            })
             .then(() => {
                 this.$router.push({name:'video_management'});
             })
