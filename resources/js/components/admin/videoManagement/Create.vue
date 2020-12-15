@@ -55,7 +55,7 @@
                                 <img :src="thumbnail_preview" class="img-thumbnail" >
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeThumbnail()">
-                                    {{replaceFileName(thumbnail.name, upload_file_name_length)}}
+                                    {{replaceFileName(thumbnail_name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -78,7 +78,7 @@
                                 </div>
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeVideo()">
-                                    {{replaceFileName(video.name, upload_file_name_length)}}
+                                    {{replaceFileName(video_name, upload_file_name_length)}}
                                     <v-icon class="ml-2" 
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
@@ -162,11 +162,13 @@ export default {
 
             //サムネイル
             thumbnail: null,
+            thumbnail_name: null,
             thumbnail_preview: null,
             allow_thumbnail_ext: ['jpg', 'jpeg', 'png'],
 
             //動画
             video: null,
+            video_name: null,
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
 
@@ -247,6 +249,7 @@ export default {
                 this.$refs.thumbnail_preview.value = null;
             }
             else{
+                this.thumbnail_name = this.thumbnail.name;
                 this.thumbnail_preview = URL.createObjectURL(this.thumbnail);
             }
         },
@@ -289,6 +292,7 @@ export default {
         },
         removeThumbnail(){
             this.thumbnail = null;
+            this.thumbnail_name = null;
             this.thumbnail_preview = null;
             this.$refs.thumbnail_preview.value = null;
         },
@@ -300,11 +304,13 @@ export default {
                 this.$refs.video.value = null;
             }
             else{
+                this.video_name = this.video.name;
                 this.video_preview = URL.createObjectURL(this.video);
             }
         },
         removeVideo(){
             this.video = null;
+            this.video_name = null;
             this.video_preview = null;
             this.$refs.video.value = null;
         },
@@ -323,9 +329,9 @@ export default {
             formData.append('title', this.title);
             formData.append('about', this.about);
             formData.append('thumbnail', this.thumbnail);
-            formData.append('thumbnail_name', this.thumbnail.name);
+            formData.append('thumbnail_name', this.thumbnail_name);
             formData.append('video', this.video);
-            formData.append('video_name', this.video.name);
+            formData.append('video_name', this.video_name);
             this.select_categories.forEach( category => {
                 formData.append('category' + '[]', category.id);
             });
