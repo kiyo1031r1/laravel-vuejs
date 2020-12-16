@@ -58,8 +58,39 @@ class VideoController extends Controller
     }
 
     public function destroy(Video $video){
+        if($video->thumbnail || $video->video){
+            $this->deleteFile($video->thumbnail, $video->video);
+        }
+
         $video->delete();
         return $video;
+    }
+
+    private function deleteFile($thumbnail, $video){
+        $thumbnail_url = env('APP_URL').'/storage/thumbnails/';
+        $video_url = env('APP_URL').'/storage/videos/';
+        
+        $thumbnail_file_path = storage_path('app/public/thumbnails/');
+        $video_file_path = storage_path('app/public/videos/');
+
+        //ファイル名を取得
+        $thumbnail_file_name = str_replace($thumbnail_url, '', $thumbnail);
+        $video_file_name = str_replace($video_url, '', $video);
+
+        // ダミーデータを削除しない処理
+        $sample_thumbnail = 'A_thumbnail_sample.jpeg';
+        $sample_video = 'A_video_sample.qt';
+        if($thumbnail_file_name === $sample_thumbnail || $video_file_name === $sample_video){
+            return;
+        }
+
+        //ファイル削除
+        if(is_file($thumbnail_file_path.$thumbnail_file_name)){
+            unlink($thumbnail_file_path.$thumbnail_file_name);
+        }
+        if(is_file($video_file_path.$video_file_name)){
+            unlink($video_file_path.$video_file_name);
+        }
     }
 
     public function search(Request $request){
