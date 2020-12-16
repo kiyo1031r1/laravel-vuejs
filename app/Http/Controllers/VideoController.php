@@ -58,29 +58,27 @@ class VideoController extends Controller
     }
 
     public function destroy(Video $video){
-        if($video->thumbnail || $video->video){
-            $this->deleteFile($video->thumbnail, $video->video);
+        if($video->thumbnail){
+            $this->deleteThumbnailFile($video->thumbnail);
+        }
+        if($video->video){
+            $this->deleteVideoFile($video->video);
         }
 
         $video->delete();
         return $video;
     }
 
-    private function deleteFile($thumbnail, $video){
+    private function deleteThumbnailFile($thumbnail){
         $thumbnail_url = env('APP_URL').'/storage/thumbnails/';
-        $video_url = env('APP_URL').'/storage/videos/';
-        
         $thumbnail_file_path = storage_path('app/public/thumbnails/');
-        $video_file_path = storage_path('app/public/videos/');
 
         //ファイル名を取得
         $thumbnail_file_name = str_replace($thumbnail_url, '', $thumbnail);
-        $video_file_name = str_replace($video_url, '', $video);
 
-        // ダミーデータを削除しない処理
+        //ダミーデータを削除しない処理
         $sample_thumbnail = 'A_thumbnail_sample.jpeg';
-        $sample_video = 'A_video_sample.qt';
-        if($thumbnail_file_name === $sample_thumbnail || $video_file_name === $sample_video){
+        if($thumbnail_file_name === $sample_thumbnail){
             return;
         }
 
@@ -88,6 +86,22 @@ class VideoController extends Controller
         if(is_file($thumbnail_file_path.$thumbnail_file_name)){
             unlink($thumbnail_file_path.$thumbnail_file_name);
         }
+    }
+
+    private function deleteVideoFile($video){
+        $video_url = env('APP_URL').'/storage/videos/';
+        $video_file_path = storage_path('app/public/videos/');
+
+        //ファイル名を取得
+        $video_file_name = str_replace($video_url, '', $video);
+
+        //ダミーデータを削除しない処理
+        $sample_video = 'A_video_sample.qt';
+        if($video_file_name === $sample_video){
+            return;
+        }
+
+        //ファイル削除
         if(is_file($video_file_path.$video_file_name)){
             unlink($video_file_path.$video_file_name);
         }
