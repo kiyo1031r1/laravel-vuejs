@@ -53,7 +53,7 @@ class VideoController extends Controller
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video_name = $input['video_name'];
         $video->save();
-        //$video->videoCategory()->attach(request('category'));
+        $video->videoCategory()->sync(request('category'));
 
         return $video;
     }
