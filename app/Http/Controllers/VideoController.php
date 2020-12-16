@@ -46,7 +46,6 @@ class VideoController extends Controller
         if(request('thumbnail')){
             $video->thumbnail = request('thumbnail')->store('thumbnails');
         }
-
         if(request('video')){
             $video->video = request('video')->store('videos');
         }
@@ -55,6 +54,11 @@ class VideoController extends Controller
         $video->save();
         $video->videoCategory()->sync(request('category'));
 
+        return $video;
+    }
+
+    public function destroy(Video $video){
+        $video->delete();
         return $video;
     }
 

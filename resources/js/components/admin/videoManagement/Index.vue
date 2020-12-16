@@ -32,7 +32,7 @@
                                 <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
                                     <button class="btn btn-warning btn-block">編集</button>
                                 </router-link>
-                                <button class="btn btn-danger btn-block mt-2">削除</button>
+                                <button @click="deleteVideo(video.id)" class="btn btn-danger btn-block mt-2">削除</button>
                             </div>
                         </div>
                     </div>
@@ -123,6 +123,15 @@ export default {
                 return text;
             }
         },
+        deleteVideo(id){
+            const result = confirm('ビデオを削除します。よろしいですか？');
+            if(result){
+                axios.delete('/api/videos/' + id)
+                .then(() => {
+                    this.getVideo();
+                });
+            }
+        }
     },
     created(){
         this.getVideo();
