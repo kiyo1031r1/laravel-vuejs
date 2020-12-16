@@ -127,7 +127,9 @@ return [
         'caution' => '注意事項',
         'about' => '概要',
         'thumbnail' => 'サムネイル',
+        'thumbnail_name' => 'サムネイル',
         'video' => '動画',
+        'video_name' => '動画',
     ],
 
 ];

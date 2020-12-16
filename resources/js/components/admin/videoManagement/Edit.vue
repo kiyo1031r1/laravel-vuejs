@@ -51,7 +51,7 @@
                                 <label class="file_upload_button" for="thumbnail">ファイルを選択</label>
                                 <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
                             </div>
-                            <div v-if="thumbnail" class="col-md-5">
+                            <div v-if="thumbnail_name" class="col-md-5">
                                 <img :src="thumbnail_preview" class="img-thumbnail" >
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
                                     @click="removeThumbnail()">
@@ -60,7 +60,7 @@
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
                             </div>
-                            <div v-if="errors.thumbnail" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail[0]}}</div>
+                            <div v-if="errors.thumbnail_name" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail_name[0]}}</div>
                         </div>
 
                         <!-- 動画ファイル -->
@@ -70,7 +70,7 @@
                                 <label class="file_upload_button" for="video">ファイルを選択</label>
                                 <input @change="uploadVideo()" type="file" id="video" ref="video">
                             </div>
-                            <div v-if="video" class="col-md-5">
+                            <div v-if="video_name" class="col-md-5">
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <video class="embed-responsive-item img-thumbnail" 
                                     controls :src="video_preview">
@@ -83,7 +83,7 @@
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
                             </div>
-                            <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
+                            <div v-if="errors.video_name" class="col-md-8 offset-md-2 upload_error">{{ errors.video_name[0]}}</div>
                         </div>
 
 
@@ -359,10 +359,8 @@ export default {
                 this.title = res.data.title;
                 this.select_categories = res.data.video_category;
                 this.about = res.data.about;
-                this.thumbnail = res.data.thumbnail;
                 this.thumbnail_name = res.data.thumbnail_name;
                 this.thumbnail_preview = res.data.thumbnail;
-                this.video = res.data.video;
                 this.video_name = res.data.video_name;
                 this.video_preview = res.data.video;
             });

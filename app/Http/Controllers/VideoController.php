@@ -33,6 +33,31 @@ class VideoController extends Controller
         return Video::with('videoCategory')->find($video->id);
     }
 
+    public function update(Video $video){
+        $input = request()->validate([
+            'title' => 'required|max:255',
+            'about' => 'required',
+            'thumbnail_name' => 'required',
+            'video_name' => 'required',
+        ]);
+
+        $video->title = $input['title'];
+        $video->about = $input['about'];
+        if(request('thumbnail')){
+            $video->thumbnail = request('thumbnail')->store('thumbnails');
+        }
+
+        if(request('video')){
+            $video->video = request('video')->store('videos');
+        }
+        $video->thumbnail_name = $input['thumbnail_name'];
+        $video->video_name = $input['video_name'];
+        $video->save();
+        //$video->videoCategory()->attach(request('category'));
+
+        return $video;
+    }
+
     public function search(Request $request){
         $query = Video::with('videoCategory');
 
