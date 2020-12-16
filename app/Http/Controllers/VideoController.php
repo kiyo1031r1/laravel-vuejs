@@ -44,9 +44,17 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         if(request('thumbnail')){
+            //前データを削除
+            if($video->thumbnail){
+                $this->deleteThumbnailFile($video->thumbnail);
+            }
             $video->thumbnail = request('thumbnail')->store('thumbnails');
         }
         if(request('video')){
+            //前データを削除
+            if($video->video){
+                $this->deleteVideoFile($video->video);
+            }
             $video->video = request('video')->store('videos');
         }
         $video->thumbnail_name = $input['thumbnail_name'];
