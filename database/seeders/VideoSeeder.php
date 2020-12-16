@@ -15,6 +15,6 @@ class VideoSeeder extends Seeder
      */
     public function run()
     {
-        Video::factory()->times(100)->has(VideoCategory::factory()->count(3))->create();
+        Video::factory()->times(100)->has(VideoCategory::factory()->count(2))->create();
     }
 }
