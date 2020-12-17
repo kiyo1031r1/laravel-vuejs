@@ -124,8 +124,16 @@ class VideoController extends Controller
 
         //検索
         $title = $search['title'];
+        $created_at_start = $search['created_at_start'];
+        $created_at_end = $search['created_at_end'];
         if($title){
             $this->searchWord($title, 'title', $query);
+        }
+        if($created_at_start){
+            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        }
+        if($created_at_end){
+            $query->whereDate('created_at', '<=', $created_at_end)->get();
         }
 
         return $query->paginate($sort['per_page']);
