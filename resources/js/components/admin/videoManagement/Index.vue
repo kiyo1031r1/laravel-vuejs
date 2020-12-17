@@ -2,15 +2,26 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="container">
-            <!-- 表示件数 -->
-            <div class="form-inline justify-content-end px-3 my-3">
-                <label class="col-form-label p-2" for="per_page">表示件数</label>
-                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
-                    <option value="10">10件</option>
-                    <option value="20">20件</option>
-                    <option value="50">50件</option>
-                    <option value="100">100件</option>
-                </select>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="form-inline justify-content-end my-3">
+                        <!-- 表示件数 -->
+                        <label class="col-form-label p-2" for="per_page">表示件数</label>
+                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                            <option value="10">10件</option>
+                            <option value="20">20件</option>
+                            <option value="50">50件</option>
+                            <option value="100">100件</option>
+                        </select>
+
+                        <!-- 並び替え -->
+                        <label class="col-form-label p-2" for="per_page">並び替え</label>
+                        <select class="form-control">
+                            <option value="10">新しい順</option>
+                            <option value="20">古い順</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <!-- ビデオ新規作成 -->
