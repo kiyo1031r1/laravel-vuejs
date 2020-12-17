@@ -89,6 +89,7 @@
                                             class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                             </span>
                                             <p class="card-text mt-2">{{replaceText(video.about, 130)}}</p>
+                                            <p class="text-right mb-0">作成日 {{video.created_at | moment}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-2 my-auto px-2">
