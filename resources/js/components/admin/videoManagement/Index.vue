@@ -9,8 +9,8 @@
                     <div class="px-4">
                         <form @submit.prevent="changeFirstPage()">
                             <div class="form-group">
-                                <label class="col-form-label" for="name">ユーザー名</label>
-                                <input v-model="search.name" class="form-control" type="text" id="name">
+                                <label class="col-form-label" for="name">ビデオ名</label>
+                                <input v-model="search.title" class="form-control" type="text" id="name">
                             </div>
 
                             <div class="form-group">
@@ -144,7 +144,6 @@ export default {
 
             //検索
             search:{
-                name: null,
                 title: null,
                 created_at_start: null,
                 created_at_end: null,
