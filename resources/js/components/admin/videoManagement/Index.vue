@@ -16,9 +16,9 @@
 
                         <!-- 並び替え -->
                         <label class="col-form-label p-2" for="per_page">並び替え</label>
-                        <select class="form-control">
-                            <option value="10">新しい順</option>
-                            <option value="20">古い順</option>
+                        <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
+                            <option value="created_at_desc">新しい順</option>
+                            <option value="created_at_asc">古い順</option>
                         </select>
 
                         <!-- ビデオ新規作成 -->
@@ -158,8 +158,7 @@ export default {
 
             //ソート
             sort:{
-                id: null,
-                created_at: null,
+                select: 'created_at_desc',
                 per_page: 10,
             }
         }
@@ -303,7 +302,6 @@ export default {
             }
             return page === this.current_page;
         },
-        
     },
     created(){
         this.getVideo();

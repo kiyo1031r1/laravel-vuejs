@@ -136,6 +136,15 @@ class VideoController extends Controller
             $query->whereDate('created_at', '<=', $created_at_end)->get();
         }
 
+        //ソート
+        $select = $sort['select'];
+        if($select === 'created_at_desc'){
+            $query->orderBy('created_at', 'desc');
+        }
+        if($select === 'created_at_asc'){
+            $query->orderBy('created_at', 'asc');
+        }
+
         return $query->paginate($sort['per_page']);
     }
 
