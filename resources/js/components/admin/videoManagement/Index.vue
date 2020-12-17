@@ -78,7 +78,7 @@
                         <div v-for="video in videos" :key="video.id" class="mb-4">
                             <div class="card">
                                 <div class="row no-gutters">
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <img class="img-thumbnail" :src="video.thumbnail">
                                     </div>
                                     <div class="col-md-6 border-right">
@@ -87,11 +87,11 @@
                                             <span v-for="category in video.video_category" :key="category.id"
                                             class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                             </span>
-                                            <p class="card-text mt-2 mb-0">{{replaceText(video.about, 130)}}</p>
+                                            <p class="card-text mt-2">{{replaceText(video.about, 130)}}</p>
                                             <p class="text-right mb-0">{{video.created_at | moment}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 my-auto px-2">
+                                    <div class="col-md-1 my-auto px-2">
                                         <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
                                             <button class="btn btn-warning btn-block">編集</button>
                                         </router-link>

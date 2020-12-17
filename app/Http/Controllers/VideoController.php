@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use \InterventionImage;
 
 class VideoController extends Controller
 {
+    private $thumbnail_url;
+    private $thumbnail_file_path;
+    private $video_url;
+    private $video_file_path;
+
+    public function __construct(){
+        $this->thumbnail_url = env('APP_URL').'/storage/thumbnails/';
+        $this->thumbnail_file_path = storage_path('app/public/thumbnails/');
+        $this->video_url = env('APP_URL').'/storage/videos/';
+        $this->video_file_path = storage_path('app/public/videos/');
+    }
+
     public function store(Video $video){
         $input = request()->validate([
             'title' => 'required|max:255',
@@ -20,6 +33,7 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->thumbnail = $input['thumbnail']->store('thumbnails');
+        $this->resizeThumbnail($video->thumbnail);
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video = $input['video']->store('videos');
         $video->video_name = $input['video_name'];
@@ -49,6 +63,7 @@ class VideoController extends Controller
                 $this->deleteThumbnailFile($video->thumbnail);
             }
             $video->thumbnail = request('thumbnail')->store('thumbnails');
+            $this->resizeThumbnail($video->thumbnail);
         }
         if(request('video')){
             //前データを削除
@@ -78,11 +93,8 @@ class VideoController extends Controller
     }
 
     private function deleteThumbnailFile($thumbnail){
-        $thumbnail_url = env('APP_URL').'/storage/thumbnails/';
-        $thumbnail_file_path = storage_path('app/public/thumbnails/');
-
         //ファイル名を取得
-        $thumbnail_file_name = str_replace($thumbnail_url, '', $thumbnail);
+        $thumbnail_file_name = str_replace($this->thumbnail_url, '', $thumbnail);
 
         //ダミーデータを削除しない処理
         $sample_thumbnail = 'A_thumbnail_sample.jpeg';
@@ -91,17 +103,14 @@ class VideoController extends Controller
         }
 
         //ファイル削除
-        if(is_file($thumbnail_file_path.$thumbnail_file_name)){
-            unlink($thumbnail_file_path.$thumbnail_file_name);
+        if(is_file($this->thumbnail_file_path.$thumbnail_file_name)){
+            unlink($this->thumbnail_file_path.$thumbnail_file_name);
         }
     }
 
     private function deleteVideoFile($video){
-        $video_url = env('APP_URL').'/storage/videos/';
-        $video_file_path = storage_path('app/public/videos/');
-
         //ファイル名を取得
-        $video_file_name = str_replace($video_url, '', $video);
+        $video_file_name = str_replace($this->video_url, '', $video);
 
         //ダミーデータを削除しない処理
         $sample_video = 'A_video_sample.qt';
@@ -110,9 +119,14 @@ class VideoController extends Controller
         }
 
         //ファイル削除
-        if(is_file($video_file_path.$video_file_name)){
-            unlink($video_file_path.$video_file_name);
+        if(is_file($this->video_file_path.$video_file_name)){
+            unlink($this->video_file_path.$video_file_name);
         }
+    }
+
+    private function resizeThumbnail($name){
+        $thumbnail_file_name = str_replace($this->thumbnail_url, '', $name);
+        InterventionImage::make($this->thumbnail_file_path.$thumbnail_file_name)->resize(800, 500)->save();
     }
 
     public function search(Request $request){
