@@ -2,8 +2,19 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="container">
+            <!-- 表示件数 -->
+            <div class="form-inline justify-content-end px-3 my-3">
+                <label class="col-form-label p-2" for="per_page">表示件数</label>
+                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                    <option value="10">10件</option>
+                    <option value="20">20件</option>
+                    <option value="50">50件</option>
+                    <option value="100">100件</option>
+                </select>
+            </div>
+
             <!-- ビデオ新規作成 -->
-            <div class="row justify-content-center my-4">
+            <div class="row justify-content-center mb-3">
                 <div class="col-md-6">
                     <router-link :to="{ name: 'video_management_create'}">
                         <button class="btn btn-primary btn-block">ビデオ新規作成</button>
@@ -205,7 +216,7 @@ export default {
             //最初のユーザーから表示する仕様
             this.current_page = 1;
             this.focus_page_index = 0;
-            this.getUser();
+            this.getVideo();
         },
         changePage(page){
             this.current_page = page;
