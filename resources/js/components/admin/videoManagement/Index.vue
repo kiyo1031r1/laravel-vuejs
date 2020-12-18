@@ -82,12 +82,14 @@
                                         <img class="img-thumbnail" :src="video.thumbnail">
                                     </div>
                                     <div class="col-md-6 border-right">
-                                        <div class="card-body">
+                                        <div class="card-body p-3">
                                             <h5 class="card-title mb-1">{{video.title}}</h5>
-                                            <span v-for="category in video.video_category" :key="category.id"
-                                            class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
-                                            </span>
-                                            <p class="card-text mt-2">{{video.about}}</p>
+                                            <p class="card-tag">
+                                                <span v-for="category in video.video_category" :key="category.id"
+                                                class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
+                                                </span>
+                                            </p>
+                                            <p class="card-text">{{video.about}}</p>
                                             <p class="text-right mb-0">{{video.created_at | moment}}</p>
                                         </div>
                                     </div>
@@ -303,6 +305,13 @@ export default {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.card-tag{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
     overflow: hidden;
 }
 
