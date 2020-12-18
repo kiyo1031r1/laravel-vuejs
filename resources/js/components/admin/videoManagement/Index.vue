@@ -83,11 +83,11 @@
                                     </div>
                                     <div class="col-md-6 border-right">
                                         <div class="card-body">
-                                            <h5 class="card-title mb-1">{{replaceText(video.title, 65)}}</h5>
+                                            <h5 class="card-title mb-1">{{video.title}}</h5>
                                             <span v-for="category in video.video_category" :key="category.id"
                                             class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                             </span>
-                                            <p class="card-text mt-2">{{replaceText(video.about, 130)}}</p>
+                                            <p class="card-text mt-2">{{video.about}}</p>
                                             <p class="text-right mb-0">{{video.created_at | moment}}</p>
                                         </div>
                                     </div>
@@ -234,38 +234,6 @@ export default {
                 this.last_page = res.data.last_page;
             });
         },
-        replaceText(text, max_length){
-            const text_bytes = encodeURIComponent(text).replace(/%../g, 'x').length;
-
-            //※「…」の分を差し引いておく
-            if(text_bytes > max_length - 2){
-                let sum = 0;
-                let str_bytes = 0;
-                for(let i = 0; i < text.length; i++){
-                    //半角カナ
-                    if(text[i].match(/[ｦ-ﾟ]/)){
-                        str_bytes = 1;
-                    }
-                    else{
-                        str_bytes = encodeURIComponent(text[i]).replace(/%../g, 'x').length;
-                        //全角
-                        if(str_bytes === 3) {
-                            str_bytes = 2;
-                        }
-                    }
-                    
-                    if(sum + str_bytes <= max_length){
-                        sum += str_bytes;
-                    }
-                    else{
-                        return text.substring(0, i) + '…';
-                    }
-                }
-            }
-            else{
-                return text;
-            }
-        },
         deleteVideo(id){
             const result = confirm('ビデオを削除します。よろしいですか？');
             if(result){
@@ -329,6 +297,20 @@ export default {
 .vdp-datepicker >>> .vdp-datepicker__clear-button{
     height: calc(1.6em + 0.75rem + 2px);
     margin-bottom: 0.5rem;
+}
+
+.card-title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.card-text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 </style>
