@@ -90,7 +90,7 @@
                         <!-- 作成ボタン -->
                         <div class="col-md-4 mx-auto mt-5">
                             <button class="btn btn-primary btn-block" type="submit"
-                            @click="createVideo()">作成</button>
+                            @click="createVideo()">更新</button>
                         </div>
                     </div>
                 </div>
