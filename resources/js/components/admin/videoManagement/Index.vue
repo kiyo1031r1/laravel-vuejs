@@ -94,10 +94,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-1 my-auto px-2">
-                                        <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
-                                            <button class="btn btn-warning btn-block">編集</button>
+                                        <router-link :to="{name: 'video_management_show', params: { id: video.id}}">
+                                            <button class="btn btn-success btn-block mb-2">視聴</button>
                                         </router-link>
-                                        <button @click="deleteVideo(video.id)" class="btn btn-danger btn-block mt-2">削除</button>
+                                        <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
+                                            <button class="btn btn-warning btn-block mb-2">編集</button>
+                                        </router-link>
+                                        <button @click="deleteVideo(video.id)" class="btn btn-danger btn-block mb-2">削除</button>
                                     </div>
                                 </div>
                             </div>
