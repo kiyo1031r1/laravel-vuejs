@@ -15,9 +15,10 @@
                                 <h4>{{video.title}}</h4>
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
-                            <div class="card-title border-bottom">
-                                <div class="video-about mb-2" :style="aboutHeightStyle">{{video.about}}</div>
-                                <p class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
+                            <div class="card-title border-bottom" :style="aboutContentHeight">
+                                <div class="video-about mb-2" :style="aboutHeight"
+                                ref="about">{{video.about}}</div>
+                                <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
                             </div>
                         </div>
                     </div>
@@ -37,9 +38,11 @@ export default {
         return{
             video: {},
             about:{
+                see_more : false,
                 toggle: false,
                 toggle_word: 'もっと見る',
-                height: '50px',
+                height: '',
+                content_height: ''
             }
         }
     },
@@ -49,8 +52,22 @@ export default {
         AdminHeader
     },
     computed:{
-        aboutHeightStyle(){
+        //概要が多い場合に「もっと見る」を表示
+        aboutHeight(){
+            if(this.about.height > 50) {
+                this.about.see_more = true;
+                this.about.content_height = '100%';
+                this.about.height = '50px';
+            }
+            //表示が少ない場合でも一定領域を表示
+            if(this.about.see_more == false) {
+                this.about.content_height = '100px';
+            }
+            
             return 'height:' + this.about.height;
+        },
+        aboutContentHeight(){
+            return 'height:' + this.about.content_height;
         }
     },
     methods:{
@@ -58,6 +75,11 @@ export default {
             axios.get('/api/videos/watch/' + this.id)
             .then(res => {
                 this.video = res.data;
+                //概要の高さを取得
+                this.$nextTick(() => {
+                    const rect = this.$refs.about.getBoundingClientRect();
+                    this.about.height = rect.height;
+                 })
             })
         },
         aboutToggle(){
