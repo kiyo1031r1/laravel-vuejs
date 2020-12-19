@@ -94,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-1 my-auto px-2">
-                                        <router-link :to="{name: 'video_management_show', params: { id: video.id}}">
+                                        <router-link :to="{name: 'video_management_watch', params: { id: video.id}}">
                                             <button class="btn btn-success btn-block mb-2">視聴</button>
                                         </router-link>
                                         <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
