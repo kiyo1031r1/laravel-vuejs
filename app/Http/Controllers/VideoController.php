@@ -170,4 +170,8 @@ class VideoController extends Controller
             $query->where($column, 'like', '%'.$value.'%');
         }
     }
+
+    public function watch(Video $video){
+        return $video;
+    }
 }
