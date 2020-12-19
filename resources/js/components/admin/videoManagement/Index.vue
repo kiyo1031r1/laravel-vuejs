@@ -305,6 +305,7 @@ export default {
 }
 
 .card-title{
+    height: 40px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -319,6 +320,7 @@ export default {
 }
 
 .card-text{
+    height: 70px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
