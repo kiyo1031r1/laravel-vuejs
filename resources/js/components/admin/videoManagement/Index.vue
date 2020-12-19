@@ -323,6 +323,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    white-space: pre-wrap;
 }
 
 </style>

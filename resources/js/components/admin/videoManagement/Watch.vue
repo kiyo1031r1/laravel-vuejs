@@ -81,6 +81,7 @@ export default {
 
 <style scoped>
 .video-about{
+    white-space: pre-wrap;
     overflow: hidden;
 }
 
