@@ -22,7 +22,7 @@ import UserManagementEdit from './components/admin/userManagement/Edit'
 import VideoManagementIndex from './components/admin/videoManagement/Index'
 import VideoManagementCreate from './components/admin/videoManagement/Create'
 import VideoManagementEdit from './components/admin/videoManagement/Edit'
-import VideoManagementShow from './components/admin/videoManagement/Show'
+import VideoManagementWatch from './components/admin/videoManagement/Watch'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
@@ -176,9 +176,9 @@ const router = new Router({
              }
         },
         {
-            path:'/admin/video_management/:id',
-            name: 'video_management_show',
-            component: VideoManagementShow,
+            path:'/admin/video_management/watch/:id',
+            name: 'video_management_watch',
+            component: VideoManagementWatch,
             props: true,
             meta: {
                 admin_authOnly: true,
