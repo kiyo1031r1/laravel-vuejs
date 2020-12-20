@@ -27,7 +27,9 @@
                             </div>
                             <!-- コメント -->
                             <div class="card-title">
+                                <h5 class="comment-title">Comment</h5>
                                 <div v-for="comment in comments" :key="comment.id" class="border-bottom my-2">
+                                    <p>{{comment.user.name}}</p>
                                     <p>{{comment.comment}}</p>
                                 </div>
                             </div>
@@ -123,6 +125,13 @@ export default {
 .see-more{
     color: #3490dc;
     cursor: pointer;
+}
+
+.comment-title{
+    font-weight: bold;
+    padding-bottom: 8px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #dee2e6;
 }
 
 </style>
