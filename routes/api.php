@@ -12,6 +12,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoCommentController;
+use App\Http\Controllers\ReVideoCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,8 @@ Route::apiResource('video_category', VideoCategoryController::class);
 Route::apiResource('videos', VideoController::class);
 Route::post('/videos/search', [VideoController::class, 'search']);
 Route::get('/videos/watch/{video}', [VideoController::class, 'watch']);
+Route::apiResource('video_comments', VideoCommentController::class);
+Route::apiResource('re_video_comments', ReVideoCommentController::class);
 
 
 Route::apiResource('/tasks',TaskController::class);
