@@ -22,7 +22,7 @@ class ReVideoCommentFactory extends Factory
     public function definition()
     {
         return [
-            'comment' => $this->faker->realText(random_int(1, 200)),
+            'comment' => $this->faker->realText(random_int(11, 100)),
             'video_comment_id' => random_int(1, 100),
             'user_id' => random_int(1, 100),
         ];
