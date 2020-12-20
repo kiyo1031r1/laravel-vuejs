@@ -172,6 +172,6 @@ class VideoController extends Controller
     }
 
     public function watch(Video $video){
-        return $video;
+        return Video::with('videoComments')->find($video->id);
     }
 }
