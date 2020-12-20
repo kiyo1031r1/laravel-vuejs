@@ -12,4 +12,8 @@ class VideoComment extends Model
     public function video(){
         return $this->belongsTo(Video::class);
     }
+
+    public function reVideoComments(){
+        return $this->hasMany(ReVideoComment::class);
+    }
 }
