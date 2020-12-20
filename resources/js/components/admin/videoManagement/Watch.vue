@@ -27,7 +27,9 @@
                             </div>
                             <!-- コメント -->
                             <div class="card-title">
-                                
+                                <div v-for="comment in video.video_comments" :key="comment.id" class="border-bottom my-2">
+                                    <p>{{comment.comment}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
