@@ -23,7 +23,7 @@ class VideoCommentFactory extends Factory
     {
         return [
             'comment' => $this->faker->realText(random_int(11, 100)),
-            'video_id' => random_int(1, 100),
+            'video_id' => random_int(1, 10),
             'user_id' => random_int(1, 100),
         ];
     }
