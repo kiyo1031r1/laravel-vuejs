@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\VideoComment;
 use \InterventionImage;
 
 class VideoController extends Controller
@@ -172,6 +173,10 @@ class VideoController extends Controller
     }
 
     public function watch(Video $video){
-        return Video::with('videoComments.reVideoComments')->find($video->id);
+        $comments = VideoComment::with(['user', 'reVideoComments.user'])
+        ->where('video_id', $video->id)
+        ->get();
+
+        return ['video' => $video, 'comments' => $comments];
     }
 }
