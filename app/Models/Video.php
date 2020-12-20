@@ -13,6 +13,10 @@ class Video extends Model
         return $this->belongsToMany(VideoCategory::class);
     }
 
+    public function videoComments(){
+        return $this->hasMany(VideoComment::class);
+    }
+
     public function setThumbnailAttribute($value){
         //seederの自動生成用
         if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false){
