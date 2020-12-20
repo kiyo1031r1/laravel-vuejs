@@ -27,7 +27,7 @@
                             </div>
                             <!-- コメント -->
                             <div class="card-title">
-                                <div v-for="comment in video.video_comments" :key="comment.id" class="border-bottom my-2">
+                                <div v-for="comment in comments" :key="comment.id" class="border-bottom my-2">
                                     <p>{{comment.comment}}</p>
                                 </div>
                             </div>
@@ -54,7 +54,8 @@ export default {
                 toggle_word: 'もっと見る',
                 height: '',
                 content_height: ''
-            }
+            },
+            comments: '',
         }
     },
     props: ['id']
@@ -85,7 +86,8 @@ export default {
         getVideo(){
             axios.get('/api/videos/watch/' + this.id)
             .then(res => {
-                this.video = res.data;
+                this.video = res.data.video;
+                this.comments = res.data.comments;
                 //概要の高さを取得
                 this.$nextTick(() => {
                     const rect = this.$refs.about.getBoundingClientRect();
