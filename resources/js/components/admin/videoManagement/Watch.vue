@@ -3,22 +3,31 @@
         <AdminHeader></AdminHeader>
         <div class="container">
             <div class="row justify-content-center">
+                <!-- メイン画面 -->
                 <div class="col-md-10">
+                    <!-- ビデオ画面 -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <video class="embed-responsive-item img-thumbnail" 
                         controls :src="video.video">
                         </video>
                     </div>
+                    <!-- ビデオ情報 -->
                     <div class="card">
                         <div class="card-body">
+                            <!-- タイトル -->
                             <div class="card-title border-bottom">
                                 <h4>{{video.title}}</h4>
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
+                            <!-- 概要 -->
                             <div class="card-title border-bottom" :style="aboutContentHeight">
                                 <div class="video-about mb-2" :style="aboutHeight"
                                 ref="about">{{video.about}}</div>
                                 <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
+                            </div>
+                            <!-- コメント -->
+                            <div class="card-title">
+                                
                             </div>
                         </div>
                     </div>
