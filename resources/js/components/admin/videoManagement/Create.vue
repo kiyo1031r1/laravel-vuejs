@@ -204,7 +204,7 @@ export default {
     methods:{
         //カテゴリー
         getCategory(){
-            axios.get('/api/video_category')
+            axios.get('/api/video_categories')
             .then((res) => {
                 this.categories = res.data;
             });
@@ -218,7 +218,7 @@ export default {
             });
         },
         createCategory(){
-            axios.post('/api/video_category', this.input_category)
+            axios.post('/api/video_categories', this.input_category)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを作成しました'
@@ -228,7 +228,7 @@ export default {
             });
         },
         deleteCategory(){
-            axios.delete('/api/video_category/' + this.delete_select_category.id)
+            axios.delete('/api/video_categories/' + this.delete_select_category.id)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
                     message:'カテゴリーを削除しました',
