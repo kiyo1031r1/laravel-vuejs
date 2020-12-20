@@ -12,4 +12,8 @@ class ReVideoComment extends Model
     public function videoComment(){
         return $this->belongsTo(VideoComment::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
