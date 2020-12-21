@@ -30,15 +30,20 @@
                                 <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
                                 <div v-for="comment in comments" :key="comment.id" class="col-md-7 border-top py-3">
                                     <p>{{comment.user.name}}</p>
-                                    <p class="card-text">{{comment.comment}}</p>
+                                    <p class="mb-0">{{comment.comment}}</p>
 
                                     <!-- 返信コメント -->
-                                    <div v-if="comment.re_video_comments.length > 0">
-                                        <a>▼このコメントへの返信を表示</a>
-                                        <div v-for="re_video_comment in comment.re_video_comments" 
-                                        :key="re_video_comment.id" class="border-top pt-3">
-                                            <p>{{re_video_comment.user.name}}</p>
-                                            <p class="card-text">{{re_video_comment.comment}}</p>
+                                    <div v-if="comment.re_video_comments.length > 0" class="px-3">
+                                        <a class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
+                                        aria-expanded="false" :aria-controls="'comment' + comment.id">
+                                        ▼このコメントへの返信を表示
+                                        </a>
+                                        <div class="px-3">
+                                            <div v-for="re_video_comment in comment.re_video_comments" 
+                                            :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
+                                                <p class="mt-3">{{re_video_comment.user.name}}</p>
+                                                <p>{{re_video_comment.comment}}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
