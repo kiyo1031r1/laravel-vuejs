@@ -21,16 +21,16 @@
                             </div>
                             <!-- 概要 -->
                             <div class="card-title border-bottom" :style="aboutContentHeight">
-                                <div class="video-about mb-2" :style="aboutHeight"
+                                <div class="col-md-7 video-about p-0 mb-2" :style="aboutHeight"
                                 ref="about">{{video.about}}</div>
                                 <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
                             </div>
                             <!-- コメント -->
                             <div class="card-title">
-                                <h5 class="comment-title">Comment</h5>
-                                <div v-for="comment in comments" :key="comment.id" class="border-bottom my-2">
+                                <h5 class="comment-title border-bottom font-weight-bold pb-2 mb-0">Comment</h5>
+                                <div v-for="comment in comments" :key="comment.id" class="border-bottom py-3">
                                     <p>{{comment.user.name}}</p>
-                                    <p>{{comment.comment}}</p>
+                                    <div class="col-md-7 p-0">{{comment.comment}}</div>
                                 </div>
                             </div>
                         </div>
@@ -125,13 +125,6 @@ export default {
 .see-more{
     color: #3490dc;
     cursor: pointer;
-}
-
-.comment-title{
-    font-weight: bold;
-    padding-bottom: 8px;
-    margin-bottom: 0px;
-    border-bottom: 1px solid #dee2e6;
 }
 
 </style>
