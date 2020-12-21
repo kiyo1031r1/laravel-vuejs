@@ -15,30 +15,30 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- タイトル -->
-                            <div class="card-title border-bottom">
+                            <div>
                                 <h4>{{video.title}}</h4>
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
                             <!-- 概要 -->
-                            <div class="card-title border-bottom" :style="aboutContentHeight">
+                            <div class="border-top py-3" :style="aboutContentHeight">
                                 <div class="col-md-7 video-about p-0 mb-2" :style="aboutHeight"
                                 ref="about">{{video.about}}</div>
                                 <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
                             </div>
                             <!-- コメント -->
-                            <div class="card-title">
-                                <h5 class="comment-title border-bottom font-weight-bold pb-2 mb-0">Comment</h5>
-                                <div v-for="comment in comments" :key="comment.id" class="border-bottom py-3">
+                            <div class="border-top py-3">
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
+                                <div v-for="comment in comments" :key="comment.id" class="col-md-7 border-top py-3">
                                     <p>{{comment.user.name}}</p>
-                                    <p class="col-md-7 px-0">{{comment.comment}}</p>
-                                    
+                                    <p class="card-text">{{comment.comment}}</p>
+
                                     <!-- 返信コメント -->
-                                    <div v-if="comment.re_video_comments.length > 0" class="col-md-7">
+                                    <div v-if="comment.re_video_comments.length > 0">
                                         <a>▼このコメントへの返信を表示</a>
                                         <div v-for="re_video_comment in comment.re_video_comments" 
                                         :key="re_video_comment.id" class="border-top pt-3">
                                             <p>{{re_video_comment.user.name}}</p>
-                                            <p class="co-md-7 px-0">{{re_video_comment.comment}}</p>
+                                            <p class="card-text">{{re_video_comment.comment}}</p>
                                         </div>
                                     </div>
                                 </div>
