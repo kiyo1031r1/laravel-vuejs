@@ -30,7 +30,17 @@
                                 <h5 class="comment-title border-bottom font-weight-bold pb-2 mb-0">Comment</h5>
                                 <div v-for="comment in comments" :key="comment.id" class="border-bottom py-3">
                                     <p>{{comment.user.name}}</p>
-                                    <div class="col-md-7 p-0">{{comment.comment}}</div>
+                                    <p class="col-md-7 px-0">{{comment.comment}}</p>
+                                    
+                                    <!-- 返信コメント -->
+                                    <div v-if="comment.re_video_comments.length > 0" class="col-md-7">
+                                        <a>▼このコメントへの返信を表示</a>
+                                        <div v-for="re_video_comment in comment.re_video_comments" 
+                                        :key="re_video_comment.id" class="border-top pt-3">
+                                            <p>{{re_video_comment.user.name}}</p>
+                                            <p class="co-md-7 px-0">{{re_video_comment.comment}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
