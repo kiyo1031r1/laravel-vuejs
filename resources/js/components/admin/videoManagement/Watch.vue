@@ -34,10 +34,11 @@
 
                                     <!-- 返信コメント -->
                                     <div v-if="comment.re_video_comments.length > 0" class="px-3">
-                                        <a class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
+                                        <div @click="commentToggle(comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
                                         aria-expanded="false" :aria-controls="'comment' + comment.id">
-                                        ▼このコメントへの返信を表示
-                                        </a>
+                                            <a v-if="!comment.re_comment_toggle">▼このコメントへの返信を表示</a>
+                                            <a v-else>▼このコメントへの返信を非表示</a>
+                                        </div>
                                         <div class="px-3">
                                             <div v-for="re_video_comment in comment.re_video_comments" 
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
@@ -105,6 +106,12 @@ export default {
             .then(res => {
                 this.video = res.data.video;
                 this.comments = res.data.comments;
+
+                //返信表示の切り替え属性を付与
+                this.comments.forEach((object, index) => {
+                    this.$set(this.comments[index], 're_comment_toggle', false);
+                })
+
                 //概要の高さを取得
                 this.$nextTick(() => {
                     const rect = this.$refs.about.getBoundingClientRect();
@@ -123,6 +130,9 @@ export default {
                 this.about.toggle_word = 'もっと見る';
                 this.about.height = '50px';
             }
+        },
+        commentToggle(comment){
+            comment.re_comment_toggle = !comment.re_comment_toggle;
         }
     },
     created(){
