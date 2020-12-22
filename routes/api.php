@@ -50,7 +50,7 @@ Route::post('/users/search',[UserController::class, 'search']);
 Route::apiResource('video_categories', VideoCategoryController::class);
 Route::apiResource('videos', VideoController::class);
 Route::post('/videos/search', [VideoController::class, 'search']);
-Route::get('/videos/watch/{video}', [VideoController::class, 'watch']);
+Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
 

@@ -171,11 +171,11 @@ class VideoController extends Controller
             $query->where($column, 'like', '%'.$value.'%');
         }
     }
-
+    
     public function watch(Video $video){
         $comments = VideoComment::with(['user', 'reVideoComments.user'])
         ->where('video_id', $video->id)
-        ->get();
+        ->paginate(request('per_page'));
 
         return ['video' => $video, 'comments' => $comments];
     }
