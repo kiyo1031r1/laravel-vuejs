@@ -30,6 +30,7 @@
         "velocity-animate": "^1.5.2",
         "vue-awesome": "^4.1.0",
         "vue-cookies": "^1.7.4",
+        "vue-infinite-loading": "^2.4.5",
         "vue-router": "^3.4.3",
         "vuejs-datepicker": "^1.6.2",
         "vuelidate": "^0.7.6",
