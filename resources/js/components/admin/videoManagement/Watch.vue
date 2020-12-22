@@ -49,6 +49,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <infinite-loading v-if="hasNext" @infinite="infiniteHandler" spinner="spiral" direction="bottom">
+                            </infinite-loading>
                         </div>
                     </div>
                 </div>
@@ -61,6 +63,7 @@
 
 <script>
 import AdminHeader from '../AdminHeaderComponent'
+import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
     data(){
@@ -73,13 +76,21 @@ export default {
                 height: '',
                 content_height: ''
             },
-            comments: '',
+            comments: [],
+            
+            //無限スクロール
+            start_page: 1,
+            end_page: 1,
+            last_page: 0,
+            per_page: 20,
+            initialized: false,
         }
     },
     props: ['id']
     ,
     components:{
-        AdminHeader
+        AdminHeader,
+        InfiniteLoading,
     },
     computed:{
         //概要が多い場合に「もっと見る」を表示
@@ -98,14 +109,28 @@ export default {
         },
         aboutContentHeight(){
             return 'height:' + this.about.content_height;
+        },
+        hasNext(){
+            return this.initialized && this.last_page > this.end_page;
         }
     },
     methods:{
-        getVideo(){
-            axios.get('/api/videos/watch/' + this.id)
+        getVideo($state, page, next){
+            axios.post('/api/videos/watch/' + this.id + '?page=' + page, {
+                'per_page' :  this.per_page,
+            })
             .then(res => {
                 this.video = res.data.video;
-                this.comments = res.data.comments;
+
+                //追加データをマージ
+                let new_data = res.data.comments.data;
+                new_data.forEach((data) => {
+                    this.comments.push(data);
+                })
+
+                this.last_page = res.data.comments.last_page;
+                this.end_page = page;
+                if($state) $state.loaded();
 
                 //返信表示の切り替え属性を付与
                 this.comments.forEach((object, index) => {
@@ -116,6 +141,9 @@ export default {
                 this.$nextTick(() => {
                     const rect = this.$refs.about.getBoundingClientRect();
                     this.about.height = rect.height;
+
+                    //初回コメントデータアクセス完了フラグ
+                    this.initialized = true;
                  })
             })
         },
@@ -133,10 +161,18 @@ export default {
         },
         commentToggle(comment){
             comment.re_comment_toggle = !comment.re_comment_toggle;
+        },
+        infiniteHandler($state){
+            if(this.end_page >= this.total_page){
+                $state.complete();
+            }
+            else{
+                this.getVideo($state, this.end_page + 1, true);
+            }
         }
     },
     created(){
-        this.getVideo();
+        this.getVideo(null, this.start_page, false);
     }
 }
 </script>
