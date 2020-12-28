@@ -84,6 +84,8 @@ export default {
             last_page: 0,
             per_page: 20,
             initialized: false,
+
+            recommends: [],
         }
     },
     props: ['id']
@@ -121,6 +123,7 @@ export default {
             })
             .then(res => {
                 this.video = res.data.video;
+                this.recommends = res.data.recommends;
 
                 //追加データをマージ
                 let new_data = res.data.comments.data;
