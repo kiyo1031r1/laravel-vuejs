@@ -171,12 +171,49 @@ class VideoController extends Controller
             $query->where($column, 'like', '%'.$value.'%');
         }
     }
-    
+
     public function watch(Video $video){
+        $video = Video::with('videoCategory')->find($video->id);
         $comments = VideoComment::with(['user', 'reVideoComments.user'])
         ->where('video_id', $video->id)
         ->paginate(request('per_page'));
+        $recommends = $this->getRecommend($video);
 
-        return ['video' => $video, 'comments' => $comments];
+        return ['video' => $video, 'comments' => $comments, 'recommends' => $recommends];
+    }
+
+    private function getRecommend(Video $video){
+        //ビデオカテゴリーを取得
+        $video_categories = $video->videoCategory()->get();
+        foreach($video_categories as $video_category){
+            $video_categories_id[] = $video_category->id;
+        }
+        
+        //一致するカテゴリーの数の配列を作成
+        $r_videos = Video::with('videoCategory')->where('id', '!=', $video->id)->get();
+        $same_num = [];
+        foreach($r_videos as $r_video){
+            $r_categories = $r_video->videoCategory()->get();
+            foreach($r_categories as $r_category){
+                $r_video_categories_id[] = $r_category->id;
+            }
+            $same_category_num = count(array_intersect($video_categories_id, $r_video_categories_id));
+            $same_num[$r_video->id] = $same_category_num;
+            $r_video_categories_id = [];
+        }
+        arsort($same_num);
+
+        //上位10個のデータを送る
+        $recommends = collect([]);
+        $count = 0;
+        foreach($same_num as $id => $value){
+            if($count > 9) {
+                break;
+            }
+            $recommends->push(Video::find($id));
+            $count++;
+        }
+
+        return $recommends;
     }
 }
