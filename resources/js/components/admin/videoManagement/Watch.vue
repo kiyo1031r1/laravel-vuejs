@@ -21,14 +21,14 @@
                             </div>
                             <!-- 概要 -->
                             <div class="border-top py-3" :style="aboutContentHeight">
-                                <div class="col-md-7 video-about p-0 mb-2" :style="aboutHeight"
+                                <div class="video-about p-0 mb-2" :style="aboutHeight"
                                 ref="about">{{video.about}}</div>
                                 <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
                             </div>
                             <!-- コメント -->
                             <div class="border-top py-3">
                                 <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
-                                <div v-for="comment in comments" :key="comment.id" class="col-md-7 border-top py-3">
+                                <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
 
