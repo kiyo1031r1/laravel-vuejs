@@ -210,7 +210,7 @@ class VideoController extends Controller
             if($count > 9) {
                 break;
             }
-            $recommends->push(Video::find($id));
+            $recommends->push($r_videos->find($id));
             $count++;
         }
 
