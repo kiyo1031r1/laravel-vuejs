@@ -31,6 +31,9 @@
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
+                                    <div class="text-right">
+                                        <button class="btn btn-danger m-4">コメント削除</button>
+                                    </div>
 
                                     <!-- 返信コメント -->
                                     <div v-if="comment.re_video_comments.length > 0" class="px-3">
@@ -44,6 +47,9 @@
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.comment}}</p>
+                                                <div class="text-right">
+                                                    <button class="btn btn-danger m-4">返信コメント削除</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
