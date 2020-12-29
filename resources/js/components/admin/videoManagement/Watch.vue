@@ -57,7 +57,7 @@
                 <!-- レコメンド動画 -->
                 <div class="col-md-3">
                     <div v-for="recommend in recommends" :key="recommend.id">
-                        <div class="card mb-2">
+                        <div @click="moveRecommend(recommend.id)" class="card mb-2">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
                                     <img class="img-fluid" :src="recommend.thumbnail">
@@ -134,6 +134,13 @@ export default {
             return this.initialized && this.last_page > this.end_page;
         }
     },
+    watch: {
+        $route(to, from){
+            //コメントは追加されるので初期化
+            this.comments = [];
+            this.getVideo(null, this.start_page, false);
+        }
+    },
     methods:{
         getVideo($state, page, next){
             axios.post('/api/videos/watch/' + this.id + '?page=' + page, {
@@ -190,6 +197,9 @@ export default {
             else{
                 this.getVideo($state, this.end_page + 1, true);
             }
+        },
+        moveRecommend($id){
+            this.$router.push({name: 'video_management_watch', params: { id: $id}});
         }
     },
     created(){
@@ -206,6 +216,10 @@ export default {
 
 .see-more{
     color: #3490dc;
+    cursor: pointer;
+}
+
+.card{
     cursor: pointer;
 }
 
