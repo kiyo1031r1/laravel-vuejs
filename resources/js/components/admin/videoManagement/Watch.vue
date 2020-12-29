@@ -1,10 +1,10 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- メイン画面 -->
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <!-- ビデオ画面 -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <video class="embed-responsive-item img-thumbnail" 
@@ -54,7 +54,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <!-- レコメンド動画 -->
+                <div class="col-md-3">
+                    <div v-for="recommend in recommends" :key="recommend.id">
+                        <div class="card mb-2">
+                            <div class="row no-gutters">
+                                <div class="col-md-5">
+                                    <img class="img-fluid" :src="recommend.thumbnail">
+                                </div>
+                                <div class="col-md-7 p-2">
+                                    <p class="card-title">{{recommend.title}}</p>
+                                    <p class="card-tag">
+                                        <span v-for="category in recommend.video_category" :key="category.id"
+                                        class="badge badge-secondary mr-1">{{category.name}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,6 +207,21 @@ export default {
 .see-more{
     color: #3490dc;
     cursor: pointer;
+}
+
+.card-title{
+    height: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.card-tag{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
 }
 
 </style>
