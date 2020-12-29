@@ -8,5 +8,9 @@ use Illuminate\Http\Request;
 
 class ReVideoCommentController extends Controller
 {
-    
+    public function destroy(Request $request){
+        $comment = ReVideoComment::find($request['id']);
+        $comment->delete();
+        return $comment;
+    }
 }
