@@ -32,7 +32,7 @@
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
                                     <div class="text-right">
-                                        <button class="btn btn-danger m-4">コメント削除</button>
+                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-4">コメント削除</button>
                                     </div>
 
                                     <!-- 返信コメント -->
@@ -48,7 +48,7 @@
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.comment}}</p>
                                                 <div class="text-right">
-                                                    <button class="btn btn-danger m-4">返信コメント削除</button>
+                                                    <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,6 +196,38 @@ export default {
         commentToggle(comment){
             comment.re_comment_toggle = !comment.re_comment_toggle;
         },
+        deleteComment(id){
+            const result = confirm('コメントを削除します。よろしいですか？');
+            if(result){
+                let formData = new FormData();
+                formData.append('id', id);
+                axios.post('/api/video_comments/' + id, formData, {
+                    headers: {
+                        'X-HTTP-Method-Override': 'DELETE'
+                    }
+                })
+                .then(()=>{
+                    this.comments = [];
+                    this.getVideo(null, this.start_page, false);
+                });
+            }
+        },
+        deleteReComment(id){
+            const result = confirm('コメントを削除します。よろしいですか？');
+            if(result){
+                let formData = new FormData();
+                formData.append('id', id);
+                axios.post('/api/re_video_comments/' + id, formData, {
+                    headers: {
+                        'X-HTTP-Method-Override': 'DELETE'
+                    }
+                })
+                .then(()=>{
+                    this.comments = [];
+                    this.getVideo(null, this.start_page, false);
+                });
+            }
+        },
         infiniteHandler($state){
             if(this.end_page >= this.total_page){
                 $state.complete();
@@ -204,8 +236,8 @@ export default {
                 this.getVideo($state, this.end_page + 1, true);
             }
         },
-        moveRecommend($id){
-            this.$router.push({name: 'video_management_watch', params: { id: $id}});
+        moveRecommend(id){
+            this.$router.push({name: 'video_management_watch', params: { id: id}});
         }
     },
     created(){
