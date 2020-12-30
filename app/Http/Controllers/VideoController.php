@@ -139,10 +139,19 @@ class VideoController extends Controller
 
         //検索
         $title = $search['title'];
+        $categories = $search['categories'];
         $created_at_start = $search['created_at_start'];
         $created_at_end = $search['created_at_end'];
+
         if($title){
             $this->searchWord($title, 'title', $query);
+        }
+        if($categories){
+            foreach($categories as $category){
+                $query->whereHas('videoCategory', function($q) use ($category){
+                    $q->where('id', $category['id']);
+                });
+            }
         }
         if($created_at_start){
             $query->whereDate('created_at', '>=', $created_at_start)->get();
