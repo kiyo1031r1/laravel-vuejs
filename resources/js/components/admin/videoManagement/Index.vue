@@ -1,36 +1,40 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="container">
+        <div class="container-fluid">
             <!-- ナビバー -->
-            <div class="row justify-content-end my-3">
-                    <div class="form-inline">
-                        <!-- 表示件数 -->
-                        <label class="col-form-label p-2" for="per_page">表示件数</label>
-                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
-                            <option value="10">10件</option>
-                            <option value="20">20件</option>
-                            <option value="50">50件</option>
-                            <option value="100">100件</option>
-                        </select>
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="row justify-content-end my-3">
+                            <div class="form-inline">
+                                <!-- 表示件数 -->
+                                <label class="col-form-label p-2" for="per_page">表示件数</label>
+                                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                                    <option value="10">10件</option>
+                                    <option value="20">20件</option>
+                                    <option value="50">50件</option>
+                                    <option value="100">100件</option>
+                                </select>
 
-                        <!-- 並び替え -->
-                        <label class="col-form-label p-2" for="per_page">並び替え</label>
-                        <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
-                            <option value="created_at_desc">新しい順</option>
-                            <option value="created_at_asc">古い順</option>
-                        </select>
+                                <!-- 並び替え -->
+                                <label class="col-form-label p-2" for="per_page">並び替え</label>
+                                <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
+                                    <option value="created_at_desc">新しい順</option>
+                                    <option value="created_at_asc">古い順</option>
+                                </select>
 
-                        <!-- ビデオ新規作成 -->
-                        <router-link :to="{ name: 'video_management_create'}">
-                            <button class="btn btn-primary px-4 ml-4">ビデオ新規作成</button>
-                        </router-link>
+                                <!-- ビデオ新規作成 -->
+                                <router-link :to="{ name: 'video_management_create'}">
+                                    <button class="btn btn-primary px-4 ml-4">ビデオ新規作成</button>
+                                </router-link>
+                            </div>
                     </div>
+                </div>
             </div>
 
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- サイドバー -->
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <!-- ビデオ検索 -->
                     <p class="sidebar-head">ビデオ検索</p>
                     <div class="sidebar p-4 mb-3">
@@ -39,6 +43,21 @@
                                 <label class="col-form-label" for="name">ビデオ名</label>
                                 <input v-model="search.title" class="form-control" type="text" id="name">
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label" for="category">カテゴリー名</label>
+                                <div class="form-row">
+                                    <div class="col-md-8">
+                                        <select  v-model="select_category" class="form-control" id="category">
+                                            <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary btn-block">追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
                             <div class="form-group">
                                 <label class="col-form-label">登録日</label>
@@ -72,7 +91,7 @@
                 </div>
 
                 <!-- メイン -->
-                <div class="col-md-9">
+                <div class="col-md-7">
                     <!-- ビデオ一覧 -->
                     <div class="row justify-content-center">
                         <div v-for="video in videos" :key="video.id" class="mb-4">
@@ -157,7 +176,7 @@ export default {
 
             //カテゴリー
             categories: [],
-            //select_category: null,
+            select_category: '',
             //select_categories: [],
 
             //登録日
