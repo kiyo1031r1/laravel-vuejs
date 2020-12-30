@@ -155,6 +155,12 @@ export default {
                 created_at_end: null,
             },
 
+            //カテゴリー
+            categories: [],
+            //select_category: null,
+            //select_categories: [],
+
+            //登録日
             datepicker:{
                 language: ja,
                 format: 'yyyy-MM-dd (D)',
@@ -245,8 +251,15 @@ export default {
                 axios.delete('/api/videos/' + id)
                 .then(() => {
                     this.getVideo();
+                    this.getCategory();
                 });
             }
+        },
+        getCategory(){
+            axios.get('/api/video_categories')
+            .then((res) => {
+                this.categories = res.data;
+            });
         },
         //ページネーション
         changeFirstPage(){
@@ -278,6 +291,7 @@ export default {
     },
     created(){
         this.getVideo();
+        this.getCategory();
     }
 }
 </script>
