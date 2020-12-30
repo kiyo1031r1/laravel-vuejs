@@ -60,7 +60,7 @@
                                 </div>
 
                                 <!-- 選択カテゴリーからの削除 -->
-                                <div class="col-md-8 p-0" v-for="select_category in select_categories" :key="select_category.id">
+                                <div class="col-md-8 p-0" v-for="select_category in search.categories" :key="select_category.id">
                                     <button @click="removeCategory(select_category)" 
                                     class="btn btn-success btn-block text-left py-0 mt-1" style="position:relative">
                                     {{select_category.name}}
@@ -180,15 +180,15 @@ export default {
 
             //検索
             search:{
-                title: null,
-                created_at_start: null,
-                created_at_end: null,
+                title: '',
+                created_at_start: '',
+                created_at_end: '',
+                categories: [],
             },
 
             //カテゴリー
             categories: [],
             select_category: '',
-            select_categories: [],
 
             //登録日
             datepicker:{
@@ -257,7 +257,7 @@ export default {
             return column;
         },
         isSelectedCategory(){
-            return this.select_categories.includes(this.select_category);
+            return this.search.categories.includes(this.select_category);
         },
     },
     methods:{
@@ -295,10 +295,10 @@ export default {
             });
         },
         addCategory(){
-            this.select_categories.push(this.select_category);
+            this.search.categories.push(this.select_category);
         },
         removeCategory(select_category){
-            this.select_categories = this.select_categories.filter((removeCategory) => {
+            this.search.categories = this.search.categories.filter((removeCategory) => {
                 return removeCategory !== select_category;
             });
         },
