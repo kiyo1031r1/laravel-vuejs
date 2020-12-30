@@ -43,6 +43,24 @@
                                 <div v-if="errors.about" class="invalid-feedback">{{ errors.about[0]}}</div>
                             </div>
                         </div>
+
+                        <!-- ステータス -->
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-md-2 py-0">ステータス</legend>
+                                <div class="col-md-8" style="padding:0 12px">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="status_normal">ノーマル</label>
+                                        <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="status">
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="status_premium">プレミアム</label>
+                                        <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="status">
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="errors.status" class="col-md-8 offset-md-2 status_error">{{ errors.status[0]}}</div>
+                        </fieldset>
                         
                         <!-- サムネイル -->
                         <div class="form-group row mb-0">
@@ -175,10 +193,12 @@ export default {
             //その他
             title: '',
             about: '',
+            status: '',
             upload_file_name_length: 25,
             errors: {
                 title: null,
                 about: null,
+                status: null,
                 thumbnail: null,
                 video: null
             }
@@ -333,6 +353,7 @@ export default {
             let formData = new FormData();
             formData.append('title', this.title);
             formData.append('about', this.about);
+            formData.append('status', this.status);
             formData.append('thumbnail', this.thumbnail);
             formData.append('thumbnail_name', this.thumbnail_name);
             formData.append('video', this.video);
@@ -359,6 +380,7 @@ export default {
                 this.title = res.data.title;
                 this.select_categories = res.data.video_category;
                 this.about = res.data.about;
+                this.status = res.data.status;
                 this.thumbnail_name = res.data.thumbnail_name;
                 this.thumbnail_preview = res.data.thumbnail;
                 this.video_name = res.data.video_name;
@@ -392,6 +414,13 @@ export default {
 
 #thumbnail, #video{
     display: none;
+}
+
+.status_error{
+    color: #e3342f;
+    font-size: 80%;
+    font-family: "Nunito", sans-serif;
+    padding-left: 4px;
 }
 
 .upload_error{
