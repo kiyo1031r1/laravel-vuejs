@@ -126,6 +126,7 @@ return [
         'contact' => 'お問い合わせ内容',
         'caution' => '注意事項',
         'about' => '概要',
+        'status' => 'ステータス',
         'thumbnail' => 'サムネイル',
         'thumbnail_name' => 'サムネイル',
         'video' => '動画',

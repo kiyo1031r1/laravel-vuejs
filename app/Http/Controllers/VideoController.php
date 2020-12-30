@@ -25,6 +25,7 @@ class VideoController extends Controller
         $input = request()->validate([
             'title' => 'required|max:255',
             'about' => 'required',
+            'status' => 'required',
             'thumbnail' => 'required',
             'thumbnail_name' => 'required',
             'video' => 'required',
@@ -33,6 +34,7 @@ class VideoController extends Controller
 
         $video->title = $input['title'];
         $video->about = $input['about'];
+        $video->status = $input['status'];
         $video->thumbnail = $input['thumbnail']->store('thumbnails');
         $this->resizeThumbnail($video->thumbnail);
         $video->thumbnail_name = $input['thumbnail_name'];
