@@ -109,7 +109,10 @@
                             <div class="card">
                                 <div class="row no-gutters">
                                     <div class="col-md-5">
-                                        <img class="img-thumbnail" :src="video.thumbnail">
+                                        <img class="img-thumbnail" :src="video.thumbnail" style="position:relative">
+                                        <span v-if="video.status == 'premium'" class="badge badge-warning" 
+                                        style="position: absolute; top:8px; right:8px; font-size:100%">{{video.status}}
+                                        </span>
                                     </div>
                                     <div class="col-md-6 border-right">
                                         <div class="card-body p-3">
