@@ -54,12 +54,14 @@ class VideoController extends Controller
         $input = request()->validate([
             'title' => 'required|max:255',
             'about' => 'required',
+            'status' => 'required',
             'thumbnail_name' => 'required',
             'video_name' => 'required',
         ]);
 
         $video->title = $input['title'];
         $video->about = $input['about'];
+        $video->status = $input['status'];
         if(request('thumbnail')){
             //前データを削除
             if($video->thumbnail){
