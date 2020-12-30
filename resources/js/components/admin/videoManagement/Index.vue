@@ -39,26 +39,37 @@
                     <p class="sidebar-head">ビデオ検索</p>
                     <div class="sidebar p-4 mb-3">
                         <form @submit.prevent="changeFirstPage()">
+                            <!-- ビデオ名 -->
                             <div class="form-group">
                                 <label class="col-form-label" for="name">ビデオ名</label>
                                 <input v-model="search.title" class="form-control" type="text" id="name">
                             </div>
 
+                            <!-- カテゴリー -->
                             <div class="form-group">
                                 <label class="col-form-label" for="category">カテゴリー名</label>
-                                <div class="form-row">
+                                <div class="form-row mb-1">
                                     <div class="col-md-8">
                                         <select  v-model="select_category" class="form-control" id="category">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-primary btn-block">追加</button>
+                                        <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block">追加</button>
                                     </div>
+                                </div>
+
+                                <!-- 選択カテゴリーからの削除 -->
+                                <div class="col-md-8 p-0" v-for="select_category in select_categories" :key="select_category.id">
+                                    <button @click="removeCategory(select_category)" 
+                                    class="btn btn-success btn-block text-left py-0 mt-1" style="position:relative">
+                                    {{select_category.name}}
+                                        <v-icon style="position:absolute; top:3px; right:6px" name="times" inverse/>
+                                    </button>
                                 </div>
                             </div>
                             
-
+                            <!-- 登録日 -->
                             <div class="form-group">
                                 <label class="col-form-label">登録日</label>
                                 <Datepicker
@@ -177,7 +188,7 @@ export default {
             //カテゴリー
             categories: [],
             select_category: '',
-            //select_categories: [],
+            select_categories: [],
 
             //登録日
             datepicker:{
@@ -244,7 +255,10 @@ export default {
             }
 
             return column;
-        }
+        },
+        isSelectedCategory(){
+            return this.select_categories.includes(this.select_category);
+        },
     },
     methods:{
         getVideo(){
@@ -278,6 +292,14 @@ export default {
             axios.get('/api/video_categories')
             .then((res) => {
                 this.categories = res.data;
+            });
+        },
+        addCategory(){
+            this.select_categories.push(this.select_category);
+        },
+        removeCategory(select_category){
+            this.select_categories = this.select_categories.filter((removeCategory) => {
+                return removeCategory !== select_category;
             });
         },
         //ページネーション
