@@ -224,6 +224,7 @@ export default {
             axios.get('/api/video_categories')
             .then((res) => {
                 this.categories = res.data;
+                this.select_category = this.categories[0];
             });
         },
         addCategory(){
