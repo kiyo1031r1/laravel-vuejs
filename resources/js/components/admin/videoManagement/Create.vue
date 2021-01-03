@@ -359,6 +359,7 @@ export default {
             formData.append('thumbnail_name', this.thumbnail_name);
             formData.append('video', this.video);
             formData.append('video_name', this.video_name);
+            formData.append('video_time', this.video_time);
             this.select_categories.forEach( category => {
                 formData.append('category' + '[]', category.id);
             });
