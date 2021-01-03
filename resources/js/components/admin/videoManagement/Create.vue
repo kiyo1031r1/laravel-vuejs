@@ -103,6 +103,7 @@
                                 </button>
                             </div>
                             <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
+                            <div v-else-if="errors.video_time" class="col-md-8 offset-md-2 upload_error">{{ errors.video_time[0]}}</div>
                         </div>
 
 

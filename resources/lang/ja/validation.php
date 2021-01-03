@@ -131,6 +131,7 @@ return [
         'thumbnail_name' => 'サムネイル',
         'video' => '動画',
         'video_name' => '動画',
+        'video_time' => '再生時間',
     ],
 
 ];

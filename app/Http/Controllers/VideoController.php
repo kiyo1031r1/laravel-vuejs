@@ -30,7 +30,7 @@ class VideoController extends Controller
             'thumbnail_name' => 'required',
             'video' => 'required|max:2048',
             'video_name' => 'required',
-            'video_time' => 'required',
+            'video_time' => 'required|max:86400',
         ]);
 
         $video->title = $input['title'];
@@ -59,7 +59,7 @@ class VideoController extends Controller
             'status' => 'required',
             'thumbnail_name' => 'required',
             'video_name' => 'required',
-            'video_time' => 'required',
+            'video_time' => 'required|max:86400',
         ]);
 
         $video->title = $input['title'];
