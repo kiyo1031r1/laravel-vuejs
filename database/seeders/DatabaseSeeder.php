@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         //$this->call(TaskSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(VideoCategorySeeder::class);
+        $this->call(VideoSeeder::class);
+        $this->call(VideoCommentSeeder::class);
+        $this->call(ReVideoCommentSeeder::class);
+        $this->call(VideoVideoCategorySeeder::class);
     }
 }

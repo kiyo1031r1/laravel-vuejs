@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        //テストユーザー
         DB::table('users')->insert([
             'name' => 'test1111',
             'email' => 'test1@test.com',
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             'status' => 'normal'
         ]);
 
-        User::factory()->times(300)->create();
+        //ランダム生成
+        User::factory()->times(100)->create();
     }
 }

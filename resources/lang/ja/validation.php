@@ -125,6 +125,13 @@ return [
         'age' => '年齢',
         'contact' => 'お問い合わせ内容',
         'caution' => '注意事項',
+        'about' => '概要',
+        'status' => 'ステータス',
+        'thumbnail' => 'サムネイル',
+        'thumbnail_name' => 'サムネイル',
+        'video' => '動画',
+        'video_name' => '動画',
+        'video_time' => '再生時間',
     ],
 
 ];

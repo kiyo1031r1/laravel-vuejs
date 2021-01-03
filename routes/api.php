@@ -1,14 +1,19 @@
 <?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoCommentController;
+use App\Http\Controllers\ReVideoCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +45,14 @@ Route::post('/admin/logout', [AdminLoginController::class, 'logout']);
 //user
 Route::apiResource('/users',UserController::class);
 Route::post('/users/search',[UserController::class, 'search']);
+
+//video
+Route::apiResource('video_categories', VideoCategoryController::class);
+Route::apiResource('videos', VideoController::class);
+Route::post('/videos/search', [VideoController::class, 'search']);
+Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
+Route::apiResource('video_comments', VideoCommentController::class);
+Route::apiResource('re_video_comments', ReVideoCommentController::class);
+
 
 Route::apiResource('/tasks',TaskController::class);

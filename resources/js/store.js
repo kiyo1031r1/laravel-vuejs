@@ -6,19 +6,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        //auth: null,
+        flashMessage: null,
+        flashColor: null,
+        flashTime: null
     },
     getters: {
-        //auth: state => state.auth,
+        flashMessage: state => state.flashMessage,
+        flashColor: state => state.flashColor,
+        flashTime: state => state.flashTime
     },
     mutations: {
-        // updateAuth(state, auth){
-        //     state.auth = auth;
-        // }
+        setFlashMessage(state, {message, time, color}) {
+            state.flashTime = time;
+            state.flashColor = color;
+            state.flashMessage = message;
+            setTimeout(() => {
+                state.flashMessage = null;
+                state.flashColor = null;
+                state.flashTime = null;
+            }, time);
+        }
     },
     actions: {
-        // updateAuth({ commit}, auth){
-        //     commit('updateAuth', auth);
-        // }
+        setFlashMessage({commit}, {message, time = 3000, color = 'primary'}) {
+            commit('setFlashMessage', {message, time, color});
+        }
     }
 });

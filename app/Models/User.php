@@ -52,4 +52,12 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsTo(Role::class);
     }
+
+    public function videoComments(){
+        return $this->hasMany(VideoComment::class);
+    }
+
+    public function reVideoComments(){
+        return $this->hasMany(ReVideoComment::class);
+    }
 }
