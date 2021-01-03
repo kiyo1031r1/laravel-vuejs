@@ -205,6 +205,8 @@ class VideoController extends Controller
     private function getRecommend(Video $video){
         //ビデオカテゴリーを取得
         $video_categories = $video->videoCategory()->get();
+        if($video_categories->count() == 0) return null;
+
         foreach($video_categories as $video_category){
             $video_categories_id[] = $video_category->id;
         }

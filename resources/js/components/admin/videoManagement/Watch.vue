@@ -79,6 +79,9 @@
                             </div>
                         </div>
                     </div>
+                    <div v-if="recommends == null">
+                        <p class="mt-4">カテゴリ未登録の為、関連動画はありません。</p>
+                    </div>
                 </div>
             </div>
         </div>
