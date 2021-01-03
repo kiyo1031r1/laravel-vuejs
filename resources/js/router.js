@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import TaskListComponent from './components/tasks/TaskListComponent'
-// import TaskCreateComponent from './components/tasks/TaskCreateComponent'
-// import TaskShowComponent from './components/tasks/TaskShowComponent'
-// import TaskEditComponent from './components/tasks/TaskEditComponent'
 
 //auth
 import LoginComponent from './components/auth/LoginComponent'
@@ -32,34 +28,6 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes: [
-        // {
-        //     path:'/tasks',
-        //     name: 'task.list',
-        //     component: TaskListComponent
-        // },
-        // {
-        //     path:'/tasks/create',
-        //     name: 'task.create',
-        //     component: TaskCreateComponent,
-        //     meta: {
-        //         authOnly : true
-        //     }
-        // },
-        // {
-        //     path:'/tasks/:taskId',
-        //     name: 'task.show',
-        //     component: TaskShowComponent,
-        //     props: true
-        // },
-        // {
-        //     path:'/tasks/:taskId/edit',
-        //     name: 'task.edit',
-        //     component: TaskEditComponent,
-        //     props: true,
-        //     meta: {
-        //         authOnly : true
-        //     }
-        // },
         {
             path:'/',
             name: 'home',

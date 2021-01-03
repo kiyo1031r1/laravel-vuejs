@@ -8,7 +8,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
@@ -53,6 +52,3 @@ Route::post('/videos/search', [VideoController::class, 'search']);
 Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
-
-
-Route::apiResource('/tasks',TaskController::class);
