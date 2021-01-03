@@ -187,6 +187,7 @@ const router = new Router({
     ]
 });
 
+//ユーザーページの認証ガード
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
         axios.get('/api/user')
@@ -211,6 +212,7 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+//管理者ページの認証ガード
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
         axios.get('/api/user')
@@ -232,7 +234,7 @@ router.beforeEach((to, from, next) => {
         .then(res => {
             let user = res.data;
             if(user.role_id === 2){
-                next({name: 'admin'});
+                next({name: 'video_management'});
             }
             else{
                 next();

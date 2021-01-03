@@ -80,7 +80,7 @@ export default {
                 .then((res) => {
                     axios.get('/api/user')
                     .then(res => {
-                        this.$router.push({name: 'admin'});
+                        this.$router.push({name: 'video_management'});
                     });
                 })
                 .catch((error) =>{
