@@ -81,7 +81,7 @@ class VideoController extends Controller
             $input_video = request()->validate([
                 'video' => 'max:2048',
             ]);
-            $video->video = request('video')->store('videos');
+            $video->video = $input_video['video']->store('videos');
         }
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video_name = $input['video_name'];
