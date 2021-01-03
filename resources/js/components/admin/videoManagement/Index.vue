@@ -113,6 +113,9 @@
                                         <span v-if="video.status == 'premium'" class="badge badge-warning" 
                                         style="position: absolute; top:8px; right:8px; font-size:100%">{{video.status}}
                                         </span>
+                                        <span class="badge badge-dark" 
+                                        style="position: absolute; bottom:8px; right:8px; font-size:100%">{{video.video_time}}
+                                        </span>
                                     </div>
                                     <div class="col-md-6 border-right">
                                         <div class="card-body p-3">
