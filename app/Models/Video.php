@@ -39,4 +39,16 @@ class Video extends Model
         }
     }
 
+    public function setVideoTimeAttribute($value){
+        if($value > 60*60) {
+            $this->attributes['video_time'] = gmdate("H:i:s", $value);
+        }
+        elseif($value > 60*10){
+            $this->attributes['video_time'] = gmdate("i:s", $value);
+        }
+        else{
+            $this->attributes['video_time'] = substr(gmdate("i:s", $value), 1);
+        }
+    }
+
 }
