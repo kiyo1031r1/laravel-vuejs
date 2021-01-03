@@ -29,7 +29,7 @@ class VideoController extends Controller
             'thumbnail' => 'required',
             'thumbnail_name' => 'required',
             'video' => 'required',
-            'video_name' => 'required',
+            'video_name' => 'min:1',
             'video_time' => 'required',
         ]);
 
@@ -59,6 +59,7 @@ class VideoController extends Controller
             'status' => 'required',
             'thumbnail_name' => 'required',
             'video_name' => 'required',
+            'video_time' => 'min:1',
         ]);
 
         $video->title = $input['title'];
@@ -81,6 +82,7 @@ class VideoController extends Controller
         }
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video_name = $input['video_name'];
+        $video->video_time = $input['video_time'];
         $video->save();
         $video->videoCategory()->sync(request('category'));
 

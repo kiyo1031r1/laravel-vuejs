@@ -91,7 +91,8 @@
                             <div v-if="video_name" class="col-md-5">
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <video class="embed-responsive-item img-thumbnail" 
-                                    controls :src="video_preview">
+                                    controls :src="video_preview" ref="video_time"
+                                    @loadedmetadata="getVideoTime()">
                                     </video>
                                 </div>
                                 <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
@@ -189,6 +190,7 @@ export default {
             video_name: '',
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
+            video_time: '',
 
             //その他
             title: '',
@@ -333,6 +335,10 @@ export default {
                 this.video_preview = URL.createObjectURL(this.video);
             }
         },
+        getVideoTime(){
+            const video = this.$refs.video_time;
+            this.video_time = Math.floor(video.duration);
+        },
         removeVideo(){
             this.video = '';
             this.video_name = '';
@@ -358,6 +364,7 @@ export default {
             formData.append('thumbnail_name', this.thumbnail_name);
             formData.append('video', this.video);
             formData.append('video_name', this.video_name);
+            formData.append('video_time', this.video_time);
             this.select_categories.forEach( category => {
                 formData.append('category' + '[]', category.id);
             });
