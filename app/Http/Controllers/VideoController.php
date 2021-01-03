@@ -30,6 +30,7 @@ class VideoController extends Controller
             'thumbnail_name' => 'required',
             'video' => 'required',
             'video_name' => 'required',
+            'video_time' => 'required',
         ]);
 
         $video->title = $input['title'];
@@ -40,6 +41,7 @@ class VideoController extends Controller
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video = $input['video']->store('videos');
         $video->video_name = $input['video_name'];
+        $video->video_time = $input['video_time'];
         $video->save();
         $video->videoCategory()->attach(request('category'));
 
