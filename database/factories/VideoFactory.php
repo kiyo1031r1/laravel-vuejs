@@ -30,6 +30,7 @@ class VideoFactory extends Factory
             'thumbnail_name' => $this->faker->text(40).'.jpg',
             'video' => 'http://127.0.0.1:8000/storage/videos/A_video_sample.qt',
             'video_name' => $this->faker->text(40).'mov',
+            'video_time' => '5',
             'created_at' => DateTime::dateTimeThisDecade(),
             'updated_at' => DateTime::dateTimeThisDecade(),
         ];
