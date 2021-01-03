@@ -197,13 +197,7 @@ export default {
             about: '',
             status: '',
             upload_file_name_length: 25,
-            errors: {
-                title: null,
-                about: null,
-                status: null,
-                thumbnail: null,
-                video: null
-            }
+            errors: {}
         }
     },
     props:['id']

@@ -28,8 +28,8 @@ class VideoController extends Controller
             'status' => 'required',
             'thumbnail' => 'required',
             'thumbnail_name' => 'required',
-            'video' => 'required',
-            'video_name' => 'min:1',
+            'video' => 'required|max:2048',
+            'video_name' => 'required',
             'video_time' => 'required',
         ]);
 
@@ -59,7 +59,7 @@ class VideoController extends Controller
             'status' => 'required',
             'thumbnail_name' => 'required',
             'video_name' => 'required',
-            'video_time' => 'min:1',
+            'video_time' => 'required',
         ]);
 
         $video->title = $input['title'];
@@ -78,6 +78,9 @@ class VideoController extends Controller
             if($video->video){
                 $this->deleteVideoFile($video->video);
             }
+            $input_video = request()->validate([
+                'video' => 'max:2048',
+            ]);
             $video->video = request('video')->store('videos');
         }
         $video->thumbnail_name = $input['thumbnail_name'];
