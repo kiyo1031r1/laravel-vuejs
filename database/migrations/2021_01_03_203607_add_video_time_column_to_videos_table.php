@@ -14,7 +14,7 @@ class AddVideoTimeColumnToVideosTable extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->integer('video_time')->after('video_name');
+            $table->string('video_time')->after('video_name');
         });
     }
 
