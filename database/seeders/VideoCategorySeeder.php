@@ -35,5 +35,11 @@ class VideoCategorySeeder extends Seeder
         DB::table('video_categories')->insert([
             'name' => 'VueJs',
         ]);
+        DB::table('video_categories')->insert([
+            'name' => 'Rails',
+        ]);
+        DB::table('video_categories')->insert([
+            'name' => 'django',
+        ]);
     }
 }
