@@ -10,7 +10,7 @@ export default {
         axios.get('/api/user')
         .then(res => {
             if(localStorage.getItem(process.env.MIX_APP_NAME)){
-                next({name: 'home'});
+                next({name: 'video'});
             }
             else{
                 localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
@@ -27,7 +27,7 @@ export default {
             VueCookies.remove('SOCIAL_LOGIN_SUCCESS');
         }
 
-        this.$router.push({name: 'home'});
+        this.$router.push({name: 'video'});
     },
 }
 </script>
