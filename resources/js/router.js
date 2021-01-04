@@ -175,7 +175,7 @@ router.beforeEach((to, from, next) => {
     else if(to.matched.some(record => record.meta.guestOnly)){
         axios.get('/api/user')
         .then(() => {
-            next({name: 'home'});
+            next({name: 'video'});
         })
         .catch(() => {
             next();
