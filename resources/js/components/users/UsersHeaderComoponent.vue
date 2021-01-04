@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluif bg-dark mb-3">
+    <div class="container-fluif bg-dark">
         <div class="container">
             <nav class="navbar navbar-dark">
                 <router-link :to="{ name: 'home'}">
