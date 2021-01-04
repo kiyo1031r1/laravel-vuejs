@@ -23,6 +23,7 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
 import UserVideoIndex from './components/users/videos/Index'
+import UserVideoShow from './components/users/videos/Show'
 
 Vue.use(Router);
 
@@ -93,6 +94,12 @@ const router = new Router({
             path:'/video',
             name: 'video',
             component: UserVideoIndex,
+        },
+        {
+            path:'/video/:category',
+            name: 'video_show',
+            props: true,
+            component: UserVideoShow,
         },
         {
             path:'/admin/login',
