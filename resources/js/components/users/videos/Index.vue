@@ -4,7 +4,9 @@
         <div class="container">
             <div class="row justify-content-center mt-3">
                 <div v-for="icon in icons" :key="icon.index" class="icon col-md-3">
-                    <img :src="'/images/' + icon + '.png'" class="image img-fluid">
+                    <router-link :to="{name:'video_show', params: { category: icon }}">
+                        <img :src="'/images/' + icon + '.png'" class="image img-fluid">
+                    </router-link>
                 </div>
             </div>
         </div>
