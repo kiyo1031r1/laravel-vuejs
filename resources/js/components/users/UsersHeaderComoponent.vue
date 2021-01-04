@@ -2,8 +2,10 @@
     <div class="container-fluif bg-dark mb-3">
         <div class="container">
             <nav class="navbar navbar-dark">
-                <span class="h1 text-light">Laravel-vuejs</span>
-                
+                <router-link :to="{ name: 'home'}">
+                    <span class="h1 text-light">Laravel-vuejs</span>
+                </router-link>
+
                 <form class="form-inline">
                     <input class="form-controll mr-sm-2" type="search">
                     <button class="btn btn-outline-success my-sm-0" type="submit">検索</button>
