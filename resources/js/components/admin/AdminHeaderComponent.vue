@@ -2,7 +2,10 @@
     <div class="container-fluif bg-dark">
         <div class="container">
             <nav class="navbar">
-                <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
+                <router-link :to="{ name: 'home'}">
+                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs</span>
+                </router-link>
+                    <span class="text-light">管理者用</span>
                 <div>
                     <router-link :to="{ name: 'user_management'}">
                         <button class="btn btn-success">ユーザー管理</button>
