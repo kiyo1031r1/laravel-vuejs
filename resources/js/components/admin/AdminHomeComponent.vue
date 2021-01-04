@@ -1,7 +1,6 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        dashboad
     </div>
 </template>
 
@@ -11,6 +10,9 @@ import AdminHeader from './AdminHeaderComponent'
 export default {
     components:{
         AdminHeader
+    },
+    created(){
+        this.$router.push({name:'video_management'});
     }
 }
 </script>
