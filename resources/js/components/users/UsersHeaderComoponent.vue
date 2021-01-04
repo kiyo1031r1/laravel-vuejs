@@ -12,7 +12,7 @@
                 </form>
                 
                 <router-link :to="{ name: ''}">
-                    <button class="btn btn-success">一覧</button>
+                    <button class="btn btn-success">ビデオ一覧</button>
                 </router-link>
 
                 <router-link :to="{ name: ''}">
