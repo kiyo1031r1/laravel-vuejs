@@ -6,7 +6,9 @@
                 <div class="title text-center">
                     <h1 class="message">さぁ、動画で簡単に</h1>
                     <h1 class="message">プログラミングを学習だ！</h1>
-                    <button class="btn btn-primary btn-lg mt-4">無料会員登録</button>
+                    <router-link :to="{ name:'login' }">
+                        <button class="btn btn-primary btn-lg mt-4">無料会員登録</button>
+                    </router-link>
                 </div>
             </div>
         </div>
