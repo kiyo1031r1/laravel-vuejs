@@ -22,6 +22,7 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
+import UserVideoIndex from './components/users/videos/Index'
 
 Vue.use(Router);
 
@@ -84,6 +85,11 @@ const router = new Router({
             name: 'sns_login',
             component: SNSLoggedInComponent,
             //コンポーネントにナビゲーションガードあり
+        },
+        {
+            path:'/video',
+            name: 'video',
+            component: UserVideoIndex,
         },
         {
             path:'/admin/login',
