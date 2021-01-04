@@ -32,7 +32,10 @@ const router = new Router({
         {
             path:'/',
             name: 'home',
-            component: UserHomeComponent
+            component: UserHomeComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/login',
