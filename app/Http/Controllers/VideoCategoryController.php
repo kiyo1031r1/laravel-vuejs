@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class VideoCategoryController extends Controller
 {
     public function index(){
-        return VideoCategory::get(['id', 'name']);
+        return VideoCategory::get(['id', 'name', 'file_name']);
     }
 
     public function store(Request $request){

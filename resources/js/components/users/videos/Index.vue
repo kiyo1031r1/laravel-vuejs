@@ -3,9 +3,9 @@
         <Header></Header>
         <div class="container">
             <div class="row justify-content-center mt-3">
-                <div v-for="icon in icons" :key="icon.index" class="icon col-md-3">
-                    <router-link :to="{name:'video_show', params: { category: icon }}">
-                        <img :src="'/images/' + icon + '.png'" class="image img-fluid">
+                <div v-for="category in categories" :key="category.id" class="icon col-md-3">
+                    <router-link :to="{name:'video_show', params: { category: category.id }}">
+                        <img :src="'/images/' + category.file_name + '.png'" class="image img-fluid">
                     </router-link>
                 </div>
             </div>
@@ -19,11 +19,22 @@ import Header from '../UsersHeaderComoponent'
 export default {
     data(){
         return{
-            icons: ['php','ruby','js','python','csharp','laravel','rails','vue','django'],
+            categories: '',
         }
     },
     components:{
         Header,
+    },
+    methods:{
+        getCategory(){
+            axios.get('/api/video_categories')
+            .then((res) => {
+                this.categories = res.data;
+            });
+        }
+    },
+    created(){
+        this.getCategory();
     }
 }
 </script>
