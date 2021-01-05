@@ -49,7 +49,7 @@ export default {
     },
     methods:{
         getVideo(){
-            //this.search.categories.push(this.category);
+            this.search.categories.push(this.category);
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
