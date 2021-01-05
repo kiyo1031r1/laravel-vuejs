@@ -27,6 +27,16 @@ class UserSeeder extends Seeder
             'status' => 'normal'
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'test2222',
+            'email' => 'test2@test.com',
+            'password' => Hash::make(22222222),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'role_id' => 1,
+            'status' => 'normal'
+        ]);
+
         //ランダム生成
         User::factory()->times(100)->create();
     }
