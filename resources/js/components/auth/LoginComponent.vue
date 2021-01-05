@@ -109,6 +109,11 @@ export default {
                 .then((res) => {
                     axios.get('/api/user')
                     .then(res => {
+                        let user = res.data;
+                        if(user.role_id === 2){
+                            localStorage.setItem(process.env.MIX_APP_NAME + '-admin', res.data.token);
+                        }
+                        
                         localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
                         this.$router.push({name: 'video'});
                     });
