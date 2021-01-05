@@ -40,7 +40,7 @@
             <!-- ビデオサムネイル -->
             <div class="row px-3 mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
-                    <div class="card">
+                    <div @click="moveVideoWatch()" class="card">
                         <div class="card-img-top">
                             <img class="img-fluid" :src="video.thumbnail" style="position:relative">
                         </div>
@@ -210,6 +210,9 @@ export default {
             }
             return page === this.current_page;
         },
+        moveVideoWatch(){
+            this.$router.push({name: 'video_watch', params: { id: video.id} });
+        }
     },
     created(){
         this.getVideo();
@@ -218,6 +221,10 @@ export default {
 </script>
 
 <style scoped>
+.card{
+    cursor: pointer;
+}
+
 .card-title{
     height: 40px;
     display: -webkit-box;
