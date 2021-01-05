@@ -11,7 +11,7 @@
                             <input v-model="search.title" class="form-control" type="text" placeholder="検索">
                             <div class="input-group-prepend">
                                 <div class="input-group-text p-0">
-                                    <button @change="changeFirstPage()" class="btn btn-default" type="submit">
+                                    <button @click="changeFirstPage()" class="btn btn-default" type="submit">
                                         <v-icon name="search"/>
                                     </button>
                                 </div>
