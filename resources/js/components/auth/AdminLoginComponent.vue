@@ -2,8 +2,10 @@
     <div>
         <div class="container-fluif bg-dark mb-3">
             <div class="container">
-                <nav class="navbar navbar-dark">
-                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs-Admin</span>
+                <nav class="navbar">
+                <router-link :to="{ name: 'home'}">
+                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs</span>
+                </router-link>
                 </nav>
             </div>
         </div>
