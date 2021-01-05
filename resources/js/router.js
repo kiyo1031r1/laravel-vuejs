@@ -180,7 +180,6 @@ router.beforeEach((to, from, next) => {
         })
         .catch(() => {
             localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
             next({name: 'login'});
         });
     }
@@ -191,7 +190,6 @@ router.beforeEach((to, from, next) => {
         })
         .catch(() => {
             localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
             next();
         });
     }
