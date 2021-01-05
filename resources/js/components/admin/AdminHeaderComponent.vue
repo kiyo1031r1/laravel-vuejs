@@ -28,6 +28,7 @@ export default {
         logout(){
             axios.post('/api/admin/logout')
             .then(() => {
+                localStorage.removeItem(process.env.MIX_APP_NAME);
                 this.$router.push({name: 'admin_login'});
             });
         }
