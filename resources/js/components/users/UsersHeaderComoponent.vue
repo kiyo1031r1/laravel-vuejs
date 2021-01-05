@@ -37,7 +37,13 @@
 export default {
     computed:{
         isAuthenticated(){
-            return localStorage.getItem(process.env.MIX_APP_NAME);
+            if(localStorage.getItem(process.env.MIX_APP_NAME)
+            || localStorage.getItem(process.env.MIX_APP_NAME + '-admin')){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
     },
     methods:{
@@ -45,6 +51,7 @@ export default {
             axios.post('/api/logout')
             .then(() => {
                 localStorage.removeItem(process.env.MIX_APP_NAME);
+                localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
                 this.$router.push({name: 'login'});
             });
         }
