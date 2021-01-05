@@ -179,6 +179,7 @@ router.beforeEach((to, from, next) => {
             next();
         })
         .catch(() => {
+            localStorage.removeItem(process.env.MIX_APP_NAME);
             next({name: 'login'});
         });
     }
@@ -188,6 +189,7 @@ router.beforeEach((to, from, next) => {
             next({name: 'video'});
         })
         .catch(() => {
+            localStorage.removeItem(process.env.MIX_APP_NAME);
             next();
         });
     }
