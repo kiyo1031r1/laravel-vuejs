@@ -96,9 +96,8 @@ const router = new Router({
             component: UserVideoIndex,
         },
         {
-            path:'/video/:category_name',
+            path:'/video/:category',
             name: 'video_show',
-            props: true,
             component: UserVideoShow,
         },
         {

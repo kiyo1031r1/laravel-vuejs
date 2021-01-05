@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row justify-content-center mt-3">
                 <div v-for="category in categories" :key="category.id" class="icon col-md-3">
-                    <router-link :to="{name:'video_show', params: { category_name: category.file_name, category: category }}">
+                    <router-link :to="{name:'video_show', params: { category: category.id }}">
                         <img :src="'/images/' + category.file_name + '.png'" class="image img-fluid">
                     </router-link>
                 </div>

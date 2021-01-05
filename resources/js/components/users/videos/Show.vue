@@ -39,17 +39,17 @@ export default {
             sort:{
                 select: 'created_at_desc',
                 per_page: 10,
-            }
+            },
         }
     },
-    props: ['category']
-    ,
     components:{
         Header,
     },
     methods:{
         getVideo(){
-            this.search.categories.push(this.category);
+            //urlからカテゴリー情報を取得
+            const category_id = this.$route.path.split('/').slice(-1)[0];
+            this.search.categories.push({id: category_id})
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
