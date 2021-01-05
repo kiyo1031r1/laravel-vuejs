@@ -3,33 +3,43 @@
         <Header></Header>
         <div class="container">
             <!-- ナビバー -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center my-3">
                 <div class="col-md-12">
-                    <div class="row justify-content-end my-3">
-                        <div class="form-inline">
-                            <!-- 表示件数 -->
-                            <label class="col-form-label p-2" for="per_page">表示件数</label>
-                            <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
-                                <option value="10">10件</option>
-                                <option value="20">20件</option>
-                                <option value="50">50件</option>
-                                <option value="100">100件</option>
-                            </select>
-
-                            <!-- 並び替え -->
-                            <label class="col-form-label p-2" for="per_page">並び替え</label>
-                            <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
-                                <option value="created_at_desc">新しい順</option>
-                                <option value="created_at_asc">古い順</option>
-                            </select>
+                    <div class="form-inline">
+                        <!-- ビデオ検索 -->
+                        <div class="input-group col-md-6 mr-auto p-0">
+                            <input v-model="search.title" class="form-control" type="text" placeholder="検索">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text p-0">
+                                    <button @change="changeFirstPage()" class="btn btn-default" type="submit">
+                                        <v-icon name="search"/>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- 表示件数 -->
+                        <label class="col-form-label p-2" for="per_page">表示件数</label>
+                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                            <option value="10">10件</option>
+                            <option value="20">20件</option>
+                            <option value="50">50件</option>
+                            <option value="100">100件</option>
+                        </select>
+
+                        <!-- 並び替え -->
+                        <label class="col-form-label p-2" for="per_page">並び替え</label>
+                        <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
+                            <option value="created_at_desc">新しい順</option>
+                            <option value="created_at_asc">古い順</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
             <!-- ビデオサムネイル -->
-            <div class="row mt-3">
-                <div v-for="video in videos" :key="video.id" class="col-md-3 px-2 mb-3">
+            <div class="row px-3 mt-3">
+                <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
                     <div class="card">
                         <div class="card-img-top">
                             <img class="img-fluid" :src="video.thumbnail" style="position:relative">
@@ -223,5 +233,9 @@ export default {
     -webkit-line-clamp: 1;
     overflow: hidden;
     margin-bottom: 6px;
+}
+
+.btn-default{
+    padding: 5px 12px;
 }
 </style>
