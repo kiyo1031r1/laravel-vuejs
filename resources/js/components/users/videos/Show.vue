@@ -2,8 +2,23 @@
     <div>
         <Header></Header>
         <div class="container">
-            <div class="row justify-content-center mt-3">
-
+            <div class="row mt-3">
+                <div v-for="video in videos" :key="video.id" class="col-md-3 px-2 mb-3">
+                    <div class="card">
+                        <div class="card-img-top">
+                            <img class="img-fluid" :src="video.thumbnail" style="position:relative">
+                        </div>
+                        <div class="card-body p-2">
+                            <p class="card-title">{{video.title}}</p>
+                            <p class="card-tag">
+                                <span v-for="category in video.video_category" :key="category.id"
+                                class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
+                                </span>
+                            </p>
+                            <p class="text-right mb-0">{{video.created_at | moment}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -73,3 +88,22 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.card-title{
+    height: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.card-tag{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+</style>
