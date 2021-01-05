@@ -2,6 +2,31 @@
     <div>
         <Header></Header>
         <div class="container">
+            <!-- ナビバー -->
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="row justify-content-end my-3">
+                        <div class="form-inline">
+                            <!-- 表示件数 -->
+                            <label class="col-form-label p-2" for="per_page">表示件数</label>
+                            <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                                <option value="10">10件</option>
+                                <option value="20">20件</option>
+                                <option value="50">50件</option>
+                                <option value="100">100件</option>
+                            </select>
+
+                            <!-- 並び替え -->
+                            <label class="col-form-label p-2" for="per_page">並び替え</label>
+                            <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
+                                <option value="created_at_desc">新しい順</option>
+                                <option value="created_at_asc">古い順</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- ビデオサムネイル -->
             <div class="row mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 px-2 mb-3">
@@ -70,7 +95,7 @@ export default {
             //ソート
             sort:{
                 select: 'created_at_desc',
-                per_page: 12,
+                per_page: 10,
             },
         }
     },
