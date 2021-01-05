@@ -110,7 +110,7 @@ export default {
                     axios.get('/api/user')
                     .then(res => {
                         localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                        this.$router.push({name: 'home'});
+                        this.$router.push({name: 'video'});
                     });
                 })
                 .catch((error) =>{

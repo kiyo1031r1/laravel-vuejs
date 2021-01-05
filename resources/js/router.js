@@ -22,6 +22,8 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
+import UserVideoIndex from './components/users/videos/Index'
+import UserVideoShow from './components/users/videos/Show'
 
 Vue.use(Router);
 
@@ -31,7 +33,10 @@ const router = new Router({
         {
             path:'/',
             name: 'home',
-            component: UserHomeComponent
+            component: UserHomeComponent,
+            meta: {
+                guestOnly: true
+            }
         },
         {
             path:'/login',
@@ -84,6 +89,17 @@ const router = new Router({
             name: 'sns_login',
             component: SNSLoggedInComponent,
             //コンポーネントにナビゲーションガードあり
+        },
+        {
+            path:'/video',
+            name: 'video',
+            component: UserVideoIndex,
+        },
+        {
+            path:'/video/:category',
+            name: 'video_show',
+            props: true,
+            component: UserVideoShow,
         },
         {
             path:'/admin/login',
@@ -169,7 +185,7 @@ router.beforeEach((to, from, next) => {
     else if(to.matched.some(record => record.meta.guestOnly)){
         axios.get('/api/user')
         .then(() => {
-            next({name: 'home'});
+            next({name: 'video'});
         })
         .catch(() => {
             next();

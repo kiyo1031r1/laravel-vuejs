@@ -14,10 +14,9 @@ class VideoVideoCategorySeeder extends Seeder
      */
     public function run()
     {
-        //VideoVideoCategory::factory()->times(50)->create();
         for($i = 0; $i < 50; $i++){
             $video_id = random_int(1, 10);
-            $video_category_id = random_int(1, 7);
+            $video_category_id = random_int(1, 9);
             $video_video_category = DB::table('video_video_category')->where([
                 ['video_id', $video_id],
                 ['video_category_id', $video_category_id]

@@ -11,7 +11,7 @@
                     <button class="btn btn-outline-success my-sm-0" type="submit">検索</button>
                 </form>
                 
-                <router-link :to="{ name: ''}">
+                <router-link :to="{ name: 'video'}">
                     <button class="btn btn-success">ビデオ一覧</button>
                 </router-link>
 
