@@ -5,7 +5,7 @@
             <!-- ナビバー -->
             <div class="row justify-content-center my-3">
                 <div class="col-md-12">
-                    <div class="form-inline">
+                    <div class="form-inline mx-2">
                         <!-- ビデオ検索 -->
                         <div class="input-group col-md-6 mr-auto p-0">
                             <input v-model="search.title" class="form-control" type="text" placeholder="検索">
@@ -40,7 +40,7 @@
             <!-- ビデオサムネイル -->
             <div class="row px-3 mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
-                    <div @click="moveVideoWatch()" class="card">
+                    <div @click="moveVideoWatch()" class="card mx-2">
                         <div class="card-img-top">
                             <img class="img-fluid" :src="video.thumbnail" style="position:relative">
                         </div>
