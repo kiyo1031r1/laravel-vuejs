@@ -14,9 +14,15 @@ class VideoVideoCategorySeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 50; $i++){
-            $video_id = random_int(1, 10);
-            $video_category_id = random_int(1, 9);
+        $video_num = 100;
+        $category_num = 9;
+        $video_video_category_num = 200;
+        $user_num = 100;
+        $video_comment_num = 500;
+
+        for($i = 0; $i < $video_video_category_num; $i++){
+            $video_id = random_int(1, $video_num);
+            $video_category_id = random_int(1, $category_num);
             $video_video_category = DB::table('video_video_category')->where([
                 ['video_id', $video_id],
                 ['video_category_id', $video_category_id]
