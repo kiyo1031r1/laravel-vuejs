@@ -241,7 +241,7 @@ export default {
             }
         },
         moveRecommend(id){
-            this.$router.push({name: 'video_management_watch', params: { id: id}});
+            this.$router.push({name: 'video_watch', params: { id: id}});
         },
         getUser(){
             axios.get('/api/user')
