@@ -10,7 +10,8 @@ class VideoCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'file_name'
     ];
 
     public function videos(){
