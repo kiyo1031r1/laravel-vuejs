@@ -107,6 +107,10 @@ const router = new Router({
             name: 'video_watch',
             component: UserVideoWatch,
             props: true,
+            meta: {
+                authOnly: true
+            }
+            //TODO premiumのナビゲーションガード作成
         },
         {
             path:'/admin/login',
