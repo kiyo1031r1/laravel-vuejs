@@ -164,14 +164,14 @@ export default {
             return column;
         },
     },
+    props: ['category']
+    ,
     components:{
         Header,
     },
     methods:{
         getVideo(){
-            //urlからカテゴリー情報を取得
-            const category_id = this.$route.path.split('/').slice(-1)[0];
-            this.search.categories.push({id: category_id})
+            this.search.categories.push({id: this.category})
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
