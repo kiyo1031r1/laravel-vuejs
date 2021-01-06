@@ -41,8 +41,14 @@
             <div class="row px-3 mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
                     <div @click="moveVideoWatch()" class="card mx-2">
-                        <div class="card-img-top">
-                            <img class="img-fluid" :src="video.thumbnail" style="position:relative">
+                        <div class="card-img-top"  style="position:relative">
+                            <img class="img-fluid" :src="video.thumbnail">
+                            <span v-if="video.status == 'premium'" class="badge badge-warning" 
+                            style="position: absolute; top:4px; right:4px; font-size:100%">{{video.status}}
+                            </span>
+                            <span class="badge badge-dark" 
+                            style="position: absolute; bottom:4px; right:4px; font-size:100%">{{video.video_time}}
+                            </span>
                         </div>
                         <div class="card-body p-2">
                             <p class="card-title">{{video.title}}</p>
