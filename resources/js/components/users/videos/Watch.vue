@@ -31,7 +31,7 @@
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
-                                    <div class="text-right">
+                                    <div v-if="isCommentUser(comment)" class="text-right">
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-4">コメント削除</button>
                                     </div>
 
@@ -47,7 +47,7 @@
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.comment}}</p>
-                                                <div class="text-right">
+                                                <div v-if="isCommentUser(comment)" class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
                                                 </div>
                                             </div>
@@ -95,6 +95,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 export default {
     data(){
         return{
+            user: '',
             video: {},
             about:{
                 see_more : false,
@@ -241,10 +242,20 @@ export default {
         },
         moveRecommend(id){
             this.$router.push({name: 'video_management_watch', params: { id: id}});
+        },
+        getUser(){
+            axios.get('/api/user')
+            .then(res => {
+                this.user = res.data;
+            });
+        },
+        isCommentUser(comment){
+            return comment.user_id === this.user.id;
         }
     },
     created(){
         this.getVideo(null, this.start_page, false);
+        this.getUser();
     }
 }
 </script>
