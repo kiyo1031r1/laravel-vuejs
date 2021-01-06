@@ -40,7 +40,7 @@
             <!-- ビデオサムネイル -->
             <div class="row px-3 mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
-                    <div @click="moveVideoWatch()" class="card mx-2">
+                    <div @click="moveVideoWatch(video)" class="card mx-2">
                         <div class="card-img-top"  style="position:relative">
                             <img class="img-fluid" :src="video.thumbnail">
                             <span v-if="video.status == 'premium'" class="badge badge-warning" 
@@ -216,7 +216,7 @@ export default {
             }
             return page === this.current_page;
         },
-        moveVideoWatch(){
+        moveVideoWatch(video){
             this.$router.push({name: 'video_watch', params: { id: video.id} });
         }
     },
