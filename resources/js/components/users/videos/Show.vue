@@ -91,6 +91,7 @@ export default {
             //ビデオ
             videos:[],
             is_videos: true,
+            video_category: '',
 
             //ページネーション
             current_page: 1,
@@ -171,7 +172,7 @@ export default {
     },
     methods:{
         getVideo(){
-            this.search.categories.push({id: this.category})
+            this.search.categories.push({id: this.video_category.id})
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
@@ -218,10 +219,19 @@ export default {
         },
         moveVideoWatch(video){
             this.$router.push({name: 'video_watch', params: { id: video.id} });
+        },
+        getCategory(name){
+            axios.post('/api/video_categories/get_category', {
+                file_name: name,
+            })
+            .then(res => {
+                this.video_category = res.data;
+                this.getVideo();
+            });
         }
     },
     created(){
-        this.getVideo();
+        this.getCategory(this.category);
     }
 }
 </script>
