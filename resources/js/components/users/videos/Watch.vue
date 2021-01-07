@@ -29,13 +29,13 @@
                             <div class="border-top py-3">
                                 <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
                                 <!-- コメント投稿 -->
-                                <p>〜〜としてコメントする</p>
-                                <div class="form-group row">
-                                <div class="col-md-10">
+                                <span>{{user.name}} としてコメントする</span>
+                                <div class="input-group mb-4">
                                     <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_comment"></textarea>
+                                    <div class="input-group-append">
+                                        <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                    </div>
                                     <div v-if="errors.comment" class="invalid-feedback">{{ errors.comment[0]}}</div>
-                                </div>
-                                    <button class="btn btn-success">コメント</button>
                                 </div>
 
                                 <!-- コメント一覧 -->
@@ -265,6 +265,21 @@ export default {
         },
         isCommentUser(comment){
             return comment.user_id === this.user.id;
+        },
+        createComment(){
+            axios.post('/api/video_comments', {
+                comment: this.my_comment,
+                video_id: this.video.id,
+                user_id: this.user.id
+            })
+            .then(() => {
+                this.my_comment = '';
+                this.comments = [];
+                this.getVideo(null, this.start_page, false);
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
         }
     },
     created(){

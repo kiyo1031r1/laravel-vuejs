@@ -132,7 +132,8 @@ return [
         'video' => '動画',
         'video_name' => '動画',
         'video_time' => '再生時間',
-        'file_name' => 'ファイル名'
+        'file_name' => 'ファイル名',
+        'comment' => 'コメント',
     ],
 
 ];
