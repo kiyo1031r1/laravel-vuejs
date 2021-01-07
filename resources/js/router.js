@@ -103,7 +103,7 @@ const router = new Router({
             props: true,
         },
         {
-            path:'/video/:id',
+            path:'/video/watch/:id',
             name: 'video_watch',
             component: UserVideoWatch,
             props: true,
