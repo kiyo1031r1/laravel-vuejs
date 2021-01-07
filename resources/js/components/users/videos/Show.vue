@@ -172,7 +172,10 @@ export default {
     },
     methods:{
         getVideo(){
-            this.search.categories.push({id: this.video_category.id})
+            //初回のみ登録
+            if(this.search.categories.length === 0) {
+                this.search.categories.push({id: this.video_category.id})
+            }
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
