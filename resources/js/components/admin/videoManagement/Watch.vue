@@ -147,25 +147,47 @@ export default {
         $route(to, from){
             //コメントは追加されるので初期化
             this.comments = [];
-            this.getVideo(null, this.start_page, false);
+            this.getComment(null, this.start_page, false);
         }
     },
     methods:{
-        getVideo($state, page, next){
-            axios.post('/api/videos/watch/' + this.id + '?page=' + page, {
-                'per_page' :  this.per_page,
-            })
+        getVideo(){
+            axios.post('/api/videos/watch/' + this.id)
             .then(res => {
                 this.video = res.data.video;
                 this.recommends = res.data.recommends;
 
+                //初回コメント読み込み
+                this.getComment(null, this.start_page, false);
+            });
+        },
+        aboutToggle(){
+            if(!this.about.toggle){
+                this.about.toggle = true;
+                this.about.toggle_word = '一部を表示';
+                this.about.height = '100%';
+            }
+            else{
+                this.about.toggle = false;
+                this.about.toggle_word = 'もっと見る';
+                this.about.height = '50px';
+            }
+        },
+        //コメント
+        getComment($state, page, next){
+            axios.post('/api/video_comments/get_comment' + '?page=' + page, {
+                video_id : this.video.id,
+                per_page :  this.per_page,
+            })
+            .then(res => {
                 //追加データをマージ
-                let new_data = res.data.comments.data;
+                this.new = res.data.data;
+                let new_data = res.data.data;
                 new_data.forEach((data) => {
                     this.comments.push(data);
                 })
 
-                this.last_page = res.data.comments.last_page;
+                this.last_page = res.data.last_page;
                 this.end_page = page;
                 if($state) $state.loaded();
 
@@ -184,18 +206,6 @@ export default {
                  })
             })
         },
-        aboutToggle(){
-            if(!this.about.toggle){
-                this.about.toggle = true;
-                this.about.toggle_word = '一部を表示';
-                this.about.height = '100%';
-            }
-            else{
-                this.about.toggle = false;
-                this.about.toggle_word = 'もっと見る';
-                this.about.height = '50px';
-            }
-        },
         commentToggle(comment){
             comment.re_comment_toggle = !comment.re_comment_toggle;
         },
@@ -211,7 +221,7 @@ export default {
                 })
                 .then(()=>{
                     this.comments = [];
-                    this.getVideo(null, this.start_page, false);
+                    this.getComment(null, this.start_page, false);
                 });
             }
         },
@@ -227,7 +237,7 @@ export default {
                 })
                 .then(()=>{
                     this.comments = [];
-                    this.getVideo(null, this.start_page, false);
+                    this.getComment(null, this.start_page, false);
                 });
             }
         },
@@ -242,9 +252,10 @@ export default {
         moveRecommend(id){
             this.$router.push({name: 'video_management_watch', params: { id: id}});
         }
+
     },
     created(){
-        this.getVideo(null, this.start_page, false);
+        this.getVideo();
     }
 }
 </script>
