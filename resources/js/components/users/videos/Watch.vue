@@ -28,6 +28,17 @@
                             <!-- コメント -->
                             <div class="border-top py-3">
                                 <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
+                                <!-- コメント投稿 -->
+                                <p>〜〜としてコメントする</p>
+                                <div class="form-group row">
+                                <div class="col-md-10">
+                                    <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_comment"></textarea>
+                                    <div v-if="errors.comment" class="invalid-feedback">{{ errors.comment[0]}}</div>
+                                </div>
+                                    <button class="btn btn-success">コメント</button>
+                                </div>
+
+                                <!-- コメント一覧 -->
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
@@ -55,6 +66,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <infinite-loading v-if="hasNext" @infinite="infiniteHandler" spinner="spiral" direction="bottom">
                             </infinite-loading>
                         </div>
@@ -104,7 +116,9 @@ export default {
                 height: '',
                 content_height: ''
             },
+            my_comment: '',
             comments: [],
+            errors:{},
             
             //無限スクロール
             start_page: 1,
