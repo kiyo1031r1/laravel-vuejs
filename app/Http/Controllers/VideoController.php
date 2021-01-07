@@ -194,12 +194,8 @@ class VideoController extends Controller
 
     public function watch(Video $video){
         $video = Video::with('videoCategory')->find($video->id);
-        $comments = VideoComment::with(['user', 'reVideoComments.user'])
-        ->where('video_id', $video->id)
-        ->paginate(request('per_page'));
         $recommends = $this->getRecommend($video);
-
-        return ['video' => $video, 'comments' => $comments, 'recommends' => $recommends];
+        return ['video' => $video, 'recommends' => $recommends];
     }
 
     private function getRecommend(Video $video){
