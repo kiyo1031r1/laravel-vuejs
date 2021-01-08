@@ -42,6 +42,22 @@
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
+                                    <div class="mt-2">
+                                        <button class="btn btn-outline-secondary btn-sm">返信</button>
+                                        <button class="btn btn-outline-secondary btn-sm">キャンセル</button>
+                                    </div>
+
+                                    <!-- コメント返信 -->
+                                    <template>
+                                        <div class="input-group mt-2 mb-4">
+                                            <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_comment"></textarea>
+                                            <div class="input-group-append">
+                                                <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                            </div>
+                                            <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
+                                        </div>
+                                    </template>
+
                                     <div v-if="isCommentUser(comment)" class="text-right">
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-4">コメント削除</button>
                                     </div>
@@ -58,7 +74,7 @@
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.re_comment}}</p>
-                                                <div v-if="isCommentUser(re_video_comment)" class="text-right">
+                                                <div v-if="isCommentUser(comment)" class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
                                                 </div>
                                             </div>
@@ -117,6 +133,7 @@ export default {
                 content_height: ''
             },
             my_comment: '',
+            my_re_comment: '',
             comments: [],
             errors:{},
             
