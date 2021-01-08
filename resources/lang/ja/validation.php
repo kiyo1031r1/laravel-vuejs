@@ -134,6 +134,7 @@ return [
         'video_time' => '再生時間',
         'file_name' => 'ファイル名',
         'comment' => 'コメント',
+        're_comment' => 'コメント',
     ],
 
 ];

@@ -43,16 +43,21 @@
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
                                     <div class="mt-2">
-                                        <button class="btn btn-outline-secondary btn-sm">返信</button>
-                                        <button class="btn btn-outline-secondary btn-sm">キャンセル</button>
+                                        <button v-if="!comment.re_comment_form" 
+                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm"
+                                        :disabled="is_re_comment_form" >返信
+                                        </button>
+                                        <button v-else 
+                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm">キャンセル
+                                        </button>
                                     </div>
 
                                     <!-- コメント返信 -->
-                                    <template>
+                                    <template v-if="comment.re_comment_form">
                                         <div class="input-group mt-2 mb-4">
                                             <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_comment"></textarea>
                                             <div class="input-group-append">
-                                                <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                                <button @click="createReComment(comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
                                             <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
                                         </div>
@@ -74,7 +79,7 @@
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.re_comment}}</p>
-                                                <div v-if="isCommentUser(comment)" class="text-right">
+                                                <div v-if="isCommentUser(re_video_comment)" class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
                                                 </div>
                                             </div>
@@ -132,8 +137,10 @@ export default {
                 height: '',
                 content_height: ''
             },
+            //コメント
             my_comment: '',
             my_re_comment: '',
+            is_re_comment_form: false,
             comments: [],
             errors:{},
             
@@ -177,9 +184,7 @@ export default {
     },
     watch: {
         $route(to, from){
-            //コメントは追加されるので初期化
-            this.comments = [];
-            this.getComment(null, this.start_page, false);
+            this.initializedComment();
         }
     },
     methods:{
@@ -224,9 +229,11 @@ export default {
                 this.end_page = page;
                 if($state) $state.loaded();
 
-                //返信表示の切り替え属性を付与
                 this.comments.forEach((object, index) => {
+                    //返信表示の切り替え属性を付与
                     this.$set(this.comments[index], 're_comment_toggle', false);
+                    //返信フォームの切り替え属性を付与
+                    this.$set(this.comments[index], 're_comment_form', false);
                 })
 
                 //概要の高さを取得
@@ -255,9 +262,26 @@ export default {
                 user_id: this.user.id
             })
             .then(() => {
-                this.my_comment = '';
-                this.comments = [];
-                this.getComment(null, this.start_page, false);
+                this.initializedComment();
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
+        },
+        reCommentFormToggle(comment){
+            comment.re_comment_form = !comment.re_comment_form;
+
+            //返信フォームを１つだけ表示
+            this.is_re_comment_form = !this.is_re_comment_form;
+        },
+        createReComment(comment){
+            axios.post('/api/re_video_comments', {
+                re_comment: this.my_re_comment,
+                video_comment_id: comment.id,
+                user_id: this.user.id
+            })
+            .then(() => {
+                this.initializedComment();
             })
             .catch((error) => {
                 this.errors = error.response.data.errors;
@@ -277,8 +301,7 @@ export default {
                     }
                 })
                 .then(()=>{
-                    this.comments = [];
-                    this.getComment(null, this.start_page, false);
+                    this.initializedComment();
                 });
             }
         },
@@ -293,10 +316,16 @@ export default {
                     }
                 })
                 .then(()=>{
-                    this.comments = [];
-                    this.getComment(null, this.start_page, false);
+                    this.initializedComment();
                 });
             }
+        },
+        initializedComment(){
+            this.my_comment = '';
+            this.my_re_comment = '';
+            this.is_re_comment_form = false;
+            this.comments = [];
+            this.getComment(null, this.start_page, false);
         },
         infiniteHandler($state){
             if(this.end_page >= this.total_page){
