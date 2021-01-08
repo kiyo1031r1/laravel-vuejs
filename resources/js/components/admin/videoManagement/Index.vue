@@ -102,44 +102,33 @@
                 </div>
 
                 <!-- メイン -->
-                <div class="col-md-7">
-                    <!-- ビデオ一覧 -->
-                    <div class="row justify-content-center">
-                        <div v-for="video in videos" :key="video.id" class="mb-4">
-                            <div class="card">
-                                <div class="row no-gutters">
-                                    <div class="col-md-5">
-                                        <div class="card-img-top"  style="position:relative">
-                                            <img class="img-fluid" :src="video.thumbnail">
-                                            <span v-if="video.status == 'premium'" class="badge badge-warning" 
-                                            style="position: absolute; top:8px; right:8px; font-size:100%">{{video.status}}
-                                            </span>
-                                            <span class="badge badge-dark" 
-                                            style="position: absolute; bottom:8px; right:8px; font-size:100%">{{video.video_time}}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 border-right">
-                                        <div class="card-body p-3">
-                                            <h5 class="card-title mb-1">{{video.title}}</h5>
-                                            <p class="card-tag">
-                                                <span v-for="category in video.video_category" :key="category.id"
-                                                class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
-                                                </span>
-                                            </p>
-                                            <p class="card-text">{{video.about}}</p>
-                                            <p class="text-right mb-0">{{video.created_at | moment}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1 my-auto px-2">
-                                        <router-link :to="{name: 'video_management_watch', params: { id: video.id}}">
-                                            <button class="btn btn-success btn-block mb-2">視聴</button>
-                                        </router-link>
-                                        <router-link :to="{name: 'video_management_edit', params: { id: video.id}}">
-                                            <button class="btn btn-warning btn-block mb-2">編集</button>
-                                        </router-link>
-                                        <button @click="deleteVideo(video.id)" class="btn btn-danger btn-block mb-2">削除</button>
-                                    </div>
+                <div class="col-md-8">
+                    <!-- ビデオサムネイル -->
+                    <div class="row px-3">
+                        <div v-for="video in videos" :key="video.id" class="col-md-15 p-0 mb-3">
+                            <div class="card mx-2">
+                                <div class="card-img-top"  style="position:relative">
+                                    <img class="img-fluid" :src="video.thumbnail">
+                                    <span v-if="video.status == 'premium'" class="badge badge-warning" 
+                                    style="position: absolute; top:4px; right:4px; font-size:100%">{{video.status}}
+                                    </span>
+                                    <span class="badge badge-dark" 
+                                    style="position: absolute; bottom:4px; right:4px; font-size:100%">{{video.video_time}}
+                                    </span>
+                                </div>
+                                <div class="card-body p-2">
+                                    <p class="card-title">{{video.title}}</p>
+                                    <p class="card-tag">
+                                        <span v-for="category in video.video_category" :key="category.id"
+                                        class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
+                                        </span>
+                                    </p>
+                                    <p class="text-right mb-0">{{video.created_at | moment}}</p>
+                                </div>
+                                <div class="card-button card-body">
+                                    <button @click="moveVideoWatch(video)" class="btn btn-success">視聴</button>
+                                    <button @click="editVideo(video)" class="btn btn-warning">編集</button>
+                                    <button @click="deleteVideo(video)" class="btn btn-danger">削除</button>
                                 </div>
                             </div>
                         </div>
@@ -286,10 +275,16 @@ export default {
                 this.last_page = res.data.last_page;
             });
         },
-        deleteVideo(id){
+        moveVideoWatch(video){
+            this.$router.push({name: 'video_management_watch', params: { id: video.id} });
+        },
+        editVideo(video){
+            this.$router.push({name: 'video_management_edit', params: { id: video.id} });
+        },
+        deleteVideo(video){
             const result = confirm('ビデオを削除します。よろしいですか？');
             if(result){
-                axios.delete('/api/videos/' + id)
+                axios.delete('/api/videos/' + video.id)
                 .then(() => {
                     this.getVideo();
                     this.getCategory();
@@ -310,6 +305,7 @@ export default {
                 return removeCategory !== select_category;
             });
         },
+
         //ページネーション
         changeFirstPage(){
             //最初のユーザーから表示する仕様
@@ -389,6 +385,42 @@ export default {
     -webkit-line-clamp: 3;
     overflow: hidden;
     white-space: pre-wrap;
+}
+
+.card-button{
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #dee2e6;
+}
+
+.col-15, .col-sm-15, .col-md-15, .col-lg-15 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+.col-sm-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
+}
+
+@media (min-width: 992px) {
+.col-md-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
+}
+
+@media (min-width: 1200px) {
+.col-lg-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
 }
 
 </style>
