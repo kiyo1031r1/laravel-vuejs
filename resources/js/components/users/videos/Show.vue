@@ -38,8 +38,8 @@
             </div>
 
             <!-- ビデオサムネイル -->
-            <div class="row px-3 mt-3">
-                <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
+            <div class="row px-3 mt-5">
+                <div v-for="video in videos" :key="video.id" class="col-md-15 p-0 mb-5">
                     <div @click="moveVideoWatch(video)" class="card mx-2">
                         <div class="card-img-top"  style="position:relative">
                             <img class="img-fluid" :src="video.thumbnail">
@@ -264,4 +264,34 @@ export default {
 .btn-default{
     padding: 5px 12px;
 }
+
+.col-15, .col-sm-15, .col-md-15, .col-lg-15 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+.col-sm-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
+}
+
+@media (min-width: 992px) {
+.col-md-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
+}
+
+@media (min-width: 1200px) {
+.col-lg-15 {
+	width: 20%;
+	flex: 0 0 20%;
+}
+}
+
 </style>
