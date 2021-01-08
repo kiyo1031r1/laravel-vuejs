@@ -46,7 +46,7 @@
                                             <div v-for="re_video_comment in comment.re_video_comments" 
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
-                                                <p>{{re_video_comment.comment}}</p>
+                                                <p>{{re_video_comment.re_comment}}</p>
                                                 <div class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
                                                 </div>
