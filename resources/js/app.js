@@ -32,6 +32,9 @@ Vue.filter('moment', (value) => {
 Vue.filter('moment_details', (value) => {
     return moment(value).format('YYYY-MM-DD (dd) HH:MM:SS');
 });
+Vue.filter('moment_ago', (value) => {
+    return moment(value).fromNow();
+});
 Vue.filter('role', (value) => {
     if(value == 1){
         return '一般ユーザー';

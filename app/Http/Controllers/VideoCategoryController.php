@@ -23,4 +23,8 @@ class VideoCategoryController extends Controller
     public function destroy(VideoCategory $videoCategory){
         return $videoCategory->delete();
     }
+
+    public function getCategory(Request $request){
+        return VideoCategory::where('file_name', $request['file_name'])->first();
+    }
 }

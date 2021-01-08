@@ -9,6 +9,12 @@ class VideoComment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'comment',
+        'video_id',
+        'user_id',
+    ];
+
     public function video(){
         return $this->belongsTo(Video::class);
     }

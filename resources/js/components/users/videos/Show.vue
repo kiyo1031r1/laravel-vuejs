@@ -40,7 +40,7 @@
             <!-- ビデオサムネイル -->
             <div class="row px-3 mt-3">
                 <div v-for="video in videos" :key="video.id" class="col-md-3 p-0 mb-3">
-                    <div @click="moveVideoWatch()" class="card mx-2">
+                    <div @click="moveVideoWatch(video)" class="card mx-2">
                         <div class="card-img-top"  style="position:relative">
                             <img class="img-fluid" :src="video.thumbnail">
                             <span v-if="video.status == 'premium'" class="badge badge-warning" 
@@ -91,6 +91,7 @@ export default {
             //ビデオ
             videos:[],
             is_videos: true,
+            video_category: '',
 
             //ページネーション
             current_page: 1,
@@ -164,14 +165,17 @@ export default {
             return column;
         },
     },
+    props: ['category']
+    ,
     components:{
         Header,
     },
     methods:{
         getVideo(){
-            //urlからカテゴリー情報を取得
-            const category_id = this.$route.path.split('/').slice(-1)[0];
-            this.search.categories.push({id: category_id})
+            //初回のみ登録
+            if(this.search.categories.length === 0) {
+                this.search.categories.push({id: this.video_category.id})
+            }
 
             axios.post('/api/videos/search?page=' + this.current_page, {
                 search: this.search,
@@ -216,12 +220,21 @@ export default {
             }
             return page === this.current_page;
         },
-        moveVideoWatch(){
+        moveVideoWatch(video){
             this.$router.push({name: 'video_watch', params: { id: video.id} });
+        },
+        getCategory(name){
+            axios.post('/api/video_categories/get_category', {
+                file_name: name,
+            })
+            .then(res => {
+                this.video_category = res.data;
+                this.getVideo();
+            });
         }
     },
     created(){
-        this.getVideo();
+        this.getCategory(this.category);
     }
 }
 </script>

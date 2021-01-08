@@ -24,6 +24,7 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 import UserHomeComponent from './components/users/UserHomeComponent'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoShow from './components/users/videos/Show'
+import UserVideoWatch from './components/users/videos/Watch'
 
 Vue.use(Router);
 
@@ -99,6 +100,17 @@ const router = new Router({
             path:'/video/:category',
             name: 'video_show',
             component: UserVideoShow,
+            props: true,
+        },
+        {
+            path:'/video/watch/:id',
+            name: 'video_watch',
+            component: UserVideoWatch,
+            props: true,
+            meta: {
+                authOnly: true
+            }
+            //TODO premiumのナビゲーションガード作成
         },
         {
             path:'/admin/login',
