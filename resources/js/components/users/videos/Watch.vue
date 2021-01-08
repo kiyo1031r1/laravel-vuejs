@@ -40,7 +40,10 @@
 
                                 <!-- コメント一覧 -->
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
-                                    <p>{{comment.user.name}}</p>
+                                    <div class="mb-2">
+                                        <span>{{comment.user.name}}</span>
+                                        <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
+                                    </div>
                                     <p class="mb-0">{{comment.comment}}</p>
                                     <div class="mt-2">
                                         <button v-if="!comment.re_comment_form" 
@@ -77,7 +80,10 @@
                                         <div class="px-3">
                                             <div v-for="re_video_comment in comment.re_video_comments" 
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
-                                                <p class="mt-3">{{re_video_comment.user.name}}</p>
+                                                <div class="mt-3 mb-2">
+                                                    <span>{{re_video_comment.user.name}}</span>
+                                                    <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
+                                                </div>
                                                 <p>{{re_video_comment.re_comment}}</p>
                                                 <div v-if="isCommentUser(re_video_comment)" class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
