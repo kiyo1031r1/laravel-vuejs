@@ -32,7 +32,7 @@
                                     <p>{{comment.user.name}}</p>
                                     <p class="mb-0">{{comment.comment}}</p>
                                     <div class="text-right">
-                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-4">コメント削除</button>
+                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
 
                                     <!-- 返信コメント -->
@@ -48,7 +48,7 @@
                                                 <p class="mt-3">{{re_video_comment.user.name}}</p>
                                                 <p>{{re_video_comment.re_comment}}</p>
                                                 <div class="text-right">
-                                                    <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-4">返信コメント削除</button>
+                                                    <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
                                                 </div>
                                             </div>
                                         </div>
