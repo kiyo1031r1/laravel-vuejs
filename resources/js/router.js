@@ -22,6 +22,7 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 
 //user
 import UserHomeComponent from './components/users/UserHomeComponent'
+import UserMyPage from './components/users/MyPage'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoShow from './components/users/videos/Show'
 import UserVideoWatch from './components/users/videos/Watch'
@@ -111,6 +112,14 @@ const router = new Router({
                 authOnly: true
             }
             //TODO premiumのナビゲーションガード作成
+        },
+        {
+            path:'/my_page',
+            name: 'my_page',
+            component: UserMyPage,
+            meta: {
+                authOnly: true
+             }
         },
         {
             path:'/admin/login',
