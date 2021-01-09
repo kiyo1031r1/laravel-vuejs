@@ -8,13 +8,13 @@
                     <!-- ユーザー名 -->
                     <div class="form-group row">
                         <label class="col-form-label col-md-3">ユーザー名</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input class="form-control" :value="before_name" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="name">ユーザー名を変更</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="name" v-model="user.name">
                             <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
                         </div>
@@ -23,13 +23,13 @@
                     <!-- メールアドレス -->
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">メールアドレス</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input class="form-control" :value="before_email" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="email">メールアドレスを変更</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email">
                             <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0]}}</div>
                         </div>
@@ -38,21 +38,21 @@
                     <!-- パスワード -->
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3" for="password">パスワードを変更</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input :type="is_password_hidden ? 'password' : 'text'"
                             :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
                             <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
                         </div>
                         <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
-                            <div v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></div>
-                            <div v-else><v-icon name="eye" scale="1.5"/></div>
+                            <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
+                            <span v-else><v-icon name="eye" scale="1.5"/></span>
                         </div>
                     </div>
 
                     <!-- パスワードの確認 -->
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="password_confirmation">パスワード再確認</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input :type="is_password_hidden ? 'password' : 'text'"
                             class="form-control" id="password_confirmation" v-model="user.password_confirmation">
                         </div>
@@ -61,7 +61,7 @@
                     <!-- ステータス -->
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">ステータス</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input class="form-control" :value="user.status" disabled>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <!-- 次回更新日 -->
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">次回更新日</label>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <input class="form-control" :value="user.next_update === null ? '-' : user.next_update" disabled>
                         </div>
                     </div>
@@ -135,8 +135,13 @@ export default {
 
 <style scoped>
 .password-icon {
-    margin: auto;
-    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
     cursor: pointer;
+}
+
+.fa-icon{
+    height: 20px;
 }
 </style>
