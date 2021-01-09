@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -18,11 +20,11 @@ class UserController extends Controller
     }
 
     public function updateFromUser(User $user){
-        $input = request()->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        $input = Validator::make(request()->all(),[
+            'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ])->validate();
 
         $user->update($input);
         return $user;
