@@ -11,6 +11,10 @@
                         <button class="btn btn-success">ビデオ一覧</button>
                     </router-link>
 
+                    <router-link :to="{ name: 'my_page'}">
+                        <button class="btn btn-success">マイページ</button>
+                    </router-link>
+
                     <router-link :to="{ name: ''}">
                         <button class="btn btn-success">プレミアム登録</button>
                     </router-link>
