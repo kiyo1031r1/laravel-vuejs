@@ -40,7 +40,7 @@
                         <label class="col-form-label col-md-3" for="password">パスワードを変更</label>
                         <div class="col-md-8">
                             <input :type="is_password_hidden ? 'password' : 'text'"
-                            :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
+                            :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
                             <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
                         </div>
                         <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
