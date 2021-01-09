@@ -117,9 +117,12 @@ export default {
         edit(){
             const result = confirm('ユーザー情報を変更します。よろしいですか？');
             if(result){
-                axios.put('/api/users/' + this.user.id, this.user)
+                axios.put('/api/users/update_from_user/' + this.user.id, this.user)
                 .then(() => {
                     this.$router.push({name: 'video'})
+                })
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
                 });
             }
         }
