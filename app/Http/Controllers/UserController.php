@@ -20,11 +20,20 @@ class UserController extends Controller
     }
 
     public function updateFromUser(User $user){
-        $input = Validator::make(request()->all(),[
-            'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ])->validate();
+        //パスワード未入力時は、パスワード情報を変更しない
+        if(request('password') !== null){
+            $input = Validator::make(request()->all(),[
+                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'password' => ['required', 'string', 'min:8', 'confirmed']
+            ])->validate();
+        }
+        else{
+            $input = Validator::make(request()->all(),[
+                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            ])->validate();
+        }
 
         $user->update($input);
         return $user;
