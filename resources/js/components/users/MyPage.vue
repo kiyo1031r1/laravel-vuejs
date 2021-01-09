@@ -39,10 +39,13 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3" for="password">パスワードを変更</label>
                         <div class="col-md-8">
-                            <input type="password" :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
+                            <input :type="is_password_hidden ? 'password' : 'text'"
+                            :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
                             <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
                         </div>
-                        <div class="password-icon col-md-1"><v-icon name="eye-slash" scale="1.5"/>
+                        <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
+                            <div v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></div>
+                            <div v-else><v-icon name="eye" scale="1.5"/></div>
                         </div>
                     </div>
 
@@ -50,7 +53,8 @@
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="password_confirmation">パスワード再確認</label>
                         <div class="col-md-8">
-                            <input type="password" class="form-control" id="password_confirmation" v-model="user.password_confirmation">
+                            <input :type="is_password_hidden ? 'password' : 'text'"
+                            class="form-control" id="password_confirmation" v-model="user.password_confirmation">
                         </div>
                     </div>
 
@@ -91,6 +95,7 @@ export default {
         return {
             user:{},
             errors:{},
+            is_password_hidden: true,
         }
     },
     components:{
@@ -102,6 +107,9 @@ export default {
             .then(res => {
                 this.user = res.data;
             });
+        },
+        passwordHiddenToggle(){
+            this.is_password_hidden = !this.is_password_hidden;
         },
         edit(){
             const result = confirm('ユーザー情報を変更します。よろしいですか？');
