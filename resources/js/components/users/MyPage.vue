@@ -88,7 +88,6 @@
 
 <script>
 import Header from './UsersHeaderComoponent'
-import moment from 'moment'
 
 export default {
     data(){
