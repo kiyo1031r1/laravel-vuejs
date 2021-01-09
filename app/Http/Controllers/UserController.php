@@ -17,6 +17,17 @@ class UserController extends Controller
         return $user;
     }
 
+    public function updateFromUser(User $user){
+        $input = request()->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user->update($input);
+        return $user;
+    }
+
     public function destroy(User $user){
         $user->delete();
         return $user;
