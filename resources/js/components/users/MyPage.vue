@@ -9,7 +9,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-md-3">ユーザー名</label>
                         <div class="col-md-8">
-                            <input class="form-control" :value="user.name" disabled>
+                            <input class="form-control" :value="before_name" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -24,7 +24,7 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">メールアドレス</label>
                         <div class="col-md-8">
-                            <input class="form-control" :value="user.email" disabled>
+                            <input class="form-control" :value="before_email" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,6 +93,8 @@ export default {
     data(){
         return {
             user:{},
+            before_name:'',
+            before_email:'',
             errors:{},
             is_password_hidden: true,
         }
@@ -105,6 +107,8 @@ export default {
             axios.get('/api/user/')
             .then(res => {
                 this.user = res.data;
+                this.before_name = this.user.name;
+                this.before_email = this.user.email;
             });
         },
         passwordHiddenToggle(){
