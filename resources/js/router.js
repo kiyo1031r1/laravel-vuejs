@@ -207,7 +207,12 @@ router.beforeEach((to, from, next) => {
         .catch(() => {
             localStorage.removeItem(process.env.MIX_APP_NAME);
             localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
-            next({name: 'login'});
+            //遷移予定だったpathを取得
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
         });
     }
     else if(to.matched.some(record => record.meta.guestOnly)){
@@ -261,7 +266,12 @@ router.beforeEach((to, from, next) => {
         })
         .catch(() => {
             localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
-            next({name: 'admin_login'});
+            //遷移予定だったpathを取得
+            next({name: 'admin_login',
+                query: {
+                    redirect: to.path
+                }
+            });
         });
     }
     else if(to.matched.some(record => record.meta.admin_guestOnly)){

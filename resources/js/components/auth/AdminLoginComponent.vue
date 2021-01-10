@@ -84,7 +84,11 @@ export default {
                     .then(res => {
                         localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
                         localStorage.setItem(process.env.MIX_APP_NAME + '-admin', res.data.token);
-                        this.$router.push({name: 'video_management'});
+
+                        //遷移前のpath情報があれば、そのページに遷移
+                        this.$router.push(
+                            this.$route.query.redirect ? this.$route.query.redirect : {name: 'video_management'}
+                        );
                     });
                 })
                 .catch((error) =>{
