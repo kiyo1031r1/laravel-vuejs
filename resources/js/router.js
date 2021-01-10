@@ -96,12 +96,18 @@ const router = new Router({
             path:'/video',
             name: 'video',
             component: UserVideoIndex,
+            meta: {
+                common: true
+            }
         },
         {
             path:'/video/:category',
             name: 'video_show',
             component: UserVideoShow,
             props: true,
+            meta: {
+                common: true
+            }
         },
         {
             path:'/video/watch/:id',
@@ -219,6 +225,26 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
+
+//ユーザーページの共通ページ
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.common)){
+        axios.get('/api/user')
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            localStorage.removeItem(process.env.MIX_APP_NAME);
+            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            next();
+        });
+    }
+    else{
+        next();
+    }
+});
+
 
 //管理者ページの認証ガード
 router.beforeEach((to, from, next) => {
