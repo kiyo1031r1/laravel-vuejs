@@ -49,8 +49,17 @@ export default {
     },
     methods:{
         logout(){
-            axios.post('/api/logout')
+            axios.get('/api/user')
             .then(() => {
+                axios.post('/api/logout')
+                .then(() => {
+                    localStorage.removeItem(process.env.MIX_APP_NAME);
+                    localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+                    this.$router.push({name: 'login'});
+                });
+            })
+            //自動ログアウト時の処理
+            .catch(() => {
                 localStorage.removeItem(process.env.MIX_APP_NAME);
                 localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
                 this.$router.push({name: 'login'});
