@@ -15,7 +15,7 @@
                         <button class="btn btn-success">マイページ</button>
                     </router-link>
 
-                    <router-link :to="{ name: ''}">
+                    <router-link :to="{ name: 'premium'}">
                         <button class="btn btn-success">プレミアム登録</button>
                     </router-link>
 
