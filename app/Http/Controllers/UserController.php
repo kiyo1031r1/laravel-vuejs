@@ -137,4 +137,12 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    public function cancelPremium(User $user){
+        if($user->status === 'premium'){
+            $user->status = 'normal';
+            $user->save();
+        }
+        return $user;
+    }
 }
