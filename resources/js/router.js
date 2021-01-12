@@ -26,7 +26,7 @@ import UserMyPage from './components/users/MyPage'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoShow from './components/users/videos/Show'
 import UserVideoWatch from './components/users/videos/Watch'
-import UserPremium from './components/users/Premium'
+import UserPremiumRegister from './components/users/premium/Register'
 
 Vue.use(Router);
 
@@ -129,9 +129,9 @@ const router = new Router({
              }
         },
         {
-            path:'/premium',
-            name: 'premium',
-            component: UserPremium,
+            path:'/premium/register',
+            name: 'premium_register',
+            component: UserPremiumRegister,
             meta: {
                 authOnly: true
              }
