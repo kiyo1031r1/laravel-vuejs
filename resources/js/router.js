@@ -29,6 +29,7 @@ import UserVideoWatch from './components/users/videos/Watch'
 import UserPremiumRegister from './components/users/premium/Register'
 import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
 import UserPremiumCancel from './components/users/premium/Cancel'
+import UserPremiumChangedNormal from './components/users/premium/ChangedNormal'
 
 Vue.use(Router);
 
@@ -150,6 +151,14 @@ const router = new Router({
             path:'/premium/cancel',
             name: 'premium_cancel',
             component: UserPremiumCancel,
+            meta: {
+                authOnly: true
+             }
+        },
+        {
+            path:'/premium/changed_normal',
+            name: 'changed_normal',
+            component: UserPremiumChangedNormal,
             meta: {
                 authOnly: true
              }
