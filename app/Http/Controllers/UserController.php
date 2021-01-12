@@ -129,4 +129,20 @@ class UserController extends Controller
             $query->where($column, 'like', '%'.$value.'%');
         }
     }
+
+    public function registerPremium(User $user){
+        if($user->status === 'normal'){
+            $user->status = 'premium';
+            $user->save();
+        }
+        return $user;
+    }
+
+    public function cancelPremium(User $user){
+        if($user->status === 'premium'){
+            $user->status = 'normal';
+            $user->save();
+        }
+        return $user;
+    }
 }

@@ -26,6 +26,10 @@ import UserMyPage from './components/users/MyPage'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoShow from './components/users/videos/Show'
 import UserVideoWatch from './components/users/videos/Watch'
+import UserPremiumRegister from './components/users/premium/Register'
+import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
+import UserPremiumCancel from './components/users/premium/Cancel'
+import UserPremiumChangedNormal from './components/users/premium/ChangedNormal'
 
 Vue.use(Router);
 
@@ -126,6 +130,34 @@ const router = new Router({
             meta: {
                 authOnly: true
              }
+        },
+        {
+            path:'/premium/register',
+            name: 'premium_register',
+            component: UserPremiumRegister,
+            meta: {
+                normalOnly: true,
+             }
+        },
+        {
+            path:'/premium/changed_premium',
+            name: 'changed_premium',
+            component: UserPremiumChangedPremium,
+             //コンポーネントにナビゲーションガードあり
+        },
+        {
+            path:'/premium/cancel',
+            name: 'premium_cancel',
+            component: UserPremiumCancel,
+            meta: {
+                premiumOnly: true,
+             }
+        },
+        {
+            path:'/premium/changed_normal',
+            name: 'changed_normal',
+            component: UserPremiumChangedNormal,
+             //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/admin/login',
@@ -243,6 +275,56 @@ router.beforeEach((to, from, next) => {
             localStorage.removeItem(process.env.MIX_APP_NAME);
             localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
             next();
+        });
+    }
+    else{
+        next();
+    }
+});
+
+
+//プレミアムページ
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.premiumOnly)){
+        axios.get('/api/user')
+        .then(res => {
+            const user = res.data;
+            if(user.status === 'premium'){
+                next();
+            }
+            else{
+                next({name: 'premium_register'});
+            }
+        })
+        .catch(() => {
+            localStorage.removeItem(process.env.MIX_APP_NAME);
+            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
+        });
+    }
+    else if(to.matched.some(record => record.meta.normalOnly)){
+        axios.get('/api/user')
+        .then(res => {
+            const user = res.data;
+            if(user.status === 'normal'){
+                next();
+            }
+            else{
+                next({name: 'premium_cancel'});
+            }
+        })
+        .catch(() => {
+            localStorage.removeItem(process.env.MIX_APP_NAME);
+            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
         });
     }
     else{
