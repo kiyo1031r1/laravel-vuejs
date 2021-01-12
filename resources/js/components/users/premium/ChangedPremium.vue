@@ -19,24 +19,8 @@
 import Header from '../UsersHeaderComoponent'
 
 export default {
-    data(){
-        return{
-            user: {}
-        }
-    },
     components: {
         Header
-    },
-    methods: {
-        getUser(){
-            axios.get('/api/user')
-            .then(res => {
-                this.user = res.data;
-            });
-        },
-    },
-    created(){
-        this.getUser();
     }
 }
 </script>
