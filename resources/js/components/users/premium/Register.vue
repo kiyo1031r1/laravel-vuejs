@@ -8,7 +8,7 @@
                     <div class="card-body text-center">
                         <h3>プレミアム会員は</h3>
                         <h3>全ての動画が見放題!!</h3>
-                        <button class="btn btn-success mt-4">プレミアム登録する</button>
+                        <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
                         <p>※月額500円(税込)</p>
                     </div>
                 </div>
@@ -21,8 +21,35 @@
 import Header from '../UsersHeaderComoponent'
 
 export default {
+    data(){
+        return{
+            user: {}
+        }
+    },
     components: {
         Header
+    },
+    methods: {
+        getUser(){
+            axios.get('/api/user')
+            .then(res => {
+                this.user = res.data;
+            });
+        },
+        register(){
+            if(this.user.status === 'normal'){
+                axios.post('/api/users/register_premium/' + this.user.id)
+                .then(() => {
+                    this.$router.push({name: 'change_premium'});
+                });
+            }
+            else{
+                alert('すでにプレミアム会員です');
+            }
+        }
+    },
+    created(){
+        this.getUser();
     }
 }
 </script>

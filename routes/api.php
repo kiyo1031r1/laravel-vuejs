@@ -44,6 +44,7 @@ Route::post('/admin/logout', [AdminLoginController::class, 'logout']);
 //user
 Route::apiResource('/users',UserController::class);
 Route::put('/users/update_from_user/{user}',[UserController::class, 'updateFromUser']);
+Route::post('/users/register_premium/{user}',[UserController::class, 'registerPremium']);
 Route::post('/users/search',[UserController::class, 'search']);
 
 //video
