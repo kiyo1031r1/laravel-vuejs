@@ -21,6 +21,26 @@ import Header from '../UsersHeaderComoponent'
 export default {
     components: {
         Header
+    },
+    beforeRouteEnter(to, from, next){
+        if(from.name === 'premium_cancel'){
+            next();
+        }
+        else{
+            axios.get('/api/user')
+            .then(res => {
+                const user = res.data;
+                if(user.status === 'normal'){
+                    next({name: 'premium_register'});
+                }
+                else{
+                    next();
+                }
+            })
+            .catch(() => {
+                next({name: 'login'});
+            });
+        }
     }
 }
 </script>
