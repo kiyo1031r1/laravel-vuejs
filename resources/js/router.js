@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 
 //auth
 import LoginComponent from './components/auth/LoginComponent'
@@ -232,7 +233,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
         axios.get('/api/user')
-        .then(() => {
+        .then((res) => {
+            const user = res.data;
+            store.dispatch('setUser', user);
             next();
         })
         .catch(() => {
@@ -288,6 +291,7 @@ router.beforeEach((to, from, next) => {
         axios.get('/api/user')
         .then(res => {
             const user = res.data;
+            store.dispatch('setUser', user);
             if(user.status === 'premium'){
                 next();
             }
@@ -309,6 +313,7 @@ router.beforeEach((to, from, next) => {
         axios.get('/api/user')
         .then(res => {
             const user = res.data;
+            store.dispatch('setUser', user);
             if(user.status === 'normal'){
                 next();
             }
@@ -337,7 +342,8 @@ router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
         axios.get('/api/user')
         .then(res => {
-            let user = res.data;
+            const user = res.data;
+            store.dispatch('setUser', user);
             if(user.role_id != 2){
                 next({name: 'admin_login'});
             }
@@ -358,7 +364,8 @@ router.beforeEach((to, from, next) => {
     else if(to.matched.some(record => record.meta.admin_guestOnly)){
         axios.get('/api/user')
         .then(res => {
-            let user = res.data;
+            const user = res.data;
+            store.dispatch('setUser', user);
             if(user.role_id === 2){
                 next({name: 'video_management'});
             }

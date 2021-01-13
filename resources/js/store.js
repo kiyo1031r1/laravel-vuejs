@@ -8,12 +8,16 @@ export default new Vuex.Store({
     state: {
         flashMessage: null,
         flashColor: null,
-        flashTime: null
+        flashTime: null,
+
+        user: {}
     },
     getters: {
         flashMessage: state => state.flashMessage,
         flashColor: state => state.flashColor,
-        flashTime: state => state.flashTime
+        flashTime: state => state.flashTime,
+
+        user: state => state.user,
     },
     mutations: {
         setFlashMessage(state, {message, time, color}) {
@@ -25,11 +29,19 @@ export default new Vuex.Store({
                 state.flashColor = null;
                 state.flashTime = null;
             }, time);
+        },
+
+        //認証チェック時に取得したユーザーデータを保存
+        setUser(state, user){
+            state.user = user;
         }
     },
     actions: {
         setFlashMessage({commit}, {message, time = 3000, color = 'primary'}) {
             commit('setFlashMessage', {message, time, color});
+        },
+        setUser({commit}, user){
+            commit('setUser', user);
         }
     }
 });
