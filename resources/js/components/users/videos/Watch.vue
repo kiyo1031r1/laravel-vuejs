@@ -210,7 +210,6 @@ export default {
                 }
             });
         },
-        
         isPremium(status){
             this.video.status = status;
             if(this.video.status === 'premium' && this.user.status === 'normal'){
