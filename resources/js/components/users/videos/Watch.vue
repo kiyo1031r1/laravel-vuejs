@@ -199,20 +199,16 @@ export default {
             .then(res => {
                 this.video = res.data.video;
                 this.recommends = res.data.recommends;
-
-                //ユーザーの読み込み
-                axios.get('/api/user')
-                .then(res => {
-                    this.user = res.data;
-                    //プレミアムのチェック
-                    if(this.video.status === 'premium' && this.user.status === 'normal'){
-                        this.$router.push({name: 'premium_register'});
-                    }
-                    else{
-                        //初回コメント読み込み
-                        this.getComment(null, this.start_page, false);
-                    }
-                });
+                this.user = this.$store.getters.user;
+                
+                //プレミアムのチェック
+                if(this.video.status === 'premium' && this.user.status === 'normal'){
+                    this.$router.push({name: 'premium_register'});
+                }
+                else{
+                    //初回コメント読み込み
+                    this.getComment(null, this.start_page, false);
+                }
             });
         },
         aboutToggle(){
