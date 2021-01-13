@@ -21,24 +21,13 @@
 import Header from '../UsersHeaderComoponent'
 
 export default {
-    data(){
-        return{
-            user: {}
-        }
-    },
     components: {
         Header
     },
     methods: {
-        getUser(){
-            axios.get('/api/user')
-            .then(res => {
-                this.user = res.data;
-            });
-        },
         register(){
-            if(this.user.status === 'normal'){
-                axios.post('/api/users/register_premium/' + this.user.id)
+            if(this.$store.getters.user.status === 'normal'){
+                axios.post('/api/users/register_premium/' + this.$store.getters.user.id)
                 .then(() => {
                     this.$router.push({name: 'changed_premium'});
                 });
@@ -47,9 +36,6 @@ export default {
                 alert('すでにプレミアム会員です');
             }
         }
-    },
-    created(){
-        this.getUser();
     }
 }
 </script>
