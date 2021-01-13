@@ -38,7 +38,7 @@
             </div>
 
             <!-- ビデオサムネイル -->
-            <div class="row px-3 mt-5">
+            <div v-show="is_videos" class="row px-3 mt-5">
                 <div v-for="video in videos" :key="video.id" class="col-md-15 p-0 mb-5">
                     <div @click="moveVideoWatch(video)" class="card mx-2">
                         <div class="card-img-top"  style="position:relative">
@@ -59,6 +59,16 @@
                             </p>
                             <p class="text-right mb-0">{{video.created_at | moment}}</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ビデオ非存在時(検索結果が0件) -->
+            <div v-show="!is_videos" class="col-md-8 mx-auto mb-5">
+                <div class="card">
+                    <div class="card-header">ビデオ検索結果</div>
+                    <div class="card-body">
+                        <p class="text-center text-danger mb-0 my-4">一致するビデオがありませんでした</p>
                     </div>
                 </div>
             </div>
