@@ -109,7 +109,6 @@ const router = new Router({
             path:'/video/:category',
             name: 'video_show',
             component: UserVideoShow,
-            props: true,
             meta: {
                 common: true
             }

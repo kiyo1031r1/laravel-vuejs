@@ -19,7 +19,7 @@ import Header from '../UsersHeaderComoponent'
 export default {
     data(){
         return{
-            //基本固定なので直接記載
+            //基本的に固定なので直接記載
             categories: [
                 'php',
                 'ruby',

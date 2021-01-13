@@ -91,6 +91,19 @@ export default {
             //ビデオ
             videos:[],
             is_videos: true,
+
+            //基本的に固定なので直接記載
+            categories: [
+                'php',
+                'ruby',
+                'javascript',
+                'python',
+                'csharp',
+                'laravel',
+                'rails',
+                'vuejs',
+                'django'
+            ],
             video_category: '',
 
             //ページネーション
@@ -165,8 +178,6 @@ export default {
             return column;
         },
     },
-    props: ['category']
-    ,
     components:{
         Header,
     },
@@ -174,7 +185,10 @@ export default {
         getVideo(){
             //初回のみ登録
             if(this.search.categories.length === 0) {
-                this.search.categories.push({id: this.video_category.id})
+                //urlからカテゴリー名とidを取得
+                const category_name = this.$route.path.split('/').slice(-1)[0];
+                const category_id = this.categories.findIndex(category => category === category_name) + 1;
+                this.search.categories.push({id: category_id})
             }
 
             axios.post('/api/videos/search?page=' + this.current_page, {
@@ -222,19 +236,10 @@ export default {
         },
         moveVideoWatch(video){
             this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
-        },
-        getCategory(name){
-            axios.post('/api/video_categories/get_category', {
-                file_name: name,
-            })
-            .then(res => {
-                this.video_category = res.data;
-                this.getVideo();
-            });
         }
     },
     created(){
-        this.getCategory(this.category);
+        this.getVideo();
     }
 }
 </script>
