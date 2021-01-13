@@ -221,7 +221,7 @@ export default {
             return page === this.current_page;
         },
         moveVideoWatch(video){
-            this.$router.push({name: 'video_watch', params: { id: video.id} });
+            this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
         },
         getCategory(name){
             axios.post('/api/video_categories/get_category', {

@@ -160,7 +160,7 @@ export default {
             recommends: [],
         }
     },
-    props: ['id']
+    props: ['id', 'status']
     ,
     components:{
         Header,
@@ -199,10 +199,9 @@ export default {
             .then(res => {
                 this.video = res.data.video;
                 this.recommends = res.data.recommends;
-                this.user = this.$store.getters.user;
-                
-                //プレミアムのチェック
-                if(this.video.status === 'premium' && this.user.status === 'normal'){
+
+                //直接アクセスの場合のプレミアム判別
+                if(!this.isPremium(this.video.status)){
                     this.$router.push({name: 'premium_register'});
                 }
                 else{
@@ -210,6 +209,16 @@ export default {
                     this.getComment(null, this.start_page, false);
                 }
             });
+        },
+        
+        isPremium(status){
+            this.video.status = status;
+            if(this.video.status === 'premium' && this.user.status === 'normal'){
+                return false;
+            }
+            else {
+                return true;
+            }
         },
         aboutToggle(){
             if(!this.about.toggle){
@@ -262,12 +271,6 @@ export default {
         commentToggle(comment){
             comment.re_comment_toggle = !comment.re_comment_toggle;
         },
-        // getUser(){
-        //     axios.get('/api/user')
-        //     .then(res => {
-        //         this.user = res.data;
-        //     });
-        // },
         createComment(){
             axios.post('/api/video_comments', {
                 comment: this.my_comment,
@@ -351,11 +354,19 @@ export default {
 
         moveRecommend(id){
             this.$router.push({name: 'video_watch', params: { id: id}});
-        },
+        }
     },
     created(){
-        this.getVideo();
-    }
+        this.user = this.$store.getters.user;
+
+        //showページからのstatusで基本的にプレミアム判別
+        if(!this.isPremium(this.status)){
+            this.$router.push({name: 'premium_register'});
+        }
+        else{
+            this.getVideo();
+        }
+    },
 }
 </script>
 
