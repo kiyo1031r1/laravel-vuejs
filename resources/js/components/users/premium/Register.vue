@@ -21,13 +21,18 @@
 import Header from '../UsersHeaderComoponent'
 
 export default {
+    data(){
+        return{
+            user: {}
+        }
+    },
     components: {
         Header
     },
     methods: {
         register(){
-            if(this.$store.getters.user.status === 'normal'){
-                axios.post('/api/users/register_premium/' + this.$store.getters.user.id)
+            if(this.user.status === 'normal'){
+                axios.post('/api/users/register_premium/' + this.user.id)
                 .then(() => {
                     this.$router.push({name: 'changed_premium'});
                 });
@@ -36,6 +41,9 @@ export default {
                 alert('すでにプレミアム会員です');
             }
         }
+    },
+    created(){
+        this.user = this.$store.getters.user;
     }
 }
 </script>

@@ -29,12 +29,6 @@ export default {
         Header
     },
     methods: {
-        getUser(){
-            axios.get('/api/user')
-            .then(res => {
-                this.user = res.data;
-            });
-        },
         cancel(){
             if(this.user.status === 'premium'){
                 axios.post('/api/users/cancel_premium/' + this.user.id)
@@ -48,7 +42,7 @@ export default {
         }
     },
     created(){
-        this.getUser();
+        this.user = this.$store.getters.user;
     }
 }
 </script>
