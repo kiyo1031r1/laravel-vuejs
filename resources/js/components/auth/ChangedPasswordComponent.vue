@@ -24,19 +24,18 @@ export default {
         Header
     },
     beforeRouteEnter(to, from, next){
-        axios.get('/api/user')
-        .then(res => {
-            if(localStorage.getItem(process.env.MIX_APP_NAME)){
-                next({name: 'home'});
-            }
-            else{
-                localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                next();
-            }
-        })
-        .catch(() => {
-            next({name: 'login'});
-        });
+        if(from.name === 'reset_password'){
+            next();
+        }
+        else{
+            axios.get('/api/user')
+            .then(() => {
+                next({name: 'video'});
+            })
+            .catch(() => {
+                next({name: 'login'});
+            });
+        }
     }
 }
 </script>

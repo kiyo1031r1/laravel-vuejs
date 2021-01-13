@@ -96,11 +96,7 @@ export default {
             .then(() => {
                 axios.post('/api/register', this.user)
                 .then((res) => {
-                    axios.get('api/user')
-                    .then(res => {
-                        localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                        this.$router.push({name: 'home'});
-                    })
+                    this.$router.push({name: 'video'});
                 })
                 .catch((error) =>{
                     this.errors = error.response.data.errors;

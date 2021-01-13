@@ -26,10 +26,15 @@
 export default {
     methods:{
         logout(){
-            axios.post('/api/admin/logout')
+            axios.get('/api/user')
             .then(() => {
-                localStorage.removeItem(process.env.MIX_APP_NAME);
-                localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+                axios.post('/api/admin/logout')
+                .then(() => {
+                    this.$router.push({name: 'admin_login'});
+                });
+            })
+            //自動ログアウト時の処理
+            .catch(() => {
                 this.$router.push({name: 'admin_login'});
             });
         }

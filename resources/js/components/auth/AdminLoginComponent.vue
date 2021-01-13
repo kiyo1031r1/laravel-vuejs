@@ -80,19 +80,13 @@ export default {
             .then(() => {
                 axios.post('/api/admin/login', this.user)
                 .then((res) => {
-                    axios.get('/api/user')
-                    .then(res => {
-                        localStorage.setItem(process.env.MIX_APP_NAME, res.data.token);
-                        localStorage.setItem(process.env.MIX_APP_NAME + '-admin', res.data.token);
-
-                        //遷移前のpath情報があれば、そのページに遷移
-                        this.$router.push(
-                            this.$route.query.redirect ? this.$route.query.redirect : {name: 'video_management'}
-                        );
-                    });
+                    //遷移前のpath情報があれば、そのページに遷移
+                    this.$router.push(
+                        this.$route.query.redirect ? this.$route.query.redirect : {name: 'video_management'}
+                    );
                 })
                 .catch((error) =>{
-                this.errors = error.response.data.errors;
+                    this.errors = error.response.data.errors;
                 })
             });
         }

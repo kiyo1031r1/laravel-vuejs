@@ -34,14 +34,21 @@ export default new Vuex.Store({
         //認証チェック時に取得したユーザーデータを保存
         setUser(state, user){
             state.user = user;
+        },
+        resetUser(state){
+            state.user = null;
         }
     },
     actions: {
         setFlashMessage({commit}, {message, time = 3000, color = 'primary'}) {
             commit('setFlashMessage', {message, time, color});
         },
+
         setUser({commit}, user){
             commit('setUser', user);
+        },
+        resetUser({commit}){
+            commit('resetUser');
         }
     }
 });

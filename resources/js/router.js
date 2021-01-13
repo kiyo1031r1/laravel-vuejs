@@ -238,8 +238,7 @@ router.beforeEach((to, from, next) => {
             next();
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             //遷移予定だったpathを取得
             next({name: 'login', 
                 query: {
@@ -250,12 +249,13 @@ router.beforeEach((to, from, next) => {
     }
     else if(to.matched.some(record => record.meta.guestOnly)){
         axios.get('/api/user')
-        .then(() => {
+        .then((res) => {
+            const user = res.data;
+            store.dispatch('setUser', user);
             next({name: 'video'});
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             next();
         });
     }
@@ -269,12 +269,13 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.common)){
         axios.get('/api/user')
-        .then(() => {
+        .then(res => {
+            const user = res.data;
+            store.dispatch('setUser', user);
             next();
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             next();
         });
     }
@@ -299,8 +300,7 @@ router.beforeEach((to, from, next) => {
             }
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             next({name: 'login', 
                 query: {
                     redirect: to.path
@@ -321,8 +321,7 @@ router.beforeEach((to, from, next) => {
             }
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME);
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             next({name: 'login', 
                 query: {
                     redirect: to.path
@@ -351,7 +350,7 @@ router.beforeEach((to, from, next) => {
             }
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             //遷移予定だったpathを取得
             next({name: 'admin_login',
                 query: {
@@ -373,7 +372,7 @@ router.beforeEach((to, from, next) => {
             }
         })
         .catch(() => {
-            localStorage.removeItem(process.env.MIX_APP_NAME + '-admin');
+            store.dispatch('resetUser');
             next();
         });
     }

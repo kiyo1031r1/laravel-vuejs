@@ -75,7 +75,11 @@ export default {
     methods: {
         submit(){
             axios.post('/api/reset', this.user)
-            .then(() => {
+            .then(res => {
+                //changed_passwordページのヘッダー切り替え用
+                const user = res.data;
+                this.$store.dispatch('setUser', user);
+
                 this.$router.push({name: 'changed_password'});
             })
             .catch(error => {
