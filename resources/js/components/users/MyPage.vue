@@ -104,12 +104,9 @@ export default {
     },
     methods:{
         getUser(){
-            axios.get('/api/user/')
-            .then(res => {
-                this.user = res.data;
-                this.before_name = this.user.name;
-                this.before_email = this.user.email;
-            });
+            this.user = this.$store.getters.user;
+            this.before_name = this.user.name;
+            this.before_email = this.user.email;
         },
         passwordHiddenToggle(){
             this.is_password_hidden = !this.is_password_hidden;
