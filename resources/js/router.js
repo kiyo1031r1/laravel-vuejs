@@ -121,7 +121,6 @@ const router = new Router({
             meta: {
                 authOnly: true
             }
-            //TODO premiumのナビゲーションガード作成
         },
         {
             path:'/my_page',

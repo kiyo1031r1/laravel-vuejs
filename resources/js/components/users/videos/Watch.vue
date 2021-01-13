@@ -200,8 +200,19 @@ export default {
                 this.video = res.data.video;
                 this.recommends = res.data.recommends;
 
-                //初回コメント読み込み
-                this.getComment(null, this.start_page, false);
+                //ユーザーの読み込み
+                axios.get('/api/user')
+                .then(res => {
+                    this.user = res.data;
+                    //プレミアムのチェック
+                    if(this.video.status === 'premium' && this.user.status === 'normal'){
+                        this.$router.push({name: 'premium_register'});
+                    }
+                    else{
+                        //初回コメント読み込み
+                        this.getComment(null, this.start_page, false);
+                    }
+                });
             });
         },
         aboutToggle(){
@@ -255,12 +266,12 @@ export default {
         commentToggle(comment){
             comment.re_comment_toggle = !comment.re_comment_toggle;
         },
-        getUser(){
-            axios.get('/api/user')
-            .then(res => {
-                this.user = res.data;
-            });
-        },
+        // getUser(){
+        //     axios.get('/api/user')
+        //     .then(res => {
+        //         this.user = res.data;
+        //     });
+        // },
         createComment(){
             axios.post('/api/video_comments', {
                 comment: this.my_comment,
@@ -348,7 +359,6 @@ export default {
     },
     created(){
         this.getVideo();
-        this.getUser();
     }
 }
 </script>
