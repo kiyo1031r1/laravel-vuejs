@@ -4,8 +4,8 @@
         <div class="container">
             <div class="row justify-content-center mt-3">
                 <div v-for="category in categories" :key="category.id" class="icon col-md-3">
-                    <router-link :to="{name:'video_show', params: { category: category.file_name}}">
-                        <img :src="'/images/' + category.file_name + '.png'" class="image img-fluid">
+                    <router-link :to="{name:'video_show', params: { category: category}}">
+                        <img :src="'/images/' + category + '.png'" class="image img-fluid">
                     </router-link>
                 </div>
             </div>
@@ -19,22 +19,22 @@ import Header from '../UsersHeaderComoponent'
 export default {
     data(){
         return{
-            categories: '',
+            //基本固定なので直接記載
+            categories: [
+                'php',
+                'ruby',
+                'javascript',
+                'python',
+                'csharp',
+                'laravel',
+                'rails',
+                'vuejs',
+                'django'
+            ],
         }
     },
     components:{
         Header,
-    },
-    methods:{
-        getCategory(){
-            axios.get('/api/video_categories')
-            .then((res) => {
-                this.categories = res.data;
-            });
-        }
-    },
-    created(){
-        this.getCategory();
     }
 }
 </script>
