@@ -25,6 +25,7 @@
                                 </select>
                             </div>
                             <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
+                            <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
                         </div>
 
                         <!-- 選択カテゴリーからの削除 -->

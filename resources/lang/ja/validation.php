@@ -135,6 +135,7 @@ return [
         'file_name' => 'ファイル名',
         'comment' => 'コメント',
         're_comment' => 'コメント',
+        'category' => 'カテゴリー',
     ],
 
 ];
