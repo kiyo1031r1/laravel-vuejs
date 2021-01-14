@@ -23,8 +23,8 @@ import VideoManagementWatch from './components/admin/videoManagement/Watch'
 //user
 import Home from './components/Home'
 import UserMyPage from './components/users/MyPage'
+import UserVideoCategoryIndex from './components/users/videos/CategoryIndex'
 import UserVideoIndex from './components/users/videos/Index'
-import UserVideoShow from './components/users/videos/Show'
 import UserVideoWatch from './components/users/videos/Watch'
 import UserPremiumRegister from './components/users/premium/Register'
 import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
@@ -99,15 +99,15 @@ const router = new Router({
         {
             path:'/video',
             name: 'video',
-            component: UserVideoIndex,
+            component: UserVideoCategoryIndex,
             meta: {
                 common: true
             }
         },
         {
             path:'/video/:category',
-            name: 'video_show',
-            component: UserVideoShow,
+            name: 'video_index',
+            component: UserVideoIndex,
             meta: {
                 common: true
             }
