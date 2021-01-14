@@ -2,7 +2,7 @@
     <div>
         <Header></Header>
         <div class="container">
-            <div class="row mx-auto">
+            <div class="row">
                 <!-- ログインフォーム -->
                 <div class="col-md-8 my-3">
                     <div class="card">
@@ -86,7 +86,7 @@
             </div>
 
              <!-- アプリ確認用 -->
-            <div class="row mx-auto border-top">
+            <div class="row border-top">
                 <div class="col-md-8 py-3">
                     <div class="card">
                         <div class="card-header">アプリ確認用</div>

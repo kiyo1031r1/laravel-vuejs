@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- ヘッダー(ページ専用) -->
         <div class="container-fluif bg-dark mb-3">
             <div class="container">
                 <nav class="navbar">
@@ -9,8 +10,10 @@
                 </nav>
             </div>
         </div>
+
         <div class="container">
-            <div class="row justify-content-center">
+            <!-- ログインフォーム -->
+            <div class="row justify-content-center my-3">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">ログイン</div>
@@ -57,6 +60,86 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- アプリ確認用 -->
+            <div class="row mx-auto border-top">
+                <div class="col-md-8 py-3">
+                    <div class="card">
+                        <div class="card-header">アプリ確認用</div>
+                        <div class="card-body">
+                            <table class="table table-sm table-bordered table-hover text-center ">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">内容</th>
+                                        <th scope="col">メールアドレス</th>
+                                        <th scope="col">パスワード</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>テストユーザー(管理者アカウント)</td>
+                                        <td>test1@test.com</td>
+                                        <td>11111111</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>テストユーザー(管理者アカウント)</td>
+                                        <td>test2@test.com</td>
+                                        <td>22222222</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>テストユーザー(管理者アカウント)</td>
+                                        <td>test3@test.com</td>
+                                        <td>33333333</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>テストユーザー(管理者アカウント)</td>
+                                        <td>test4@test.com</td>
+                                        <td>44444444</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>テストユーザー(通常アカウント)</td>
+                                        <td>test5@test.com</td>
+                                        <td>55555555</td>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>テストユーザー(通常アカウント)</td>
+                                        <td>test6@test.com</td>
+                                        <td>66666666</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>テストユーザー(通常アカウント)</td>
+                                        <td>test7@test.com</td>
+                                        <td>77777777</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>テストユーザー(通常アカウント)</td>
+                                        <td>test8@test.com</td>
+                                        <td>88888888</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 py-3">
+                    <div class="card">
+                        <div class="card-header">アプリ確認用</div>
+                        <div class="card-body text-center">
+                            <router-link :to="{name:'login'}">
+                                <button class="btn btn-primary">通常ログインページへ遷移</button>
+                            </router-link>
                         </div>
                     </div>
                 </div>
