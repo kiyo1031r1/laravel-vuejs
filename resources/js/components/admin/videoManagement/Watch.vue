@@ -69,10 +69,16 @@
                 <!-- レコメンド動画 -->
                 <div class="col-md-3">
                     <div v-for="recommend in recommends" :key="recommend.id">
-                        <div @click="moveRecommend(recommend.id)" class="card mb-2">
+                        <div @click="moveRecommend(recommend)" class="card mb-2">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
-                                    <img class="img-fluid" :src="recommend.thumbnail">
+                                    <img class="img-fluid" style="position:relative" :src="recommend.thumbnail">
+                                    <span v-if="recommend.status == 'premium'" class="badge badge-warning" 
+                                    style="position: absolute; top:4px; right:4px; font-size:100%">{{recommend.status}}
+                                    </span>
+                                    <span class="badge badge-dark" 
+                                    style="position: absolute; bottom:4px; right:4px; font-size:100%">{{recommend.video_time}}
+                                    </span>
                                 </div>
                                 <div class="col-md-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
@@ -153,7 +159,7 @@ export default {
         $route(to, from){
             //コメントは追加されるので初期化
             this.comments = [];
-            this.getComment(null, this.start_page, false);
+            this.getVideo();
         }
     },
     methods:{
@@ -255,8 +261,8 @@ export default {
                 this.getVideo($state, this.end_page + 1, true);
             }
         },
-        moveRecommend(id){
-            this.$router.push({name: 'video_management_watch', params: { id: id}});
+        moveRecommend(video){
+            this.$router.push({name: 'video_management_watch', params: { id: video.id, status: video.status} });
         }
 
     },
