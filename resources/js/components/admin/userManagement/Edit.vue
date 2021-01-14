@@ -1,6 +1,7 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
+        <!-- ユーザー情報 -->
         <div class="col-md-6 mx-auto mt-4">
             <table class="table table-bordered bg-white">
                 <tbody>
@@ -41,6 +42,7 @@
             </table>
         </div>
     
+        <!-- ステータス切り替え -->
         <div class="col-md-6 mx-auto my-4">
             <div class="card">
                 <div class="card-header">ステータス変更</div>

@@ -9,6 +9,7 @@
                         <div class="card-body">
                             <form @submit.prevent="submit">
                                 <div class="form-group row">
+                                    <!-- その他エラー表示 -->
                                     <div v-if="errors.user" class="col-md-12">
                                         <p class="text-danger text-center">{{ errors.user[0] }}</p>
                                     </div>

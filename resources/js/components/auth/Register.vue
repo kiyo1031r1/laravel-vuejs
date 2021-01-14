@@ -9,6 +9,7 @@
 
                         <div class="card-body">
                             <form @submit.prevent="submit">
+                                <!-- ユーザー名 -->
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名</label>
                                     <div class="col-md-6">
@@ -16,6 +17,8 @@
                                         <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
                                     </div>
                                 </div>
+
+                                <!-- メールアドレス -->
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                                     <div class="col-md-6">
@@ -24,6 +27,7 @@
                                     </div>
                                 </div>
 
+                                <!-- パスワード -->
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                                     <div class="col-md-6">
@@ -37,6 +41,7 @@
                                     </div>
                                 </div>
 
+                                <!-- パスワード確認 -->
                                 <div class="form-group row">
                                     <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">パスワードの確認</label>
                                     <div class="col-md-6">
