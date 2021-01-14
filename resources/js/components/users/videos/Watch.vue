@@ -28,7 +28,7 @@
                             <!-- コメント -->
                             <div class="border-top py-3">
                                 <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
-                                <!-- コメント投稿 -->
+                                <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
                                     <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_comment"></textarea>
@@ -44,7 +44,7 @@
                                         <span>{{comment.user.name}}</span>
                                         <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
                                     </div>
-                                    <p class="mb-0">{{comment.comment}}</p>
+                                    <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
                                     <div class="mt-2">
                                         <button v-if="!comment.re_comment_form" 
                                         @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm"
@@ -55,7 +55,7 @@
                                         </button>
                                     </div>
 
-                                    <!-- コメント返信 -->
+                                    <!-- コメント返信フォーム -->
                                     <template v-if="comment.re_comment_form">
                                         <div class="input-group mt-2 mb-4">
                                             <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_comment"></textarea>
@@ -65,18 +65,20 @@
                                             <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
                                         </div>
                                     </template>
-
                                     <div v-if="isCommentUser(comment)" class="text-right">
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
 
                                     <!-- 返信コメント -->
                                     <div v-if="comment.re_video_comments.length > 0" class="px-3">
+                                        <!-- 表示切り替え -->
                                         <div @click="commentToggle(comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
                                         aria-expanded="false" :aria-controls="'comment' + comment.id">
                                             <a v-if="!comment.re_comment_toggle">▼このコメントへの返信を表示</a>
                                             <a v-else>▼このコメントへの返信を非表示</a>
                                         </div>
+
+                                        <!-- 返信コメント一覧 -->
                                         <div class="px-3">
                                             <div v-for="re_video_comment in comment.re_video_comments" 
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
@@ -84,7 +86,8 @@
                                                     <span>{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
                                                 </div>
-                                                <p>{{re_video_comment.re_comment}}</p>
+                                                <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
+                                                
                                                 <div v-if="isCommentUser(re_video_comment)" class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
                                                 </div>
