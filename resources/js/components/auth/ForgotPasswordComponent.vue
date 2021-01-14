@@ -5,7 +5,7 @@
             <div class="row justify-content-center mt-3">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">パスワード再設定用確認メール</div>
+                        <div class="card-header">パスワード再設定用確認メール(開発環境のみ可)</div>
 
                         <div class="card-body">
                             <form @submit.prevent="submit">
