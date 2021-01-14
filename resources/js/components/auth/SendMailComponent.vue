@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Header from '../users/UsersHeaderComoponent'
+import Header from '../users/Header'
 import VueCookies from 'vue-cookies'
 
 export default {

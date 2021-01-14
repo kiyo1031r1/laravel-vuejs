@@ -171,7 +171,7 @@
 
 <script>
 import VueCookies from 'vue-cookies'
-import Header from '../users/UsersHeaderComoponent'
+import Header from '../users/Header'
 
 export default {
     data(){

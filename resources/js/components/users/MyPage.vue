@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import Header from './UsersHeaderComoponent'
+import Header from './Header'
 
 export default {
     data(){
