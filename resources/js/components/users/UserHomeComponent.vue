@@ -5,7 +5,7 @@
             <div class="bg-mask">
                 <div class="title text-center">
                     <h1 class="message">さぁ、動画で</h1>
-                    <h1 class="message">プログラミングを学習だ！</h1>
+                    <h1 class="message">プログラミング学習だ！</h1>
                     <router-link :to="{ name:'login' }">
                         <button class="btn btn-primary btn-lg mt-4">無料会員登録</button>
                     </router-link>
