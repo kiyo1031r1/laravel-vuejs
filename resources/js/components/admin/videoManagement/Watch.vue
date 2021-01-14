@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import AdminHeader from '../AdminHeaderComponent'
+import AdminHeader from '../AdminHeader'
 import InfiniteLoading from 'vue-infinite-loading'
 
 export default {

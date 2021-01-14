@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import AdminHeader from '../AdminHeaderComponent'
+import AdminHeader from '../AdminHeader'
 import moment from 'moment'
 
 export default {

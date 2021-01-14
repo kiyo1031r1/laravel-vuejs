@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AdminHeader from './AdminHeaderComponent'
+import AdminHeader from './AdminHeader'
 
 export default {
     components:{
