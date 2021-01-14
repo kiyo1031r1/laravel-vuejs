@@ -6,7 +6,6 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">パスワード再設定</div>
-
                         <div class="card-body">
                             <form @submit.prevent="submit">
                                 <div class="form-group row">
@@ -16,31 +15,32 @@
                                     <div v-if="errors.token" class="col-md-12">
                                         <p class="text-danger text-center">{{ errors.token[0] }}</p>
                                     </div>
+
+                                    <!-- 新パスワード -->
                                     <label for="password" class="col-md-4 col-form-label text-md-right">新パスワード</label>
-                                    <template v-if="errors.password">
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
-                                            <div class="invalid-feedback">{{ errors.password[0]}}</div>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password" v-model="user.password">
-                                        </div>
-                                    </template>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">新パスワードの確認</label>
-
                                     <div class="col-md-6">
-                                        <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" v-model="user.password_confirmation">
+                                        <input :type="is_password_hidden ? 'password' : 'text'"
+                                        :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
+                                        <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
+                                    </div>
+                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
+                                        <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
+                                        <span v-else><v-icon name="eye" scale="1.5"/></span>
                                     </div>
                                 </div>
 
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-primary px-4 mt-4">
+                                <!-- パスワードの確認 -->
+                                <div class="form-group row">
+                                    <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">新パスワードの確認</label>
+                                    <div class="col-md-6">
+                                        <input :type="is_password_hidden ? 'password' : 'text'"
+                                        class="form-control" id="password_confirmation" v-model="user.password_confirmation">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <div class="col-md-3 mt-4 mx-auto">
+                                        <button type="submit" class="btn btn-primary btn-block">
                                             再設定
                                         </button>
                                     </div>
@@ -67,12 +67,16 @@ export default {
                 token: ''
             },
             errors: [],
+            is_password_hidden: true
         }
     },
     components:{
         Header
     },
     methods: {
+        passwordHiddenToggle(){
+            this.is_password_hidden = !this.is_password_hidden;
+        },
         submit(){
             axios.post('/api/reset', this.user)
             .then(res => {
@@ -100,3 +104,16 @@ export default {
    }
 }
 </script>
+
+<style scoped>
+.password-icon {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.fa-icon{
+    height: 20px;
+}
+</style>
