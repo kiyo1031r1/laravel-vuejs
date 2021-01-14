@@ -13,7 +13,6 @@ import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
 
 //admin
 import AdminLoginComponent from './components/auth/AdminLoginComponent'
-import AdminHomeComponent from './components/admin/AdminHomeComponent'
 import UserManagementIndex from './components/admin/userManagement/Index'
 import UserManagementEdit from './components/admin/userManagement/Edit'
 import VideoManagementIndex from './components/admin/videoManagement/Index'
@@ -165,14 +164,6 @@ const router = new Router({
             meta: {
                admin_guestOnly: true
             }
-        },
-        {
-            path:'/admin',
-            name: 'admin',
-            component: AdminHomeComponent,
-            meta: {
-                admin_authOnly: true,
-             }
         },
         {
             path:'/admin/user_management',
