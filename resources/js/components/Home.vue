@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Header from './UsersHeaderComoponent'
+import Header from './users/UsersHeaderComoponent'
 
 export default {
     components:{

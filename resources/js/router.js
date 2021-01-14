@@ -22,7 +22,7 @@ import VideoManagementEdit from './components/admin/videoManagement/Edit'
 import VideoManagementWatch from './components/admin/videoManagement/Watch'
 
 //user
-import UserHomeComponent from './components/users/UserHomeComponent'
+import Home from './components/Home'
 import UserMyPage from './components/users/MyPage'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoShow from './components/users/videos/Show'
@@ -40,7 +40,7 @@ const router = new Router({
         {
             path:'/',
             name: 'home',
-            component: UserHomeComponent,
+            component: Home,
             meta: {
                 guestOnly: true
             }
