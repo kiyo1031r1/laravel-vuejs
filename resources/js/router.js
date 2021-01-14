@@ -3,16 +3,16 @@ import Router from 'vue-router'
 import store from './store'
 
 //auth
-import LoginComponent from './components/auth/LoginComponent'
-import RegisterComponent from './components/auth/RegisterComponent'
-import ForgotPasswordComponent from './components/auth/ForgotPasswordComponent'
-import ResetPasswordComponent from './components/auth/ResetPasswordComponent'
-import SendMailComponent from './components/auth/SendMailComponent'
-import ChangedPasswordComponent from './components/auth/ChangedPasswordComponent'
-import SNSLoggedInComponent from './components/auth/SNSLoggedInComponent'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import ForgotPassword from './components/auth/ForgotPassword'
+import ResetPassword from './components/auth/ResetPassword'
+import SendMail from './components/auth/SendMail'
+import ChangedPassword from './components/auth/ChangedPassword'
+import SNSLoggedIn from './components/auth/SNSLoggedIn'
 
 //admin
-import AdminLoginComponent from './components/auth/AdminLoginComponent'
+import AdminLogin from './components/auth/AdminLogin'
 import UserManagementIndex from './components/admin/userManagement/Index'
 import UserManagementEdit from './components/admin/userManagement/Edit'
 import VideoManagementIndex from './components/admin/videoManagement/Index'
@@ -47,7 +47,7 @@ const router = new Router({
         {
             path:'/login',
             name: 'login',
-            component: LoginComponent,
+            component: Login,
             meta: {
                 guestOnly: true
             }
@@ -55,7 +55,7 @@ const router = new Router({
         {
             path:'/register',
             name: 'register',
-            component: RegisterComponent,
+            component: Register,
             meta: {
                 guestOnly: true
             }
@@ -63,7 +63,7 @@ const router = new Router({
         {
             path:'/forgot_password',
             name: 'forgot_password',
-            component: ForgotPasswordComponent,
+            component: ForgotPassword,
             meta: {
                 guestOnly: true
             }
@@ -71,7 +71,7 @@ const router = new Router({
         {
             path:'/reset_password',
             name: 'reset_password',
-            component: ResetPasswordComponent,
+            component: ResetPassword,
             meta: {
                 guestOnly: true
             }
@@ -79,7 +79,7 @@ const router = new Router({
         {
             path:'/send_mail',
             name: 'send_mail',
-            component: SendMailComponent,
+            component: SendMail,
             meta: {
                 guestOnly: true
             }
@@ -87,13 +87,13 @@ const router = new Router({
         {
             path:'/changed_password',
             name: 'changed_password',
-            component: ChangedPasswordComponent
+            component: ChangedPassword,
             //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/sns_login',
             name: 'sns_login',
-            component: SNSLoggedInComponent,
+            component: SNSLoggedIn,
             //コンポーネントにナビゲーションガードあり
         },
         {
@@ -160,7 +160,7 @@ const router = new Router({
         {
             path:'/admin/login',
             name: 'admin_login',
-            component: AdminLoginComponent,
+            component: AdminLogin,
             meta: {
                admin_guestOnly: true
             }
