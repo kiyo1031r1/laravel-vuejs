@@ -102,7 +102,7 @@
                 <!-- レコメンド動画 -->
                 <div class="col-md-3">
                     <div v-for="recommend in recommends" :key="recommend.id">
-                        <div @click="moveRecommend(recommend.id)" class="card mb-2">
+                        <div @click="moveRecommend(recommend)" class="card mb-2">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail">
@@ -196,7 +196,11 @@ export default {
     },
     watch: {
         $route(to, from){
-            this.initializedComment();
+            this.my_comment = '';
+            this.my_re_comment = '';
+            this.is_re_comment_form = false;
+            this.comments = [];
+            this.getVideo();
         }
     },
     methods:{
@@ -357,8 +361,8 @@ export default {
             }
         },
 
-        moveRecommend(id){
-            this.$router.push({name: 'video_watch', params: { id: id}});
+        moveRecommend(video){
+            this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
         }
     },
     created(){
