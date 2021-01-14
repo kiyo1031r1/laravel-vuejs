@@ -17,6 +17,7 @@ class VideoCommentController extends Controller
     public function getComment(Request $request){
         $comments = VideoComment::with(['user:id,name', 'reVideoComments.user:id,name'])
         ->where('video_id', $request['video_id'])
+        ->orderBy('created_at', 'desc')
         ->paginate($request['per_page']);
         return $comments;
     }
