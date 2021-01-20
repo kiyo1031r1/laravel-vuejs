@@ -27,7 +27,7 @@ export default {
 
 <style scoped>
 .bg{
-    background-image: url("http://127.0.0.1:8000/storage/thumbnails/A_thumbnail_sample.jpeg");
+    background-image: url('/images/toppage.jpeg');
     background-size: cover;
     height: 100vh;
     padding: 0;
