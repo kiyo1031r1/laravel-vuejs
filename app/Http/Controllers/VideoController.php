@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Video;
-use App\Models\VideoComment;
+use Illuminate\Http\File;
 use \InterventionImage;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -37,12 +38,31 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->status = $input['status'];
-        $video->thumbnail = $input['thumbnail']->store('thumbnails');
-        $this->resizeThumbnail($video->thumbnail);
         $video->thumbnail_name = $input['thumbnail_name'];
-        $video->video = $input['video']->store('videos');
         $video->video_name = $input['video_name'];
         $video->video_time = $input['video_time'];
+        $video->thumbnail = $input['thumbnail']->store('thumbnails');
+        $this->resizeThumbnail($video->thumbnail);
+
+        //サムネイルと動画の保存先を環境で切り替え
+        if(app()->environment('production')){
+            //ローカルに保存したリサイズ済のサムネイルを取得し、s3にアップロード
+            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
+            $local_thumbnail_path = $this->thumbnail_file_path.$thumbnail_file_name;
+            $path = Storage::disk('s3')->putFile('thumbnails', new File($local_thumbnail_path), 'public');
+            $video->thumbnail = Storage::disk('s3')->url($path);
+
+            //s3に保存後はローカルのサムネイルを削除
+            unlink($local_thumbnail_path);
+
+            //動画はs3に直アップロード
+            $path = Storage::disk('s3')->putFile('videos', $input['video'], 'public');
+            $video->video = Storage::disk('s3')->url($path);
+        }
+        else{
+            $video->video = $input['video']->store('videos');
+        }
+
         $video->save();
         $video->videoCategory()->attach(request('category'));
 
