@@ -127,14 +127,11 @@ class VideoController extends Controller
     }
 
     private function deleteThumbnailFile($thumbnail){
+        //ダミーデータを削除しない処理
+        if($thumbnail === '/images/sample_thumbnail.jpeg') return;
+
         //ファイル名を取得
         $thumbnail_file_name = str_replace($this->thumbnail_url, '', $thumbnail);
-
-        //ダミーデータを削除しない処理
-        $sample_thumbnail = 'A_thumbnail_sample.jpeg';
-        if($thumbnail_file_name === $sample_thumbnail){
-            return;
-        }
 
         //ファイル削除
         if(is_file($this->thumbnail_file_path.$thumbnail_file_name)){
@@ -143,14 +140,11 @@ class VideoController extends Controller
     }
 
     private function deleteVideoFile($video){
+        //ダミーデータを削除しない処理
+        if($video === '/sample_video.qt') return;
+
         //ファイル名を取得
         $video_file_name = str_replace($this->video_url, '', $video);
-
-        //ダミーデータを削除しない処理
-        $sample_video = 'A_video_sample.qt';
-        if($video_file_name === $sample_video){
-            return;
-        }
 
         //ファイル削除
         if(is_file($this->video_file_path.$video_file_name)){

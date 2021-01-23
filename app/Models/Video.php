@@ -19,7 +19,7 @@ class Video extends Model
 
     public function setThumbnailAttribute($value){
         //seederの自動生成用
-        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false){
+        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false || strpos($value, '/images') !== false){
             $this->attributes['thumbnail'] = $value;
         }
         //通常保存用
@@ -30,7 +30,7 @@ class Video extends Model
 
     public function setVideoAttribute($value){
         //seederの自動生成用
-        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false){
+        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false || strpos($value, '/images') !== false){
             $this->attributes['video'] = $value;
         }
         //通常保存用
