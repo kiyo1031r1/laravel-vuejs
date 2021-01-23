@@ -73,27 +73,36 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->status = $input['status'];
+        $video->thumbnail_name = $input['thumbnail_name'];
+        $video->video_name = $input['video_name'];
+        $video->video_time = $input['video_time'];
+
         if(request('thumbnail')){
             //前データを削除
             if($video->thumbnail){
                 $this->deleteThumbnailFile($video->thumbnail);
             }
-            $video->thumbnail = request('thumbnail')->store('thumbnails');
-            $this->resizeThumbnail($video->thumbnail);
+
+            $input_t = request()->validate([
+                'thumbnail' => 'required',
+            ]);
+
+            $this->uploadThumbnailFile($video, $input_t['thumbnail']);
         }
+
         if(request('video')){
             //前データを削除
             if($video->video){
                 $this->deleteVideoFile($video->video);
             }
-            $input_video = request()->validate([
+            
+            $input_t = request()->validate([
                 'video' => 'max:2048',
             ]);
-            $video->video = $input_video['video']->store('videos');
+
+            $this->uploadVideoFile($video, $input_t['video']);
         }
-        $video->thumbnail_name = $input['thumbnail_name'];
-        $video->video_name = $input['video_name'];
-        $video->video_time = $input['video_time'];
+
         $video->save();
         $video->videoCategory()->sync(request('category'));
 
