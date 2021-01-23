@@ -130,12 +130,17 @@ class VideoController extends Controller
         //ダミーデータを削除しない処理
         if($thumbnail === '/images/sample_thumbnail.jpeg') return;
 
-        //ファイル名を取得
-        $thumbnail_file_name = str_replace($this->thumbnail_url, '', $thumbnail);
-
-        //ファイル削除
-        if(is_file($this->thumbnail_file_path.$thumbnail_file_name)){
-            unlink($this->thumbnail_file_path.$thumbnail_file_name);
+        if(app()->environment('production')){
+            $thumbnail_file_name = str_replace(env('AWS_URL'), '', $thumbnail);
+            if(Storage::disk('s3')->exists($thumbnail_file_name)){
+                Storage::disk('s3')->delete($thumbnail_file_name);
+            }
+        }
+        else{
+            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $thumbnail);
+            if(Storage::exists('thumbnails/'.$thumbnail_file_name)){
+                Storage::delete('thumbnails/'.$thumbnail_file_name);
+            }
         }
     }
 
@@ -143,12 +148,17 @@ class VideoController extends Controller
         //ダミーデータを削除しない処理
         if($video === '/sample_video.qt') return;
 
-        //ファイル名を取得
-        $video_file_name = str_replace($this->video_url, '', $video);
-
-        //ファイル削除
-        if(is_file($this->video_file_path.$video_file_name)){
-            unlink($this->video_file_path.$video_file_name);
+        if(app()->environment('production')){
+            $video_file_name = str_replace(env('AWS_URL'), '', $video);
+            if(Storage::disk('s3')->exists($video_file_name)){
+                Storage::disk('s3')->delete($video_file_name);
+            }
+        }
+        else{
+            $video_file_name = str_replace($this->video_url, '', $video);
+            if(Storage::exists('videos/'.$video_file_name)){
+                Storage::delete('videos/'.$video_file_name);
+            }
         }
     }
 
