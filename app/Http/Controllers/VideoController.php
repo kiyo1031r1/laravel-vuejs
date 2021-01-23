@@ -13,8 +13,6 @@ class VideoController extends Controller
     private $thumbnail_url;
     private $thumbnail_file_path;
     private $video_url;
-    private $video_file_path;
-    private $local_env;
     private $pro_env;
 
     public function __construct(){
@@ -22,7 +20,6 @@ class VideoController extends Controller
         $this->thumbnail_file_path = storage_path('app/public/thumbnails/');
         $this->video_url = env('APP_URL').'/storage/videos/';
         $this->video_file_path = storage_path('app/public/videos/');
-        $this->local_env = app()->environment('local');
         $this->pro_env = app()->environment('production');
     }
 
