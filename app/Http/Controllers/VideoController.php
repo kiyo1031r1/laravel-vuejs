@@ -14,12 +14,16 @@ class VideoController extends Controller
     private $thumbnail_file_path;
     private $video_url;
     private $video_file_path;
+    private $local_env;
+    private $pro_env;
 
     public function __construct(){
         $this->thumbnail_url = env('APP_URL').'/storage/thumbnails/';
         $this->thumbnail_file_path = storage_path('app/public/thumbnails/');
         $this->video_url = env('APP_URL').'/storage/videos/';
         $this->video_file_path = storage_path('app/public/videos/');
+        $this->local_env = app()->environment('local');
+        $this->pro_env = app()->environment('production');
     }
 
     public function store(Video $video){
@@ -41,27 +45,9 @@ class VideoController extends Controller
         $video->thumbnail_name = $input['thumbnail_name'];
         $video->video_name = $input['video_name'];
         $video->video_time = $input['video_time'];
-        $video->thumbnail = $input['thumbnail']->store('thumbnails');
-        $this->resizeThumbnail($video->thumbnail);
 
-        //サムネイルと動画の保存先を環境で切り替え
-        if(app()->environment('production')){
-            //ローカルに保存したリサイズ済のサムネイルを取得し、s3にアップロード
-            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
-            $local_thumbnail_path = $this->thumbnail_file_path.$thumbnail_file_name;
-            $path = Storage::disk('s3')->putFile('thumbnails', new File($local_thumbnail_path), 'public');
-            $video->thumbnail = Storage::disk('s3')->url($path);
-
-            //s3に保存後はローカルのサムネイルを削除
-            unlink($local_thumbnail_path);
-
-            //動画はs3に直アップロード
-            $path = Storage::disk('s3')->putFile('videos', $input['video'], 'public');
-            $video->video = Storage::disk('s3')->url($path);
-        }
-        else{
-            $video->video = $input['video']->store('videos');
-        }
+        $this->uploadThumbnailFile($video, $input['thumbnail']);
+        $this->uploadVideoFile($video, $input['video']);
 
         $video->save();
         $video->videoCategory()->attach(request('category'));
@@ -126,11 +112,38 @@ class VideoController extends Controller
         return $video;
     }
 
+    private function uploadThumbnailFile($video, $input_thumbnail){
+        //ローカルに保存(共通)
+        $video->thumbnail = $input_thumbnail->store('thumbnails');
+        $this->resizeThumbnail($video->thumbnail);
+
+        if($this->pro_env){
+            //ローカルに保存したリサイズ済のサムネイルを取得し、s3にアップロード
+            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
+            $local_thumbnail_path = $this->thumbnail_file_path.$thumbnail_file_name;
+            $path = Storage::disk('s3')->putFile('thumbnails', new File($local_thumbnail_path), 'public');
+            $video->thumbnail = Storage::disk('s3')->url($path);
+
+            //s3に保存後はローカルのサムネイルを削除
+            unlink($local_thumbnail_path);
+        }
+    }
+
+    private function uploadVideoFile($video, $input_video){
+        if($this->pro_env){
+            $path = Storage::disk('s3')->putFile('videos', $input_video, 'public');
+            $video->video = Storage::disk('s3')->url($path);
+        }
+        else{
+            $video->video = $input_video->store('videos');
+        }
+    }
+
     private function deleteThumbnailFile($thumbnail){
         //ダミーデータを削除しない処理
         if($thumbnail === '/images/sample_thumbnail.jpeg') return;
 
-        if(app()->environment('production')){
+        if($this->pro_env){
             $thumbnail_file_name = str_replace(env('AWS_URL'), '', $thumbnail);
             if(Storage::disk('s3')->exists($thumbnail_file_name)){
                 Storage::disk('s3')->delete($thumbnail_file_name);
@@ -148,7 +161,7 @@ class VideoController extends Controller
         //ダミーデータを削除しない処理
         if($video === '/sample_video.qt') return;
 
-        if(app()->environment('production')){
+        if($this->pro_env){
             $video_file_name = str_replace(env('AWS_URL'), '', $video);
             if(Storage::disk('s3')->exists($video_file_name)){
                 Storage::disk('s3')->delete($video_file_name);
