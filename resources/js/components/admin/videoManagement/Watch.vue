@@ -27,7 +27,7 @@
                             </div>
                             <!-- コメント一覧 -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{comments.length}}件</h5>
                                 <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
                                     <div class="mb-2">
                                         <span>{{comment.user.name}}</span>
@@ -64,6 +64,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <infinite-loading v-if="hasNext" @infinite="infiniteHandler" spinner="spiral" direction="bottom">
                             </infinite-loading>
                         </div>

@@ -27,7 +27,7 @@
                             </div>
                             <!-- コメント -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment</h5>
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{comments.length}}件</h5>
                                 <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
