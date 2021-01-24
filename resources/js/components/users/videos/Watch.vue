@@ -23,7 +23,7 @@
                             <div class="border-top py-3" :style="aboutContentHeight">
                                 <div class="video-about p-0 mb-2" :style="aboutHeight"
                                 ref="about">{{video.about}}</div>
-                                <p v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</p>
+                                <span v-if="about.see_more" class="see-more" @click="aboutToggle()">{{about.toggle_word}}</span>
                             </div>
                             <!-- コメント -->
                             <div class="border-top py-3">
