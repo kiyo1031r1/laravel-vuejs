@@ -9,37 +9,34 @@
                         <div class="card-header">ログイン</div>
                         <div class="card-body">
                             <form @submit.prevent="login">
-                                <div class="form-group row">
-                                    <div v-if="errors.not_found" class="col-md-12">
-                                        <p class="text-danger text-center">{{ errors.not_found[0] }}</p>
+                                <!-- SNS認証エラー -->
+                                <div v-if="errors.not_found" class="form-group row">
+                                    <div class="col-md-12">
+                                        <p class="text-danger text-center mb-0">{{ errors.not_found[0] }}</p>
                                     </div>
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
-                                    <template v-if="errors.email">
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control is-invalid" name="email" v-model="user.email">
-                                            <div class="invalid-feedback">{{ errors.email[0]}}</div>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control" name="email" v-model="user.email">
-                                        </div>
-                                    </template>
                                 </div>
 
+                                <!-- メールアドレス -->
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+                                    <div class="col-md-6">
+                                        <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email">
+                                        <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0]}}</div>
+                                    </div>
+                                </div>
+
+                                <!-- パスワード -->
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
-                                    <template v-if="errors.password">
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control is-invalid" name="password" v-model="user.password">
-                                            <div class="invalid-feedback">{{ errors.password[0] }}</div>
-                                        </div>
-                                    </template>
-                                    <template v-else>
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password" v-model="user.password">
-                                        </div>
-                                    </template>
+                                    <div class="col-md-6">
+                                        <input :type="is_password_hidden ? 'password' : 'text'"
+                                        :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
+                                        <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
+                                    </div>
+                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
+                                        <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
+                                        <span v-else><v-icon name="eye" scale="1.5"/></span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group row mb-0">
@@ -174,13 +171,17 @@ export default {
     data(){
         return{
             user:{},
-            errors:{}
+            errors:{},
+            is_password_hidden: true,
         }
     },
     components:{
         Header
     },
     methods:{
+        passwordHiddenToggle(){
+            this.is_password_hidden = !this.is_password_hidden;
+        },
         login(){
             axios.get('sanctum/csrf-cookie')
             .then(() => {
@@ -205,3 +206,16 @@ export default {
    }
 }
 </script>
+
+<style scoped>
+.password-icon {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.fa-icon{
+    height: 20px;
+}
+</style>
