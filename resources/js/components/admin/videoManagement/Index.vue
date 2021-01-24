@@ -134,6 +134,16 @@
                         </div>
                     </div>
 
+                    <!-- ビデオ非存在時(検索結果が0件) -->
+                    <div v-show="!is_videos" class="col-md-8 mx-auto mb-5">
+                        <div class="card">
+                            <div class="card-header">ビデオ検索結果</div>
+                            <div class="card-body">
+                                <p class="text-center text-danger mb-0 my-4">一致するビデオがありませんでした</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- ページネーション -->
                     <nav>
                         <ul class="pagination justify-content-center">
