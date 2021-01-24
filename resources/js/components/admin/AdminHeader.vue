@@ -5,7 +5,7 @@
                 <router-link :to="{ name: 'home'}">
                     <span class="h1 text-light">Laravel-vuejs</span>
                 </router-link>
-                    <span class="text-light">管理者用</span>
+                    <span class="name">管理者 : {{isAuthenticated.name}}さん</span>
                 <div>
                     <router-link :to="{ name: 'user_management'}">
                         <button class="btn btn-success">ユーザー管理</button>
@@ -24,6 +24,11 @@
 
 <script>
 export default {
+    computed:{
+        isAuthenticated(){
+            return this.$store.getters.user;
+        }
+    },
     methods:{
         logout(){
             axios.get('/api/user')
@@ -41,3 +46,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.name{
+    color: white;
+    font-size: 16px;
+    margin-right: 5px;
+    vertical-align: bottom;
+}
+</style>

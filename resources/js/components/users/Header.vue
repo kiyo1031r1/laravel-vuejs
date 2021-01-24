@@ -7,6 +7,7 @@
                 </router-link>
                 
                 <div>
+                    <span v-if="isAuthenticated" class="name">{{isAuthenticated.name}}さん</span>
                     <router-link :to="{ name: 'video'}">
                         <button class="btn btn-success">ビデオ一覧</button>
                     </router-link>
@@ -58,3 +59,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.name{
+    color: white;
+    font-size: 16px;
+    margin-right: 5px;
+    vertical-align: bottom;
+}
+</style>
