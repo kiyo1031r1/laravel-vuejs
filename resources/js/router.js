@@ -161,9 +161,9 @@ const router = new Router({
             path:'/admin/login',
             name: 'admin_login',
             component: AdminLogin,
-            meta: {
-               admin_guestOnly: true
-            }
+            //meta: {
+            //   admin_guestOnly: true
+            //}
         },
         {
             path:'/admin/user_management',
