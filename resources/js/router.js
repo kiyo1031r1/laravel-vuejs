@@ -169,9 +169,9 @@ const router = new Router({
             path:'/admin/user_management',
             name: 'user_management',
             component: UserManagementIndex,
-            meta: {
-                admin_authOnly: true,
-             }
+            //meta: {
+            //    admin_authOnly: true,
+            // }
         },
         {
             path:'/admin/user_management/:id',
