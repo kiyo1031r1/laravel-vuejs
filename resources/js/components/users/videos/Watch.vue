@@ -105,7 +105,7 @@
                 <!-- レコメンド動画 -->
                 <div class="col-md-3">
                     <div v-for="recommend in recommends" :key="recommend.id">
-                        <div @click="moveRecommend(recommend)" class="card mb-2">
+                        <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail">
@@ -393,7 +393,7 @@ export default {
     cursor: pointer;
 }
 
-.card{
+.recommend{
     cursor: pointer;
 }
 
