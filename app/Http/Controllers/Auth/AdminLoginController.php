@@ -35,6 +35,9 @@ class AdminLoginController extends Controller
             $user->token = $this->createToken();
             $user->save();
 
+            \Debugbar::addMessage($user);
+            \Debugbar::addMessage(Auth::check());
+
             return response()->json();
         }
         throw ValidationException::withMessages([
