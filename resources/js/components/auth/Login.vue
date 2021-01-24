@@ -71,14 +71,11 @@
                     <div class="card">
                         <div class="card-header">ソーシャルアカウントでログイン</div>
                         <div class="card-body">
-                            <div class="text-center">
-                                <button onclick="location.href='/login/google'" class="btn btn-danger">Googleアカウントでログイン</button>
-                            </div>
-                            <div class="text-center">
-                                <button onclick="location.href='/login/facebook'" class="btn btn-primary mt-3" style="background-color: blue; border-color: blue;">Facebookアカウントでログイン</button>
-                            </div>
-                            <div class="text-center">
-                                <button onclick="location.href='/login/twitter'" class="btn btn-primary mt-3 ">Twitterアカウントでログイン</button>
+                            <div class="col-md-11 mx-auto text-center">
+                                <button onclick="location.href='/login/google'" class="btn btn-danger btn-block mb-2 py-3">Googleアカウントでログイン</button>
+                                <button onclick="location.href='/login/facebook'" class="btn btn-primary btn-block mb-2 py-3" style="background-color: blue; border-color: blue;">Facebookアカウントでログイン</button>
+                                <button onclick="location.href='/login/twitter'" class="btn btn-primary btn-block mb-2 py-3">Twitterアカウントでログイン</button>
+                                <p class="mb-0">※本番環境では使用できません</p>
                             </div>
                         </div>
                     </div>
