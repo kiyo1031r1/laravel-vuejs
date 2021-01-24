@@ -86,7 +86,7 @@
             <div class="row border-top">
                 <div class="col-md-8 py-3">
                     <div class="card">
-                        <div class="card-header">アプリ確認用</div>
+                        <div class="card-header">アプリ確認用(※通常アカウントは[ユーザー新規作成]からも作成可能です)</div>
                         <div class="card-body">
                             <table class="table table-sm table-bordered table-hover text-center ">
                                 <thead class="thead-dark">
