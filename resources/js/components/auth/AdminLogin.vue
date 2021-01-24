@@ -163,12 +163,14 @@ export default {
             .then(() => {
                 axios.post('/api/admin/login', this.user)
                 .then((res) => {
+                    console.log('then');
                     //遷移前のpath情報があれば、そのページに遷移
                     this.$router.push(
                         this.$route.query.redirect ? this.$route.query.redirect : {name: 'video_management'}
                     );
                 })
                 .catch((error) =>{
+                    console.log('catch');
                     this.errors = error.response.data.errors;
                 })
             });
