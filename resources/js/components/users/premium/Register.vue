@@ -10,6 +10,7 @@
                         <h3>全ての動画が見放題!!</h3>
                         <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
                         <p>※月額500円(税込)</p>
+                        <p>※サンプルの為、ボタンを押しても実際に課金はされません</p>
                     </div>
                 </div>
             </div>
