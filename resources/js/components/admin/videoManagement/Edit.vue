@@ -391,13 +391,18 @@ export default {
             axios.get('/api/videos/'+ this.id)
             .then(res => {
                 this.title = res.data.title;
-                this.select_categories = res.data.video_category;
                 this.about = res.data.about;
                 this.status = res.data.status;
                 this.thumbnail_name = res.data.thumbnail_name;
                 this.thumbnail_preview = res.data.thumbnail;
                 this.video_name = res.data.video_name;
                 this.video_preview = res.data.video;
+
+                //取得したカテゴリidを元に、カテゴリ一覧のオブジェクトを選択カテゴリリストに追加
+                const select_categories = res.data.video_category;
+                select_categories.forEach((object, index) => {
+                    this.select_categories.push(this.categories[select_categories[index].id - 1]);
+                })
             });
         }
     },

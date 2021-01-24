@@ -53,7 +53,7 @@ class VideoController extends Controller
     }
 
     public function show(Video $video){
-        return Video::with('videoCategory')->find($video->id);
+        return Video::with('videoCategory:id')->find($video->id);
     }
 
     public function update(Video $video){
