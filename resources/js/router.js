@@ -186,9 +186,9 @@ const router = new Router({
             path:'/admin/video_management',
             name: 'video_management',
             component: VideoManagementIndex,
-            meta: {
-                admin_authOnly: true,
-             }
+            //meta: {
+            //    admin_authOnly: true,
+            // }
         },
         {
             path:'/admin/video_management/create',
