@@ -233,7 +233,12 @@ export default {
             axios.get('/api/video_categories')
             .then((res) => {
                 this.categories = res.data;
-                this.select_category = this.categories[0];
+                
+                //初回のみ1番上のカテゴリーを代入
+                if(this.select_category === null) {
+                    this.select_category = this.categories[0];
+                }
+
                 this.setCategory();
             });
         },
@@ -249,6 +254,15 @@ export default {
                         this.select_categories.push(category);
                     }
                 })
+            })
+
+            //選択中カテゴリも同様の処理
+            const select_category_cache = this.select_category;
+            this.select_category = null;
+            this.categories.forEach((category) => {
+                if(select_category_cache.id === category.id){
+                    this.select_category = category;
+                }
             })
         },
         addCategory(){
