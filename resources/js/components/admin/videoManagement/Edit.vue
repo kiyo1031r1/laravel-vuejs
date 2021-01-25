@@ -180,6 +180,7 @@ export default {
             categories: [],
             select_category: null,
             select_categories: [],
+            before_select_categories: [],
             input_category: {
                 name: '',
                 file_name: '',
@@ -233,7 +234,22 @@ export default {
             .then((res) => {
                 this.categories = res.data;
                 this.select_category = this.categories[0];
+                this.setCategory();
             });
+        },
+        setCategory(){
+            //選択中カテゴリsの情報を一時的に保存して、初期化
+            const select_categories_caches = this.select_categories;
+            this.select_categories = [];
+
+            //新たに取得したカテゴリsから選択中カテゴリsを作成
+            select_categories_caches.forEach((select_categories_cache) => {
+                this.categories.forEach((category) => {
+                    if(select_categories_cache.id === category.id){
+                        this.select_categories.push(category);
+                    }
+                })
+            })
         },
         addCategory(){
             this.select_categories.push(this.select_category);
@@ -398,10 +414,14 @@ export default {
                 this.video_name = res.data.video_name;
                 this.video_preview = res.data.video;
 
-                //取得したカテゴリidを元に、カテゴリ一覧のオブジェクトを選択カテゴリリストに追加
-                const select_categories = res.data.video_category;
-                select_categories.forEach((object, index) => {
-                    this.select_categories.push(this.categories[select_categories[index].id - 1]);
+                //保存されてるカテゴリsを、選択カテゴリsに追加;
+                this.before_select_categories = res.data.video_category;
+                this.before_select_categories.forEach((before_select_category) => {
+                    this.categories.forEach((category) => {
+                        if(before_select_category.id === category.id){
+                            this.select_categories.push(category);
+                        }
+                    })
                 })
             });
         }
