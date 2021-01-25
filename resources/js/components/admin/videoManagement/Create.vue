@@ -231,7 +231,22 @@ export default {
             .then((res) => {
                 this.categories = res.data;
                 this.select_category = this.categories[0];
+                this.setCategory();
             });
+        },
+        setCategory(){
+            //選択中カテゴリsの情報を一時的に保存して、初期化
+            const select_categories_caches = this.select_categories;
+            this.select_categories = [];
+
+            //新たに取得したカテゴリsから選択中カテゴリsを作成
+            select_categories_caches.forEach((select_categories_cache) => {
+                this.categories.forEach((category) => {
+                    if(select_categories_cache.id === category.id){
+                        this.select_categories.push(category);
+                    }
+                })
+            })
         },
         addCategory(){
             this.select_categories.push(this.select_category);
