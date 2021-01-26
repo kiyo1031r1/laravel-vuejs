@@ -286,6 +286,12 @@ export default {
             });
         },
         deleteCategory(){
+            //id9のカテゴリまでは削除対象外にする
+            if(this.delete_select_category.id < 10) {
+                alert('そのカテゴリーは削除できません');
+                return;
+            }
+            
             axios.delete('/api/video_categories/' + this.delete_select_category.id)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
