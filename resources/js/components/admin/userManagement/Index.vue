@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <!-- 表示件数 -->
             <div class="row justify-content-center">
-                <div class="col-md-9">
+                <div class="col-md-11">
                     <div class="form-inline justify-content-end px-3 my-3">
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
                         <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
