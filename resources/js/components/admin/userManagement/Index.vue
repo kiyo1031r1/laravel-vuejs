@@ -1,195 +1,210 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="row">
-            <!-- サイドバー -->
-            <div class="sidebar col-md-2 pr-0">
-                <p class="font-weight-bold text-center border-bottom py-1 mb-0">ユーザー検索</p>
-                <div class="px-4">
-                    <form @submit.prevent="changeFirstPage()">
-                        <div class="form-group">
-                            <label class="col-form-label" for="name">ユーザー名</label>
-                            <input v-model="search.name" class="form-control" type="text" id="name">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label" for="email">メールアドレス</label>
-                            <input  v-model="search.email" class="form-control" type="text" id="email">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">登録日</label>
-                            <Datepicker
-                                v-model="search.created_at_start"
-                                :language="datepicker.language"
-                                :format="datepicker.format"
-                                :input-class="datepicker.input_class"
-                                :bootstrap-styling="true"
-                                :clear-button="true"
-                                :placeholder="'〜から(未指定可)'"
-                                :disabled-dates="{from: search.created_at_end}">
-                            </Datepicker>
-                            <Datepicker
-                                v-model="search.created_at_end"
-                                :language="datepicker.language"
-                                :format="datepicker.format"
-                                :input-class="datepicker.input_class"
-                                :bootstrap-styling="true"
-                                :clear-button="true"
-                                :placeholder="'〜まで(未指定可)'"
-                                :disabled-dates="{to: search.created_at_start}">
-                            </Datepicker>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">ステータス</label>
-                            <select v-model="search.status" class="form-control">
-                                <option selected></option>
-                                <option value="normal">normal</option>
-                                <option value="premium">premium</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">次回更新日</label>
-                            <Datepicker
-                                v-model="search.next_update_start"
-                                :language="datepicker.language"
-                                :format="datepicker.format"
-                                :input-class="datepicker.input_class"
-                                :bootstrap-styling="true"
-                                :clear-button="true"
-                                :placeholder="'〜から(未指定可)'"
-                                :disabled-dates="{from: search.next_update_end}">
-                            </Datepicker>
-                            <Datepicker
-                                v-model="search.next_update_end"
-                                :language="datepicker.language"
-                                :format="datepicker.format"
-                                :input-class="datepicker.input_class"
-                                :bootstrap-styling="true"
-                                :clear-button="true"
-                                :placeholder="'〜まで(未指定可)'"
-                                :disabled-dates="{to: search.next_update_start}">
-                            </Datepicker>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">権限</label>
-                            <select v-model="search.role" class="form-control">
-                                <option selected></option>
-                                <option value="一般ユーザー">一般ユーザー</option>
-                                <option value="管理者">管理者</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-8 mx-auto mt-5 pt-5">
-                            <button class="btn btn-primary btn-block" type="submit">検索</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- メイン -->
-            <div class="main col-md-9">
-                <!-- 表示件数 -->
-                <div class="form-inline justify-content-end px-3 my-3">
-                    <label class="col-form-label p-2" for="per_page">表示件数</label>
-                    <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
-                        <option value="10">10件</option>
-                        <option value="20">20件</option>
-                        <option value="50">50件</option>
-                        <option value="100">100件</option>
-                    </select>
-                </div>
-
-                <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
-                <div v-show="isUsers">
-                    <!-- ユーザーリスト -->
-                    <table class="table table-sm table-bordered table-hover text-center ">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">
-                                    <span class="mr-1">ID</span>
-                                    <v-icon @click="sortList('id', 'asc');" name="caret-square-up"/>
-                                    <v-icon @click="sortList('id', 'desc')" name="caret-square-down"/>
-                                </th>
-                                <th scope="col">ユーザー名</th>
-                                <th scope="col">email</th>
-                                <th scope="col">
-                                    <span class="mr-1">登録日</span>
-                                    <v-icon @click="sortList('created_at', 'asc');" name="caret-square-up"/>
-                                    <v-icon @click="sortList('created_at', 'desc')" name="caret-square-down"/>
-                                </th>
-                                <th scope="col">
-                                    <span class="mr-1">ステータス</span>
-                                    <v-icon @click="sortList('status', 'asc');" name="caret-square-up"/>
-                                    <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
-                                </th>
-                                <th scope="col">
-                                    <span class="mr-1">次回更新日</span>
-                                    <v-icon @click="sortList('next_update', 'asc');" name="caret-square-up"/>
-                                    <v-icon @click="sortList('next_update', 'desc')" name="caret-square-down"/>
-                                </th>
-                                <th scope="col">
-                                    <span class="mr-1">権限</span>
-                                    <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
-                                    <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
-                                </th>
-                                <th scope="col">編集</th>
-                                <th scope="col">削除</th>
-                            </tr>
-                        </thead>
-                        <tbody v-for="user in users" :key="user.id">
-                            <tr>
-                                <th scope="row">{{user.id}}</th>
-                                <td>{{user.name}}</td>
-                                <td>{{user.email}}</td>
-                                <td>{{user.created_at | moment}}</td>
-                                <td>{{user.status}}</td>
-                                <td v-if="user.next_update != null">{{user.next_update | moment}}</td>
-                                <td v-else></td>
-                                <td>{{user.role_id | role}}</td>
-                                <td>
-                                    <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
-                                        <button class="btn btn-primary px-2 py-0">編集</button>
-                                    </router-link>
-                                </td>
-                                <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- ページネーション -->
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
-                            <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
-                            <li v-show="leftMorePage" class="mx-2">...</li>
-                            <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
-                                <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
-                            </li>
-                            <li v-show="rightMorePage" class="mx-2">...</li>
-                            <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
-                            <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <!-- ユーザー非存在時(検索結果が0件) -->
-                <div v-show="!isUsers" class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">ユーザー検索結果</div>
-                            <div class="card-body">
-                                <p class="text-center text-danger mb-0 my-4">一致するユーザーがいませんでした</p>
-                            </div>
-                        </div>
+        <div class="container-fluid">
+            <!-- 表示件数 -->
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="form-inline justify-content-end px-3 my-3">
+                        <label class="col-form-label p-2" for="per_page">表示件数</label>
+                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                            <option value="10">10件</option>
+                            <option value="20">20件</option>
+                            <option value="50">50件</option>
+                            <option value="100">100件</option>
+                        </select>
                     </div>
                 </div>
             </div>
+
+            <div class="row justify-content-center">
+                <!-- サイドバー -->
+                <div class="col-md-2">
+                    <!-- ビデオ検索 -->
+                    <p class="sidebar-head">ユーザー検索</p>
+                    <div class="sidebar px-4 mb-3">
+                        <form @submit.prevent="changeFirstPage()">
+                            <!-- ユーザー名 -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">ユーザー名</label>
+                                <input v-model="search.name" class="form-control" type="text" id="name">
+                            </div>
+
+                            <!-- メールアドレス -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="email">メールアドレス</label>
+                                <input  v-model="search.email" class="form-control" type="text" id="email">
+                            </div>
+
+                            <!-- 登録日 -->
+                            <div class="form-group">
+                                <label class="col-form-label">登録日</label>
+                                <Datepicker
+                                    v-model="search.created_at_start"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜から(未指定可)'"
+                                    :disabled-dates="{from: search.created_at_end}">
+                                </Datepicker>
+                                <Datepicker
+                                    v-model="search.created_at_end"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜まで(未指定可)'"
+                                    :disabled-dates="{to: search.created_at_start}">
+                                </Datepicker>
+                            </div>
+
+                            <!-- ステータス -->
+                            <div class="form-group">
+                                <label class="col-form-label">ステータス</label>
+                                <select v-model="search.status" class="form-control">
+                                    <option selected></option>
+                                    <option value="normal">normal</option>
+                                    <option value="premium">premium</option>
+                                </select>
+                            </div>
+
+                            <!-- 次回更新日 -->
+                            <div class="form-group">
+                                <label class="col-form-label">次回更新日</label>
+                                <Datepicker
+                                    v-model="search.next_update_start"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜から(未指定可)'"
+                                    :disabled-dates="{from: search.next_update_end}">
+                                </Datepicker>
+                                <Datepicker
+                                    v-model="search.next_update_end"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜まで(未指定可)'"
+                                    :disabled-dates="{to: search.next_update_start}">
+                                </Datepicker>
+                            </div>
+
+                            <!-- 権限 -->
+                            <div class="form-group">
+                                <label class="col-form-label">権限</label>
+                                <select v-model="search.role" class="form-control">
+                                    <option selected></option>
+                                    <option value="一般ユーザー">一般ユーザー</option>
+                                    <option value="管理者">管理者</option>
+                                </select>
+                            </div>
+                            
+                            <!-- 検索ボタン -->
+                            <div class="col-md-8 mx-auto my-4">
+                                <button class="btn btn-primary btn-block" type="submit">検索</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- メイン -->
+                <div class="main col-md-9">
+                    <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
+                    <div v-show="isUsers">
+                        <!-- ユーザーリスト -->
+                        <table class="table table-sm table-bordered table-hover text-center ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">
+                                        <span class="mr-1">ID</span>
+                                        <v-icon @click="sortList('id', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('id', 'desc')" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">ユーザー名</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">
+                                        <span class="mr-1">登録日</span>
+                                        <v-icon @click="sortList('created_at', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('created_at', 'desc')" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="mr-1">ステータス</span>
+                                        <v-icon @click="sortList('status', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="mr-1">次回更新日</span>
+                                        <v-icon @click="sortList('next_update', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('next_update', 'desc')" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">
+                                        <span class="mr-1">権限</span>
+                                        <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
+                                        <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
+                                    </th>
+                                    <th scope="col">編集</th>
+                                    <th scope="col">削除</th>
+                                </tr>
+                            </thead>
+                            <tbody v-for="user in users" :key="user.id">
+                                <tr>
+                                    <th scope="row">{{user.id}}</th>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.created_at | moment}}</td>
+                                    <td>{{user.status}}</td>
+                                    <td v-if="user.next_update != null">{{user.next_update | moment}}</td>
+                                    <td v-else></td>
+                                    <td>{{user.role_id | role}}</td>
+                                    <td>
+                                        <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
+                                            <button class="btn btn-primary px-2 py-0">編集</button>
+                                        </router-link>
+                                    </td>
+                                    <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- ページネーション -->
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
+                                <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
+                                <li v-show="leftMorePage" class="mx-2">...</li>
+                                <li v-for="(page, index) in createPageColumn" :key="page.index" @click="changePage(page)" :class="isCurrent(page, index) ? 'page-item active' : 'page-item inactive'">
+                                    <a  ref="focus_page" class="page-link" href="#">{{page}}</a>
+                                </li>
+                                <li v-show="rightMorePage" class="mx-2">...</li>
+                                <li @click="changeNextPage()" class="page-item"><a class="page-link" href="#">次</a></li>
+                                <li @click="changePage(last_page)" class="page-item mx-2"><a class="page-link" href="#">最終</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- ユーザー非存在時(検索結果が0件) -->
+                    <div v-show="!isUsers" class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">ユーザー検索結果</div>
+                                <div class="card-body">
+                                    <p class="text-center text-danger mb-0 my-4">一致するユーザーがいませんでした</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -378,8 +393,18 @@ export default {
 
 <style scoped>
 .sidebar{
-    border-right: 2px solid #dee2e6;
+    border: 2px solid #dee2e6;
 }
+
+.sidebar-head{
+    font-weight: bold;
+    color: #f8f9fa;
+    background-color: #343a40;
+    text-align: center;
+    padding: 4px 0px;
+    margin-bottom: 0px;
+}
+
 .vdp-datepicker >>> .vdp-datepicker__calendar{
     width: 110%;
 }
