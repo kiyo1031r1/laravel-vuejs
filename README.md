@@ -14,13 +14,16 @@
 <br>
 
 ## DEMO
-<br>ユーザー<br>
+ユーザー
+<br>
 <img src="./public/images/readme/user1.png" width="400px">
 <img src="./public/images/readme/user2.png" width="400px">
 <img src="./public/images/readme/user3.png" width="400px">
 <img src="./public/images/readme/user4.png" width="400px">
 <br>
-<br>管理者<br>
+<br>
+管理者
+<br>
 <img src="./public/images/readme/admin1.png" width="400px">
 <img src="./public/images/readme/admin2.png" width="400px">
 <img src="./public/images/readme/admin3.png" width="400px">
