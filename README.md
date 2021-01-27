@@ -1,23 +1,32 @@
 ## Laravel-Vuejs
+<img src="./public/images/readme/top.png" width="800px">
+<br>
+<br>
+
 ## 概要
 管理者が投稿した動画を、ユーザーが視聴できる動画配信サービスのWebアプリケーションです。
 <br>
-<br>確認用URL:http://54.178.31.53/
-<br>(テストアカウントはログイン画面に表示しています)
 <br>
-<br>ユーザー画面イメージ<br>
-<img src="./public/images/readme/user1.png" width="200px">
-<img src="./public/images/readme/user2.png" width="200px">
-<img src="./public/images/readme/user3.png" width="200px">
-<img src="./public/images/readme/user4.png" width="200px">
+<a href="http://54.178.31.53/" style="font-size: 150%;">確認ページ</a>
 <br>
-<br>管理者画面イメージ<br>
-<img src="./public/images/readme/admin1.png" width="200px">
-<img src="./public/images/readme/admin2.png" width="200px">
-<img src="./public/images/readme/admin3.png" width="200px">
-<img src="./public/images/readme/admin4.png" width="200px">
+(テストアカウントはログイン画面に表示しています)
+<br>
 <br>
 
+## DEMO
+<br>ユーザー<br>
+<img src="./public/images/readme/user1.png" width="400px">
+<img src="./public/images/readme/user2.png" width="400px">
+<img src="./public/images/readme/user3.png" width="400px">
+<img src="./public/images/readme/user4.png" width="400px">
+<br>
+<br>管理者<br>
+<img src="./public/images/readme/admin1.png" width="400px">
+<img src="./public/images/readme/admin2.png" width="400px">
+<img src="./public/images/readme/admin3.png" width="400px">
+<img src="./public/images/readme/admin4.png" width="400px">
+<br>
+<br>
 
 ## 機能一覧
 #### 管理者
@@ -51,9 +60,13 @@
 - Node.js - 12.18.2
 - MySQL - 5.6.43
 - デプロイ - AWS(EC2,S3)
+<br>
+<br>
 
 ## ER図
 <img src="./ER.png" width="800px">
+<br>
+<br>
 
 # 制作背景
 youtubeを始め、ここ数年で動画配信サービスの人気は高まり
@@ -62,8 +75,8 @@ youtubeを始め、ここ数年で動画配信サービスの人気は高まり
 その為、サービスを作れる技術は需要があるのでは？
 と思った事がきっかけです。
 <br>
-実際、私もyoutubeをよく利用しています。
-また、プログラミング学習時は、ドットインストールやUdemyにお世話になりました。
+私もyoutubeをよく利用しています。
+プログラミング学習時は、ドットインストールやUdemyにお世話になりました。
 <br>
 今回のアプリは、これらのサービスを参考にして作成しました。
 <br>
@@ -71,6 +84,8 @@ youtubeを始め、ここ数年で動画配信サービスの人気は高まり
 プログラミング言語やフレームワークの選択も、習得が容易で需要が高いと思われるもので作成しました。
 <br>
 サーバー側はPHP(Laravel)、フロント側はSPAを作成する為、Vue.jsで作成しました。
+<br>
+<br>
 
 # 工夫ポイント
 SPAで作成したことです。
@@ -78,16 +93,23 @@ SPAで作成したことです。
 私は、先にLaravelで従来のWebアプリケーションの作成方法を学習しました。
 <br>
 その為「この機能を実装したい。Laravelではこうすればできるけど、Vueでどうやるんだ？？」
+<br>
 という場面が多くありました。
 <br>
 (特に認証は苦労しました)
+<br>
+<br>
 
 # 課題
 - レスポンシブデザイン
 - テスト
 - 課金機能
+<br>
+<br>
 
 # 今後実装したい機能
 - 動画再生リスト
 - 評価
 - ランキング
+<br>
+<br>
