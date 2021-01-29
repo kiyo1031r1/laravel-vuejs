@@ -54,6 +54,7 @@ Route::post('video_categories/get_category', [VideoCategoryController::class, 'g
 Route::apiResource('videos', VideoController::class);
 Route::post('/videos/search', [VideoController::class, 'search']);
 Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
+Route::post('/videos/download', [VideoController::class, 'download']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::post('video_comments/get_comment', [VideoCommentController::class, 'getComment']);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);

@@ -279,4 +279,12 @@ class VideoController extends Controller
 
         return $recommends;
     }
+    public function download(Video $video){
+        $file_name = request('file_name');
+        $file_path = $file_name;
+        $mimeType = Storage::mimeType($file_path);
+        $headers = [['Content-Type' => $mimeType]];
+        
+        return Storage::download($file_path, $file_name, $headers);
+    }
 }

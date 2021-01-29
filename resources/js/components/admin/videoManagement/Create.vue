@@ -85,9 +85,10 @@
                         <!-- 動画ファイル -->
                         <div class="form-group row mt-3 mb-0">
                             <label class="col-form-label col-md-2" for="capture">動画</label>
-                            <div class="col-md-3">
+                            <div class="col-md-3 text-center">
                                 <label class="file_upload_button" for="video">ファイルを選択</label>
                                 <input @change="uploadVideo()" type="file" id="video" ref="video">
+                                <a :href="sample_video_url" download="sample_video">サンプル動画をDL</a>
                             </div>
                             <div v-if="video" class="col-md-5">
                                 <div class="embed-responsive embed-responsive-16by9">
@@ -106,7 +107,6 @@
                             <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
                             <div v-else-if="errors.video_time" class="col-md-8 offset-md-2 upload_error">{{ errors.video_time[0]}}</div>
                         </div>
-
 
                         <!-- 作成ボタン -->
                         <div class="col-md-4 mx-auto mt-5">
@@ -198,6 +198,7 @@ export default {
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
             video_time: '',
+            sample_video_url: '',
 
             //その他
             title: '',
@@ -413,12 +414,25 @@ export default {
             .catch(error => {
                 this.errors = error.response.data.errors;
             });
+        },
+        sampleVideoDownload(){
+            axios.post('/api/videos/download',
+            {
+                file_name: 'sample_video.qt'
+            },
+            {
+                responseType: 'blob'
+            })
+            .then(res => {
+                this.sample_video_url = 
+                window.URL.createObjectURL(new Blob([res.data],{type: res.headers['content-type']}));
+            })
         }
     },
     created(){
         this.getCategory();
+        this.sampleVideoDownload();
     }
-
 }
 </script>
 
