@@ -42,7 +42,7 @@
                 <div v-for="video in videos" :key="video.id" class="col-md-15 p-0 mb-5">
                     <div @click="moveVideoWatch(video)" class="card mx-2">
                         <div class="card-img-top"  style="position:relative">
-                            <img class="img-fluid" :src="video.thumbnail">
+                            <img class="img-fluid" :src="video.thumbnail !== null ? video.thumbnail : '/images/default_thumbnail.jpg' ">
                             <span v-if="video.status == 'premium'" class="badge badge-warning" 
                             style="position: absolute; top:4px; right:4px; font-size:100%">{{video.status}}
                             </span>
