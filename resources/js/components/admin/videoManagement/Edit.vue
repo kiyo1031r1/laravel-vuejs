@@ -415,7 +415,7 @@ export default {
             });
 
             //サムネイル未設定の場合
-            if(this.thumbnail === '' && this.thumbnail_name === ''){
+            if(this.thumbnail === '' && this.thumbnail_name === '' || this.thumbnail_name === null){
                 const result = confirm('サムネイルが設定されていません。よろしいですか？');
                 if(!result) return;
             }
