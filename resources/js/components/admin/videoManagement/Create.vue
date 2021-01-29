@@ -418,7 +418,7 @@ export default {
         sampleVideoDownload(){
             axios.post('/api/videos/download',
             {
-                file_name: 'sample_video.qt'
+                file_name: 'sample_video.mov'
             },
             {
                 responseType: 'blob'
