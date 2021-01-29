@@ -85,9 +85,10 @@
                         <!-- 動画ファイル -->
                         <div class="form-group row mt-3 mb-0">
                             <label class="col-form-label col-md-2" for="capture">動画</label>
-                            <div class="col-md-3">
+                            <div class="col-md-3 text-center">
                                 <label class="file_upload_button" for="video">ファイルを選択</label>
                                 <input @change="uploadVideo()" type="file" id="video" ref="video">
+                                <a :href="sample_video_url" download="sample_video">サンプル動画をDL</a>
                             </div>
                             <div v-if="video_name" class="col-md-5">
                                 <div class="embed-responsive embed-responsive-16by9">
@@ -199,6 +200,7 @@ export default {
             video_preview: null,
             allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
             video_time: '',
+            sample_video_url: '',
 
             //その他
             title: '',
@@ -445,11 +447,25 @@ export default {
                     })
                 })
             });
+        },
+        sampleVideoDownload(){
+            axios.post('/api/videos/download',
+            {
+                file_name: 'sample_video.mov'
+            },
+            {
+                responseType: 'blob'
+            })
+            .then(res => {
+                this.sample_video_url = 
+                window.URL.createObjectURL(new Blob([res.data],{type: res.headers['content-type']}));
+            })
         }
     },
     created(){
         this.getCategory();
         this.getVideo();
+        this.sampleVideoDownload();
     }
 
 }
