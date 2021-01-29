@@ -28,8 +28,7 @@ class VideoController extends Controller
             'title' => 'required|max:255',
             'about' => 'required',
             'status' => 'required',
-            'thumbnail' => 'required',
-            'thumbnail_name' => 'required',
+            'thumbnail_name' => 'max:255',
             'video' => 'required|max:2048',
             'video_name' => 'required',
             'video_time' => 'required|max:86400',
@@ -39,12 +38,16 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->status = $input['status'];
-        $video->thumbnail_name = $input['thumbnail_name'];
+
         $video->video_name = $input['video_name'];
         $video->video_time = $input['video_time'];
-
-        $this->uploadThumbnailFile($video, $input['thumbnail']);
         $this->uploadVideoFile($video, $input['video']);
+
+        //サムネイルが設定されている場合
+        if(request('thumbnail') !== null) {
+            $video->thumbnail_name = $input['thumbnail_name'];
+            $this->uploadThumbnailFile($video, request('thumbnail'));
+        }
 
         $video->save();
         $video->videoCategory()->attach(request('category'));
