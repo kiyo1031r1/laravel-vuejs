@@ -414,6 +414,12 @@ export default {
                 formData.append('category' + '[]', category.id);
             });
 
+            //サムネイル未設定の場合
+            if(this.thumbnail === '' && this.thumbnail_name === ''){
+                const result = confirm('サムネイルが設定されていません。よろしいですか？');
+                if(!result) return;
+            }
+
             axios.post('/api/videos/' + this.id, formData, { 
                 headers: {
                     'X-HTTP-Method-Override': 'PUT'

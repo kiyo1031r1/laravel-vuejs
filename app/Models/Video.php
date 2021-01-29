@@ -22,6 +22,10 @@ class Video extends Model
         if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false || strpos($value, '/images') !== false){
             $this->attributes['thumbnail'] = $value;
         }
+        //サムネイル削除の場合
+        elseif($value === null){
+            $this->attributes['thumbnail'] = $value;
+        }
         //通常保存用
         else{
             $this->attributes['thumbnail'] = asset('storage/'. $value);

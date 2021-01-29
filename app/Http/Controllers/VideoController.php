@@ -64,7 +64,7 @@ class VideoController extends Controller
             'title' => 'required|max:255',
             'about' => 'required',
             'status' => 'required',
-            'thumbnail_name' => 'required',
+            'thumbnail_name' => 'max:255',
             'video_name' => 'required',
             'video_time' => 'required|max:86400',
             'category' => 'required',
@@ -73,10 +73,10 @@ class VideoController extends Controller
         $video->title = $input['title'];
         $video->about = $input['about'];
         $video->status = $input['status'];
-        $video->thumbnail_name = $input['thumbnail_name'];
         $video->video_name = $input['video_name'];
         $video->video_time = $input['video_time'];
 
+        //サムネイル更新の場合
         if(request('thumbnail')){
             //前データを削除
             if($video->thumbnail){
@@ -88,6 +88,16 @@ class VideoController extends Controller
             ]);
 
             $this->uploadThumbnailFile($video, $input_t['thumbnail']);
+            $video->thumbnail_name = $input['thumbnail_name'];
+        }
+
+        //サムネイル削除の場合
+        if(request('thumbnail') === null) {
+            if($video->thumbnail){
+                $this->deleteThumbnailFile($video->thumbnail);
+                $video->thumbnail = null;
+                $video->thumbnail_name = null;
+            }
         }
 
         if(request('video')){
