@@ -79,7 +79,7 @@
                                     style="position:absolute; top:3; right:5;" name="times"/>
                                 </button>
                             </div>
-                            <div v-if="errors.thumbnail" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail[0]}}</div>
+                            <div v-if="errors.thumbnail_name" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail_name[0]}}</div>
                         </div>
 
                         <!-- 動画ファイル -->
@@ -406,6 +406,12 @@ export default {
             this.select_categories.forEach( category => {
                 formData.append('category' + '[]', category.id);
             });
+
+            //サムネイル未設定の場合
+            if(this.thumbnail === ''){
+                const result = confirm('サムネイルが設定されていません。よろしいですか？');
+                if(!result) return;
+            }
 
             axios.post('/api/videos', formData)
             .then(() => {
