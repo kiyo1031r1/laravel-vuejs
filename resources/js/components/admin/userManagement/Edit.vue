@@ -31,8 +31,7 @@
                     </tr>
                     <tr>
                         <td scope="row">次回更新日</td>
-                        <td v-if="user.next_update != null">{{user.next_update | moment_details}}</td>
-                        <td v-else></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td scope="row">権限</td>
@@ -84,7 +83,6 @@
 
 <script>
 import AdminHeader from '../AdminHeader'
-import moment from 'moment'
 
 export default {
     data(){
@@ -111,13 +109,6 @@ export default {
         edit(){
             const result = confirm('ユーザー情報を変更します。よろしいですか？');
             if(result){
-                if(this.status == 'normal' && this.user.status == 'premium'){
-                    this.user.next_update = moment().add(1, 'M').format('YYYY-MM-DD');
-                }
-                else if(this.status == 'premium' && this.user.status == 'normal'){
-                    this.user.next_update = moment(this.user.next_update).subtract(1, 'M').subtract(1, 'd').format('YYYY-MM-DD');
-                }
-
                 axios.put('/api/users/' + this.id, this.user)
                 .then(() => {
                     this.$router.push({name: 'user_management'})
