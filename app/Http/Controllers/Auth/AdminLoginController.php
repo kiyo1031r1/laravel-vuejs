@@ -10,7 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class AdminLoginController extends Controller
 {
-    use CreateTokenTrait;
     public function login(Request $request){
         $credentials = $request->validate([
              'email' => ['required', 'email'],
@@ -32,7 +31,6 @@ class AdminLoginController extends Controller
 
         if(Auth::attempt($credentials)){
             $user = Auth::user();
-            $user->token = $this->createToken();
             $user->save();
             
             return response()->json();
@@ -44,7 +42,6 @@ class AdminLoginController extends Controller
 
     public function logout(){
         $user = Auth::user();
-        $user->token = null;
         $user->save();
 
         Auth::logout();

@@ -23,7 +23,6 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'token' => $this->createToken(),
             'role_id' => Role::find(1)->id,
             'status' => 'normal',
         ]);

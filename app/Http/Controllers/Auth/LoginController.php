@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-    use CreateTokenTrait;
     private $login_path = 'login';
     private $sns_login_path = 'sns_login';
 
@@ -25,7 +24,6 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)){
             $user = Auth::user();
-            $user->token = $this->createToken();
             $user->save();
 
             return response()->json();
@@ -37,7 +35,6 @@ class LoginController extends Controller
 
     public function logout(){
         $user = Auth::user();
-        $user->token = null;
         $user->save();
 
         Auth::logout();
@@ -66,7 +63,6 @@ class LoginController extends Controller
                         'status' => 'normal',
                 ]);
 
-                $user->token = $this->createToken();
                 $user->save();
             }
             elseif($provider_id) {
@@ -80,7 +76,6 @@ class LoginController extends Controller
                     'status' => 'normal',
                 ]);
 
-                $user->token = $this->createToken();
                 $user->save();
             }
             else{

@@ -70,7 +70,7 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">次回更新日</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="user.next_update === null ? '-' : user.next_update" disabled>
+                            <input class="form-control" disabled>
                         </div>
                     </div>
 

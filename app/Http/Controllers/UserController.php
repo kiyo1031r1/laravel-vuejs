@@ -64,8 +64,6 @@ class UserController extends Controller
         $email = $search['email'];
         $created_at_start = $search['created_at_start'];
         $created_at_end = $search['created_at_end'];
-        $next_update_start = $search['next_update_start'];
-        $next_update_end = $search['next_update_end'];
         $role = $search['role'];
         $status = $search['status'];
 
@@ -81,12 +79,6 @@ class UserController extends Controller
         if($created_at_end){
             $query->whereDate('created_at', '<=', $created_at_end)->get();
         }
-        if($next_update_start){
-            $query->whereDate('next_update', '>=', $next_update_start)->get();
-        }
-        if($next_update_end){
-            $query->whereDate('next_update', '<=', $next_update_end)->get();
-        }
         if($role != ""){
             $role_id = Role::where('name', $role)->first()->id;
             $query->where('role_id', $role_id);
@@ -99,7 +91,6 @@ class UserController extends Controller
         $sort_id = $sort['id'];
         $sort_created_at = $sort['created_at'];
         $sort_status = $sort['status'];
-        $sort_next_update = $sort['next_update'];
         $sort_role = $sort['role'];
 
         if($sort_id){
@@ -110,9 +101,6 @@ class UserController extends Controller
         }
         if($sort_status){
             $query->orderBy('status', $sort_status);
-        }
-        if($sort_next_update){
-            $query->orderBy('next_update', $sort_next_update);
         }
         if($sort_role){
             $query->orderBy('role_id', $sort_role);

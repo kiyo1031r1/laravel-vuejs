@@ -29,7 +29,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'password' => Hash::make(11111111),
             'created_at' => DateTime::dateTimeThisDecade(),
-            'next_update' => DateTime::dateTimeThisDecade(),
             'role_id' => 1,
             'status' => 'normal',
         ];

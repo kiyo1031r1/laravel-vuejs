@@ -73,7 +73,7 @@
 
                             <!-- 次回更新日 -->
                             <div class="form-group">
-                                <label class="col-form-label">次回更新日</label>
+                                <label class="col-form-label">次回更新日(※現在不可)</label>
                                 <Datepicker
                                     v-model="search.next_update_start"
                                     :language="datepicker.language"
@@ -160,8 +160,7 @@
                                     <td>{{user.email}}</td>
                                     <td>{{user.created_at | moment}}</td>
                                     <td>{{user.status}}</td>
-                                    <td v-if="user.next_update != null">{{user.next_update | moment}}</td>
-                                    <td v-else></td>
+                                    <td></td>
                                     <td>{{user.role_id | role}}</td>
                                     <td>
                                         <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
