@@ -160,7 +160,7 @@ class VideoController extends Controller
 
     private function deleteThumbnailFile($thumbnail){
         //ダミーデータを削除しない処理
-        if($thumbnail === '/images/sample_thumbnail.jpeg') return;
+        if($thumbnail === '/images/dummyData/dummy_thumbnail.jpeg') return;
 
         if($this->pro_env){
             $thumbnail_file_name = str_replace(env('AWS_URL'), '', $thumbnail);
@@ -178,7 +178,7 @@ class VideoController extends Controller
 
     private function deleteVideoFile($video){
         //ダミーデータを削除しない処理
-        if($video === '/sample_video.qt') return;
+        if($video === '/images/dummyData/dummy_video.qt') return;
 
         if($this->pro_env){
             $video_file_name = str_replace(env('AWS_URL'), '', $video);
