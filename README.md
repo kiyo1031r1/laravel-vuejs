@@ -67,7 +67,7 @@
 <br>
 
 ## ER図
-<img src="./ER.png" width="800px">
+<img src="./public/images/readme/ER.png" width="800px">
 <br>
 <br>
 
