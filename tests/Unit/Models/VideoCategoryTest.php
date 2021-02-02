@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Models\Unit;
 
 use App\Models\Video;
 use App\Models\VideoCategory;
