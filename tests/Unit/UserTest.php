@@ -21,6 +21,7 @@ class UserTest extends TestCase
         $role = Role::create(['name' => 'testRole']);
         $user = User::factory()->for($role)->create();
         $this->assertNotEmpty($user->role);
+        $this->assertEquals($role->id, $user->role->id);
     }
 
     //VideoCommentモデルとのリレーション確認
