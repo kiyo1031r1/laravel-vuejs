@@ -19,6 +19,7 @@ class ReVideoCommentTest extends TestCase
     public function testReVideoCommentBelongsToVideoComment(){
         $video_comment = VideoComment::factory()->create();
         $re_video_comment = ReVideoComment::factory()->for($video_comment)->create();
+        $this->assertNotEmpty($re_video_comment->videoComment);
         $this->assertEquals($video_comment->id, $re_video_comment->videoComment->id);
     }
 
@@ -26,6 +27,7 @@ class ReVideoCommentTest extends TestCase
     public function testReVideoCommentBelongsToUser(){
         $user = User::factory()->create();
         $re_video_comment = ReVideoComment::factory()->for($user)->create();
+        $this->assertNotEmpty($re_video_comment->user);
         $this->assertEquals($user->id, $re_video_comment->user->id);
     }
 }
