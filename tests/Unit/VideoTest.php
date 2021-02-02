@@ -20,7 +20,8 @@ class VideoTest extends TestCase
         $count = 5;
         $video = Video::factory()
                 ->has(VideoCategory::factory()->count($count))->create();
-        $this->assertEquals($count, count($video->videoCategory));
+        //$this->assertEquals($count, count($video->videoCategory));
+        $this->assertEquals($count, count($video->videoCategories));
     }
 
     //VideoCommentモデルとのリレーション確認
