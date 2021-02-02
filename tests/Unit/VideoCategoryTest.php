@@ -14,7 +14,7 @@ class VideoCategoryTest extends TestCase
         $this->artisan('db:seed');
     }
 
-    //Roleモデルとのリレーション確認
+    //Videoモデルとのリレーション確認
     public function testVideoCategoryBelongsToManyVideo(){
         $count = 5;
         $video_category = VideoCategory::factory()
