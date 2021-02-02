@@ -21,6 +21,7 @@ class VideoCommentTest extends TestCase
         $video = Video::factory()->create();
         $video_comment = VideoComment::factory()->for($video)->create();
         $this->assertNotEmpty($video_comment->video);
+        $this->assertEquals($video->id, $video_comment->video->id);
     }
 
     //Userモデルとのリレーション確認
@@ -28,6 +29,7 @@ class VideoCommentTest extends TestCase
         $user = User::factory()->create();
         $video_comment = VideoComment::factory()->for($user)->create();
         $this->assertNotEmpty($video_comment->user);
+        $this->assertEquals($user->id, $video_comment->user->id);
     }
 
     //ReVideoCommentモデルとのリレーション確認
