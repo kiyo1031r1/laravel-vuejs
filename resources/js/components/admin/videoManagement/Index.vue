@@ -119,7 +119,7 @@
                                 <div class="card-body p-2">
                                     <p class="card-title">{{video.title}}</p>
                                     <p class="card-tag">
-                                        <span v-for="category in video.video_category" :key="category.id"
+                                        <span v-for="category in video.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                         </span>
                                     </p>

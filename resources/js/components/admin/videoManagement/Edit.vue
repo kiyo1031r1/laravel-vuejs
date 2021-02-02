@@ -444,7 +444,7 @@ export default {
                 this.video_preview = res.data.video;
 
                 //保存されてるカテゴリsを、選択カテゴリsに追加;
-                this.before_select_categories = res.data.video_category;
+                this.before_select_categories = res.data.video_categories;
                 this.before_select_categories.forEach((before_select_category) => {
                     this.categories.forEach((category) => {
                         if(before_select_category.id === category.id){

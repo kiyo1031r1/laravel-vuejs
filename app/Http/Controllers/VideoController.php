@@ -50,13 +50,13 @@ class VideoController extends Controller
         }
 
         $video->save();
-        $video->videoCategory()->attach(request('category'));
+        $video->videoCategories()->attach(request('category'));
 
         return $video;
     }
 
     public function show(Video $video){
-        return Video::with('videoCategory:id')->find($video->id);
+        return Video::with('videoCategories:id')->find($video->id);
     }
 
     public function update(Video $video){
@@ -114,7 +114,7 @@ class VideoController extends Controller
         }
 
         $video->save();
-        $video->videoCategory()->sync(request('category'));
+        $video->videoCategories()->sync(request('category'));
 
         return $video;
     }
@@ -200,7 +200,7 @@ class VideoController extends Controller
     }
 
     public function search(Request $request){
-        $query = Video::with('videoCategory');
+        $query = Video::with('videoCategories');
 
         $data = $request->all();
         $search = $data['search'];
@@ -217,7 +217,7 @@ class VideoController extends Controller
         }
         if($categories){
             foreach($categories as $category){
-                $query->whereHas('videoCategory', function($q) use ($category){
+                $query->whereHas('videoCategories', function($q) use ($category){
                     $q->where('id', $category['id']);
                 });
             }
@@ -251,14 +251,14 @@ class VideoController extends Controller
     }
 
     public function watch(Video $video){
-        $video = Video::with('videoCategory')->find($video->id);
+        $video = Video::with('videoCategories')->find($video->id);
         $recommends = $this->getRecommend($video);
         return ['video' => $video, 'recommends' => $recommends];
     }
 
     private function getRecommend(Video $video){
         //ビデオカテゴリーを取得
-        $video_categories = $video->videoCategory()->get();
+        $video_categories = $video->videoCategories()->get();
         if($video_categories->count() == 0) return null;
 
         foreach($video_categories as $video_category){
@@ -266,10 +266,10 @@ class VideoController extends Controller
         }
         
         //一致するカテゴリーの数の配列を作成
-        $r_videos = Video::with('videoCategory')->where('id', '!=', $video->id)->get();
+        $r_videos = Video::with('videoCategories')->where('id', '!=', $video->id)->get();
         $same_num = [];
         foreach($r_videos as $r_video){
-            $r_categories = $r_video->videoCategory()->get();
+            $r_categories = $r_video->videoCategories()->get();
             foreach($r_categories as $r_category){
                 $r_video_categories_id[] = $r_category->id;
             }
@@ -292,6 +292,7 @@ class VideoController extends Controller
 
         return $recommends;
     }
+
     public function download(Video $video){
         $file_name = request('file_name');
         $file_path = $file_name;

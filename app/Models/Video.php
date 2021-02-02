@@ -9,7 +9,7 @@ class Video extends Model
 {
     use HasFactory;
 
-    public function videoCategory(){
+    public function videoCategories(){
         return $this->belongsToMany(VideoCategory::class);
     }
 

@@ -87,7 +87,7 @@
                                 <div class="col-md-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
-                                        <span v-for="category in recommend.video_category" :key="category.id"
+                                        <span v-for="category in recommend.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1">{{category.name}}
                                         </span>
                                     </p>
