@@ -97,6 +97,19 @@ export default {
     components:{
         AdminHeader
     },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/users/exist', {
+            id: to.params.id
+        })
+        .then((res) => {
+            if(res.data.length === 0) {
+                next({name: 'user_management'});
+            }
+            else{
+                next();
+            }
+        })
+    },
     methods:{
         getUser(){
             axios.get('/api/users/' + this.id)

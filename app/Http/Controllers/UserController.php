@@ -133,4 +133,8 @@ class UserController extends Controller
         }
         return $user;
     }
+
+    public function exist(Request $request){
+        return User::find($request['id']);
+    }
 }
