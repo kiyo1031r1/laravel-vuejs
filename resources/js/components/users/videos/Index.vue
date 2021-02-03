@@ -190,6 +190,19 @@ export default {
     components:{
         Header,
     },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/video_categories/get_category', {
+            file_name: to.params.category
+        })
+        .then((res) => {
+            if(res.data.length === 0) {
+                next({name: 'video'});
+            }
+            else{
+                next();
+            }
+        })
+    },
     methods:{
         getVideo(){
             //初回のみ登録
