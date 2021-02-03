@@ -229,6 +229,19 @@ export default {
             });
         }
     },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/videos/watch/exist', {
+            id: to.params.id
+        })
+        .then((res) => {
+            if(res.data.length === 0) {
+                next({name: 'video_management'});
+            }
+            else{
+                next();
+            }
+        })
+    },
     methods:{
         //カテゴリー
         getCategory(){
