@@ -191,7 +191,7 @@ export default {
         Header,
     },
     beforeRouteEnter(to,from,next){
-        axios.post('/api/video_categories/get_category', {
+        axios.post('/api/video_categories/exist', {
             file_name: to.params.category
         })
         .then((res) => {

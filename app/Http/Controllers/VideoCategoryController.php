@@ -24,7 +24,7 @@ class VideoCategoryController extends Controller
         return $videoCategory->delete();
     }
 
-    public function getCategory(Request $request){
+    public function exist(Request $request){
         return VideoCategory::where('file_name', $request['file_name'])->first();
     }
 }
