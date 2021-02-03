@@ -197,6 +197,19 @@ export default {
             return this.initialized && this.last_page > this.end_page;
         }
     },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/videos/watch/watch_exist', {
+            id: to.params.id
+        })
+        .then((res) => {
+            if(res.data.length === 0) {
+                next({name: 'video'});
+            }
+            else{
+                next();
+            }
+        })
+    },
     watch: {
         $route(to, from){
             this.my_comment = '';
