@@ -256,7 +256,7 @@ class VideoController extends Controller
         return ['video' => $video, 'recommends' => $recommends];
     }
 
-    public function watchExist(Request $request){
+    public function exist(Request $request){
         return Video::find($request['id']);
     }
 

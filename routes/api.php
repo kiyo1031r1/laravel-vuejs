@@ -53,7 +53,7 @@ Route::apiResource('video_categories', VideoCategoryController::class);
 Route::post('video_categories/get_category', [VideoCategoryController::class, 'getCategory']);
 Route::apiResource('videos', VideoController::class);
 Route::post('/videos/search', [VideoController::class, 'search']);
-Route::post('/videos/watch/watch_exist', [VideoController::class, 'watchExist']);
+Route::post('/videos/watch/exist', [VideoController::class, 'exist']);
 Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
 Route::post('/videos/download', [VideoController::class, 'download']);
 Route::apiResource('video_comments', VideoCommentController::class);

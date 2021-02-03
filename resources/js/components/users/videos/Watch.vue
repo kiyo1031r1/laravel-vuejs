@@ -198,7 +198,7 @@ export default {
         }
     },
     beforeRouteEnter(to,from,next){
-        axios.post('/api/videos/watch/watch_exist', {
+        axios.post('/api/videos/watch/exist', {
             id: to.params.id
         })
         .then((res) => {
