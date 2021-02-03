@@ -230,7 +230,7 @@ export default {
         }
     },
     beforeRouteEnter(to,from,next){
-        axios.post('/api/videos/watch/exist', {
+        axios.post('/api/videos/exist', {
             id: to.params.id
         })
         .then((res) => {
