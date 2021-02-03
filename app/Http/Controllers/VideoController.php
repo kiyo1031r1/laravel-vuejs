@@ -256,6 +256,10 @@ class VideoController extends Controller
         return ['video' => $video, 'recommends' => $recommends];
     }
 
+    public function watchExist(Request $request){
+        return Video::find($request['id']);
+    }
+
     private function getRecommend(Video $video){
         //ビデオカテゴリーを取得
         $video_categories = $video->videoCategories()->get();
