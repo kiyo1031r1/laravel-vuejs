@@ -9,7 +9,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-md-3">ユーザー名</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="before_name" disabled>
+                            <input class="form-control" :value="isAuthenticated.name" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -24,7 +24,7 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">メールアドレス</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="before_email" disabled>
+                            <input class="form-control" :value="isAuthenticated.email" disabled>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,8 +93,6 @@ export default {
     data(){
         return {
             user:{},
-            before_name:'',
-            before_email:'',
             errors:{},
             is_password_hidden: true,
         }
@@ -102,11 +100,17 @@ export default {
     components:{
         Header
     },
+    computed:{
+        isAuthenticated(){
+            return this.$store.getters.user;
+        }
+    },
     methods:{
         getUser(){
-            this.user = this.$store.getters.user;
-            this.before_name = this.user.name;
-            this.before_email = this.user.email;
+            this.user.id = this.isAuthenticated.id;
+            this.user.name = this.isAuthenticated.name;
+            this.user.email = this.isAuthenticated.email;
+            this.user.status = this.isAuthenticated.status;
         },
         passwordHiddenToggle(){
             this.is_password_hidden = !this.is_password_hidden;
