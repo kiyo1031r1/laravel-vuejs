@@ -101,8 +101,8 @@
                                 <label class="col-form-label">権限</label>
                                 <select v-model="search.role" class="form-control">
                                     <option selected></option>
-                                    <option value="一般ユーザー">一般ユーザー</option>
-                                    <option value="管理者">管理者</option>
+                                    <option value="1">一般ユーザー</option>
+                                    <option value="2">管理者</option>
                                 </select>
                             </div>
                             
