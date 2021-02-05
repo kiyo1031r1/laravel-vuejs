@@ -55,55 +55,40 @@ class UserController extends Controller
     public function search(Request $request){
         $query = User::query();
 
-        $data = $request->all();
-        $search = $data['search'];
-        $sort = $data['sort'];
-
         //検索
-        $name = $search['name'];
-        $email = $search['email'];
-        $created_at_start = $search['created_at_start'];
-        $created_at_end = $search['created_at_end'];
-        $role = $search['role'];
-        $status = $search['status'];
-
-        if($name) {
-            $this->searchWord($name, 'name', $query);
+        $search = $request['search'];
+        if($search['name']) {
+            $this->searchWord($search['name'], 'name', $query);
         }
-        if($email) {
-            $this->searchWord($email, 'email', $query);
+        if($search['email']) {
+            $this->searchWord($search['email'], 'email', $query);
         }
-        if($created_at_start){
-            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        if($search['created_at_start']){
+            $query->whereDate('created_at', '>=', $search['created_at_start'])->get();
         }
-        if($created_at_end){
-            $query->whereDate('created_at', '<=', $created_at_end)->get();
+        if($search['created_at_end']){
+            $query->whereDate('created_at', '<=', $search['created_at_end'])->get();
         }
-        if($role != ""){
-            $role_id = Role::where('name', $role)->first()->id;
-            $query->where('role_id', $role_id);
+        if($search['role'] != ""){    //selectBoxの為
+            $query->where('role_id', $search['role']);
         }
-        if($status != ""){
-            $query->where('status', $status);
+        if($search['status'] != ""){    //selectBoxの為
+            $query->where('status', $search['status']);
         }
 
         //ソート
-        $sort_id = $sort['id'];
-        $sort_created_at = $sort['created_at'];
-        $sort_status = $sort['status'];
-        $sort_role = $sort['role'];
-
-        if($sort_id){
-            $query->orderBy('id', $sort_id);
+        $sort = $request['sort'];
+        if($sort['id']){
+            $query->orderBy('id', $sort['id']);
         }
-        if($sort_created_at){
-            $query->orderBy('created_at', $sort_created_at);
+        if($sort['created_at']){
+            $query->orderBy('created_at', $sort['created_at']);
         }
-        if($sort_status){
-            $query->orderBy('status', $sort_status);
+        if($sort['status']){
+            $query->orderBy('status', $sort['status']);
         }
-        if($sort_role){
-            $query->orderBy('role_id', $sort_role);
+        if($sort['role']){
+            $query->orderBy('role_id', $sort['role']);
         }
 
         return $query->paginate($sort['per_page']);
