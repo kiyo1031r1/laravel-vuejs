@@ -141,8 +141,6 @@
                                     </th>
                                     <th scope="col">
                                         <span class="mr-1">次回更新日</span>
-                                        <v-icon @click="sortList('next_update', 'asc');" name="caret-square-up"/>
-                                        <v-icon @click="sortList('next_update', 'desc')" name="caret-square-down"/>
                                     </th>
                                     <th scope="col">
                                         <span class="mr-1">権限</span>
@@ -246,7 +244,6 @@ export default {
                 id: null,
                 created_at: null,
                 status: null,
-                next_update: null,
                 role: null,
                 per_page: '10',
             }
@@ -360,7 +357,6 @@ export default {
             this.sort.id = null;
             this.sort.created_at = null;
             this.sort.status = null;
-            this.sort.next_update = null;
             this.sort.role = null;
             if(column === 'id'){
                 this.sort.id = order;
@@ -370,9 +366,6 @@ export default {
             }
             if(column === 'status'){
                 this.sort.status = order;
-            }
-            if(column === 'next_update'){
-                this.sort.next_update = order;
             }
             if(column === 'role'){
                 this.sort.role = order;
