@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function updateFromUser(User $user){
         //パスワード未入力時は、パスワード情報を変更しない
-        if(request('password') !== null){
+        if(request('password')){
             $input = Validator::make(request()->all(),[
                 'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
                 'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
