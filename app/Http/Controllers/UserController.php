@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Models\User;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -64,10 +65,15 @@ class UserController extends Controller
             $this->searchWord($search['email'], 'email', $query);
         }
         if($search['created_at_start']){
-            $query->whereDate('created_at', '>=', $search['created_at_start'])->get();
+            //dateTime型に変換し、日本時刻に変換した値で検索
+            $date = new DateTime($search['created_at_start']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '>=', $date)->get();
         }
         if($search['created_at_end']){
-            $query->whereDate('created_at', '<=', $search['created_at_end'])->get();
+            $date = new DateTime($search['created_at_end']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '<=', $date)->get();
         }
         if($search['role'] != ""){    //selectBoxの為
             $query->where('role_id', $search['role']);
