@@ -18,7 +18,6 @@ class UserController extends Controller
 
     public function update(Request $request, User $user){
         $user->update($request->all());
-        return $user;
     }
 
     public function updateFromUser(User $user){
@@ -44,13 +43,10 @@ class UserController extends Controller
             
             $user->update($input);
         }
-
-        return $user;
     }
 
     public function destroy(User $user){
         $user->delete();
-        return $user;
     }
 
     public function search(Request $request){
@@ -114,7 +110,6 @@ class UserController extends Controller
             $user->status = 'premium';
             $user->save();
         }
-        return $user;
     }
 
     public function cancelPremium(User $user){
@@ -122,7 +117,6 @@ class UserController extends Controller
             $user->status = 'normal';
             $user->save();
         }
-        return $user;
     }
 
     public function exist(Request $request){
