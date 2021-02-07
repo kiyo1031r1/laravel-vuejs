@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateFromUserRequest;
 use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -20,29 +20,15 @@ class UserController extends Controller
         $user->update($request->all());
     }
 
-    public function updateFromUser(User $user){
-        //パスワード未入力時は、パスワード情報を変更しない
-        if(request('password')){
-            $input = Validator::make(request()->all(),[
-                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'password' => ['required', 'string', 'min:8', 'confirmed']
-            ])->validate();
-
-            $user->update([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password'])
-            ]);
+    public function updateFromUser(UpdateFromUserRequest $request){
+        $request = $request->validated();
+        $user = Auth::user();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        if(!empty($request['password'])){
+            $user->password = Hash::make($request['password']);
         }
-        else{
-            $input = Validator::make(request()->all(),[
-                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            ])->validate();
-            
-            $user->update($input);
-        }
+        $user->save();
     }
 
     public function destroy(User $user){
