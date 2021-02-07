@@ -380,6 +380,7 @@ export default {
         removeVideo(){
             this.video = '';
             this.video_name = '';
+            this.video_time = '';
             this.video_preview = null;
             this.$refs.video.value = null;
         },
