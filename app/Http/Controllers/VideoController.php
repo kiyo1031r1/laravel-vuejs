@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVideoRequest;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Http\File;
@@ -23,36 +24,18 @@ class VideoController extends Controller
         $this->pro_env = app()->environment('production');
     }
 
-    public function store(Video $video){
-        $input = request()->validate([
-            'title' => 'required|max:255',
-            'about' => 'required',
-            'status' => 'required',
-            'thumbnail_name' => 'max:255',
-            'video' => 'required|max:2048',
-            'video_name' => 'required',
-            'video_time' => 'required|max:86400',
-            'category' => 'required',
-        ]);
+    public function store(StoreVideoRequest $request){
+        //入力値を元に一旦作成
+        $request = $request->validated();
+        $video = Video::create($request);
 
-        $video->title = $input['title'];
-        $video->about = $input['about'];
-        $video->status = $input['status'];
-
-        $video->video_name = $input['video_name'];
-        $video->video_time = $input['video_time'];
-        $this->uploadVideoFile($video, $input['video']);
-
-        //サムネイルが設定されている場合
-        if(request('thumbnail') !== null) {
-            $video->thumbnail_name = $input['thumbnail_name'];
-            $this->uploadThumbnailFile($video, request('thumbnail'));
+        //ビデオとサムネイルのファイルパスを加工したものを上書き
+        $this->uploadVideoFile($video, $request['video']);
+        if(!empty($request['thumbnail'])) {
+            $this->uploadThumbnailFile($video, $request['thumbnail']);
         }
-
         $video->save();
-        $video->videoCategories()->attach(request('category'));
-
-        return $video;
+        $video->videoCategories()->attach($request['category']);
     }
 
     public function show(Video $video){
