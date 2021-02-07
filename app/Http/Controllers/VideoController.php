@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
+use App\Http\Requests\UpdateVideoRequest;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Http\File;
@@ -42,64 +43,36 @@ class VideoController extends Controller
         return Video::with('videoCategories:id')->find($video->id);
     }
 
-    public function update(Video $video){
-        $input = request()->validate([
-            'title' => 'required|max:255',
-            'about' => 'required',
-            'status' => 'required',
-            'thumbnail_name' => 'max:255',
-            'video_name' => 'required',
-            'video_time' => 'required|max:86400',
-            'category' => 'required',
+    public function update(UpdateVideoRequest $request, Video $video){
+        $request = $request->validated();
+        $video->update([
+            'title' => $request['title'],
+            'about' => $request['about'],
+            'status' => $request['status'],
+            'thumbnail_name' => $request['thumbnail_name'],
+            'video_name' => $request['video_name'],
+            'video_time' => $request['video_time'],
         ]);
 
-        $video->title = $input['title'];
-        $video->about = $input['about'];
-        $video->status = $input['status'];
-        $video->video_name = $input['video_name'];
-        $video->video_time = $input['video_time'];
-
-        //サムネイル更新の場合
-        if(request('thumbnail')){
-            //前データを削除
-            if($video->thumbnail){
-                $this->deleteThumbnailFile($video->thumbnail);
-            }
-
-            $input_t = request()->validate([
-                'thumbnail' => 'required',
-            ]);
-
-            $this->uploadThumbnailFile($video, $input_t['thumbnail']);
-            $video->thumbnail_name = $input['thumbnail_name'];
+        //サムネイル更新
+        if($request['thumbnail']){
+            $this->deleteThumbnailFile($video->thumbnail);
+            $this->uploadThumbnailFile($video, $request['thumbnail']);
+        }
+        //サムネイル削除
+        elseif(!$request['thumbnail'] && !$request['thumbnail_name']){
+            $this->deleteThumbnailFile($video->thumbnail);
+            $video->thumbnail = null;
         }
 
-        //サムネイル削除の場合
-        if(request('thumbnail') === null) {
-            if($video->thumbnail){
-                $this->deleteThumbnailFile($video->thumbnail);
-                $video->thumbnail = null;
-                $video->thumbnail_name = null;
-            }
-        }
-
-        if(request('video')){
-            //前データを削除
-            if($video->video){
-                $this->deleteVideoFile($video->video);
-            }
-            
-            $input_t = request()->validate([
-                'video' => 'max:2048',
-            ]);
-
-            $this->uploadVideoFile($video, $input_t['video']);
+        //ビデオ更新
+        if($request['video']){
+            $this->deleteVideoFile($video->video);
+            $this->uploadVideoFile($video, $request['video']);
         }
 
         $video->save();
         $video->videoCategories()->sync(request('category'));
-
-        return $video;
     }
 
     public function destroy(Video $video){
