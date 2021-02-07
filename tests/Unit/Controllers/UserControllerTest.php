@@ -4,8 +4,10 @@ namespace Tests\Unit\Controllers;
 
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
+
 
 class UserControllerTest extends TestCase
 {
@@ -78,6 +80,7 @@ class UserControllerTest extends TestCase
         ]);
 
         $user = User::factory()->create();
+        Auth::login($user);
         $old_password = $user->password;
         $params = $request;
 
