@@ -103,6 +103,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'video_time' => [
+            'max' => ':attributeには23時間59分59秒以下を指定してください。'
+        ]
     ],
 
     /*
