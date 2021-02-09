@@ -31,7 +31,7 @@ class StoreVideoRequest extends FormRequest
             'thumbnail_name' => 'max:255',
             'video' => 'required|max:2048',
             'video_name' => 'required',
-            'video_time' => 'required|max:86400',
+            'video_time' => 'required|integer|max:86399',
             'category' => 'required',
         ];
     }
