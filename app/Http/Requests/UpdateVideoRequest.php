@@ -32,7 +32,7 @@ class UpdateVideoRequest extends FormRequest
             'video' => 'sometimes|max:2048',
             'video_name' => 'required',
             'video_time' => 'required|integer|max:86399',
-            'category' => 'required',
+            'category' => 'required|array|max:3',
         ];
     }
 }
