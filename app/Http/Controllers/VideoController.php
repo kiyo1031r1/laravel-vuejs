@@ -172,9 +172,14 @@ class VideoController extends Controller
             }
         }
         if($search['created_at_start']){
+            //dateTime型に変換し、日本時刻に変換した値で検索
+            $date = new DateTime($search['created_at_start']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
             $query->whereDate('created_at', '>=', $search['created_at_start'])->get();
         }
         if($search['created_at_end']){
+            $date = new DateTime($search['created_at_end']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
             $query->whereDate('created_at', '<=', $search['created_at_start'])->get();
         }
 
