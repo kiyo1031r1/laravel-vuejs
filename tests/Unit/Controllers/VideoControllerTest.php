@@ -4,6 +4,7 @@ namespace Tests\Unit\Controllers;
 
 use App\Models\Video;
 use App\Models\VideoCategory;
+use Carbon\Carbon;
 use Database\Seeders\VideoCategorySeeder;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -328,11 +329,130 @@ class VideoControllerTest extends TestCase
     //     ])->assertOk();
     // }
 
-    public function testDestroy(){
-        $video = Video::factory()->create();
-        $request = $this->deleteJson('/api/videos/'.$video->id);
+    // public function testDestroy(){
+    //     $video = Video::factory()->create();
+    //     $request = $this->deleteJson('/api/videos/'.$video->id);
 
-        //ファイル削除処理は、updateアクションで確認済みの為省略
-        $this->assertDeleted($video);
+    //     //ファイル削除処理は、updateアクションで確認済みの為省略
+    //     $this->assertDeleted($video);
+    // }
+
+    /**
+     * @dataProvider dataProviderSearch
+     * @param 検索カラム
+     * @param 検索値
+     * @param ソートカラム
+     * @param ソート値
+     * @param ケース
+     * @param 表示件数フラグ
+     */
+    public function testSearch($search_param, $search_value, $sort_param, $sort_value, $case, $per_page = false){
+        $this->artisan('migrate:fresh');
+        VideoCategory::factory()->count(3)->create();
+        Video::factory()->hasAttached(VideoCategory::find(1))->create([
+            'title' => 'test1',
+            'created_at' => Carbon::now(),
+        ]);
+        Video::factory()->hasAttached([VideoCategory::find(1), VideoCategory::find(2)])->create([
+            'title' => 'test2',
+            'created_at' => Carbon::now()->subDay(1),
+        ]);
+
+        $search = [
+            'title' => '',
+            'created_at_start' => '',
+            'created_at_end' => '',
+            'categories' => [],
+        ];
+        $sort = [
+            'created_at' => 'desc',
+            'per_page' => 10,
+        ];
+
+        if($search_param){
+            //dateProvider読み込み時にはモデルが作成されていないのでこちらで作成
+            if($search_param === 'categories'){
+                foreach($search_value as $value){
+                    $search['categories'][] = VideoCategory::find($value);
+                }
+            }
+            else{
+                $search[$search_param] = $search_value;
+            }
+            
+        }
+        if($sort_param){
+            $sort[$sort_param] = $sort_value;
+        }
+
+        $current_page = 1;
+        //ユーザー表示件数を変更しない場合
+        if(!$per_page){
+            $response = $this->postJson('/api/videos/search?page='.$current_page, [
+                'search' => $search,
+                'sort' => $sort,
+            ]);
+        }
+
+        switch($case){
+            case 0:
+                $response->assertJsonCount(0, 'data')
+                ->assertOK();
+                break;
+            case 1:
+                $response->assertJsonCount(1, 'data')
+                ->assertOK();
+                break;
+            case 2:
+                $response->assertJsonCount(2, 'data')
+                ->assertOK();
+                break;
+            case 3:
+                //descなら、0つめがid1(今日)で、1つめがid2(昨日)
+                $this->assertGreaterThan($response['data'][0]['id'], $response['data'][1]['id']);
+                $response->assertOK();
+                break;
+            case 4:
+                //ascなら、0つめがid2(昨日)で、1つめがid1(今日)
+                $this->assertGreaterThan($response['data'][1]['id'], $response['data'][0]['id']);
+                $response->assertOK();
+                break;
+            case 5:
+                //video表示数を確認する為、videoを100個追加
+                $count = 100;
+                Video::factory($count)->create();
+                $response = $this->postJson('/api/videos/search?page='.$current_page, [
+                    'search' => $search,
+                    'sort' => $sort,
+                ]);
+                $response->assertJsonFragment(['last_page' => ceil(($count + 2) / $sort_value)])
+                ->assertOK();
+                break;
+        }
     }
+
+    public function dataProviderSearch(){
+        return[
+            'search_title_expect_2' => ['title', 'test', null, null, 2],
+            'search_title_expect_1' => ['title', 'test 1', null, null, 1],
+            'search_title_expect_0' => ['title', 'test12', null, null, 0],
+            'search_categories_expect_2' => ['categories', [1], null, null, 2],
+            'search_categories_expect_1' => ['categories', [1, 2], null, null, 1],
+            'search_categories_expect_0' => ['categories', [3], null, null, 0],
+            'search_created_at_start_expect_2' => ['created_at_start',Carbon::now()->subDay(1), null, null, 2],
+            'search_created_at_start_expect_1' => ['created_at_start',Carbon::now(), null, null, 1],
+            'search_created_at_start_expect_0' => ['created_at_start',Carbon::now()->addDay(1), null, null, 0], 
+            'search_created_at_end_expect_2' => ['created_at_end',Carbon::now(), null, null, 2],
+            'search_created_at_end_expect_1' => ['created_at_end',Carbon::now()->subDay(1), null, null, 1],
+            'search_created_at_end_expect_0' => ['created_at_end',Carbon::now()->subDay(2), null, null, 0], 
+            'sort_created_at_expect_desc' => [null, null, 'created_at', 'desc', 3], 
+            'sort_created_at_expect_asc' => [null, null, 'created_at', 'asc', 4], 
+            'sort_per_page_expect_11' => [null, null, 'per_page', 10, 5, true], 
+            'sort_per_page_expect_6' => [null, null, 'per_page', 20, 5, true], 
+            'sort_per_page_expect_3' => [null, null, 'per_page', 50, 5, true], 
+            'sort_per_page_expect_2' => [null, null, 'per_page', 100, 5, true], 
+        ];
+    }
+
+
 }
