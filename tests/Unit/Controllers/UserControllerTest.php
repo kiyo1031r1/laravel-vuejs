@@ -152,7 +152,7 @@ class UserControllerTest extends TestCase
      * @param 表示件数フラグ
      */
 
-    public function testSearchWord($search_param, $search_value, $sort_param, $sort_value, $case, $per_page = false){
+    public function testSearch($search_param, $search_value, $sort_param, $sort_value, $case, $per_page = false){
         User::factory()->create([
             'name' => 'test1',
             'email' => 'test1@example.com',
@@ -272,9 +272,9 @@ class UserControllerTest extends TestCase
             'search_email_expect_2' => ['email','test', null, null, 2],
             'search_email_expect_1' => ['email','test1', null, null, 1],
             'search_email_expect_0' => ['email','test12', null, null, 0],
-            'search_created_at_expect_2' => ['created_at_start',Carbon::now()->subDay(1), null, null, 2],
-            'search_created_at_expect_1' => ['created_at_start',Carbon::now(), null, null, 1],
-            'search_created_at_expect_0' => ['created_at_start',Carbon::now()->addDay(1), null, null, 0], 
+            'search_created_at_start_expect_2' => ['created_at_start',Carbon::now()->subDay(1), null, null, 2],
+            'search_created_at_start_expect_1' => ['created_at_start',Carbon::now(), null, null, 1],
+            'search_created_at_start_expect_0' => ['created_at_start',Carbon::now()->addDay(1), null, null, 0], 
             'search_created_at_end_expect_2' => ['created_at_end',Carbon::now(), null, null, 2],
             'search_created_at_end_expect_1' => ['created_at_end',Carbon::now()->subDay(1), null, null, 1],
             'search_created_at_end_expect_0' => ['created_at_end',Carbon::now()->subDay(2), null, null, 0], 
