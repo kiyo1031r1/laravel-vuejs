@@ -305,33 +305,30 @@ class VideoControllerTest extends TestCase
     //     ];
     // }
 
-    // public function testShow(){
-    //     $category = VideoCategory::factory()->count(2)->create();
-    //     $video = Video::factory()->hasAttached($category)->create();
-    //     $response = $this->getJson('/api/videos/'.$video->id);
-    //     foreach($video->videoCategories as $video_category){
-    //         $video_categories[] = [
-    //             'id' => $video_category->id,
-    //             'pivot' => [
-    //                 'video_id' => $video_category->pivot->video_id,
-    //                 'video_category_id' => $video_category->pivot->video_category_id,
-    //             ],
-    //         ];
-    //     }
-    //     $response->assertJson([
-    //         'title' => $video->title,
-    //         'about' => $video->about,
-    //         'status' => $video->status,
-    //         'thumbnail' => $video->thumbnail,
-    //         'thumbnail_name' => $video->thumbnail_name,
-    //         'video' => $video->video,
-    //         'video_name' => $video->video_name,
-    //         'video_categories' => $video_categories,
-    //     ])->assertOk();
-    // }
+    public function testShow(){
+        $category = VideoCategory::factory()->count(2)->create();
+        $video = Video::factory()->hasAttached($category)->create();
+        $response = $this->getJson('/api/videos/'.$video->id);
+        foreach($video->videoCategories as $video_category){
+            $video_categories[] = [
+                'id' => $video_category->id,
+                'pivot' => $video_category->pivot->toArray(),
+            ];
+        }
 
-    public function testDestroy(){
-
+        $response->assertJson([
+            'title' => $video->title,
+            'about' => $video->about,
+            'status' => $video->status,
+            'thumbnail' => $video->thumbnail,
+            'thumbnail_name' => $video->thumbnail_name,
+            'video' => $video->video,
+            'video_name' => $video->video_name,
+            'video_categories' => $video_categories,
+        ])->assertOk();
     }
 
+    public function testDestroy(){
+    
+    }
 }
