@@ -14,3 +14,6 @@ npm-debug.log
 yarn-error.log
 list
 .DS_Store
+storage/.DS_Store
+resources/js/.DS_Store
+resources/.DS_Store
