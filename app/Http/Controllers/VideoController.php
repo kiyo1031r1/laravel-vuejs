@@ -9,6 +9,8 @@ use App\Models\Video;
 use Illuminate\Http\File;
 use \InterventionImage;
 use Illuminate\Support\Facades\Storage;
+use DateTime;
+use DateTimeZone;
 
 class VideoController extends Controller
 {
@@ -157,39 +159,31 @@ class VideoController extends Controller
     public function search(Request $request){
         $query = Video::with('videoCategories');
 
-        $data = $request->all();
-        $search = $data['search'];
-        $sort = $data['sort'];
-
         //検索
-        $title = $search['title'];
-        $categories = $search['categories'];
-        $created_at_start = $search['created_at_start'];
-        $created_at_end = $search['created_at_end'];
-
-        if($title){
-            $this->searchWord($title, 'title', $query);
+        $search = $request['search'];
+        if($search['title']){
+            $this->searchWord($search['title'], 'title', $query);
         }
-        if($categories){
-            foreach($categories as $category){
+        if($search['categories']){
+            foreach($search['categories'] as $category){
                 $query->whereHas('videoCategories', function($q) use ($category){
                     $q->where('id', $category['id']);
                 });
             }
         }
-        if($created_at_start){
-            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        if($search['created_at_start']){
+            $query->whereDate('created_at', '>=', $search['created_at_start'])->get();
         }
-        if($created_at_end){
-            $query->whereDate('created_at', '<=', $created_at_end)->get();
+        if($search['created_at_end']){
+            $query->whereDate('created_at', '<=', $search['created_at_start'])->get();
         }
 
         //ソート
-        $select = $sort['select'];
-        if($select === 'created_at_desc'){
+        $sort = $request['sort'];
+        if($sort['created_at'] === 'desc'){
             $query->orderBy('created_at', 'desc');
         }
-        if($select === 'created_at_asc'){
+        if($sort['created_at'] === 'asc'){
             $query->orderBy('created_at', 'asc');
         }
 
