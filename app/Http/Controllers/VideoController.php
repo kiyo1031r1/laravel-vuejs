@@ -84,7 +84,6 @@ class VideoController extends Controller
         }
 
         $video->delete();
-        return $video;
     }
 
     private function uploadThumbnailFile($video, $input_thumbnail){
