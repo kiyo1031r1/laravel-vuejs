@@ -95,6 +95,7 @@ class VideoControllerTest extends TestCase
     //         'video_time_required' => [['video_time' => null], 422, 'video_time', '再生時間は必ず入力してください。'],
     //         'video_time_max' => [['video_time' => "86400"], 422, 'video_time', '再生時間には23時間59分59秒以下を指定してください。'],
     //         'category' => [['category' => null], 422, 'category', 'カテゴリーは必ず入力してください。'],
+    //         'category' => [['category' => [1,2,3,4]], 422, 'category', 'カテゴリーは3個まで登録することができます。'],
     //     ];
     // }
 
@@ -125,7 +126,7 @@ class VideoControllerTest extends TestCase
     //             'video' => $video_cache = UploadedFile::fake()->image('test.jpg'),  //ファイル確認で使用
     //             'video_time' => "86399",
     //             'video_name' => 'test',
-    //             'category' => [$video_category],
+    //             'category' => [$video_category->id],
     //         ];
     //         $this->postJson('/api/videos', $param);
     //         $video = Video::find(1);
@@ -303,6 +304,7 @@ class VideoControllerTest extends TestCase
     //         'video_time_required' => [['video_time' => null], 422, 'video_time', '再生時間は必ず入力してください。'],
     //         'video_time_max' => [['video_time' => "86400"], 422, 'video_time', '再生時間には23時間59分59秒以下を指定してください。'],
     //         'category' => [['category' => null], 422, 'category', 'カテゴリーは必ず入力してください。'],
+    //         'category' => [['category' => [1,2,3,4]], 422, 'category', 'カテゴリーは3個まで登録することができます。'],
     //     ];
     // }
 
