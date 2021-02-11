@@ -456,131 +456,131 @@ class VideoControllerTest extends TestCase
     //     ];
     // }
 
-    // /**
-    //  * @dataProvider dataProviderWatch
-    //  * @param カテゴリー登録フラグ
-    //  * @param ビデオ登録多数フラグ
-    //  * @param ケース
-    //  */
-    // public function testWatch($register, $rec_many, $case){
-    //     $this->artisan('migrate:fresh');
-    //     VideoCategory::factory()->count(5)->create();
+    /**
+     * @dataProvider dataProviderWatch
+     * @param カテゴリー登録フラグ
+     * @param ビデオ登録多数フラグ
+     * @param ケース
+     */
+    public function testWatch($register, $rec_many, $case){
+        $this->artisan('migrate:fresh');
+        VideoCategory::factory()->count(5)->create();
 
-    //     //$video->created_atとすると、結果がyyyy-mm hh-mm-ssになる
-    //     //setTimezoneをして、フォーマットするとyyyy-mmThh-mm-ss+0900のようになる為、直接指定
-    //     $created_at = "2021-02-11T09:00:00.000000Z";
-    //     $created_at_expect = "2021-02-11T00:00:00.000000Z";
+        //$video->created_atとすると、結果がyyyy-mm hh-mm-ssになる
+        //setTimezoneをして、フォーマットするとyyyy-mmThh-mm-ss+0900のようになる為、直接指定
+        $created_at = "2021-02-11T09:00:00.000000Z";
+        $created_at_expect = "2021-02-11T00:00:00.000000Z";
 
-    //     //対象ビデオ
-    //     if($register){
-    //         $video = Video::factory()->hasAttached([
-    //             VideoCategory::find(1),
-    //             VideoCategory::find(2),
-    //             VideoCategory::find(3),
-    //         ])->create([
-    //             'created_at' => $created_at,
-    //         ]);
-    //         $video_categories_id = [1,2,3];
-    //     }
-    //     else{
-    //         $video = Video::factory()->create([
-    //             'created_at' => $created_at,
-    //         ]);
-    //     }
+        //対象ビデオ
+        if($register){
+            $video = Video::factory()->hasAttached([
+                VideoCategory::find(1),
+                VideoCategory::find(2),
+                VideoCategory::find(3),
+            ])->create([
+                'created_at' => $created_at,
+            ]);
+            $video_categories_id = [1,2,3];
+        }
+        else{
+            $video = Video::factory()->create([
+                'created_at' => $created_at,
+            ]);
+        }
 
-    //     //レコメンド用ビデオ(7つ作成)
-    //     // 3/3
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(1),
-    //         VideoCategory::find(2),
-    //         VideoCategory::find(3),
-    //     ])->create();
+        //レコメンド用ビデオ(7つ作成)
+        // 3/3
+        Video::factory()->hasAttached([
+            VideoCategory::find(1),
+            VideoCategory::find(2),
+            VideoCategory::find(3),
+        ])->create();
 
-    //     // 2/3
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(1),
-    //         VideoCategory::find(2),
-    //         VideoCategory::find(4),
-    //     ])->create();
+        // 2/3
+        Video::factory()->hasAttached([
+            VideoCategory::find(1),
+            VideoCategory::find(2),
+            VideoCategory::find(4),
+        ])->create();
 
-    //     // 1/3
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(1),
-    //         VideoCategory::find(4),
-    //         VideoCategory::find(5),
-    //     ])->create();
+        // 1/3
+        Video::factory()->hasAttached([
+            VideoCategory::find(1),
+            VideoCategory::find(4),
+            VideoCategory::find(5),
+        ])->create();
 
-    //     // 2/2
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(1),
-    //         VideoCategory::find(2),
-    //     ])->create();
+        // 2/2
+        Video::factory()->hasAttached([
+            VideoCategory::find(1),
+            VideoCategory::find(2),
+        ])->create();
 
-    //     // 1/2
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(3),
-    //         VideoCategory::find(4),
-    //     ])->create();
+        // 1/2
+        Video::factory()->hasAttached([
+            VideoCategory::find(3),
+            VideoCategory::find(4),
+        ])->create();
 
-    //     // 1/1
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(1),
-    //     ])->create();
+        // 1/1
+        Video::factory()->hasAttached([
+            VideoCategory::find(1),
+        ])->create();
 
-    //     // 0/1
-    //     Video::factory()->hasAttached([
-    //         VideoCategory::find(4),
-    //     ])->create();
+        // 0/1
+        Video::factory()->hasAttached([
+            VideoCategory::find(4),
+        ])->create();
 
-    //     //10以上のチェック(共通カテゴリー0を追加)
-    //     if($rec_many){
-    //         Video::factory()->hasAttached([
-    //             VideoCategory::find(5),
-    //         ])->count(10)->create();
-    //     }
+        //10以上のチェック(共通カテゴリー0を追加)
+        if($rec_many){
+            Video::factory()->hasAttached([
+                VideoCategory::find(5),
+            ])->count(10)->create();
+        }
 
-    //     $response = $this->postJson('/api/videos/watch/'.$video->id);
-    //     $response->assertJson(['video' => [
-    //         'id' => $video->id,
-    //         'title' => $video->title,
-    //         'about' => $video->about,
-    //         'status' => $video->status,
-    //         'video' => $video->video,
-    //         'video_name' => $video->video_name,
-    //         'created_at' => $created_at_expect,
-    //     ]]);
+        $response = $this->postJson('/api/videos/watch/'.$video->id);
+        $response->assertJson(['video' => [
+            'id' => $video->id,
+            'title' => $video->title,
+            'about' => $video->about,
+            'status' => $video->status,
+            'video' => $video->video,
+            'video_name' => $video->video_name,
+            'created_at' => $created_at_expect,
+        ]])->assertOk();
 
-    //     if($register){
-    //         $before_same_num = 3; //最大数
-    //         //同カテゴリー数を比較
-    //         foreach($response['recommends'] as $recommend){
-    //             $r_video_categories_id = array_column($recommend['video_categories'],'id');
-    //             $same_num = count(array_intersect($video_categories_id, $r_video_categories_id));
-    //             $this->assertGreaterThanOrEqual($same_num, $before_same_num);
-    //             $before_same_num = $same_num;
-    //         }
-    //     }
+        if($register){
+            $before_same_num = 3; //最大数
+            //同カテゴリー数を比較
+            foreach($response['recommends'] as $recommend){
+                $r_video_categories_id = array_column($recommend['video_categories'],'id');
+                $same_num = count(array_intersect($video_categories_id, $r_video_categories_id));
+                $this->assertGreaterThanOrEqual($same_num, $before_same_num);
+                $before_same_num = $same_num;
+            }
+        }
 
-    //     switch($case){
-    //         case 1:
-    //             $response->assertJsonCount(10, 'recommends');
-    //             break;
-    //         case 2:
-    //             $response->assertJsonCount(7, 'recommends');
-    //             break;
-    //         case 3:
-    //             $this->assertNull($response['recommends']);
-    //             break;
-    //     }
-    // }
+        switch($case){
+            case 1:
+                $response->assertJsonCount(10, 'recommends');
+                break;
+            case 2:
+                $response->assertJsonCount(7, 'recommends');
+                break;
+            case 3:
+                $this->assertNull($response['recommends']);
+                break;
+        }
+    }
 
-    // public function dataProviderWatch(){
-    //     return[
-    //         'register_rec_video_many' => [true, true, 1], 
-    //         'register_rec_video_little' => [true, false, 2], 
-    //         'not_register' => [false, null, 3],
-    //     ];
-    // }
+    public function dataProviderWatch(){
+        return[
+            'register_rec_video_many' => [true, true, 1], 
+            'register_rec_video_little' => [true, false, 2], 
+            'not_register' => [false, null, 3],
+        ];
+    }
 
     // public function testExist(){
     //     $video = Video::factory()->hasAttached(VideoCategory::factory())->create();
