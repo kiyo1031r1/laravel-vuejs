@@ -582,15 +582,15 @@ class VideoControllerTest extends TestCase
     //     ];
     // }
 
-    public function testExist(){
-        $video = Video::factory()->hasAttached(VideoCategory::factory())->create();
-        $response = $this->postJson('/api/videos/exist', [
-            'id' => $video->id,
-        ]);
-        $response->assertOk()
-            ->assertJson([
-                'id' => $video->id
-            ]);
-    }
+    // public function testExist(){
+    //     $video = Video::factory()->hasAttached(VideoCategory::factory())->create();
+    //     $response = $this->postJson('/api/videos/exist', [
+    //         'id' => $video->id,
+    //     ]);
+    //     $response->assertOk()
+    //         ->assertJson([
+    //             'id' => $video->id
+    //         ]);
+    // }
 
 }
