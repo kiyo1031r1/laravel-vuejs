@@ -74,7 +74,7 @@ class VideoController extends Controller
         }
 
         $video->save();
-        $video->videoCategories()->sync(request('category'));
+        $video->videoCategories()->sync($request['category']);
     }
 
     public function destroy(Video $video){
