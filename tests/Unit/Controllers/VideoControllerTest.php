@@ -593,4 +593,14 @@ class VideoControllerTest extends TestCase
     //         ]);
     // }
 
+    public function testDownLoad(){
+        $file_name = 'sample_video.mov';
+        $response = $this->postJson('/api/videos/download', 
+            ['file_name' => $file_name]
+        );
+
+        $this->assertFileExists(storage_path('app/public/'.$file_name));
+        $response->assertOk();
+    }
+
 }
