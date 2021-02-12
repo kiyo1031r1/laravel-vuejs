@@ -17,7 +17,7 @@ class VideoCategoryController extends Controller
     }
 
     public function destroy(VideoCategory $videoCategory){
-        return $videoCategory->delete();
+        $videoCategory->delete();
     }
 
     public function exist(Request $request){
