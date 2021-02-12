@@ -194,13 +194,11 @@ export default {
         axios.post('/api/video_categories/exist', {
             file_name: to.params.category
         })
-        .then((res) => {
-            if(res.data.length === 0) {
-                next({name: 'video'});
-            }
-            else{
-                next();
-            }
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video'});
         })
     },
     methods:{
