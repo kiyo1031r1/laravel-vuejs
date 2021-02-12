@@ -164,6 +164,7 @@ class VideoControllerTest extends TestCase
             ->assertStatus($code);
         }
         elseif($code == 200){
+            $response->assertStatus($code);
             switch($case){
                 case 1:
                     //ダミーデータが削除されていないか確認
