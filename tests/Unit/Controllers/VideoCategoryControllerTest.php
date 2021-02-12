@@ -72,10 +72,34 @@ class VideoCategoryControllerTest extends TestCase
     //     ];
     // }
 
-    public function testDestroy(){
+    // public function testDestroy(){
+    //     $category = VideoCategory::factory()->create();
+    //     $response = $this->deleteJson('/api/video_categories/'. $category->id);
+    //     $this->assertDeleted($category);
+    //     $response->assertOk();
+    // }
+
+    public function testExist(){
+        //ダミー
+        VideoCategory::factory()->count(10)->create();
+
+        //正常チェック
         $category = VideoCategory::factory()->create();
-        $response = $this->deleteJson('/api/video_categories/'. $category->id);
-        $this->assertDeleted($category);
-        $response->assertOk();
+        $response = $this->postJson('/api/video_categories/exist', [
+            'file_name' => $category->file_name,
+        ]);
+        $response->assertOk()
+        ->assertJsonStructure([
+            'id', 'name', 'file_name', 'created_at', 'updated_at'
+        ])
+        ->assertJson([
+            'file_name' => $category->file_name
+        ]);
+
+        //異常チェック
+        $response = $this->postJson('/api/video_categories/exist', [
+            'file_name' => 'not_exist',
+        ]);
+        $response->assertNotFound();
     }
 }
