@@ -21,6 +21,6 @@ class VideoCategoryController extends Controller
     }
 
     public function exist(Request $request){
-        return VideoCategory::where('file_name', $request['file_name'])->first();
+        return VideoCategory::where('file_name', $request['file_name'])->firstOrFail();
     }
 }
