@@ -334,7 +334,7 @@ class VideoControllerTest extends TestCase
 
     public function testDestroy(){
         $video = Video::factory()->create();
-        $request = $this->deleteJson('/api/videos/'.$video->id);
+        $this->deleteJson('/api/videos/'.$video->id);
 
         //ファイル削除処理は、updateアクションで確認済みの為省略
         $this->assertDeleted($video);
