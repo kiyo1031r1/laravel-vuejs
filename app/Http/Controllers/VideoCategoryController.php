@@ -13,7 +13,7 @@ class VideoCategoryController extends Controller
     }
 
     public function store(StoreVideoCategoryRequest $request){
-        return VideoCategory::create($request->validated());
+        VideoCategory::create($request->validated());
     }
 
     public function destroy(VideoCategory $videoCategory){
