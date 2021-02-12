@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVideoCategoryRequest;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
 
@@ -11,13 +12,8 @@ class VideoCategoryController extends Controller
         return VideoCategory::get(['id', 'name', 'file_name']);
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:video_categories'],
-            'file_name' => ['required', 'string', 'max:255', 'unique:video_categories']
-        ]);
-
-        return VideoCategory::create($request->all());
+    public function store(StoreVideoCategoryRequest $request){
+        return VideoCategory::create($request->validated());
     }
 
     public function destroy(VideoCategory $videoCategory){
