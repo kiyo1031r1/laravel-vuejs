@@ -22,9 +22,7 @@ class VideoCommentController extends Controller
         return $comments;
     }
 
-    public function destroy(Request $request){
-        $comment = VideoComment::find($request['id']);
-        $comment->delete();
-        return $comment;
+    public function destroy(VideoComment $video_comment){
+        $video_comment->delete();
     }
 }
