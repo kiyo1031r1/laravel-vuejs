@@ -201,13 +201,11 @@ export default {
         axios.post('/api/videos/exist', {
             id: to.params.id
         })
-        .then((res) => {
-            if(res.data.length === 0) {
-                next({name: 'video'});
-            }
-            else{
-                next();
-            }
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video'});
         })
     },
     watch: {
