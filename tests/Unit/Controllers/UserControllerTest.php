@@ -326,14 +326,26 @@ class UserControllerTest extends TestCase
     }
 
     public function testExist(){
-        $this->assertDatabaseCount('users', 0);
-        User::factory()->create();
+        //ダミー
+        User::factory()->count(10)->create();
+
+        //正常チェック
+        $user = User::factory()->create();
         $response = $this->postJson('/api/users/exist', [
-            'id' =>  1
+            'id' => $user->id,
         ]);
         $response->assertOk()
-            ->assertJsonFragment([
-                'id' => 1
-            ]);
+        ->assertJsonStructure([
+            'id', 'name', 'email', 'created_at', 'updated_at','provider_id', 'provider_name', 'nickname', 'role_id', 'status'
+        ])
+        ->assertJson([
+            'id' => $user->id,
+        ]);
+
+        //異常チェック
+        $response = $this->postJson('/api/users/exist', [
+            'id' => 10000,
+        ]);
+        $response->assertNotFound();
     }
 }
