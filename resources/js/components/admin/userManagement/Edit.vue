@@ -101,13 +101,11 @@ export default {
         axios.post('/api/users/exist', {
             id: to.params.id
         })
-        .then((res) => {
-            if(res.data.length === 0) {
-                next({name: 'user_management'});
-            }
-            else{
-                next();
-            }
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'user_management'});
         })
     },
     methods:{
