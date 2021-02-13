@@ -31,9 +31,8 @@ class VideoCategoryControllerTest extends TestCase
      * @param コード
      * @param カラム名
      * @param エラーメッセージ
-     * @param ケース
      */
-    public function testStore($request, $code, $column, $message, $case = 0){
+    public function testStore($request, $code, $column, $message){
         //uniqueバリデーション確認用
         VideoCategory::factory()->create([
             'name' => 'unique',
