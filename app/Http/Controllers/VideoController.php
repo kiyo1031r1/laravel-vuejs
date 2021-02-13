@@ -211,7 +211,7 @@ class VideoController extends Controller
     }
 
     public function exist(Request $request){
-        return Video::find($request['id']);
+        return Video::findOrFail($request['id']);
     }
 
     private function getRecommend(Video $video){
