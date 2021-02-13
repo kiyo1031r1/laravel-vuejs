@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReVideoComment;
-use App\Models\VideoComment;
 use Illuminate\Http\Request;
 
 class ReVideoCommentController extends Controller
@@ -12,12 +11,10 @@ class ReVideoCommentController extends Controller
         $request->validate([
             're_comment' => ['required', 'string', 'max:255']
         ]);
-        return ReVideoComment::create($request->all());
+        ReVideoComment::create($request->all());
     }
 
-    public function destroy(Request $request){
-        $comment = ReVideoComment::find($request['id']);
-        $comment->delete();
-        return $comment;
+    public function destroy(ReVideoComment $re_video_comment){
+        $re_video_comment->delete();
     }
 }
