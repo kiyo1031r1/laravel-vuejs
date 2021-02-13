@@ -239,13 +239,7 @@ export default {
         deleteComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
-                let formData = new FormData();
-                formData.append('id', id);
-                axios.post('/api/video_comments/' + id, formData, {
-                    headers: {
-                        'X-HTTP-Method-Override': 'DELETE'
-                    }
-                })
+                axios.delete('/api/video_comments/' + id)
                 .then(()=>{
                     this.comments = [];
                     this.getComment(null, this.start_page, false);

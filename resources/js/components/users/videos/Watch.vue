@@ -330,18 +330,13 @@ export default {
             return comment.user_id === this.user.id;
         },
         deleteComment(id){
+            console.log(id);
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
-                let formData = new FormData();
-                formData.append('id', id);
-                axios.post('/api/video_comments/' + id, formData, {
-                    headers: {
-                        'X-HTTP-Method-Override': 'DELETE'
-                    }
-                })
-                .then(()=>{
+                axios.delete('/api/video_comments/' + id)
+                .then(() => {
                     this.initializedComment();
-                });
+                })
             }
         },
         deleteReComment(id){
