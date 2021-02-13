@@ -584,14 +584,27 @@ class VideoControllerTest extends TestCase
     }
 
     public function testExist(){
+        //ダミー
+        Video::factory()->hasAttached(VideoCategory::factory())->count(10)->create();
+
+        //正常チェック
         $video = Video::factory()->hasAttached(VideoCategory::factory())->create();
         $response = $this->postJson('/api/videos/exist', [
             'id' => $video->id,
         ]);
         $response->assertOk()
-            ->assertJson([
-                'id' => $video->id
-            ]);
+        ->assertJsonStructure([
+            'id', 'title', 'about', 'status', 'thumbnail', 'thumbnail_name','video', 'video_name', 'video_time', 'created_at', 'updated_at'
+        ])
+        ->assertJson([
+            'id' => $video->id
+        ]);
+
+        //異常チェック
+        $response = $this->postJson('/api/videos/exist', [
+            'id' => 10000,
+        ]);
+        $response->assertNotFound();
     }
 
     public function testDownLoad(){
