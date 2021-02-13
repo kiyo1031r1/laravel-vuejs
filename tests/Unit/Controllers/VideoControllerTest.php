@@ -23,13 +23,8 @@ class VideoControllerTest extends TestCase
      * @param エラーメッセージ
      * @param ケース
      */
-    public function testStore($request, $code, $column, $message, $case = 0){
-        //正常チェックでは、videoCategoriesとのリレーションが必要な為
-        if($case > 0){
-            $this->artisan('migrate:fresh');
-            $this->seed(VideoCategorySeeder::class);
-        }
-
+    public function testStore($request, $code, $column, $message){
+        $this->seed(VideoCategorySeeder::class);
         $param = $request;
         $response = $this->postJson('/api/videos', $param);
 
@@ -71,33 +66,33 @@ class VideoControllerTest extends TestCase
         }
     }
 
-    // public function storeDataProvider(){
-    //     return [
-    //         'pass' => [[
-    //             'title' => str_repeat('a', 255),
-    //             'about' => 'test',
-    //             'status' => 'normal',
-    //             'thumbnail' => UploadedFile::fake()->image(str_repeat('a', 251).'.jpg'),
-    //             'thumbnail_name' => str_repeat('a', 251).'.jpg',
-    //             'video' => UploadedFile::fake()->image(str_repeat('a', 251).'.jpg'),
-    //             'video_name' => str_repeat('a', 251).'.jpg',
-    //             'video_time' => '86399',
-    //             'category' => ['1','2'],
-    //         ], 200, null, null, true],
-    //         'title_required' => [['title' => ' '], 422, 'title', 'タイトルは必ず入力してください。'],
-    //         'title_max' => [['title' => str_repeat('a', 256)], 422, 'title', 'タイトルには255文字以下の文字列を指定してください。'],
-    //         'about_required' => [['about' => ' '], 422, 'about', '概要は必ず入力してください。'],
-    //         'status_required' => [['status' => null], 422, 'status', 'ステータスは必ず入力してください。'],
-    //         'thumbnail_name_max' => [['thumbnail_name' => str_repeat('a', 252).'.jpg'], 422, 'thumbnail_name', 'サムネイルには255文字以下の文字列を指定してください。'],
-    //         'video_required' => [['video' => null], 422, 'video', '動画は必ず入力してください。'],
-    //         'video_max' => [['video' => UploadedFile::fake()->image('test.jpg')->size(2049)], 422, 'video', '動画には2048 KB以下のファイルを指定してください。'],
-    //         'video_name_required' => [['video_name' => ' '], 422, 'video_name', '動画は必ず入力してください。'],
-    //         'video_time_required' => [['video_time' => null], 422, 'video_time', '再生時間は必ず入力してください。'],
-    //         'video_time_max' => [['video_time' => "86400"], 422, 'video_time', '再生時間には23時間59分59秒以下を指定してください。'],
-    //         'category' => [['category' => null], 422, 'category', 'カテゴリーは必ず入力してください。'],
-    //         'category' => [['category' => [1,2,3,4]], 422, 'category', 'カテゴリーは3個まで登録することができます。'],
-    //     ];
-    // }
+    public function storeDataProvider(){
+        return [
+            'pass' => [[
+                'title' => str_repeat('a', 255),
+                'about' => 'test',
+                'status' => 'normal',
+                'thumbnail' => UploadedFile::fake()->image(str_repeat('a', 251).'.jpg'),
+                'thumbnail_name' => str_repeat('a', 251).'.jpg',
+                'video' => UploadedFile::fake()->image(str_repeat('a', 251).'.jpg'),
+                'video_name' => str_repeat('a', 251).'.jpg',
+                'video_time' => '86399',
+                'category' => ['1','2'],
+            ], 200, null, null],
+            'title_required' => [['title' => ' '], 422, 'title', 'タイトルは必ず入力してください。'],
+            'title_max' => [['title' => str_repeat('a', 256)], 422, 'title', 'タイトルには255文字以下の文字列を指定してください。'],
+            'about_required' => [['about' => ' '], 422, 'about', '概要は必ず入力してください。'],
+            'status_required' => [['status' => null], 422, 'status', 'ステータスは必ず入力してください。'],
+            'thumbnail_name_max' => [['thumbnail_name' => str_repeat('a', 252).'.jpg'], 422, 'thumbnail_name', 'サムネイルには255文字以下の文字列を指定してください。'],
+            'video_required' => [['video' => null], 422, 'video', '動画は必ず入力してください。'],
+            'video_max' => [['video' => UploadedFile::fake()->image('test.jpg')->size(2049)], 422, 'video', '動画には2048 KB以下のファイルを指定してください。'],
+            'video_name_required' => [['video_name' => ' '], 422, 'video_name', '動画は必ず入力してください。'],
+            'video_time_required' => [['video_time' => null], 422, 'video_time', '再生時間は必ず入力してください。'],
+            'video_time_max' => [['video_time' => "86400"], 422, 'video_time', '再生時間には23時間59分59秒以下を指定してください。'],
+            'category' => [['category' => null], 422, 'category', 'カテゴリーは必ず入力してください。'],
+            'category' => [['category' => [1,2,3,4]], 422, 'category', 'カテゴリーは3個まで登録することができます。'],
+        ];
+    }
 
     // /**
     //  * @dataProvider updateDataProvider
