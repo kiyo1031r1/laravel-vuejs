@@ -110,4 +110,13 @@ class VideoCommentControllerTest extends TestCase
         ->assertOk();
         $this->assertGreaterThan($response['data'][0]['id'], $response['data'][1]['id']);
     }
+
+    public function testDestroy(){
+        $user = User::factory()->for(Role::factory())->create();
+        $video = Video::factory()->create();
+        $comment = VideoComment::factory()->for($user)->for($video)->create();
+        $response = $this->deleteJson('/api/video_comments/'.$comment->id);
+        $response->assertOk();
+        $this->assertDeleted($comment);
+    }
 }
