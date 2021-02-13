@@ -103,7 +103,7 @@ class VideoControllerTest extends TestCase
      * @param ダミーデータフラグ
      */
     public function testUpdate($request, $code, $column, $message, $case = 0, $dummy = true){
-        $this->artisan('migrate:fresh');
+        //$this->artisan('migrate:fresh');
         $video_category = VideoCategory::factory()->create();
 
         //更新対象ビデオ
@@ -124,7 +124,7 @@ class VideoControllerTest extends TestCase
                 'category' => [$video_category->id],
             ];
             $this->postJson('/api/videos', $param);
-            $video = Video::find(1);
+            $video = Video::where('title', 'test')->first();
         }
 
         //カテゴリー取得
