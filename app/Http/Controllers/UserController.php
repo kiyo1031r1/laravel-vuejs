@@ -106,6 +106,6 @@ class UserController extends Controller
     }
 
     public function exist(Request $request){
-        return User::find($request['id']);
+        return User::findOrFail($request['id']);
     }
 }
