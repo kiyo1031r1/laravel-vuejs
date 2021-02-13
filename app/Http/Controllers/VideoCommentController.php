@@ -11,7 +11,7 @@ class VideoCommentController extends Controller
         $request->validate([
             'comment' => ['required', 'string', 'max:255']
         ]);
-        return VideoComment::create($request->all());
+        VideoComment::create($request->all());
     }
 
     public function getComment(Request $request){
