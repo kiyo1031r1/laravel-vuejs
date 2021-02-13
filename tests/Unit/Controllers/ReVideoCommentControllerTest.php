@@ -9,9 +9,58 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Video;
 use App\Models\User;
 use App\Models\VideoComment;
-use Carbon\Carbon;
 
 class ReVideoCommentControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @dataProvider storeDataProvider
+     * @param パラメータ
+     * @param コード
+     * @param カラム名
+     * @param エラーメッセージ
+     */
+    public function testStore($request, $code, $column, $message){
+        $video = Video::factory()->create();
+        $user = User::factory()->for(Role::factory())->create();
+        $video_comment = VideoComment::factory()->for($video)->for($user)->create();
+
+        $response = $this->postJson('/api/re_video_comments', [
+            're_comment' => $request,
+            'video_comment_id'=> $video_comment->id,
+            'user_id'=> $user->id,
+        ]);
+        if($code === 422){
+            $response->assertJsonValidationErrors([$column => $message])
+            ->assertStatus($code);
+        }
+        elseif($code === 200){
+            $response->assertStatus($code);
+            $this->assertDatabaseHas('re_video_comments', [
+                're_comment' => $request,
+                'video_comment_id'=> $video_comment->id,
+                'user_id'=> $user->id,
+            ]);
+        }
+    }
+
+    public function storeDataProvider(){
+        return[
+            'pass' => [str_repeat('a', 255), 200, null, null],
+            're_comment_required' => [' ', 422, 're_comment', 'コメントは必ず入力してください。'],
+            're_comment_string' => [11111111, 422, 're_comment', 'コメントには文字列を指定してください。'],
+            're_comment_max' => [str_repeat('a', 256), 422, 're_comment', 'コメントには255文字以下の文字列を指定してください。'],
+        ];
+    }
+
+    public function testDestroy(){
+        $user = User::factory()->for(Role::factory())->create();
+        $video = Video::factory()->create();
+        $video_comment = VideoComment::factory()->for($user)->for($video)->create();
+        $re_video_comment = ReVideoComment::factory()->for($user)->for($video_comment)->create();
+        $response = $this->deleteJson('/api/re_video_comments/'.$re_video_comment->id);
+        $response->assertOk();
+        $this->assertDeleted($re_video_comment);
+    }
 }
