@@ -344,14 +344,16 @@ class VideoControllerTest extends TestCase
      * @param ケース
      * @param 表示件数フラグ
      */
-    public function testSearch($search_param, $search_value, $sort_param, $sort_value, $case, $per_page = false){
-        $this->artisan('migrate:fresh');
-        VideoCategory::factory()->count(3)->create();
-        Video::factory()->hasAttached(VideoCategory::find(1))->create([
+    public function testSearch($search_param, $search_value, $sort_param, $sort_value, $case, $fresh = false, $per_page = false){
+        $category1 = VideoCategory::factory()->create();
+        $category2 = VideoCategory::factory()->create();
+        $category3 = VideoCategory::factory()->create();
+
+        Video::factory()->hasAttached($category1)->create([
             'title' => 'test1',
             'created_at' => Carbon::now(),
         ]);
-        Video::factory()->hasAttached([VideoCategory::find(1), VideoCategory::find(2)])->create([
+        Video::factory()->hasAttached([$category1, $category2])->create([
             'title' => 'test2',
             'created_at' => Carbon::now()->subDay(1),
         ]);
@@ -427,16 +429,20 @@ class VideoControllerTest extends TestCase
                 ->assertOK();
                 break;
         }
+
+        if($fresh){
+            $this->artisan('migrate:fresh');
+        }
     }
 
     public function dataProviderSearch(){
         return[
             'search_title_expect_2' => ['title', 'test', null, null, 2],
             'search_title_expect_1' => ['title', 'test 1', null, null, 1],
-            'search_title_expect_0' => ['title', 'test12', null, null, 0],
-            'search_categories_expect_2' => ['categories', [1], null, null, 2],
-            'search_categories_expect_1' => ['categories', [1, 2], null, null, 1],
-            'search_categories_expect_0' => ['categories', [3], null, null, 0],
+            'search_title_expect_0' => ['title', 'test12', null, null, 0, true], //最後にmigrate:freshを入れた為
+            'search_categories_expect_2' => ['categories', [1], null, null, 2, true],
+            'search_categories_expect_1' => ['categories', [1, 2], null, null, 1, true],
+            'search_categories_expect_0' => ['categories', [3], null, null, 0, true],
             'search_created_at_start_expect_2' => ['created_at_start',Carbon::now()->subDay(1), null, null, 2],
             'search_created_at_start_expect_1' => ['created_at_start',Carbon::now(), null, null, 1],
             'search_created_at_start_expect_0' => ['created_at_start',Carbon::now()->addDay(1), null, null, 0], 
@@ -445,10 +451,10 @@ class VideoControllerTest extends TestCase
             'search_created_at_end_expect_0' => ['created_at_end',Carbon::now()->subDay(2), null, null, 0], 
             'sort_created_at_expect_desc' => [null, null, 'created_at', 'desc', 3], 
             'sort_created_at_expect_asc' => [null, null, 'created_at', 'asc', 4], 
-            'sort_per_page_expect_11' => [null, null, 'per_page', 10, 5, true], 
-            'sort_per_page_expect_6' => [null, null, 'per_page', 20, 5, true], 
-            'sort_per_page_expect_3' => [null, null, 'per_page', 50, 5, true], 
-            'sort_per_page_expect_2' => [null, null, 'per_page', 100, 5, true], 
+            'sort_per_page_expect_11' => [null, null, 'per_page', 10, 5, false, true], 
+            'sort_per_page_expect_6' => [null, null, 'per_page', 20, 5, false, true], 
+            'sort_per_page_expect_3' => [null, null, 'per_page', 50, 5, false, true], 
+            'sort_per_page_expect_2' => [null, null, 'per_page', 100, 5, false, true], 
         ];
     }
 
