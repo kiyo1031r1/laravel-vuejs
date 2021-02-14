@@ -22,7 +22,7 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'role_id' => Role::firstOrCreate(['name' => '一般ユーザー'])->id,
+            'role_id' => Role::where('name','一般ユーザー')->first()->id,
             'status' => 'normal',
         ]);
 
