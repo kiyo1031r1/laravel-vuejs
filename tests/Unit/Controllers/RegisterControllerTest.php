@@ -5,6 +5,7 @@ namespace Tests\Unit\Controllers;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Role;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -21,8 +22,10 @@ class RegisterControllerTest extends TestCase
      * @param パスワードの有無
      */
     public function testRegister($request, $code, $column, $message, $password = null){
+        $this->seed(RoleSeeder::class);
+
         //uniqueバリデーション確認用ユーザー
-        User::factory()->for(Role::factory())
+        User::factory()->for(Role::where('name', '一般ユーザー')->first())
         ->create([
             'name' => 'unique',
             'email' => 'unique@example.com'
