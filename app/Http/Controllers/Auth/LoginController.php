@@ -23,10 +23,7 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
-            $user = Auth::user();
-            $user->save();
-
-            return response()->json();
+            
         }
         throw ValidationException::withMessages([
             'not_found' => ['メールアドレスかパスワードが間違っています'],
