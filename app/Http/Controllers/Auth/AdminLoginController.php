@@ -26,10 +26,6 @@ class AdminLoginController extends Controller
     }
 
     public function logout(){
-        $user = Auth::user();
-        $user->save();
-
         Auth::logout();
-        return response()->json();
     }
 }
