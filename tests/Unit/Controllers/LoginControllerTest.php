@@ -18,7 +18,6 @@ class LoginControllerTest extends TestCase
      * @param コード
      * @param カラム名
      * @param エラーメッセージ
-     * @param パスワードの有無
      */
 
     public function testLogin($request, $code, $column, $message){
