@@ -11,7 +11,6 @@ use App\Models\Role;
 
 class RegisterController extends Controller
 {
-    use CreateTokenTrait;
     public function register(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
