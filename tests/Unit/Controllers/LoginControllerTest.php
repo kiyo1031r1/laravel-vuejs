@@ -60,4 +60,20 @@ class LoginControllerTest extends TestCase
             ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
         ];
     }
+
+    public function testLogout(){
+        $user = User::factory()->for(Role::factory())->create();
+        Auth::login($user);
+        $session = session()->getId();
+        $token = session()->token();
+        $response = $this->postJson('/api/logout');
+        $response->assertOk();
+
+        //ログアウト確認
+        $this->assertGuest();
+
+        //セッション、トークンの再生成確認
+        $this->assertNotEquals($session, session()->getId());
+        $this->assertNotEquals($token, session()->token());
+    }
 }
