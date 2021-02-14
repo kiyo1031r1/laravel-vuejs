@@ -29,11 +29,7 @@ class LoginController extends Controller
     }
 
     public function logout(){
-        $user = Auth::user();
-        $user->save();
-
         Auth::logout();
-        return response()->json();
     }
 
     public function redirectToProvider($provider){
