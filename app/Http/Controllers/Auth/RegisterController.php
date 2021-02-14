@@ -23,13 +23,10 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'role_id' => Role::find(1)->id,
             'role_id' => Role::firstOrCreate(['name' => '一般ユーザー'])->id,
             'status' => 'normal',
         ]);
 
         Auth::login($user);
-
-        //return $user;
     }
 }
