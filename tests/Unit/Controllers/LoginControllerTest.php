@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
-
     /**
      * @dataProvider registerDataProvider
      * @param パラメータ
@@ -23,20 +22,18 @@ class LoginControllerTest extends TestCase
      */
 
     public function testLogin($request, $code, $column, $message){
-        $user = User::factory()->for(Role::factory())
+        User::factory()->for(Role::factory())
         ->create([
             'email' => 'test1@example.com',
             'password' => Hash::make('11111111'),
         ]);
-        $session = session()->getId();
         $response = $this->postJson('/api/login', $request);
         if($code === 422){
             $response->assertJsonValidationErrors([$column => $message])
             ->assertStatus($code);
         }
         elseif($code === 200){
-            $this->assertEquals(Auth::id(), $user->id);
-            $this->assertNotEquals($session, session()->getId());
+            $this->assertAuthenticated();
         }
     }
 
@@ -64,16 +61,10 @@ class LoginControllerTest extends TestCase
     public function testLogout(){
         $user = User::factory()->for(Role::factory())->create();
         Auth::login($user);
-        $session = session()->getId();
-        $token = session()->token();
         $response = $this->postJson('/api/logout');
         $response->assertOk();
 
         //ログアウト確認
         $this->assertGuest();
-
-        //セッション、トークンの再生成確認
-        $this->assertNotEquals($session, session()->getId());
-        $this->assertNotEquals($token, session()->token());
     }
 }
