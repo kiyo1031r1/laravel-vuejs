@@ -21,9 +21,11 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
         }
-        throw ValidationException::withMessages([
-            'not_found' => ['メールアドレスかパスワードが間違っています'],
-        ]);
+        else{
+            throw ValidationException::withMessages([
+                'not_found' => ['メールアドレスかパスワードが間違っています'],
+            ]);
+        }
     }
 
     public function logout(){
