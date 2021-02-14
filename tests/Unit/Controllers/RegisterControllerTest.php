@@ -19,9 +19,8 @@ class RegisterControllerTest extends TestCase
      * @param コード
      * @param カラム名
      * @param エラーメッセージ
-     * @param パスワードの有無
      */
-    public function testRegister($request, $code, $column, $message, $password = null){
+    public function testRegister($request, $code, $column, $message){
         $this->seed(RoleSeeder::class);
 
         //uniqueバリデーション確認用ユーザー
