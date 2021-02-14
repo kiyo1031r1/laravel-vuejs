@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
+            return;
         }
         else{
             throw ValidationException::withMessages([
@@ -30,8 +30,6 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
     }
 
     public function redirectToProvider($provider){
