@@ -5,6 +5,7 @@ namespace Tests\Unit\Controllers;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Role;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +22,8 @@ class LoginControllerTest extends TestCase
      */
 
     public function testLogin($request, $code, $column, $message){
-        User::factory()->for(Role::factory())
+        $this->seed(RoleSeeder::class);
+        User::factory()->for(Role::where('name', '一般ユーザー')->first())
         ->create([
             'email' => 'test1@example.com',
             'password' => Hash::make('11111111'),
@@ -58,7 +60,8 @@ class LoginControllerTest extends TestCase
     }
 
     public function testLogout(){
-        $user = User::factory()->for(Role::factory())->create();
+        $this->seed(RoleSeeder::class);
+        $user = User::factory()->for(Role::where('name', '一般ユーザー')->first())->create();
         Auth::login($user);
         $response = $this->postJson('/api/logout');
         $response->assertOk();
