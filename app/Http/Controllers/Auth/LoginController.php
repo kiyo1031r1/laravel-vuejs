@@ -30,6 +30,8 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
     }
 
     public function redirectToProvider($provider){
