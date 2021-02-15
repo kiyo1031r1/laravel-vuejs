@@ -43,6 +43,7 @@ Route::post('/admin/logout', [AdminLoginController::class, 'logout']);
 
 //user
 Route::apiResource('/users',UserController::class);
+Route::post('users/exist', [UserController::class, 'exist']);
 Route::put('/users/update_from_user/{user}',[UserController::class, 'updateFromUser']);
 Route::post('/users/register_premium/{user}',[UserController::class, 'registerPremium']);
 Route::post('/users/cancel_premium/{user}',[UserController::class, 'cancelPremium']);
@@ -50,9 +51,10 @@ Route::post('/users/search',[UserController::class, 'search']);
 
 //video
 Route::apiResource('video_categories', VideoCategoryController::class);
-Route::post('video_categories/get_category', [VideoCategoryController::class, 'getCategory']);
+Route::post('video_categories/exist', [VideoCategoryController::class, 'exist']);
 Route::apiResource('videos', VideoController::class);
 Route::post('/videos/search', [VideoController::class, 'search']);
+Route::post('/videos/exist', [VideoController::class, 'exist']);
 Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
 Route::post('/videos/download', [VideoController::class, 'download']);
 Route::apiResource('video_comments', VideoCommentController::class);

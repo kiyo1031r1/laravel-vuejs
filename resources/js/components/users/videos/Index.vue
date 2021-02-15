@@ -29,9 +29,9 @@
 
                         <!-- 並び替え -->
                         <label class="col-form-label p-2" for="per_page">並び替え</label>
-                        <select @change="changeFirstPage()" v-model="sort.select" class="form-control">
-                            <option value="created_at_desc">新しい順</option>
-                            <option value="created_at_asc">古い順</option>
+                        <select @change="changeFirstPage()" v-model="sort.created_at" class="form-control">
+                            <option value="desc">新しい順</option>
+                            <option value="asc">古い順</option>
                         </select>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <div class="card-body p-2">
                             <p class="card-title">{{video.title}}</p>
                             <p class="card-tag">
-                                <span v-for="category in video.video_category" :key="category.id"
+                                <span v-for="category in video.video_categories" :key="category.id"
                                 class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                 </span>
                             </p>
@@ -114,7 +114,6 @@ export default {
                 'vuejs',
                 'django'
             ],
-            video_category: '',
 
             //ページネーション
             current_page: 1,
@@ -134,7 +133,7 @@ export default {
 
             //ソート
             sort:{
-                select: 'created_at_desc',
+                created_at: 'desc',
                 per_page: 10,
             },
         }
@@ -190,6 +189,17 @@ export default {
     },
     components:{
         Header,
+    },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/video_categories/exist', {
+            file_name: to.params.category
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video'});
+        })
     },
     methods:{
         getVideo(){

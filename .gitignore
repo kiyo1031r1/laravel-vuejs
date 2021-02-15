@@ -5,6 +5,7 @@
 /vendor
 .env
 .env.pro
+.env.testing
 .env.backup
 .phpunit.result.cache
 Homestead.json
@@ -13,3 +14,6 @@ npm-debug.log
 yarn-error.log
 list
 .DS_Store
+storage/.DS_Store
+resources/js/.DS_Store
+resources/.DS_Store

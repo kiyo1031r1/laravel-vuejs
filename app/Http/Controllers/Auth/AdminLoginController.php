@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -11,40 +11,21 @@ use Illuminate\Validation\ValidationException;
 class AdminLoginController extends Controller
 {
     public function login(Request $request){
-        $credentials = $request->validate([
-             'email' => ['required', 'email'],
-             'password' => ['required']
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-        if($user == null) {
+        if(Auth::attempt([
+            'email' => $request['email'],
+            'password' => $request['password'],
+            'role_id' => Role::where('name', '管理者')->first()->id
+            ])){
+            return;
+        }
+        else{
             throw ValidationException::withMessages([
                 'not_found' => ['メールアドレスかパスワードが間違っています'],
             ]);
         }
-
-        if($user->role_id === 1) {
-            throw ValidationException::withMessages([
-                'not_found' => ['権限がありません']
-            ]);
-        }
-
-        if(Auth::attempt($credentials)){
-            $user = Auth::user();
-            $user->save();
-            
-            return response()->json();
-        }
-        throw ValidationException::withMessages([
-            'not_found' => ['メールアドレスかパスワードが間違っています'],
-        ]);
     }
 
     public function logout(){
-        $user = Auth::user();
-        $user->save();
-
         Auth::logout();
-        return response()->json();
     }
 }

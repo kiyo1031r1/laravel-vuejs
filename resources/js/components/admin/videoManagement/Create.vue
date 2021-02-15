@@ -380,6 +380,7 @@ export default {
         removeVideo(){
             this.video = '';
             this.video_name = '';
+            this.video_time = '';
             this.video_preview = null;
             this.$refs.video.value = null;
         },
@@ -394,6 +395,11 @@ export default {
             return file_name.slice(pos + 1);
         },
         createVideo(){
+            if(this.select_categories.length > 3){
+                alert('カテゴリーは最大3つまでしか登録できません');
+                return;
+            }
+            
             let formData = new FormData();
             formData.append('title', this.title);
             formData.append('about', this.about);

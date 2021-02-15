@@ -106,6 +106,7 @@
                             </div>
                             <div v-if="errors.video_name" class="col-md-8 offset-md-2 upload_error">{{ errors.video_name[0]}}</div>
                             <div v-else-if="errors.video_time" class="col-md-8 offset-md-2 upload_error">{{ errors.video_time[0]}}</div>
+                            <div v-else-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
                         </div>
 
 
@@ -228,6 +229,17 @@ export default {
                 return value.name;
             });
         }
+    },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/videos/exist', {
+            id: to.params.id
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video_management'});
+        })
     },
     methods:{
         //カテゴリー
@@ -387,6 +399,7 @@ export default {
         removeVideo(){
             this.video = '';
             this.video_name = '';
+            this.video_time = '';
             this.video_preview = null;
             this.$refs.video.value = null;
         },
@@ -401,6 +414,11 @@ export default {
             return file_name.slice(pos + 1);
         },
         createVideo(){
+            if(this.select_categories.length > 3){
+                alert('カテゴリーは最大3つまでしか登録できません');
+                return;
+            }
+            
             let formData = new FormData();
             formData.append('title', this.title);
             formData.append('about', this.about);
@@ -444,7 +462,7 @@ export default {
                 this.video_preview = res.data.video;
 
                 //保存されてるカテゴリsを、選択カテゴリsに追加;
-                this.before_select_categories = res.data.video_category;
+                this.before_select_categories = res.data.video_categories;
                 this.before_select_categories.forEach((before_select_category) => {
                     this.categories.forEach((category) => {
                         if(before_select_category.id === category.id){

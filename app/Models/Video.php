@@ -9,7 +9,18 @@ class Video extends Model
 {
     use HasFactory;
 
-    public function videoCategory(){
+    protected $fillable = [
+        'title',
+        'about',
+        'status',
+        'thumbnail',
+        'thumbnail_name',
+        'video',
+        'video_name',
+        'video_time',
+    ];
+
+    public function videoCategories(){
         return $this->belongsToMany(VideoCategory::class);
     }
 
@@ -19,7 +30,7 @@ class Video extends Model
 
     public function setThumbnailAttribute($value){
         //seederの自動生成用
-        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false || strpos($value, '/images') !== false){
+        if(strpos($value, '/images') !== false){
             $this->attributes['thumbnail'] = $value;
         }
         //サムネイル削除の場合
@@ -34,7 +45,7 @@ class Video extends Model
 
     public function setVideoAttribute($value){
         //seederの自動生成用
-        if(strpos($value, 'https://') !== false || strpos($value, 'http://') !== false || strpos($value, '/images') !== false){
+        if(strpos($value, '/images') !== false){
             $this->attributes['video'] = $value;
         }
         //通常保存用
@@ -44,10 +55,10 @@ class Video extends Model
     }
 
     public function setVideoTimeAttribute($value){
-        if($value > 60*60) {
+        if($value >= 60*60) {
             $this->attributes['video_time'] = gmdate("H:i:s", $value);
         }
-        elseif($value > 60*10){
+        elseif($value >= 60*10){
             $this->attributes['video_time'] = gmdate("i:s", $value);
         }
         else{

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVideoRequest;
+use App\Http\Requests\UpdateVideoRequest;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Http\File;
 use \InterventionImage;
 use Illuminate\Support\Facades\Storage;
+use DateTime;
+use DateTimeZone;
 
 class VideoController extends Controller
 {
@@ -23,100 +27,54 @@ class VideoController extends Controller
         $this->pro_env = app()->environment('production');
     }
 
-    public function store(Video $video){
-        $input = request()->validate([
-            'title' => 'required|max:255',
-            'about' => 'required',
-            'status' => 'required',
-            'thumbnail_name' => 'max:255',
-            'video' => 'required|max:2048',
-            'video_name' => 'required',
-            'video_time' => 'required|max:86400',
-            'category' => 'required',
-        ]);
+    public function store(StoreVideoRequest $request){
+        //入力値を元に一旦作成
+        $request = $request->validated();
+        $video = Video::create($request);
 
-        $video->title = $input['title'];
-        $video->about = $input['about'];
-        $video->status = $input['status'];
-
-        $video->video_name = $input['video_name'];
-        $video->video_time = $input['video_time'];
-        $this->uploadVideoFile($video, $input['video']);
-
-        //サムネイルが設定されている場合
-        if(request('thumbnail') !== null) {
-            $video->thumbnail_name = $input['thumbnail_name'];
-            $this->uploadThumbnailFile($video, request('thumbnail'));
+        //ビデオとサムネイルのファイルパスを加工したものを上書き
+        $this->uploadVideoFile($video, $request['video']);
+        if(!empty($request['thumbnail'])) {
+            $this->uploadThumbnailFile($video, $request['thumbnail']);
         }
-
         $video->save();
-        $video->videoCategory()->attach(request('category'));
-
-        return $video;
+        $video->videoCategories()->attach($request['category']);
     }
 
     public function show(Video $video){
-        return Video::with('videoCategory:id')->find($video->id);
+        return Video::with('videoCategories:id')->find($video->id);
     }
 
-    public function update(Video $video){
-        $input = request()->validate([
-            'title' => 'required|max:255',
-            'about' => 'required',
-            'status' => 'required',
-            'thumbnail_name' => 'max:255',
-            'video_name' => 'required',
-            'video_time' => 'required|max:86400',
-            'category' => 'required',
+    public function update(UpdateVideoRequest $request, Video $video){
+        $request = $request->validated();
+        $video->update([
+            'title' => $request['title'],
+            'about' => $request['about'],
+            'status' => $request['status'],
+            'thumbnail_name' => $request['thumbnail_name'],
+            'video_name' => $request['video_name'],
+            'video_time' => $request['video_time'],
         ]);
 
-        $video->title = $input['title'];
-        $video->about = $input['about'];
-        $video->status = $input['status'];
-        $video->video_name = $input['video_name'];
-        $video->video_time = $input['video_time'];
-
-        //サムネイル更新の場合
-        if(request('thumbnail')){
-            //前データを削除
-            if($video->thumbnail){
-                $this->deleteThumbnailFile($video->thumbnail);
-            }
-
-            $input_t = request()->validate([
-                'thumbnail' => 'required',
-            ]);
-
-            $this->uploadThumbnailFile($video, $input_t['thumbnail']);
-            $video->thumbnail_name = $input['thumbnail_name'];
+        //サムネイル更新
+        if($request['thumbnail']){
+            $this->deleteThumbnailFile($video->thumbnail);
+            $this->uploadThumbnailFile($video, $request['thumbnail']);
+        }
+        //サムネイル削除
+        elseif(!$request['thumbnail'] && !$request['thumbnail_name']){
+            $this->deleteThumbnailFile($video->thumbnail);
+            $video->thumbnail = null;
         }
 
-        //サムネイル削除の場合
-        if(request('thumbnail') === null) {
-            if($video->thumbnail){
-                $this->deleteThumbnailFile($video->thumbnail);
-                $video->thumbnail = null;
-                $video->thumbnail_name = null;
-            }
-        }
-
-        if(request('video')){
-            //前データを削除
-            if($video->video){
-                $this->deleteVideoFile($video->video);
-            }
-            
-            $input_t = request()->validate([
-                'video' => 'max:2048',
-            ]);
-
-            $this->uploadVideoFile($video, $input_t['video']);
+        //ビデオ更新
+        if($request['video']){
+            $this->deleteVideoFile($video->video);
+            $this->uploadVideoFile($video, $request['video']);
         }
 
         $video->save();
-        $video->videoCategory()->sync(request('category'));
-
-        return $video;
+        $video->videoCategories()->sync($request['category']);
     }
 
     public function destroy(Video $video){
@@ -128,7 +86,6 @@ class VideoController extends Controller
         }
 
         $video->delete();
-        return $video;
     }
 
     private function uploadThumbnailFile($video, $input_thumbnail){
@@ -200,41 +157,38 @@ class VideoController extends Controller
     }
 
     public function search(Request $request){
-        $query = Video::with('videoCategory');
-
-        $data = $request->all();
-        $search = $data['search'];
-        $sort = $data['sort'];
+        $query = Video::with('videoCategories');
 
         //検索
-        $title = $search['title'];
-        $categories = $search['categories'];
-        $created_at_start = $search['created_at_start'];
-        $created_at_end = $search['created_at_end'];
-
-        if($title){
-            $this->searchWord($title, 'title', $query);
+        $search = $request['search'];
+        if($search['title']){
+            $this->searchWord($search['title'], 'title', $query);
         }
-        if($categories){
-            foreach($categories as $category){
-                $query->whereHas('videoCategory', function($q) use ($category){
+        if($search['categories']){
+            foreach($search['categories'] as $category){
+                $query->whereHas('videoCategories', function($q) use ($category){
                     $q->where('id', $category['id']);
                 });
             }
         }
-        if($created_at_start){
-            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        if($search['created_at_start']){
+            //dateTime型に変換し、日本時刻に変換した値で検索
+            $date = new DateTime($search['created_at_start']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '>=', $date)->get();
         }
-        if($created_at_end){
-            $query->whereDate('created_at', '<=', $created_at_end)->get();
+        if($search['created_at_end']){
+            $date = new DateTime($search['created_at_end']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '<=', $date)->get();
         }
 
         //ソート
-        $select = $sort['select'];
-        if($select === 'created_at_desc'){
+        $sort = $request['sort'];
+        if($sort['created_at'] === 'desc'){
             $query->orderBy('created_at', 'desc');
         }
-        if($select === 'created_at_asc'){
+        if($sort['created_at'] === 'asc'){
             $query->orderBy('created_at', 'asc');
         }
 
@@ -251,25 +205,31 @@ class VideoController extends Controller
     }
 
     public function watch(Video $video){
-        $video = Video::with('videoCategory')->find($video->id);
+        $video = Video::with('videoCategories')->find($video->id);
         $recommends = $this->getRecommend($video);
         return ['video' => $video, 'recommends' => $recommends];
     }
 
+    public function exist(Request $request){
+        return Video::findOrFail($request['id']);
+    }
+
     private function getRecommend(Video $video){
         //ビデオカテゴリーを取得
-        $video_categories = $video->videoCategory()->get();
-        if($video_categories->count() == 0) return null;
+        $video_categories = $video->videoCategories()->get();
+        if($video_categories->count() == 0) {
+            return null;
+        }
 
         foreach($video_categories as $video_category){
             $video_categories_id[] = $video_category->id;
         }
         
         //一致するカテゴリーの数の配列を作成
-        $r_videos = Video::with('videoCategory')->where('id', '!=', $video->id)->get();
+        $r_videos = Video::with('videoCategories')->where('id', '!=', $video->id)->get();
         $same_num = [];
         foreach($r_videos as $r_video){
-            $r_categories = $r_video->videoCategory()->get();
+            $r_categories = $r_video->videoCategories()->get();
             foreach($r_categories as $r_category){
                 $r_video_categories_id[] = $r_category->id;
             }
@@ -292,12 +252,8 @@ class VideoController extends Controller
 
         return $recommends;
     }
+
     public function download(Video $video){
-        $file_name = request('file_name');
-        $file_path = $file_name;
-        $mimeType = Storage::mimeType($file_path);
-        $headers = [['Content-Type' => $mimeType]];
-        
-        return Storage::download($file_path, $file_name, $headers);
+        return Storage::download(request('file_name'));
     }
 }

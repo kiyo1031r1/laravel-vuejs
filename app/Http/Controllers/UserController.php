@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Http\Requests\UpdateFromUserRequest;
 use App\Models\User;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -17,93 +18,65 @@ class UserController extends Controller
 
     public function update(Request $request, User $user){
         $user->update($request->all());
-        return $user;
     }
 
-    public function updateFromUser(User $user){
-        //パスワード未入力時は、パスワード情報を変更しない
-        if(request('password') !== null){
-            $input = Validator::make(request()->all(),[
-                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'password' => ['required', 'string', 'min:8', 'confirmed']
-            ])->validate();
-
-            $user->update([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password'])
-            ]);
+    public function updateFromUser(UpdateFromUserRequest $request){
+        $request = $request->validated();
+        $user = Auth::user();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        if(!empty($request['password'])){
+            $user->password = Hash::make($request['password']);
         }
-        else{
-            $input = Validator::make(request()->all(),[
-                'name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            ])->validate();
-            
-            $user->update($input);
-        }
-
-        return $user;
+        $user->save();
     }
 
     public function destroy(User $user){
         $user->delete();
-        return $user;
     }
 
     public function search(Request $request){
         $query = User::query();
 
-        $data = $request->all();
-        $search = $data['search'];
-        $sort = $data['sort'];
-
         //検索
-        $name = $search['name'];
-        $email = $search['email'];
-        $created_at_start = $search['created_at_start'];
-        $created_at_end = $search['created_at_end'];
-        $role = $search['role'];
-        $status = $search['status'];
-
-        if($name) {
-            $this->searchWord($name, 'name', $query);
+        $search = $request['search'];
+        if($search['name']) {
+            $this->searchWord($search['name'], 'name', $query);
         }
-        if($email) {
-            $this->searchWord($email, 'email', $query);
+        if($search['email']) {
+            $this->searchWord($search['email'], 'email', $query);
         }
-        if($created_at_start){
-            $query->whereDate('created_at', '>=', $created_at_start)->get();
+        if($search['created_at_start']){
+            //dateTime型に変換し、日本時刻に変換した値で検索
+            $date = new DateTime($search['created_at_start']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '>=', $date)->get();
         }
-        if($created_at_end){
-            $query->whereDate('created_at', '<=', $created_at_end)->get();
+        if($search['created_at_end']){
+            $date = new DateTime($search['created_at_end']);
+            $date->setTimezone( new DateTimeZone('Asia/Tokyo'))->format(DateTime::ISO8601);
+            $query->whereDate('created_at', '<=', $date)->get();
         }
-        if($role != ""){
-            $role_id = Role::where('name', $role)->first()->id;
-            $query->where('role_id', $role_id);
+        if($search['role'] != ""){    //selectBoxの為
+            $query->where('role_id', $search['role']);
         }
-        if($status != ""){
-            $query->where('status', $status);
+        if($search['status'] != ""){    //selectBoxの為
+            $query->where('status', $search['status']);
         }
 
         //ソート
-        $sort_id = $sort['id'];
-        $sort_created_at = $sort['created_at'];
-        $sort_status = $sort['status'];
-        $sort_role = $sort['role'];
-
-        if($sort_id){
-            $query->orderBy('id', $sort_id);
+        $sort = $request['sort'];
+        if($sort['id']){
+            $query->orderBy('id', $sort['id']);
         }
-        if($sort_created_at){
-            $query->orderBy('created_at', $sort_created_at);
+        if($sort['created_at']){
+            $query->orderBy('created_at', $sort['created_at']);
         }
-        if($sort_status){
-            $query->orderBy('status', $sort_status);
+        if($sort['status']){
+            $query->orderBy('status', $sort['status']);
         }
-        if($sort_role){
-            $query->orderBy('role_id', $sort_role);
+        if($sort['role']){
+            $query->orderBy('role_id', $sort['role']);
         }
 
         return $query->paginate($sort['per_page']);
@@ -123,7 +96,6 @@ class UserController extends Controller
             $user->status = 'premium';
             $user->save();
         }
-        return $user;
     }
 
     public function cancelPremium(User $user){
@@ -131,6 +103,9 @@ class UserController extends Controller
             $user->status = 'normal';
             $user->save();
         }
-        return $user;
+    }
+
+    public function exist(Request $request){
+        return User::findOrFail($request['id']);
     }
 }

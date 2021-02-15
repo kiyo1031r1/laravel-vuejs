@@ -11,7 +11,6 @@ use App\Models\Role;
 
 class RegisterController extends Controller
 {
-    use CreateTokenTrait;
     public function register(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
@@ -23,12 +22,10 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'role_id' => Role::find(1)->id,
+            'role_id' => Role::where('name','一般ユーザー')->first()->id,
             'status' => 'normal',
         ]);
 
         Auth::login($user);
-
-        return $user;
     }
 }

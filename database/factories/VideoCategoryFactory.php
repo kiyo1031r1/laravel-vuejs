@@ -22,7 +22,8 @@ class VideoCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word()
+            'name' => $name = $this->faker->word(),
+            'file_name' => mb_strtolower($name),
         ];
     }
 }

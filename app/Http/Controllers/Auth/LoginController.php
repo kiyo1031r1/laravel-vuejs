@@ -17,28 +17,19 @@ class LoginController extends Controller
     private $sns_login_path = 'sns_login';
 
     public function login(Request $request){
-        $credentials = $request->validate([
-             'email' => ['required', 'email'],
-             'password' => ['required']
-        ]);
-
+        $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            $user = Auth::user();
-            $user->save();
-
-            return response()->json();
+            return;
         }
-        throw ValidationException::withMessages([
-            'not_found' => ['メールアドレスかパスワードが間違っています'],
-        ]);
+        else{
+            throw ValidationException::withMessages([
+                'not_found' => ['メールアドレスかパスワードが間違っています'],
+            ]);
+        }
     }
 
     public function logout(){
-        $user = Auth::user();
-        $user->save();
-
         Auth::logout();
-        return response()->json();
     }
 
     public function redirectToProvider($provider){

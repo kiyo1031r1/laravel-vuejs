@@ -87,7 +87,7 @@
                                 <div class="col-md-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
-                                        <span v-for="category in recommend.video_category" :key="category.id"
+                                        <span v-for="category in recommend.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1">{{category.name}}
                                         </span>
                                     </p>
@@ -159,6 +159,17 @@ export default {
             return this.initialized && this.last_page > this.end_page;
         }
     },
+    beforeRouteEnter(to,from,next){
+        axios.post('/api/videos/exist', {
+            id: to.params.id
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video_management'});
+        })
+    },
     watch: {
         $route(to, from){
             //コメントは追加されるので初期化
@@ -228,13 +239,7 @@ export default {
         deleteComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
-                let formData = new FormData();
-                formData.append('id', id);
-                axios.post('/api/video_comments/' + id, formData, {
-                    headers: {
-                        'X-HTTP-Method-Override': 'DELETE'
-                    }
-                })
+                axios.delete('/api/video_comments/' + id)
                 .then(()=>{
                     this.comments = [];
                     this.getComment(null, this.start_page, false);
@@ -244,17 +249,11 @@ export default {
         deleteReComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
-                let formData = new FormData();
-                formData.append('id', id);
-                axios.post('/api/re_video_comments/' + id, formData, {
-                    headers: {
-                        'X-HTTP-Method-Override': 'DELETE'
-                    }
-                })
-                .then(()=>{
+                axios.delete('/api/re_video_comments/' + id)
+                .then(() => {
                     this.comments = [];
                     this.getComment(null, this.start_page, false);
-                });
+                })
             }
         },
         infiniteHandler($state){

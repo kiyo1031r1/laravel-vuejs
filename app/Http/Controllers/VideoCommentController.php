@@ -11,7 +11,7 @@ class VideoCommentController extends Controller
         $request->validate([
             'comment' => ['required', 'string', 'max:255']
         ]);
-        return VideoComment::create($request->all());
+        VideoComment::create($request->all());
     }
 
     public function getComment(Request $request){
@@ -22,9 +22,7 @@ class VideoCommentController extends Controller
         return $comments;
     }
 
-    public function destroy(Request $request){
-        $comment = VideoComment::find($request['id']);
-        $comment->delete();
-        return $comment;
+    public function destroy(VideoComment $video_comment){
+        $video_comment->delete();
     }
 }
