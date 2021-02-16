@@ -16,7 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.webpackConfig({
     resolve: {
-        extensions: ['.js', '.vue'],
+        extensions: ['.js', '.json', '.vue'],
         alias: {
             '@': __dirname + '/resources/js'
         }
