@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import AdminHeader from '../AdminHeader'
+import AdminHeader from '@/components/admin/AdminHeader'
 
 export default {
     data(){

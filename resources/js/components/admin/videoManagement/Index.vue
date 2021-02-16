@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import AdminHeader from '../AdminHeader'
+import AdminHeader from '@/components/admin/AdminHeader'
 import Datepicker from 'vuejs-datepicker'
 import {ja} from 'vuejs-datepicker/dist/locale'
 
