@@ -17,3 +17,4 @@ list
 storage/.DS_Store
 resources/js/.DS_Store
 resources/.DS_Store
+/coverage
