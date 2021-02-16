@@ -137,7 +137,7 @@
 </template>
 
 <script>
-import Header from '../Header'
+import Header from '@/components/users/Header'
 import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
