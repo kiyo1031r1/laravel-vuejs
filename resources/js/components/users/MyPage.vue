@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/users/Header'
 
 export default {
