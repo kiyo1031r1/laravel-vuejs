@@ -6,6 +6,8 @@ import flushPromises from 'flush-promises'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
+const sel = id => `[data-testid="${id}"]`
+
 let mockError = false
 jest.mock("axios", () => ({
     get: () => new Promise((resolve, reject) => {
@@ -51,15 +53,15 @@ describe('UserHeader', () => {
 
     it('display logout button if login, not display login button', () => {
         const wrapper = shallowMount(UserHeader, {store, stubs: ['router-link'], localVue})
-        expect(wrapper.find('button.login').exists()).toBe(false);
-        expect(wrapper.find('button.logout').exists()).toBe(true);
+        expect(wrapper.find(sel('login')).exists()).toBe(false);
+        expect(wrapper.find(sel('logout')).exists()).toBe(true);
     })
 
     it('display login button if logout, not display logout button', () => {
         state.user = null
         const wrapper = shallowMount(UserHeader, {store, stubs: ['router-link'], localVue})
-        expect(wrapper.find('button.login').exists()).toBe(true);
-        expect(wrapper.find('button.logout').exists()).toBe(false);
+        expect(wrapper.find(sel('login')).exists()).toBe(true);
+        expect(wrapper.find(sel('logout')).exists()).toBe(false);
     })
 
     it('testLogout', async () => {
@@ -74,7 +76,7 @@ describe('UserHeader', () => {
             localVue
         })
 
-        wrapper.find('button.logout').trigger('click')
+        wrapper.find(sel('logout')).trigger('click')
         await flushPromises()
         expect(mockRouterPush).toHaveBeenCalledWith({
           name: 'login'
@@ -94,7 +96,7 @@ describe('UserHeader', () => {
             localVue
         })
 
-        wrapper.find('button.logout').trigger('click')
+        wrapper.find(sel('logout')).trigger('click')
         await flushPromises()
         expect(mockRouterPush).toHaveBeenCalledWith({
           name: 'login'
