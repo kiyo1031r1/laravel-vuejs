@@ -122,6 +122,7 @@ describe('MyPage', () => {
         confirmSpy.mockImplementation(jest.fn(() => true))
         const wrapper = factory()
         wrapper.find(sel('button_edit')).trigger('click')
+        expect(window.confirm).toHaveBeenCalledWith('ユーザー情報を変更します。よろしいですか？')
         await flushPromises()
         expect(mockRouterPush).toHaveBeenCalledWith({
             name: 'video'
@@ -132,6 +133,7 @@ describe('MyPage', () => {
         confirmSpy.mockImplementation(jest.fn(() => false))
         const wrapper = factory()
         wrapper.find(sel('button_edit')).trigger('click')
+        expect(window.confirm).toHaveBeenCalledWith('ユーザー情報を変更します。よろしいですか？')
         expect(mockRouterPush).not.toHaveBeenCalled()
     })
 
@@ -141,6 +143,7 @@ describe('MyPage', () => {
         const wrapper = factory()
         expect(Object.keys(wrapper.vm.errors).length).toBe(0)
         wrapper.find(sel('button_edit')).trigger('click')
+        expect(window.confirm).toHaveBeenCalledWith('ユーザー情報を変更します。よろしいですか？')
         await flushPromises()
         expect(wrapper.vm.errors.name[0]).toBe('名前は必ず入力してください。')
         expect(wrapper.vm.errors.email[0]).toBe('メールアドレスは必ず入力してください。')
