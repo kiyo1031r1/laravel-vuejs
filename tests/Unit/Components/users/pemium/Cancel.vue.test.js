@@ -64,7 +64,7 @@ describe('Cancel', () => {
         expect(wrapper.find(sel('name')).text()).toBe(getters.user(state).name + 'さんは')
     })
 
-    it('プレミアムユーザーの場合、ノーマル完了画面に遷移すること', async() => {
+    it('プレミアムユーザーの場合、解約ボタンクリックでノーマル完了画面に遷移すること', async() => {
         const wrapper = factory()
         wrapper.find('button').trigger('click')
         await flushPromises()
