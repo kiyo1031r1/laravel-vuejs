@@ -42,13 +42,8 @@ describe('Cancel', () => {
         })
     })
 
-    const factory = (values = {}) => {
+    const factory = () => {
         return shallowMount(Cancel, {
-            data(){
-                return {
-                    ...values
-                }
-            }, 
             mocks: {
                 $router : {
                     push : mockRouterPush
