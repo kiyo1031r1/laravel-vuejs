@@ -12,7 +12,8 @@
                                 <!-- SNS認証エラー -->
                                 <div v-if="errors.not_found" class="form-group row">
                                     <div class="col-md-12">
-                                        <p class="text-danger text-center mb-0">{{ errors.not_found[0] }}</p>
+                                        <p class="text-danger text-center mb-0" 
+                                        data-testid="error_not_found">{{ errors.not_found[0] }}</p>
                                     </div>
                                 </div>
 
