@@ -20,6 +20,7 @@
 
 <script>
 import Header from '@/components/users/Header'
+import axios from 'axios'
 
 export default {
     data(){
