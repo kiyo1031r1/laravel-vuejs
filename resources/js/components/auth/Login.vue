@@ -20,8 +20,7 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                                     <div class="col-md-6">
-                                        <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email">
-                                        <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0]}}</div>
+                                        <input class="form-control" id="email" v-model="user.email">
                                     </div>
                                 </div>
 
@@ -30,12 +29,13 @@
                                     <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                                     <div class="col-md-6">
                                         <input :type="is_password_hidden ? 'password' : 'text'"
-                                        :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
-                                        <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
+                                        class="form-control" id="password" v-model="user.password" 
+                                        data-testid="input_password">
                                     </div>
-                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
-                                        <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
-                                        <span v-else><v-icon name="eye" scale="1.5"/></span>
+                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1" 
+                                    data-testid="password-icon">
+                                        <span v-if="is_password_hidden" data-testid="eye-slash"><v-icon name="eye-slash" scale="1.5"/></span>
+                                        <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
                                     </div>
                                 </div>
 
@@ -166,6 +166,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import Header from '@/components/users/Header'
+import axios from 'axios'
 
 export default {
     data(){
