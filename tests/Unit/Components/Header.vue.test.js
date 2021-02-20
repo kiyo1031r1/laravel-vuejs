@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import UserHeader from '@/components/users/Header'
+import Header from '@/components/users/Header'
 import flushPromises from 'flush-promises'
 
 const localVue = createLocalVue()
@@ -21,7 +21,7 @@ jest.mock("axios", () => ({
     post: () => Promise.resolve(),
 }))
 
-describe('UserHeader', () => {
+describe('Header', () => {
     let state, getters, store
     const mockRouterPush = jest.fn();
 
@@ -41,7 +41,7 @@ describe('UserHeader', () => {
     })
 
     const factory = () => {
-        return shallowMount(UserHeader, {
+        return shallowMount(Header, {
             mocks: { 
                 $router : {
                     push : mockRouterPush
