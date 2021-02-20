@@ -34,7 +34,8 @@
                                     <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                                     <div class="col-md-6">
                                         <input :type="is_password_hidden ? 'password' : 'text'"
-                                        :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
+                                        :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password" 
+                                        data-testid="input_password">
                                         <div v-if="errors.password" class="invalid-feedback" 
                                         data-testid="error_password">{{ errors.password[0]}}</div>
                                     </div>
