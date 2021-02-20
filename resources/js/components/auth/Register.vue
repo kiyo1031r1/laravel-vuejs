@@ -68,6 +68,7 @@
 
 <script>
 import Header from '@/components/users/Header'
+import axios from 'axios'
 
 export default {
     data(){
@@ -88,7 +89,7 @@ export default {
             axios.get('sanctum/csrf-cookie')
             .then(() => {
                 axios.post('/api/register', this.user)
-                .then((res) => {
+                .then(() => {
                     this.$router.push({name: 'video'});
                 })
                 .catch((error) =>{
