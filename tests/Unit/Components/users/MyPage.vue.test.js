@@ -98,23 +98,23 @@ describe('MyPage', () => {
     it('passwordHiddenToggleのテスト', () => {
         const wrapper = factory()
         expect(wrapper.vm.is_password_hidden).toBe(true);
-        wrapper.find(sel('password-icon')).trigger('click')
+        wrapper.find(sel('password_icon')).trigger('click')
         expect(wrapper.vm.is_password_hidden).toBe(false);
-        wrapper.find(sel('password-icon')).trigger('click')
+        wrapper.find(sel('password_icon')).trigger('click')
         expect(wrapper.vm.is_password_hidden).toBe(true);
     })
 
     it('password表示切り替え_非表示', () => {
         const wrapper = factory()
         expect(wrapper.find(sel('input_password')).attributes().type).toBe('password')
-        expect(wrapper.find(sel('eye-slash')).exists()).toBe(true)
+        expect(wrapper.find(sel('eye_slash')).exists()).toBe(true)
         expect(wrapper.find(sel('eye')).exists()).toBe(false)
     })
 
     it('password表示切り替え_表示', () => {
         const wrapper = factory({is_password_hidden: false})
         expect(wrapper.find(sel('input_password')).attributes().type).toBe('text')
-        expect(wrapper.find(sel('eye-slash')).exists()).toBe(false)
+        expect(wrapper.find(sel('eye_slash')).exists()).toBe(false)
         expect(wrapper.find(sel('eye')).exists()).toBe(true)
     })
 
