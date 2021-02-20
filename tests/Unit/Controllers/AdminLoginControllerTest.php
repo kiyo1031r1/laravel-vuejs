@@ -57,31 +57,31 @@ class AdminLoginControllerTest extends TestCase
             'admin_email_error' => [[
                 'email' => 'test11@example.com',
                 'password' => '11111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'admin_password_error' => [[
                 'email' => 'test1@example.com',
                 'password' => '1111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'admin_email_password_error' => [[
                 'name' => 'test11@example.com',
                 'password' => '1111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'user_fail' => [[
                 'email' => 'test2@example.com',
                 'password' => '22222222',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'user_email_error' => [[
                 'email' => 'test22@example.com',
                 'password' => '22222222',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'user_password_error' => [[
                 'email' => 'test2@example.com',
                 'password' => '2222222',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'user_email_password_error' => [[
                 'name' => 'test22@example.com',
                 'password' => '22222222',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
         ];
     }
 
