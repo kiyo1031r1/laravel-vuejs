@@ -22,7 +22,8 @@
                                 <!-- 管理者認証エラー -->
                                 <div v-if="errors.not_found" class="form-group row">
                                     <div class="col-md-12">
-                                        <p class="text-danger text-center mb-0">{{ errors.not_found[0] }}</p>
+                                        <p class="text-danger text-center mb-0" 
+                                        data-testid="error_not_found">{{ errors.not_found[0] }}</p>
                                     </div>
                                 </div>
 
@@ -39,11 +40,13 @@
                                     <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
                                     <div class="col-md-6">
                                         <input :type="is_password_hidden ? 'password' : 'text'"
-                                        class="form-control" id="password" v-model="user.password">
+                                        class="form-control" id="password" v-model="user.password" 
+                                        data-testid='input_password'>
                                     </div>
-                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
-                                        <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
-                                        <span v-else><v-icon name="eye" scale="1.5"/></span>
+                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1" 
+                                    data-testid="password_icon">
+                                        <span v-if="is_password_hidden" data-testid="eye_slash"><v-icon name="eye-slash" scale="1.5"/></span>
+                                        <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
                                     </div>
                                 </div>
 
