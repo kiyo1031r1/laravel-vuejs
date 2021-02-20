@@ -55,8 +55,8 @@
                             </div>
                         </div>
                         <div @click="passwordHiddenToggle()" class="password-icon col-md-1"
-                        data-testid="password-icon">
-                            <span v-if="is_password_hidden" data-testid="eye-slash"><v-icon name="eye-slash" scale="1.5"/></span>
+                        data-testid="password_icon">
+                            <span v-if="is_password_hidden" data-testid="eye_slash"><v-icon name="eye-slash" scale="1.5"/></span>
                             <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
                         </div>
                     </div>
