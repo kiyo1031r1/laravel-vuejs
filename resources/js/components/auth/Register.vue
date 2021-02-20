@@ -14,7 +14,8 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名</label>
                                     <div class="col-md-6">
                                         <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="name" v-model="user.name">
-                                        <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
+                                        <div v-if="errors.name" class="invalid-feedback" 
+                                        data-testid="error_name">{{ errors.name[0]}}</div>
                                     </div>
                                 </div>
 
@@ -23,7 +24,8 @@
                                     <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
                                     <div class="col-md-6">
                                         <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email">
-                                        <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0]}}</div>
+                                        <div v-if="errors.email" class="invalid-feedback" 
+                                        data-testid="error_email">{{ errors.email[0]}}</div>
                                     </div>
                                 </div>
 
@@ -33,11 +35,13 @@
                                     <div class="col-md-6">
                                         <input :type="is_password_hidden ? 'password' : 'text'"
                                         :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
-                                        <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
+                                        <div v-if="errors.password" class="invalid-feedback" 
+                                        data-testid="error_password">{{ errors.password[0]}}</div>
                                     </div>
-                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
-                                        <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
-                                        <span v-else><v-icon name="eye" scale="1.5"/></span>
+                                    <div @click="passwordHiddenToggle()" class="password-icon col-md-1" 
+                                    data-testid="password_icon">
+                                        <span v-if="is_password_hidden" data-testid="eye_slash"><v-icon name="eye-slash" scale="1.5"/></span>
+                                        <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
                                     </div>
                                 </div>
 
