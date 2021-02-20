@@ -186,7 +186,7 @@ export default {
             axios.get('sanctum/csrf-cookie')
             .then(() => {
                 axios.post('/api/login', this.user)
-                .then((res) => {
+                .then(() => {
                     //遷移前のpath情報があれば、そのページに遷移
                     this.$router.push(
                         this.$route.query.redirect ? this.$route.query.redirect : {name: 'video'}
