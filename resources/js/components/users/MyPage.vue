@@ -9,14 +9,18 @@
                     <div class="form-group row">
                         <label class="col-form-label col-md-3">ユーザー名</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="isAuthenticated.name" disabled>
+                            <input class="form-control" :value="isAuthenticated.name" disabled 
+                            data-testid="input_name_disabled">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="name">ユーザー名を変更</label>
                         <div class="col-md-7">
-                            <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="name" v-model="user.name">
-                            <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0]}}</div>
+                            <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="name" v-model="user.name" 
+                            data-testid="input_name">
+                            <div v-if="errors.name" class="invalid-feedback" data-testid ="error_name">
+                                {{ errors.name[0]}} 
+                            </div>
                         </div>
                     </div>
 
@@ -24,14 +28,18 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">メールアドレス</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="isAuthenticated.email" disabled>
+                            <input class="form-control" :value="isAuthenticated.email" disabled 
+                            data-testid="input_email_disabled">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label col-md-3" for="email">メールアドレスを変更</label>
                         <div class="col-md-7">
-                            <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email">
-                            <div v-if="errors.email" class="invalid-feedback">{{ errors.email[0]}}</div>
+                            <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email" 
+                            data-testid="input_email">
+                            <div v-if="errors.email" class="invalid-feedback" data-testid ="error_email">
+                                {{ errors.email[0]}}
+                            </div>
                         </div>
                     </div>
 
@@ -40,12 +48,16 @@
                         <label class="col-form-label col-md-3" for="password">パスワードを変更</label>
                         <div class="col-md-7">
                             <input :type="is_password_hidden ? 'password' : 'text'"
-                            :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password">
-                            <div v-if="errors.password" class="invalid-feedback">{{ errors.password[0]}}</div>
+                            :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password"
+                            data-testid="input_password">
+                            <div v-if="errors.password" class="invalid-feedback" data-testid ="error_password">
+                                {{ errors.password[0]}}
+                            </div>
                         </div>
-                        <div @click="passwordHiddenToggle()" class="password-icon col-md-1">
-                            <span v-if="is_password_hidden" ><v-icon name="eye-slash" scale="1.5"/></span>
-                            <span v-else><v-icon name="eye" scale="1.5"/></span>
+                        <div @click="passwordHiddenToggle()" class="password-icon col-md-1"
+                        data-testid="password_icon">
+                            <span v-if="is_password_hidden" data-testid="eye_slash"><v-icon name="eye-slash" scale="1.5"/></span>
+                            <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
                         </div>
                     </div>
 
@@ -62,7 +74,8 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">ステータス</label>
                         <div class="col-md-7">
-                            <input class="form-control" :value="user.status" disabled>
+                            <input class="form-control" :value="user.status" disabled 
+                            data-testid="input_status_disabled">
                         </div>
                     </div>
 
@@ -79,7 +92,8 @@
 
 
             <div class="col-md-4 mx-auto mt-5">
-                <button @click="edit()" class="btn btn-primary btn-block" type="submit">更新</button>
+                <button @click="edit()" class="btn btn-primary btn-block" type="submit" 
+                data-testid="button_edit">更新</button>
             </div>
 
         </div>
@@ -87,7 +101,8 @@
 </template>
 
 <script>
-import Header from './Header'
+import axios from 'axios'
+import Header from '@/components/users/Header'
 
 export default {
     data(){

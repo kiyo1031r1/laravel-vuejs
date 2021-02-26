@@ -47,15 +47,15 @@ class LoginControllerTest extends TestCase
             'email_error' => [[
                 'email' => 'test11@example.com',
                 'password' => '11111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'password_error' => [[
                 'email' => 'test1@example.com',
                 'password' => '1111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
             'email_password_error' => [[
                 'name' => 'test11@example.com',
                 'password' => '1111111',
-            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています'],
+            ], 422, 'not_found', 'メールアドレスかパスワードが間違っています。'],
         ];
     }
 

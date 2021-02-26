@@ -22,12 +22,12 @@
 
                     <template v-if="!isAuthenticated">
                         <router-link :to="{ name: 'login'}">
-                            <button class="btn btn-success">ログイン</button>
+                            <button class="btn btn-success" data-testid='login'>ログイン</button>
                         </router-link>
                     </template>
 
                     <template v-else>
-                        <button @click="logout" class="btn btn-success">ログアウト</button>
+                        <button @click="logout" class="btn btn-success" data-testid="logout">ログアウト</button>
                     </template>
                 </div>
             </nav>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     computed:{
         isAuthenticated(){

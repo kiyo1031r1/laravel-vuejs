@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">プレミアム登録</div>
                     <div class="card-body text-center">
-                        <h3>{{user.name}}さんは</h3>
+                        <h3 data-testid="name">{{user.name}}さんは</h3>
                         <h3>現在プレミアム会員です。</h3>
                         <button @click="cancel()" class="btn btn-success mt-4">解約する</button>
                     </div>
@@ -17,7 +17,8 @@
 </template>
 
 <script>
-import Header from '../Header'
+import Header from '@/components/users/Header'
+import axios from 'axios'
 
 export default {
     data(){

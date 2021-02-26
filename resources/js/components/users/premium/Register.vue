@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import Header from '../Header'
+import Header from '@/components/users/Header'
+import axios from 'axios'
 
 export default {
     data(){

@@ -23,7 +23,7 @@ class LoginController extends Controller
         }
         else{
             throw ValidationException::withMessages([
-                'not_found' => ['メールアドレスかパスワードが間違っています'],
+                'not_found' => ['メールアドレスかパスワードが間違っています。'],
             ]);
         }
     }
