@@ -66,6 +66,19 @@
 <br>
 <br>
 
+- テスト
+- PHPUnit - 9.5.0
+- vue-test-utils - 1.1.3
+- jsdom - 16.4.0
+- jest - 26.6.3
+- vue-jest - 3.0.7
+- babel-core - 7.0.0-bridge.0
+- babel-jest - 26.6.3
+- babel-preset-env - 1.7.0
+
+<br>
+<br>
+
 ## ER図
 <img src="./public/images/readme/ER.png" width="800px">
 <br>
@@ -105,7 +118,7 @@ SPAで作成したことです。
 
 # 課題
 - レスポンシブデザイン
-- テスト(フロントエンド)
+- テスト(フロント部分の一部)
 - 課金機能
 <br>
 <br>
