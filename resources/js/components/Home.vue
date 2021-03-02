@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Header></Header>
-        <div class="bg container-fluid">
+        <div class="bg">
             <div class="bg-mask">
+                <Header></Header>
                 <div class="title text-center">
                     <h1 class="message">さぁ、動画で</h1>
                     <h1 class="message">プログラミング学習だ！</h1>
@@ -30,8 +30,6 @@ export default {
     background-image: url('/images/toppage.jpeg');
     background-size: cover;
     height: 100vh;
-    padding: 0;
-    position: relative;
 }
 
 .bg-mask{
@@ -40,13 +38,11 @@ export default {
 }
 
 .title{
-    position:absolute;
-    top: 25%;
-    left: 25%;
+    padding-top: 30vh;
 }
 
 .message{
-    font-size: calc(5px + 4vw);
+    font-size: calc(10px + 4vw);
     font-weight:bold;
 }
 
