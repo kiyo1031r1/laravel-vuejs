@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluif bg-dark">
-        <div class="container">
+        <div class="container px-0">
             <nav class="navbar">
                 <router-link :to="{ name: 'home'}">
                     <span class="h1 text-light">Laravel-vuejs</span>
@@ -9,25 +9,27 @@
                 <div>
                     <span v-if="isAuthenticated" class="name">{{isAuthenticated.name}}さん</span>
                     <router-link :to="{ name: 'video'}">
-                        <button class="btn btn-success">ビデオ一覧</button>
+                        <a>ビデオ一覧</a>
                     </router-link>
 
                     <router-link :to="{ name: 'my_page'}">
-                        <button class="btn btn-success">マイページ</button>
+                        <a>マイページ</a>
                     </router-link>
 
                     <router-link :to="{ name: 'premium_register'}">
-                        <button class="btn btn-success">プレミアム登録</button>
+                        <a>プレミアム登録</a>
                     </router-link>
 
                     <template v-if="!isAuthenticated">
                         <router-link :to="{ name: 'login'}">
-                            <button class="btn btn-success" data-testid='login'>ログイン</button>
+                            <a data-testid='login'>ログイン</a>
                         </router-link>
                     </template>
 
                     <template v-else>
-                        <button @click="logout" class="btn btn-success" data-testid="logout">ログアウト</button>
+                        <router-link :to="{ name: ''}">
+                            <a @click="logout" data-testid="logout">ログアウト</a>
+                        </router-link>
                     </template>
                 </div>
             </nav>
@@ -65,8 +67,20 @@ export default {
 <style scoped>
 .name{
     color: white;
-    font-size: 16px;
-    margin-right: 5px;
-    vertical-align: bottom;
+    padding: 0 5px;
 }
+
+a{
+    padding: 0 5px;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: silver;
+}
+a:visited {
+    color: inherit;
+}
+
 </style>
