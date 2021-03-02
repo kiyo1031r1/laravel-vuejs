@@ -91,7 +91,7 @@
             </div>
 
 
-            <div class="col-md-4 mx-auto mt-5">
+            <div class="col-md-4 mx-auto my-5">
                 <button @click="edit()" class="btn btn-primary btn-block" type="submit" 
                 data-testid="button_edit">更新</button>
             </div>
