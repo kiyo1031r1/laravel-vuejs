@@ -135,8 +135,9 @@ a:visited {
     color: inherit;
 }
 
-.dropdown-menu.show {
+.dropdown-menu {
     background-color: #212529;
+    left : -100%;
 }
 
 .dropdown-item {
