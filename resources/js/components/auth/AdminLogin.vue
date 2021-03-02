@@ -5,7 +5,7 @@
             <div class="container">
                 <nav class="navbar">
                 <router-link :to="{ name: 'home'}">
-                    <span class="nabvar-brand mb-0 h1 text-light">Laravel-vuejs</span>
+                    <span class="h1 logo text-light">どうぷろ！</span>
                 </router-link>
                 </nav>
             </div>
@@ -181,6 +181,14 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+    font-family: "ヒラギノ角ゴ Std W8",'Hiragino Kaku Gothic Std'
+}
+
+a{
+    text-decoration: none;
+}
+
 .password-icon {
     display: flex;
     align-items: center;
