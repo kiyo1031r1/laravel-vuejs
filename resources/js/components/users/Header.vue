@@ -8,7 +8,7 @@
                 <span v-if="isAuthenticated" class="name">{{isAuthenticated.name}}さん</span>
 
                 <!-- 画面サイズが大きければ通常変更 -->
-                <div v-if="width > 800">
+                <div v-if="width > 990">
                     <router-link :to="{ name: 'video'}">
                         <a>ビデオ一覧</a>
                     </router-link>

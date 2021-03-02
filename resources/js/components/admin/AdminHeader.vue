@@ -8,7 +8,7 @@
                     <span class="name">管理者 : {{isAuthenticated.name}}さん</span>
 
                 <!-- 画面サイズが大きければ通常変更 -->
-                <div v-if="width > 800">
+                <div v-if="width > 990">
                     <router-link :to="{ name: 'user_management'}">
                         <a>ユーザー管理</a>
                     </router-link>
