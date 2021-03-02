@@ -172,7 +172,7 @@
 
                         <!-- ページネーション -->
                         <nav>
-                            <ul class="pagination justify-content-center">
+                            <ul class="pagination justify-content-center pb-4">
                                 <li @click="changePage(1)" class="page-item mx-2"><a class="page-link" href="#">先頭</a></li>
                                 <li @click="changePreviousPage()" class="page-item"><a class="page-link" href="#">前</a></li>
                                 <li v-show="leftMorePage" class="mx-2">...</li>
