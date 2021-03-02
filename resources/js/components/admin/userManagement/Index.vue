@@ -218,7 +218,7 @@ export default {
             //ページネーション
             current_page: 1,
             last_page: null,
-            page_length: 9,
+            page_length: 5,
             focus_page_index: 0,
             leftMorePage: false,
             rightMorePage: false,
