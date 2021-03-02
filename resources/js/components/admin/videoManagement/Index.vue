@@ -355,6 +355,12 @@ export default {
 }
 }
 
+@media (max-width: 575px) {
+.form-inline {
+	width: 100%;
+}
+}
+
 .sidebar-body{
     border: 2px solid #dee2e6;
 }
