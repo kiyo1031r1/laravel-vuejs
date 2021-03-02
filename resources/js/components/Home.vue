@@ -46,7 +46,7 @@ export default {
 }
 
 .message{
-    font-size: 80px;
+    font-size: calc(5px + 4vw);
     font-weight:bold;
 }
 
