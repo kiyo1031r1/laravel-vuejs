@@ -34,10 +34,10 @@
 
             <div class="row justify-content-center">
                 <!-- サイドバー -->
-                <div class="col-md-2">
+                <div class="sidebar">
                     <!-- ビデオ検索 -->
                     <p class="sidebar-head">ビデオ検索</p>
-                    <div class="sidebar p-4 mb-3">
+                    <div class="sidebar-body p-4 mb-3">
                         <form @submit.prevent="changeFirstPage()">
                             <!-- ビデオ名 -->
                             <div class="form-group">
@@ -50,19 +50,19 @@
                                 <label class="col-form-label" for="category">カテゴリー名</label>
                                 <div class="form-row mb-1">
                                     <div class="col-md-8">
-                                        <select  v-model="select_category" class="form-control" id="category">
+                                        <select  v-model="select_category" class="form-control mb-2" id="category">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block">追加</button>
+                                        <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block mb-2">追加</button>
                                     </div>
                                 </div>
 
                                 <!-- 選択カテゴリーからの削除 -->
                                 <div class="col-md-8 p-0" v-for="select_category in search.categories" :key="select_category.id">
                                     <button @click="removeCategory(select_category)" 
-                                    class="btn btn-success btn-block text-left py-0 mt-1" style="position:relative">
+                                    class="btn btn-success btn-block text-left py-0 mt-2" style="position:relative">
                                     {{select_category.name}}
                                         <v-icon style="position:absolute; top:3px; right:6px" name="times" inverse/>
                                     </button>
@@ -105,7 +105,7 @@
                 <div class="col-md-8">
                     <!-- ビデオサムネイル -->
                     <div class="row px-3">
-                        <div v-for="video in videos" :key="video.id" class="col-md-15 p-0 mb-3">
+                        <div v-for="video in videos" :key="video.id" class="col-sm-15 col-md-15 col-lg-15 p-0 mb-3">
                             <div class="card mx-2">
                                 <div class="card-img-top"  style="position:relative">
                                     <img class="img-fluid" :src="video.thumbnail !== null ? video.thumbnail : '/images/default_thumbnail.jpg' ">
@@ -352,7 +352,15 @@ export default {
 </script>
 
 <style scoped>
-.sidebar{
+
+@media (max-width: 767px) {
+.sidebar {
+	width: 100%;
+    margin: 0 20px;
+}
+}
+
+.sidebar-body{
     border: 2px solid #dee2e6;
 }
 
@@ -404,7 +412,7 @@ export default {
     border-top: 1px solid #dee2e6;
 }
 
-.col-15, .col-sm-15, .col-md-15, .col-lg-15 {
+.col-sm-15, .col-md-15, .col-lg-15 {
 	position: relative;
 	min-height: 1px;
 	padding-right: 15px;
@@ -414,19 +422,19 @@ export default {
 
 @media (min-width: 768px) {
 .col-sm-15 {
-	width: 20%;
-	flex: 0 0 20%;
+	width: 50%;
+	flex: 0 0 50%;
 }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1300px) {
 .col-md-15 {
-	width: 20%;
-	flex: 0 0 20%;
+	width: 25%;
+	flex: 0 0 25%;
 }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
 .col-lg-15 {
 	width: 20%;
 	flex: 0 0 20%;
