@@ -119,7 +119,7 @@ export default {
             current_page: 1,
             last_page: null,
             page_length: 5,
-            focus_page_index: 0,
+            focus_page_index: -1,
             leftMorePage: false,
             rightMorePage: false,
 
@@ -180,7 +180,7 @@ export default {
             }
 
             //ページ番号へフォーカス
-            if(this.focus_page_index > 0) {
+            if(this.focus_page_index >= 0) {
                 this.$refs.focus_page[this.focus_page_index].focus();
             }
 
