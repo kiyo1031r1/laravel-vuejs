@@ -9,7 +9,7 @@
                             <div class="form-inline">
                                 <!-- 表示件数 -->
                                 <label class="col-form-label p-2" for="per_page">表示件数</label>
-                                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control mx-2" id="per_page">
                                     <option value="10">10件</option>
                                     <option value="20">20件</option>
                                     <option value="50">50件</option>
@@ -18,15 +18,10 @@
 
                                 <!-- 並び替え -->
                                 <label class="col-form-label p-2" for="per_page">並び替え</label>
-                                <select @change="changeFirstPage()" v-model="sort.created_at" class="form-control">
+                                <select @change="changeFirstPage()" v-model="sort.created_at" class="form-control mx-2">
                                     <option value="desc">新しい順</option>
                                     <option value="asc">古い順</option>
                                 </select>
-
-                                <!-- ビデオ新規作成 -->
-                                <router-link :to="{ name: 'video_management_create'}">
-                                    <button class="btn btn-primary px-4 ml-4">ビデオ新規作成</button>
-                                </router-link>
                             </div>
                     </div>
                 </div>

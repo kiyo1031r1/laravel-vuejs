@@ -13,6 +13,10 @@
                         <a>ユーザー管理</a>
                     </router-link>
 
+                    <router-link :to="{ name: 'video_management_create'}">
+                        <a>ビデオ作成</a>
+                    </router-link>
+
                     <router-link :to="{ name: 'video_management'}">
                         <a>ビデオ管理</a>
                     </router-link>
@@ -30,6 +34,10 @@
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <router-link :to="{ name: 'user_management'}">
                             <a class="dropdown-item">ユーザー管理</a>
+                        </router-link>
+
+                        <router-link :to="{ name: 'video_management_create'}">
+                            <a class="dropdown-item">ビデオ作成</a>
                         </router-link>
 
                         <router-link :to="{ name: 'video_management'}">
