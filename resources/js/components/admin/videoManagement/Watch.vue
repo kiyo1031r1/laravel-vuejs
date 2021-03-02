@@ -72,6 +72,7 @@
                 </div>
                 <!-- レコメンド動画 -->
                 <div class="col-md-3">
+                    <p class="h4 text-center my-3">あなたへのオススメ</p>
                     <div v-for="recommend in recommends" :key="recommend.id">
                         <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
