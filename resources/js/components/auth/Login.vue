@@ -90,9 +90,9 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col">内容</th>
-                                        <th scope="col">メールアドレス</th>
-                                        <th scope="col">パスワード</th>
+                                        <th scope="col">user</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">password</th>
                                     </tr>
                                 </thead>
                                 <tbody>
