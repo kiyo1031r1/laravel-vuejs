@@ -40,14 +40,20 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 767px) {
+.icon {
+	width: 25%;
+}
+}
+
 .icon{
-    margin: 20px;
+    margin: 2vw;
     padding: 0;
 }
 
 .image{
-    padding: 30px;
+    padding: 2vw;
     border: 2px #dee2e6 solid;
-    border-radius: 20px;
+    border-radius: 2vw;
 }
 </style>
