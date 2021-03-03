@@ -5,10 +5,11 @@
                 <router-link :to="{ name: 'home'}">
                     <span class="h1 logo text-light">どうぷろ！</span>
                 </router-link>
-                    <span class="name">管理者 : {{isAuthenticated.name}}さん</span>
 
                 <!-- 画面サイズが大きければ通常変更 -->
                 <div v-if="width > 990">
+                    <span class="name">管理者 : {{isAuthenticated.name}}さん</span>
+
                     <router-link :to="{ name: 'user_management'}">
                         <a>ユーザー管理</a>
                     </router-link>
@@ -32,6 +33,8 @@
                     Menu
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <span class="dropdown-item">管理者 : {{isAuthenticated.name}}さん</span>
+
                         <router-link :to="{ name: 'user_management'}">
                             <a class="dropdown-item">ユーザー管理</a>
                         </router-link>
@@ -101,9 +104,7 @@ export default {
 
 .name{
     color: white;
-    font-size: 16px;
-    margin-right: 5px;
-    vertical-align: bottom;
+    padding: 0 5px;
 }
 
 a{
@@ -126,10 +127,11 @@ a:visited {
 }
 
 .dropdown-item {
+    color: white;
     padding: 0 10px;
 }
 
-a.dropdown-item:hover {
+.dropdown-item:hover {
     background-color: inherit;
 }
 

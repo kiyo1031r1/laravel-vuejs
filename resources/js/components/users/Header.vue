@@ -5,10 +5,11 @@
                 <router-link :to="{ name: 'home'}">
                     <span class="h1 logo text-light">どうぷろ！</span>
                 </router-link>
-                <span v-if="isAuthenticated" class="name">{{isAuthenticated.name}}さん</span>
 
                 <!-- 画面サイズが大きければ通常変更 -->
                 <div v-if="width > 990">
+                    <span v-if="isAuthenticated" class="name">{{isAuthenticated.name}}さん</span>
+                    
                     <router-link :to="{ name: 'video'}">
                         <a>ビデオ一覧</a>
                     </router-link>
@@ -40,6 +41,8 @@
                     Menu
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <span v-if="isAuthenticated" class="dropdown-item">{{isAuthenticated.name}}さん</span>
+
                         <router-link :to="{ name: 'video'}">
                             <a class="dropdown-item">ビデオ一覧</a>
                         </router-link>
@@ -141,10 +144,11 @@ a:visited {
 }
 
 .dropdown-item {
+    color: white;
     padding: 0 10px;
 }
 
-a.dropdown-item:hover {
+.dropdown-item:hover {
     background-color: inherit;
 }
 
