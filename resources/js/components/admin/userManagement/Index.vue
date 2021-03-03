@@ -1,11 +1,113 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="container-fluid">
+        <div class="container-fluid px-0">
+            <!-- サイドバー　画面サイズが小さい場合 -->
+            <div v-if="sidebar_active && width < 1200" @click.self="sidebar_active = !sidebar_active" class="sidebar-active-mask">
+                <div class="sidebar-active">
+                    <!-- ビデオ検索 -->
+                    <div class="sidebar-body px-4">
+                        <form @submit.prevent="changeFirstPage()">
+                            <!-- ユーザー名 -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">ユーザー名</label>
+                                <input v-model="search.name" class="form-control" type="text" id="name">
+                            </div>
+
+                            <!-- メールアドレス -->
+                            <div class="form-group">
+                                <label class="col-form-label" for="email">メールアドレス</label>
+                                <input  v-model="search.email" class="form-control" type="text" id="email">
+                            </div>
+
+                            <!-- 登録日 -->
+                            <div class="form-group">
+                                <label class="col-form-label">登録日</label>
+                                <Datepicker
+                                    v-model="search.created_at_start"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜から(未指定可)'"
+                                    :disabled-dates="{from: search.created_at_end}">
+                                </Datepicker>
+                                <Datepicker
+                                    v-model="search.created_at_end"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜まで(未指定可)'"
+                                    :disabled-dates="{to: search.created_at_start}">
+                                </Datepicker>
+                            </div>
+
+                            <!-- ステータス -->
+                            <div class="form-group">
+                                <label class="col-form-label">ステータス</label>
+                                <select v-model="search.status" class="form-control">
+                                    <option selected></option>
+                                    <option value="normal">normal</option>
+                                    <option value="premium">premium</option>
+                                </select>
+                            </div>
+
+                            <!-- 次回更新日 -->
+                            <div class="form-group">
+                                <label class="col-form-label">次回更新日(※現在不可)</label>
+                                <Datepicker
+                                    v-model="search.next_update_start"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜から(未指定可)'"
+                                    :disabled-dates="{from: search.next_update_end}">
+                                </Datepicker>
+                                <Datepicker
+                                    v-model="search.next_update_end"
+                                    :language="datepicker.language"
+                                    :format="datepicker.format"
+                                    :input-class="datepicker.input_class"
+                                    :bootstrap-styling="true"
+                                    :clear-button="true"
+                                    :placeholder="'〜まで(未指定可)'"
+                                    :disabled-dates="{to: search.next_update_start}">
+                                </Datepicker>
+                            </div>
+
+                            <!-- 権限 -->
+                            <div class="form-group">
+                                <label class="col-form-label">権限</label>
+                                <select v-model="search.role" class="form-control">
+                                    <option selected></option>
+                                    <option value="1">一般ユーザー</option>
+                                    <option value="2">管理者</option>
+                                </select>
+                            </div>
+                            
+                            <!-- 検索ボタン -->
+                            <div class="col-md-8 mx-auto my-4">
+                                <button class="btn btn-primary btn-block" type="submit">検索</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- 表示件数 -->
             <div class="row justify-content-center">
                 <div class="col-md-11">
-                    <div class="form-inline justify-content-end px-3 my-3">
+                    <div class="form-inline justify-content px-3 my-3">
+                        <!-- 画面サイズが小さい場合は、サイドバーを折り畳む -->
+                        <div class="col-auto mr-auto">
+                            <button v-if="width < 1200" @click="sidebar_active = !sidebar_active" class="btn btn-secondary">ユーザー検索</button>
+                        </div>
+
                         <label class="col-form-label p-2" for="per_page">表示件数</label>
                         <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
                             <option value="10">10件</option>
@@ -18,11 +120,11 @@
             </div>
 
             <div class="row justify-content-center">
-                <!-- サイドバー -->
-                <div class="col-md-2">
+                <!-- サイドバー　画面サイズが小さい場合は折り畳む -->
+                <div v-if="width >= 1200" class="sidebar">
                     <!-- ビデオ検索 -->
                     <p class="sidebar-head">ユーザー検索</p>
-                    <div class="sidebar px-4 mb-3">
+                    <div class="sidebar-body px-4 mb-3">
                         <form @submit.prevent="changeFirstPage()">
                             <!-- ユーザー名 -->
                             <div class="form-group">
@@ -154,8 +256,8 @@
                             <tbody v-for="user in users" :key="user.id">
                                 <tr>
                                     <th scope="row">{{user.id}}</th>
-                                    <td>{{user.name}}</td>
-                                    <td>{{user.email}}</td>
+                                    <td class="name">{{user.name}}</td>
+                                    <td class="email">{{user.email}}</td>
                                     <td>{{user.created_at | moment}}</td>
                                     <td>{{user.status}}</td>
                                     <td></td>
@@ -246,7 +348,10 @@ export default {
                 status: null,
                 role: null,
                 per_page: '10',
-            }
+            },
+
+            width: window.innerWidth,
+            sidebar_active: false,
         }
     },
     computed:{
@@ -332,6 +437,8 @@ export default {
             }
         },
         changeFirstPage(){
+            if(this.sidebar_active) this.sidebar_active = false;
+
             //最初のユーザーから表示する仕様
             this.current_page = 1;
             this.focus_page_index = 0;
@@ -375,6 +482,9 @@ export default {
                 this.sort.role = order;
             }
             this.getUser();
+        },
+        handleResize(){
+            this.width = window.innerWidth;
         }
     },
     components:{
@@ -383,12 +493,22 @@ export default {
     },
     created(){
         this.getUser();
+    },
+    mounted(){
+        window.addEventListener('resize', this.handleResize);
+    },
+    beforeDestroy(){
+        window.removeEventListener('resize', this.handleResize);
     }
 }
 </script>
 
 <style scoped>
 .sidebar{
+    width: 280px;
+}
+
+.sidebar-body{
     border: 2px solid #dee2e6;
 }
 
@@ -401,12 +521,43 @@ export default {
     margin-bottom: 0px;
 }
 
+.sidebar-active-mask{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 20;
+}
+.sidebar-active{
+    width: 280px;
+    color: white;
+    background-color: #343a40;
+}
+
 .vdp-datepicker >>> .vdp-datepicker__calendar{
     width: 110%;
+    color: black;
 }
 .vdp-datepicker >>> .vdp-datepicker__clear-button{
     height: calc(1.6em + 0.75rem + 2px);
     margin-bottom: 0.5rem;
+}
+
+th, td{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.name, .email{
+    width: 200px;
+    max-width: 200px;
+}
+
+@media (min-width: 1470px) {
+.name, .email {
+    width: 300px;
+    max-width: 300px;
+}
 }
 
 </style>
