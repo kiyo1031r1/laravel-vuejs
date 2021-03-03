@@ -3,7 +3,7 @@
         <AdminHeader></AdminHeader>
         <div class="container-fluid px-0">
             <!-- サイドバー　画面サイズが小さい場合 -->
-            <div v-if="sidebar_active && width < 1200" @click.self="sidebar_active = !sidebar_active" class="sidebar-active-mask">
+            <div v-if="sidebar_active && width < change_menu_width" @click.self="sidebar_active = !sidebar_active" class="sidebar-active-mask">
                 <div class="sidebar-active">
                     <!-- ビデオ検索 -->
                     <div class="sidebar-body px-4">
@@ -102,26 +102,49 @@
             <!-- 表示件数 -->
             <div class="row justify-content-center">
                 <div class="col-md-11">
-                    <div class="form-inline justify-content px-3 my-3">
-                        <!-- 画面サイズが小さい場合は、サイドバーを折り畳む -->
-                        <div class="col-auto mr-auto">
-                            <button v-if="width < 1200" @click="sidebar_active = !sidebar_active" class="btn btn-secondary">ユーザー検索</button>
-                        </div>
+                    <!-- 画面のサイズによってメニュー表示を変更 -->
+                    <template v-if="width > 575">
+                        <div class="form-inline my-2">
+                            <!-- 画面サイズが小さい場合にサイドバーの表示を切り替えるボタンを表示 -->
+                            <div class="col-auto mr-auto">
+                            <button v-if="width < change_menu_width" @click="sidebar_active = !sidebar_active" class="btn btn-secondary search-user-btn">ユーザー検索</button>
+                            </div>
 
-                        <label class="col-form-label p-2" for="per_page">表示件数</label>
-                        <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
-                            <option value="10">10件</option>
-                            <option value="20">20件</option>
-                            <option value="50">50件</option>
-                            <option value="100">100件</option>
-                        </select>
-                    </div>
+                            <div class="per-page form-inline col-auto">
+                                <label class="col-form-label p-2" for="per_page">表示件数</label>
+                                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                                    <option value="10">10件</option>
+                                    <option value="20">20件</option>
+                                    <option value="50">50件</option>
+                                    <option value="100">100件</option>
+                                </select>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="form-row m-2">
+                            <div class="col-5">
+                                <button @click="sidebar_active = !sidebar_active" class="btn btn-secondary">ユーザー検索</button>
+                            </div>
+                            <div class="col-3 text-right">
+                                <label class="col-form-label" for="per_page">表示件数</label>
+                            </div>
+                            <div class="col-4">
+                                <select @change="changeFirstPage()" v-model="sort.per_page" class="form-control" id="per_page">
+                                    <option value="10">10件</option>
+                                    <option value="20">20件</option>
+                                    <option value="50">50件</option>
+                                    <option value="100">100件</option>
+                                </select>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <!-- サイドバー　画面サイズが小さい場合は折り畳む -->
-                <div v-if="width >= 1200" class="sidebar">
+                <div v-if="width >= change_menu_width" class="sidebar">
                     <!-- ビデオ検索 -->
                     <p class="sidebar-head">ユーザー検索</p>
                     <div class="sidebar-body px-4 mb-3">
@@ -351,6 +374,7 @@ export default {
             },
 
             width: window.innerWidth,
+            change_menu_width: 1200,
             sidebar_active: false,
         }
     },
@@ -506,6 +530,7 @@ export default {
 <style scoped>
 .sidebar{
     width: 280px;
+    padding: 0 20px;
 }
 
 .sidebar-body{
