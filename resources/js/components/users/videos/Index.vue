@@ -118,7 +118,7 @@ export default {
             //ページネーション
             current_page: 1,
             last_page: null,
-            page_length: 5,
+            page_length: '',
             focus_page_index: -1,
             leftMorePage: false,
             rightMorePage: false,
@@ -143,6 +143,10 @@ export default {
             const column = [];
             let start;
             let last;
+
+            //画面サイズに合わせてpage_lengthを変更
+            window.innerWidth > 767 ? this.page_length = 5 : this.page_length = 3;
+
             //指定ページ数以上
             if(this.last_page > this.page_length){
                 //ページ冒頭処理
