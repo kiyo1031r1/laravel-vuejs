@@ -42,7 +42,7 @@ export default {
 <style scoped>
 @media (max-width: 767px) {
 .icon {
-	width: 25%;
+	width: 40%;
 }
 }
 
