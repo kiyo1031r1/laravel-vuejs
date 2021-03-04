@@ -277,6 +277,8 @@ export default {
             });
         },
         createCategory(){
+            if(Object.keys(this.errors).length) this.errors = {};
+
             axios.post('/api/video_categories', this.input_category)
             .then(() => {
                 this.$store.dispatch('setFlashMessage', {
@@ -291,6 +293,8 @@ export default {
             });
         },
         deleteCategory(){
+            if(Object.keys(this.errors).length) this.errors = {};
+
             //id9のカテゴリまでは削除対象外にする
             if(this.delete_select_category.id < 10) {
                 alert('そのカテゴリーは削除できません');
