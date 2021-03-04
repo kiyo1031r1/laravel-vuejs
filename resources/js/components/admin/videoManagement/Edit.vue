@@ -1,7 +1,7 @@
 <template>
     <div>
-        <AdminHeader></AdminHeader>
         <FlashMessage></FlashMessage>
+        <AdminHeader></AdminHeader>
         <div class="container">
                 <!-- カテゴリー管理 -->
                 <div class="col-lg-9  mx-auto mt-4">

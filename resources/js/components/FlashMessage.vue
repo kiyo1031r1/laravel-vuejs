@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 .alert{
-    position: absolute;
+    position: fixed;
     width: 100%;
     text-align: center;
     z-index: 30;
