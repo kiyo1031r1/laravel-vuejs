@@ -1,171 +1,172 @@
 <template>
     <div>
         <AdminHeader></AdminHeader>
-        <div class="row justify-content-center mt-4">
-            <!-- ビデオ作成フォーム -->
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">ビデオ新規作成</div>
-                    <div class="card-body">
-                        <!-- タイトル -->
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="title">タイトル</label>
-                            <div class="col-md-8">
-                                <input :class="errors.title ? 'form-control is-invalid' : 'form-control'" id="title" v-model="title">
-                                <div v-if="errors.title" class="invalid-feedback">{{ errors.title[0]}}</div>
-                            </div>
-                        </div>
-
-                        <!-- カテゴリー追加 -->
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="category">カテゴリー</label>
-                            <div class="col-md-6">
-                                <select  v-model="select_category" class="form-control" id="category">
-                                    <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
-                                </select>
-                            </div>
-                            <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
-                            <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
-                        </div>
-
-                        <!-- 選択カテゴリーからの削除 -->
-                        <div class="col-md-8 offset-md-2 mb-2">
-                            <button v-for="select_category in select_categories" :key="select_category.id" 
-                                @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
-                                {{select_category.name}}<v-icon class="ml-2" name="times"/>
-                            </button>
-                        </div>
-
-                        <!-- 概要 -->
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="about">概要</label>
-                            <div class="col-md-8">
-                                <textarea :class="errors.about ? 'form-control is-invalid' : 'form-control'" id="about" rows="3" v-model="about"></textarea>
-                                <div v-if="errors.about" class="invalid-feedback">{{ errors.about[0]}}</div>
-                            </div>
-                        </div>
-
-                        <!-- ステータス -->
-                        <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-md-2 py-0">ステータス</legend>
-                                <div class="col-md-8" style="padding:0 12px">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="status_normal">ノーマル</label>
-                                        <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="status">
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="status_premium">プレミアム</label>
-                                        <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="status">
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-if="errors.status" class="col-md-8 offset-md-2 status_error">{{ errors.status[0]}}</div>
-                        </fieldset>
-                        
-                        <!-- サムネイル -->
-                        <div class="form-group row mb-0">
-                            <label class="col-form-label col-md-2">サムネイル</label>
-                            <div class="col-md-3">
-                                <label class="file_upload_button" for="thumbnail">ファイルを選択</label>
-                                <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
-                            </div>
-                            <div v-if="thumbnail" class="col-md-5">
-                                <img :src="thumbnail_preview" class="img-thumbnail" >
-                                <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
-                                    @click="removeThumbnail()">
-                                    {{replaceFileName(thumbnail_name, upload_file_name_length)}}
-                                    <v-icon class="ml-2" 
-                                    style="position:absolute; top:3; right:5;" name="times"/>
+        <FlashMessage></FlashMessage>
+        <div class=container>
+                <!-- カテゴリー作成フォーム -->
+                <div class="col-lg-9  mx-auto mt-4">
+                    <div class="accordion" id="accordion">
+                        <div class="card">
+                            <div class="card-header bg-dark p-0" id="category_header">
+                                <button class="btn btn-block text-white p-3" type="button" data-toggle="collapse" data-target="#category_body" aria-expanded="false" aria-controls="cateogory_body">
+                                    ▼カテゴリー管理
                                 </button>
                             </div>
-                            <div v-if="errors.thumbnail_name" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail_name[0]}}</div>
-                        </div>
+                            <div class="collapse" id="category_body" aria-labelledby="category_header" data-parent="#accordion">
+                                <div class="card-header">カテゴリー作成
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="create_category_name">表示名</label>
+                                        <div class="col-md-8">
+                                            <input v-model="input_category.name" :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="create_category_name">
+                                            <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0] }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label" for="create_category_file_name">ファイル名</label>
+                                        <div class="col-md-8">
+                                            <input v-model="input_category.file_name" :class="errors.file_name ? 'form-control is-invalid' : 'form-control'" id="create_category_file_name">
+                                            <div v-if="errors.file_name" class="invalid-feedback">{{ errors.file_name[0] }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mx-auto">
+                                        <button @click="createCategory()" class="btn btn-primary btn-block mt-4" :disabled="isFlashMessage || !input_category.name || errors.length > 0 ">作成</button>
+                                    </div>
+                                </div>
 
-                        <!-- 動画ファイル -->
-                        <div class="form-group row mt-3 mb-0">
-                            <label class="col-form-label col-md-2" for="capture">動画</label>
-                            <div class="col-md-3 text-center">
-                                <label class="file_upload_button" for="video">ファイルを選択</label>
-                                <input @change="uploadVideo()" type="file" id="video" ref="video">
-                                <a :href="sample_video_url" download="sample_video">サンプル動画をDL</a>
-                            </div>
-                            <div v-if="video" class="col-md-5">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <video class="embed-responsive-item img-thumbnail" 
-                                    controls :src="video_preview" ref="video_time"
-                                    @loadedmetadata="getVideoTime()">
-                                    </video>
+                                <div class="card-header">カテゴリー削除
                                 </div>
-                                <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
-                                    @click="removeVideo()">
-                                    {{replaceFileName(video_name, upload_file_name_length)}}
-                                    <v-icon class="ml-2" 
-                                    style="position:absolute; top:3; right:5;" name="times"/>
-                                </button>
-                            </div>
-                            <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
-                            <div v-else-if="errors.video_time" class="col-md-8 offset-md-2 upload_error">{{ errors.video_time[0]}}</div>
-                        </div>
-
-                        <!-- 作成ボタン -->
-                        <div class="col-md-4 mx-auto mt-5">
-                            <button class="btn btn-primary btn-block" type="submit"
-                            @click="createVideo()">作成</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- カテゴリー作成フォーム -->
-            <div class="col-md-3">
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">カテゴリー作成</div>
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label" for="create_category_name">表示名</label>
-                                <div class="col-md-8">
-                                    <input v-model="input_category.name" :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="create_category_name">
-                                    <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0] }}</div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label" for="create_category_file_name">ファイル名</label>
-                                <div class="col-md-8">
-                                    <input v-model="input_category.file_name" :class="errors.file_name ? 'form-control is-invalid' : 'form-control'" id="create_category_file_name">
-                                    <div v-if="errors.file_name" class="invalid-feedback">{{ errors.file_name[0] }}</div>
-                                </div>
-                            </div>
-                                <div class="col-md-6 mx-auto">
-                                    <button @click="createCategory()" class="btn btn-primary btn-block mt-4" :disabled="isFlashMessage || !input_category.name || errors.length > 0 ">作成</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">カテゴリー削除</div>
-                        <div class="card-body">
-                            <!-- カテゴリー削除 -->
-                            <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col-md-8">
+                                <div class="card-body">
+                                    <!-- カテゴリー削除 -->
+                                    <div class="col-md-8 mx-auto mb-4">
                                         <select  v-model="delete_select_category" class="form-control">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button @click="deleteCategory()" class="btn btn-primary ml-2" :disabled="isFlashMessage || !delete_select_category">削除</button>
+                                    <div class="col-md-4 mx-auto">
+                                        <button @click="deleteCategory()" class="btn btn-primary btn-block" :disabled="isFlashMessage || !delete_select_category">削除</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <FlashMessage></FlashMessage>
-            </div>
+
+                <!-- ビデオ作成フォーム -->
+                <div class="col-lg-9 mx-auto mt-4">
+                    <div class="card">
+                        <div class="card-header">ビデオ新規作成</div>
+                        <div class="card-body">
+                            <!-- タイトル -->
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="title">タイトル</label>
+                                <div class="col-md-8">
+                                    <input :class="errors.title ? 'form-control is-invalid' : 'form-control'" id="title" v-model="title">
+                                    <div v-if="errors.title" class="invalid-feedback">{{ errors.title[0]}}</div>
+                                </div>
+                            </div>
+
+                            <!-- カテゴリー追加 -->
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="category">カテゴリー</label>
+                                <div class="col-md-6">
+                                    <select  v-model="select_category" class="form-control" id="category">
+                                        <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
+                                    </select>
+                                </div>
+                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
+                                <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
+                            </div>
+
+                            <!-- 選択カテゴリーからの削除 -->
+                            <div class="col-md-8 offset-md-2 mb-2">
+                                <button v-for="select_category in select_categories" :key="select_category.id" 
+                                    @click="removeCategory(select_category)" class="btn btn-success mr-2 my-2">
+                                    {{select_category.name}}<v-icon class="ml-2" name="times"/>
+                                </button>
+                            </div>
+
+                            <!-- 概要 -->
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="about">概要</label>
+                                <div class="col-md-8">
+                                    <textarea :class="errors.about ? 'form-control is-invalid' : 'form-control'" id="about" rows="3" v-model="about"></textarea>
+                                    <div v-if="errors.about" class="invalid-feedback">{{ errors.about[0]}}</div>
+                                </div>
+                            </div>
+
+                            <!-- ステータス -->
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-md-2 py-0">ステータス</legend>
+                                    <div class="col-md-8" style="padding:0 12px">
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="status_normal">ノーマル</label>
+                                            <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="status">
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="status_premium">プレミアム</label>
+                                            <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="status">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="errors.status" class="col-md-8 offset-md-2 status_error">{{ errors.status[0]}}</div>
+                            </fieldset>
+                            
+                            <!-- サムネイル -->
+                            <div class="form-group row mb-0">
+                                <label class="col-form-label col-md-2">サムネイル</label>
+                                <div class="col-md-3">
+                                    <label class="file_upload_button" for="thumbnail">ファイルを選択</label>
+                                    <input @change="uploadThumbnail()" type="file" id="thumbnail" ref="thumbnail_preview">
+                                </div>
+                                <div v-if="thumbnail" class="col-md-5">
+                                    <img :src="thumbnail_preview" class="img-thumbnail" >
+                                    <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
+                                        @click="removeThumbnail()">
+                                        {{replaceFileName(thumbnail_name, upload_file_name_length)}}
+                                        <v-icon class="ml-2" 
+                                        style="position:absolute; top:3; right:5;" name="times"/>
+                                    </button>
+                                </div>
+                                <div v-if="errors.thumbnail_name" class="col-md-8 offset-md-2 upload_error">{{ errors.thumbnail_name[0]}}</div>
+                            </div>
+
+                            <!-- 動画ファイル -->
+                            <div class="form-group row mt-3 mb-0">
+                                <label class="col-form-label col-md-2" for="capture">動画</label>
+                                <div class="col-md-3 text-center">
+                                    <label class="file_upload_button" for="video">ファイルを選択</label>
+                                    <input @change="uploadVideo()" type="file" id="video" ref="video">
+                                    <a :href="sample_video_url" download="sample_video">サンプル動画をDL</a>
+                                </div>
+                                <div v-if="video" class="col-md-5">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item img-thumbnail" 
+                                        controls :src="video_preview" ref="video_time"
+                                        @loadedmetadata="getVideoTime()">
+                                        </video>
+                                    </div>
+                                    <button class="btn btn-outline-secondary btn-block text-left py-0" style="position:relative"
+                                        @click="removeVideo()">
+                                        {{replaceFileName(video_name, upload_file_name_length)}}
+                                        <v-icon class="ml-2" 
+                                        style="position:absolute; top:3; right:5;" name="times"/>
+                                    </button>
+                                </div>
+                                <div v-if="errors.video" class="col-md-8 offset-md-2 upload_error">{{ errors.video[0]}}</div>
+                                <div v-else-if="errors.video_time" class="col-md-8 offset-md-2 upload_error">{{ errors.video_time[0]}}</div>
+                            </div>
+
+                            <!-- 作成ボタン -->
+                            <div class="col-md-4 mx-auto mt-5">
+                                <button class="btn btn-primary btn-block" type="submit"
+                                @click="createVideo()">作成</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </template>

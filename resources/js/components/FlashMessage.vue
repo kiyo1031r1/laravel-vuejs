@@ -47,3 +47,13 @@ export default {
 }
 </script>
 
+<style scoped>
+.alert{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+}
+</style>
+
+
