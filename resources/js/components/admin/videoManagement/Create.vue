@@ -37,7 +37,7 @@
                                 </div>
 
                                 <!-- カテゴリー削除 -->
-                                <div class="card-header">カテゴリー削除
+                                <div class="card-header border-top">カテゴリー削除
                                 </div>
                                 <div class="card-body">
                                     <div class="col-md-8 mx-auto mb-4">
