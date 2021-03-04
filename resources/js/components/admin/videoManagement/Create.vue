@@ -3,7 +3,7 @@
         <AdminHeader></AdminHeader>
         <FlashMessage></FlashMessage>
         <div class=container>
-                <!-- カテゴリー作成フォーム -->
+                <!-- カテゴリー管理 -->
                 <div class="col-lg-9  mx-auto mt-4">
                     <div class="accordion" id="accordion">
                         <div class="card">
@@ -13,6 +13,7 @@
                                 </button>
                             </div>
                             <div class="collapse" id="category_body" aria-labelledby="category_header" data-parent="#accordion">
+                                <!-- カテゴリー作成 -->
                                 <div class="card-header">カテゴリー作成
                                 </div>
                                 <div class="card-body">
@@ -35,10 +36,10 @@
                                     </div>
                                 </div>
 
+                                <!-- カテゴリー削除 -->
                                 <div class="card-header">カテゴリー削除
                                 </div>
                                 <div class="card-body">
-                                    <!-- カテゴリー削除 -->
                                     <div class="col-md-8 mx-auto mb-4">
                                         <select  v-model="delete_select_category" class="form-control">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
@@ -76,9 +77,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block">追加</button>
-                                <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
+                                    <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block">追加</button>
                                 </div>
+                                <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
                             </div>
 
                             <!-- 選択カテゴリーからの削除 -->
