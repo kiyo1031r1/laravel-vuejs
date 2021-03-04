@@ -70,13 +70,15 @@
                             <!-- カテゴリー追加 -->
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="category">カテゴリー</label>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <select  v-model="select_category" class="form-control" id="category">
                                         <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                     </select>
                                 </div>
-                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary ml-2">追加</button>
+                                <div class="col-md-2">
+                                <button @click="addCategory()" :disabled="isSelectedCategory" class="btn btn-primary btn-block">追加</button>
                                 <div v-if="errors.category" class="col-md-8 offset-md-2 upload_error">{{ errors.category[0]}}</div>
+                                </div>
                             </div>
 
                             <!-- 選択カテゴリーからの削除 -->
