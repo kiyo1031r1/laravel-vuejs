@@ -2,8 +2,8 @@
     <div>
         <AdminHeader></AdminHeader>
         <div class="container-fluid px-0">
-            <!-- サイドバー　画面サイズが小さい場合 -->
-            <div v-if="sidebar_active && width < change_menu_width" @click.self="sidebar_active = !sidebar_active" class="sidebar-active-mask">
+            <!-- サイドバー　画面サイズが小さい場合は折り畳む -->
+            <div v-if="sidebar_active && width < change_sidebar_width" @click.self="sidebar_active = !sidebar_active" class="sidebar-active-mask">
                 <div class="sidebar-active">
                     <!-- ビデオ検索 -->
                     <div class="sidebar-body px-4">
@@ -102,12 +102,12 @@
             <!-- 表示件数 -->
             <div class="row justify-content-center">
                 <div class="col-md-11">
-                    <!-- 画面のサイズによってメニュー表示を変更 -->
-                    <template v-if="width > 575">
+                    <!-- 画面のサイズによる表示崩れを防ぐ -->
+                    <template v-if="width > change_menu_width">
                         <div class="form-inline my-2">
                             <!-- 画面サイズが小さい場合にサイドバーの表示を切り替えるボタンを表示 -->
                             <div class="col-auto mr-auto">
-                            <button v-if="width < change_menu_width" @click="sidebar_active = !sidebar_active" class="btn btn-secondary search-user-btn">ユーザー検索</button>
+                            <button v-if="width < change_sidebar_width" @click="sidebar_active = !sidebar_active" class="btn btn-secondary search-user-btn">ユーザー検索</button>
                             </div>
 
                             <div class="per-page form-inline col-auto">
@@ -143,8 +143,8 @@
             </div>
 
             <div class="row justify-content-center">
-                <!-- サイドバー　画面サイズが小さい場合は折り畳む -->
-                <div v-if="width >= change_menu_width" class="sidebar">
+                <!-- サイドバー　 通常は画面左部に表示-->
+                <div v-if="width >= change_sidebar_width" class="sidebar">
                     <!-- ビデオ検索 -->
                     <p class="sidebar-head">ユーザー検索</p>
                     <div class="sidebar-body px-4 mb-3">
@@ -240,60 +240,85 @@
                 </div>
 
                 <!-- メイン -->
-                <div class="main col-md-9">
+                <div class="main px-3">
                     <!-- ユーザー存在時(読み込み時に見出しとページネーション非表示) -->
                     <div v-show="isUsers">
-                        <!-- ユーザーリスト -->
-                        <table class="table table-sm table-bordered table-hover text-center ">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">
-                                        <span class="mr-1">ID</span>
-                                        <v-icon @click="sortList('id', 'asc');" name="caret-square-up"/>
-                                        <v-icon @click="sortList('id', 'desc')" name="caret-square-down"/>
-                                    </th>
-                                    <th scope="col">ユーザー名</th>
-                                    <th scope="col">email</th>
-                                    <th scope="col">
-                                        <span class="mr-1">登録日</span>
-                                        <v-icon @click="sortList('created_at', 'asc');" name="caret-square-up"/>
-                                        <v-icon @click="sortList('created_at', 'desc')" name="caret-square-down"/>
-                                    </th>
-                                    <th scope="col">
-                                        <span class="mr-1">ステータス</span>
-                                        <v-icon @click="sortList('status', 'asc');" name="caret-square-up"/>
-                                        <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
-                                    </th>
-                                    <th scope="col">
-                                        <span class="mr-1">次回更新日</span>
-                                    </th>
-                                    <th scope="col">
-                                        <span class="mr-1">権限</span>
-                                        <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
-                                        <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
-                                    </th>
-                                    <th scope="col">編集</th>
-                                    <th scope="col">削除</th>
-                                </tr>
-                            </thead>
-                            <tbody v-for="user in users" :key="user.id">
-                                <tr>
-                                    <th scope="row">{{user.id}}</th>
-                                    <td class="name">{{user.name}}</td>
-                                    <td class="email">{{user.email}}</td>
-                                    <td>{{user.created_at | moment}}</td>
-                                    <td>{{user.status}}</td>
-                                    <td></td>
-                                    <td>{{user.role_id | role}}</td>
-                                    <td>
-                                        <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
-                                            <button class="btn btn-primary px-2 py-0">編集</button>
-                                        </router-link>
-                                    </td>
-                                    <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <!-- ユーザーリスト 通常はテーブル形式で表示-->
+                        <template v-if="width > change_main_width">
+                            <table class="table table-sm table-bordered table-hover text-center ">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <span class="mr-1">ID</span>
+                                            <v-icon @click="sortList('id', 'asc');" name="caret-square-up"/>
+                                            <v-icon @click="sortList('id', 'desc')" name="caret-square-down"/>
+                                        </th>
+                                        <th scope="col">ユーザー名</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">
+                                            <span class="mr-1">登録日</span>
+                                            <v-icon @click="sortList('created_at', 'asc');" name="caret-square-up"/>
+                                            <v-icon @click="sortList('created_at', 'desc')" name="caret-square-down"/>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="mr-1">ステータス</span>
+                                            <v-icon @click="sortList('status', 'asc');" name="caret-square-up"/>
+                                            <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="mr-1">次回更新日</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="mr-1">権限</span>
+                                            <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
+                                            <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
+                                        </th>
+                                        <th scope="col">編集</th>
+                                        <th scope="col">削除</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-for="user in users" :key="user.id">
+                                    <tr>
+                                        <th scope="row">{{user.id}}</th>
+                                        <td class="name">{{user.name}}</td>
+                                        <td class="email">{{user.email}}</td>
+                                        <td>{{user.created_at | moment}}</td>
+                                        <td>{{user.status}}</td>
+                                        <td></td>
+                                        <td>{{user.role_id | role}}</td>
+                                        <td>
+                                            <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
+                                                <button class="btn btn-primary px-2 py-0">編集</button>
+                                            </router-link>
+                                        </td>
+                                        <td><button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </template>
+                        <!-- ユーザーリスト　画面が小さい場合は、カード形式で表示 -->
+                        <template v-else>
+                            <div class="row px-3">
+                                <div v-for="user in users" :key="user.id" class="col-15">
+                                    <div class="card">
+                                        <div class="card-header text-center">id : {{user.id}}</div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">name : {{user.name}}</li>
+                                            <li class="list-group-item">email : {{user.email}}</li>
+                                            <li class="list-group-item">登録日 : {{user.created_at | moment}}</li>
+                                            <li class="list-group-item">status : {{user.status}}</li>
+                                            <li class="list-group-item">権限 : {{user.role_id | role}}</li>
+                                            <li class="list-group-item text-center">
+                                                <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
+                                                    <button class="btn btn-primary px-2 py-0 mr-4">編集</button>
+                                                </router-link>
+                                                <button @click="deleteUser(user.id)" class="btn btn-danger px-2 py-0">削除</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
 
                         <!-- ページネーション -->
                         <nav>
@@ -374,7 +399,10 @@ export default {
             },
 
             width: window.innerWidth,
-            change_menu_width: 1200,
+            change_sidebar_width: 1330,
+            change_menu_width: 575,
+            change_main_width: 1170,
+            change_pagination_width: 767,
             sidebar_active: false,
         }
     },
@@ -385,7 +413,7 @@ export default {
             let last;
 
             //画面サイズに合わせてpage_lengthを変更
-            window.innerWidth > 767 ? this.page_length = 5 : this.page_length = 3;
+            this.width > this.change_pagination_width ? this.page_length = 5 : this.page_length = 3;
 
             //指定ページ数以上
             if(this.last_page > this.page_length){
@@ -552,6 +580,7 @@ export default {
     position: absolute;
     z-index: 20;
 }
+
 .sidebar-active{
     width: 280px;
     color: white;
@@ -567,10 +596,27 @@ export default {
     margin-bottom: 0.5rem;
 }
 
+.main {
+	width: 100%;
+}
+
+@media (min-width: 1170px) {
+.main {
+    width: 75%
+}
+}
+
 th, td{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.list-group li{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
 }
 
 .name, .email{
@@ -584,5 +630,20 @@ th, td{
     max-width: 300px;
 }
 }
+
+.col-15 {
+	width: 100%;
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+.col-15 {
+	width: 25%;
+}
+}
+
 
 </style>
