@@ -135,7 +135,7 @@ YouTubeを始め、ここ数年で動画配信サービスの人気は高まり�
 <br>
 その為、スマートフォンなどの画面が小さい場合は、表示方法を工夫して対応しました。
 <br>
-(GoogleChrome、及び所持しているiPhoneXRで確認)
+(GoogleChrome、及びiPhoneXRで確認)
 <br>
 <br>
 
