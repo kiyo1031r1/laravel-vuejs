@@ -54,7 +54,7 @@
                 </div>
 
                 <!-- ビデオ作成フォーム -->
-                <div class="col-lg-9 mx-auto mt-4">
+                <div class="col-lg-9 mx-auto my-4">
                     <div class="card">
                         <div class="card-header">ビデオ新規作成</div>
                         <div class="card-body">
