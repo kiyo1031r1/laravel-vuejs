@@ -72,10 +72,16 @@ class VideoCategoryControllerTest extends TestCase
     }
 
     public function testDestroy(){
-        $category = VideoCategory::factory()->create();
+        $category = VideoCategory::factory()->create(['id' => 10]);
         $response = $this->deleteJson('/api/video_categories/'. $category->id);
         $this->assertDeleted($category);
         $response->assertOk();
+
+        $category = VideoCategory::factory()->create(['id' => 1]);
+        $response = $this->deleteJson('/api/video_categories/'. $category->id);
+        $response->assertJsonValidationErrors(['category_delete' => 'そのカテゴリーは削除できません。'])
+        ->assertStatus(422);
+        
     }
 
     public function testExist(){

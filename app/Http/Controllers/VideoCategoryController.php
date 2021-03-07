@@ -20,7 +20,7 @@ class VideoCategoryController extends Controller
     public function destroy(VideoCategory $videoCategory){
         if($videoCategory->id < 10) {
             throw ValidationException::withMessages([
-                'category_delete' => ['そのカテゴリーは削除できません']
+                'category_delete' => ['そのカテゴリーは削除できません。']
             ]);
         }
         $videoCategory->delete();
