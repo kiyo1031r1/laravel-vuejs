@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoCategoryRequest;
+use Illuminate\Validation\ValidationException;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,11 @@ class VideoCategoryController extends Controller
     }
 
     public function destroy(VideoCategory $videoCategory){
+        if($videoCategory->id < 10) {
+            throw ValidationException::withMessages([
+                'category_delete' => ['そのカテゴリーは削除できません']
+            ]);
+        }
         $videoCategory->delete();
     }
 
