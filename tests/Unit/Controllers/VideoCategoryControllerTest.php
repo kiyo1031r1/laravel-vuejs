@@ -71,17 +71,40 @@ class VideoCategoryControllerTest extends TestCase
         ];
     }
 
-    public function testDestroy(){
-        $category = VideoCategory::factory()->create(['id' => 10]);
+    /**
+     * @dataProvider destroyDataProvider
+     * @param パラメータ
+     * @param コード
+     * @param カラム名
+     * @param エラーメッセージ
+     */
+    public function testDestroy($request, $code, $column, $message){
+        $category = VideoCategory::factory()->create($request);
         $response = $this->deleteJson('/api/video_categories/'. $category->id);
-        $this->assertDeleted($category);
-        $response->assertOk();
 
-        $category = VideoCategory::factory()->create(['id' => 1]);
-        $response = $this->deleteJson('/api/video_categories/'. $category->id);
-        $response->assertJsonValidationErrors(['category_delete' => 'そのカテゴリーは削除できません。'])
-        ->assertStatus(422);
-        
+        if($code === 422){
+            $response->assertJsonValidationErrors([$column => $message])
+            ->assertStatus(422);
+        }
+        elseif($code == 200){
+            $this->assertDeleted($category);
+            $response->assertOk();
+        }
+    }
+
+    public function destroyDataProvider(){
+        return[
+            'php' => [['file_name' => 'php'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'ruby' => [['file_name' => 'ruby'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'javascript' => [['file_name' => 'javascript'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'python' => [['file_name' => 'python'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'csharp' => [['file_name' => 'csharp'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'laravel' => [['file_name' => 'laravel'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'rails' => [['file_name' => 'rails'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'vuejs' => [['file_name' => 'vuejs'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'django' => [['file_name' => 'django'], 422, 'delete_category', 'そのカテゴリーは削除できません。'],
+            'testCategory' => [['file_name' => 'testCategory'], 200, null, null],
+        ];
     }
 
     public function testExist(){
