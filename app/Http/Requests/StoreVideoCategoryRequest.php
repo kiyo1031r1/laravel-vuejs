@@ -25,7 +25,6 @@ class StoreVideoCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:video_categories',
-            'file_name' => 'required|string|max:255|unique:video_categories',
         ];
     }
 }

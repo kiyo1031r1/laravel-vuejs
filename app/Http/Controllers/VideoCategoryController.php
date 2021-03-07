@@ -14,7 +14,8 @@ class VideoCategoryController extends Controller
     }
 
     public function store(StoreVideoCategoryRequest $request){
-        VideoCategory::create($request->validated());
+        $input = $request->validated();
+        VideoCategory::create(['name' => $input['name'], 'file_name' => $input['name']]);
     }
 
     public function destroy(VideoCategory $videoCategory){

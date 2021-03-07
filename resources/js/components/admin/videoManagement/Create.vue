@@ -17,19 +17,9 @@
                                 <div class="card-header">カテゴリー作成
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label" for="create_category_name">表示名</label>
-                                        <div class="col-md-8">
-                                            <input v-model="input_category.name" :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="create_category_name">
-                                            <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0] }}</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-form-label" for="create_category_file_name">ファイル名</label>
-                                        <div class="col-md-8">
-                                            <input v-model="input_category.file_name" :class="errors.file_name ? 'form-control is-invalid' : 'form-control'" id="create_category_file_name">
-                                            <div v-if="errors.file_name" class="invalid-feedback">{{ errors.file_name[0] }}</div>
-                                        </div>
+                                    <div class="col-md-8 mx-auto">
+                                        <input v-model="input_category.name" :class="errors.name ? 'form-control is-invalid' : 'form-control'">
+                                        <div v-if="errors.name" class="invalid-feedback">{{ errors.name[0] }}</div>
                                     </div>
                                     <div class="col-md-4 mx-auto">
                                         <button @click="createCategory()" class="btn btn-primary btn-block mt-4" :disabled="isFlashMessage || !input_category.name || errors.length > 0 ">作成</button>
@@ -187,7 +177,6 @@ export default {
             select_categories: [],
             input_category: {
                 name: '',
-                file_name: '',
             },
             delete_select_category: null,
 
@@ -286,7 +275,6 @@ export default {
                     message:'カテゴリーを作成しました'
                 });
                 this.input_category.name = '';
-                this.input_category.file_name = '';
                 this.getCategory();
             })
             .catch(error => {
