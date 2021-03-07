@@ -45,7 +45,7 @@
                                         <select  v-model="delete_select_category" :class="errors.category_delete ? 'form-control is-invalid' : 'form-control'">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                         </select>
-                                        <div v-if="errors.category_delete" class="invalid-feedback">{{ errors.category_delete[0] }}</div>
+                                        <div v-if="errors.delete_category" class="invalid-feedback">{{ errors.delete_category[0] }}</div>
                                     </div>
                                     <div class="col-md-4 mx-auto">
                                         <button @click="deleteCategory()" class="btn btn-primary btn-block" :disabled="isFlashMessage || !delete_select_category">削除</button>

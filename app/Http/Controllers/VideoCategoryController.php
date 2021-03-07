@@ -22,7 +22,7 @@ class VideoCategoryController extends Controller
 
         if(in_array($videoCategory->file_name, $categories)) {
             throw ValidationException::withMessages([
-                'category_delete' => ['そのカテゴリーは削除できません。']
+                'delete_category' => ['そのカテゴリーは削除できません。']
             ]);
         }
         $videoCategory->delete();
