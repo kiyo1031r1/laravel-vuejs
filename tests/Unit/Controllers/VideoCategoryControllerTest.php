@@ -56,18 +56,11 @@ class VideoCategoryControllerTest extends TestCase
 
     public function storeDataProvider(){
         return[
-            'pass' => [[
-                'name' => str_repeat('a', 255),
-                'file_name' => str_repeat('a', 255),
-            ], 200, null, null],
+            'pass' => [['name' => str_repeat('a', 255)], 200, null, null],
             'name_required' => [['name' => ' '], 422, 'name', '名前は必ず入力してください。'],
             'name_string' => [['name' => 11111111], 422, 'name', '名前には文字列を指定してください。'],
             'name_max' => [['name' => str_repeat('a', 256)], 422, 'name', '名前には255文字以下の文字列を指定してください。'],
             'name_unique' => [['name' => 'unique'], 422, 'name', 'その名前はすでに使われています。'],
-            'file_name_required' => [['file_name' => ' '], 422, 'file_name', 'ファイル名は必ず入力してください。'],
-            'file_name_string' => [['file_name' => 11111111], 422, 'file_name', 'ファイル名には文字列を指定してください。'],
-            'file_name_max' => [['file_name' => str_repeat('a', 256)], 422, 'file_name', 'ファイル名には255文字以下の文字列を指定してください。'],
-            'file_name_unique' => [['file_name' => 'unique'], 422, 'file_name', 'そのファイル名はすでに使われています。'],
         ];
     }
 
