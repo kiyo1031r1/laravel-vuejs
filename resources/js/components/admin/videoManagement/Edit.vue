@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="col-md-8 mx-auto mb-4">
-                                        <select  v-model="delete_select_category" :class="errors.category_delete ? 'form-control is-invalid' : 'form-control'">
+                                        <select  v-model="delete_select_category" :class="errors.delete_category ? 'form-control is-invalid' : 'form-control'">
                                             <option v-for="category in categories" :key="category.id" :value="category">{{category.name}}</option>
                                         </select>
                                         <div v-if="errors.delete_category" class="invalid-feedback">{{ errors.delete_category[0] }}</div>
