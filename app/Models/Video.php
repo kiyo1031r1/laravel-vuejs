@@ -37,7 +37,12 @@ class Video extends Model
         elseif($value === null){
             $this->attributes['thumbnail'] = $value;
         }
-        //通常保存用
+
+        //本番環境の保存
+        if(app()->environment('production')){
+            $this->attributes['thumbnail'] = $value;
+        }
+        //ローカル環境の保存
         else{
             $this->attributes['thumbnail'] = asset('storage/'. $value);
         }
@@ -48,9 +53,14 @@ class Video extends Model
         if(strpos($value, '/images') !== false){
             $this->attributes['video'] = $value;
         }
-        //通常保存用
+        
+        //本番環境の保存
+        if(app()->environment('production')){
+            $this->attributes['thumbnail'] = $value;
+        }
+        //ローカル環境の保存
         else{
-            $this->attributes['video'] = asset('storage/'. $value);
+            $this->attributes['thumbnail'] = asset('storage/'. $value);
         }
     }
 
