@@ -93,6 +93,7 @@ class VideoController extends Controller
     private function uploadThumbnailFile($video, $input_thumbnail){
         //ローカルに保存(共通)
         $video->thumbnail = $input_thumbnail->store('thumbnails');
+        \Debugbar::addMessage($video->thumbnail);
         $this->resizeThumbnail($video->thumbnail);
 
         if($this->pro_env){
