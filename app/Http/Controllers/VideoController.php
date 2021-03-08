@@ -30,9 +30,9 @@ class VideoController extends Controller
     public function store(StoreVideoRequest $request){
         //入力値を元に一旦作成
         $request = $request->validated();
-        Debugbar::addMessage($request);
+        \Debugbar::addMessage($request);
         $video = Video::create($request);
-        Debugbar::addMessage($request);
+        \Debugbar::addMessage($request);
 
         //ビデオとサムネイルのファイルパスを加工したものを上書き
         $this->uploadVideoFile($video, $request['video']);
