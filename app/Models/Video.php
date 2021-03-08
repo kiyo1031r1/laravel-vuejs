@@ -29,22 +29,15 @@ class Video extends Model
     }
 
     public function setThumbnailAttribute($value){
-        //seederの自動生成用
-        if(strpos($value, '/images') !== false){
+        //seederの自動生成用、またはサムネイル削除の場合
+        if(strpos($value, '/images') !== false || $value === null){
             $this->attributes['thumbnail'] = $value;
         }
-        //サムネイル削除の場合
-        elseif($value === null){
-            $this->attributes['thumbnail'] = $value;
-        }
-
-        //本番環境の保存
-        if(app()->environment('production')){
-            $this->attributes['thumbnail'] = $value;
-        }
-        //ローカル環境の保存
         else{
-            $this->attributes['thumbnail'] = asset('storage/'. $value);
+            //ローカル環境の保存
+            if(app()->environment('local')){
+                $this->attributes['thumbnail'] = asset('storage/'. $value);
+            }
         }
     }
 
@@ -54,13 +47,11 @@ class Video extends Model
             $this->attributes['video'] = $value;
         }
 
-        //本番環境の保存
-        if(app()->environment('production')){
-            $this->attributes['video'] = $value;
-        }
-        //ローカル環境の保存
         else{
-            $this->attributes['video'] = asset('storage/'. $value);
+            //ローカル環境の保存
+            if(app()->environment('local')){
+                $this->attributes['video'] = asset('storage/'. $value);
+            }
         }
     }
 
