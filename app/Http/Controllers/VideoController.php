@@ -98,7 +98,8 @@ class VideoController extends Controller
 
         if($this->pro_env){
             //ローカルに保存したリサイズ済のサムネイルを取得し、s3にアップロード
-            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
+            //$thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
+            $thumbnail_file_name = str_replace('thumbnails/', '', $video->thumbnail);
             $local_thumbnail_path = $this->thumbnail_file_path.$thumbnail_file_name;
             $path = Storage::disk('s3')->putFile('thumbnails', new File($local_thumbnail_path), 'public');
             $video->thumbnail = Storage::disk('s3')->url($path);
@@ -155,7 +156,13 @@ class VideoController extends Controller
     }
 
     private function resizeThumbnail($name){
-        $thumbnail_file_name = str_replace($this->thumbnail_url, '', $name);
+        //本番環境の場合は、保存時に加工しない為
+        if($this->pro_env){
+            $thumbnail_file_name = str_replace('thumbnails/', '', $name);
+        }
+        else{
+            $thumbnail_file_name = str_replace($this->thumbnail_url, '', $name);
+        }
         InterventionImage::make($this->thumbnail_file_path.$thumbnail_file_name)->resize(800, 500)->save();
     }
 
