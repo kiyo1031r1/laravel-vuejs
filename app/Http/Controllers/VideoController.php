@@ -30,9 +30,7 @@ class VideoController extends Controller
     public function store(StoreVideoRequest $request){
         //入力値を元に一旦作成
         $request = $request->validated();
-        \Debugbar::addMessage($request);
         $video = Video::create($request);
-        \Debugbar::addMessage($request);
 
         //ビデオとサムネイルのファイルパスを加工したものを上書き
         $this->uploadVideoFile($video, $request['video']);
@@ -93,12 +91,10 @@ class VideoController extends Controller
     private function uploadThumbnailFile($video, $input_thumbnail){
         //ローカルに保存(共通)
         $video->thumbnail = $input_thumbnail->store('thumbnails');
-        \Debugbar::addMessage($video->thumbnail);
         $this->resizeThumbnail($video->thumbnail);
 
         if($this->pro_env){
             //ローカルに保存したリサイズ済のサムネイルを取得し、s3にアップロード
-            //$thumbnail_file_name = str_replace($this->thumbnail_url, '', $video->thumbnail);
             $thumbnail_file_name = str_replace('thumbnails/', '', $video->thumbnail);
             $local_thumbnail_path = $this->thumbnail_file_path.$thumbnail_file_name;
             $path = Storage::disk('s3')->putFile('thumbnails', new File($local_thumbnail_path), 'public');
