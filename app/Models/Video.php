@@ -53,14 +53,14 @@ class Video extends Model
         if(strpos($value, '/images') !== false){
             $this->attributes['video'] = $value;
         }
-        
+
         //本番環境の保存
         if(app()->environment('production')){
-            $this->attributes['thumbnail'] = $value;
+            $this->attributes['video'] = $value;
         }
         //ローカル環境の保存
         else{
-            $this->attributes['thumbnail'] = asset('storage/'. $value);
+            $this->attributes['video'] = asset('storage/'. $value);
         }
     }
 
