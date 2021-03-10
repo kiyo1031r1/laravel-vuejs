@@ -35,7 +35,7 @@ class Video extends Model
         }
         else{
             //ローカル環境の保存
-            if(app()->environment('local')){
+            if(app()->environment('local') || app()->environment('testing')){
                 $this->attributes['thumbnail'] = asset('storage/'. $value);
             }
             //本番環境の保存
@@ -53,7 +53,7 @@ class Video extends Model
 
         else{
             //ローカル環境の保存
-            if(app()->environment('local')){
+            if(app()->environment('local') || app()->environment('testing')){
                 $this->attributes['video'] = asset('storage/'. $value);
             }
             //本番環境の保存
