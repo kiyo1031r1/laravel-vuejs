@@ -13,6 +13,7 @@ use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VideoCommentController;
 use App\Http\Controllers\ReVideoCommentController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,6 @@ Route::post('/videos/download', [VideoController::class, 'download']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::post('video_comments/get_comment', [VideoCommentController::class, 'getComment']);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
+
+//subscription
+Route::get('subscription', [SubscriptionController::class, 'index']);
