@@ -48,6 +48,7 @@ export default {
             user: {},
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
             card : null,
+            intent: null,
         }
     },
     components: {
@@ -64,10 +65,17 @@ export default {
             else{
                 alert('すでにプレミアム会員です');
             }
-        }
+        },
+        getIntent(){
+            axios.get('/api/subscription')
+            .then((res) => {
+                this.intent = res.data.intent;
+            });
+        },
     },
     created(){
         this.user = this.$store.getters.user;
+        this.getIntent();
     },
     mounted(){
         const elements = this.stripe.elements();
