@@ -2,15 +2,33 @@
     <div>
         <Header></Header>
         <div class="container">
-            <div class="col-md-6 mt-3 mx-auto">
+            <div class="col-md-8 mt-3 mx-auto">
                 <div class="card">
                     <div class="card-header">プレミアム登録</div>
                     <div class="card-body text-center">
                         <h3>プレミアム会員は</h3>
                         <h3>全ての動画が見放題!!</h3>
-                        <div id="card-element">
+
+                        <!-- カード登録 -->
+                        <div class="card-form">
+                            <form @submit.prevent="register">
+                                <div class="form-group row">
+                                    <label for="name" class="col-lg-3 col-form-label">名前</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" id="name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="card-element" class="col-lg-3 col-form-label">カード番号</label>
+                                    <div class="col-lg-8">
+                                        <div class="card-number" id="card-element">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success mt-4">プレミアム登録する</button>
+                            </form>
                         </div>
-                        <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
+
                         <p>※月額500円(税込)</p>
                         <p>※サンプルの為、ボタンを押しても実際に課金はされません</p>
                     </div>
@@ -58,3 +76,18 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.card-form{
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.card-number{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+</style>
