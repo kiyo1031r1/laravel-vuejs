@@ -8,6 +8,8 @@
                     <div class="card-body text-center">
                         <h3>プレミアム会員は</h3>
                         <h3>全ての動画が見放題!!</h3>
+                        <div id="card-element">
+                        </div>
                         <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
                         <p>※月額500円(税込)</p>
                         <p>※サンプルの為、ボタンを押しても実際に課金はされません</p>
@@ -25,7 +27,9 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            user: {}
+            user: {},
+            stripe : Stripe(process.env.MIX_STRIPE_KEY),
+            card : null,
         }
     },
     components: {
@@ -46,6 +50,11 @@ export default {
     },
     created(){
         this.user = this.$store.getters.user;
+    },
+    mounted(){
+        const elements = this.stripe.elements();
+        this.card = elements.create('card');
+        this.card.mount('#card-element');
     }
 }
 </script>
