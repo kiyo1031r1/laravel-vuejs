@@ -13,6 +13,9 @@ class SubscriptionController extends Controller
     }
 
     public function subscribe(Request $request){
-        
+        $user = $request->user();
+        $user->newSubscription('default', env('STRIPE_PREMIUM_KEY')
+        )->create($request->paymentMethod);
+        $user->load('subscriptions');
     }
 }
