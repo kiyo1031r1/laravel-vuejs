@@ -69,9 +69,9 @@ export default {
                 const payment_method = await this.getPayment();
 
                 if(!this.errors.payment && payment_method){
-                    axios.post('/api/users/register_premium/' + this.user.id, payment_method)
+                    axios.post('/api/subscription/subscribe', payment_method)
                     .then(() => {
-                        this.$router.push({name: 'changed_premium'});
+                        //this.$router.push({name: 'changed_premium'});
                     });
                 }
             }
