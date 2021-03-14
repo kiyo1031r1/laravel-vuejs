@@ -66,12 +66,14 @@ export default {
         async register(){
             if(this.user.status === 'normal'){
                 this.errors = {};
-                const payment_method = await this.getPayment();
+                const paymentMethod = await this.getPayment();
 
-                if(!this.errors.payment && payment_method){
-                    axios.post('/api/subscription/subscribe', payment_method)
+                if(!this.errors.payment && paymentMethod){
+                    axios.post('/api/subscription/subscribe', {
+                        payment_method : paymentMethod,
+                    })
                     .then(() => {
-                        //this.$router.push({name: 'changed_premium'});
+                        this.$router.push({name: 'changed_premium'});
                     });
                 }
             }
