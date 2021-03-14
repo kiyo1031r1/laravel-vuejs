@@ -11,22 +11,20 @@
 
                         <!-- カード登録 -->
                         <div class="card-form">
-                            <form @submit.prevent="register">
-                                <div class="form-group row">
-                                    <label for="name" class="col-lg-3 col-form-label">名前</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" id="name" v-model="card_details.name">
+                            <div class="form-group row">
+                                <label for="name" class="col-lg-3 col-form-label">名前</label>
+                                <div class="col-lg-8">
+                                    <input class="form-control" id="name" v-model="card_details.name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="card-element" class="col-lg-3 col-form-label">カード番号</label>
+                                <div class="col-lg-8">
+                                    <div class="card-number" id="card-element">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="card-element" class="col-lg-3 col-form-label">カード番号</label>
-                                    <div class="col-lg-8">
-                                        <div class="card-number" id="card-element">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-success mt-4" :data-secret="intent.client_secret">プレミアム登録する</button>
-                            </form>
+                            </div>
+                            <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
                         </div>
 
                         <p>※月額500円(税込)</p>
