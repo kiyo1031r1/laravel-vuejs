@@ -17,5 +17,10 @@ class SubscriptionController extends Controller
         $user->newSubscription('default', env('STRIPE_PREMIUM_KEY')
         )->create($request->paymentMethod);
         $user->load('subscriptions');
+
+        if($user->status === 'normal'){
+            $user->status = 'premium';
+            $user->save();
+        }
     }
 }
