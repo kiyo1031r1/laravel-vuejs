@@ -9,6 +9,6 @@ class SubscriptionController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return ['intent' => $user->createSetupIntent()];
+        return $user->createSetupIntent();
     }
 }

@@ -69,7 +69,7 @@ export default {
         getIntent(){
             axios.get('/api/subscription')
             .then((res) => {
-                this.intent = res.data.intent;
+                this.intent = res.data;
             });
         },
     },
