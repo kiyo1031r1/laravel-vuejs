@@ -11,6 +11,11 @@
 
                         <!-- カード登録 -->
                         <div class="card-form">
+                            <!-- カード登録エラー -->
+                            <div v-if="errors.payment">
+                                <p class="text-danger">{{ errors.payment.message }}</p>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="name" class="col-lg-3 col-form-label">名前</label>
                                 <div class="col-lg-8">
