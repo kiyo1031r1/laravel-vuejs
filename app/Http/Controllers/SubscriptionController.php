@@ -11,4 +11,8 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         return $user->createSetupIntent();
     }
+
+    public function subscribe(Request $request){
+        
+    }
 }

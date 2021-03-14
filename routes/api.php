@@ -64,3 +64,4 @@ Route::apiResource('re_video_comments', ReVideoCommentController::class);
 
 //subscription
 Route::get('subscription', [SubscriptionController::class, 'index']);
+Route::get('subscription/subscribe', [SubscriptionController::class, 'subscribe']);
