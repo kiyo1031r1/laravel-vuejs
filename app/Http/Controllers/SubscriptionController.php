@@ -27,4 +27,8 @@ class SubscriptionController extends Controller
             }
         }
     }
+
+    public function cancelNow(){
+        
+    }
 }
