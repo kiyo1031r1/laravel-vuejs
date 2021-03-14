@@ -63,12 +63,17 @@ export default {
         Header
     },
     methods: {
-        register(){
+        async register(){
             if(this.user.status === 'normal'){
-                axios.post('/api/users/register_premium/' + this.user.id)
-                .then(() => {
-                    this.$router.push({name: 'changed_premium'});
-                });
+                this.errors = {};
+                const payment_method = await this.getPayment();
+
+                if(!this.errors.payment && payment_method){
+                    axios.post('/api/users/register_premium/' + this.user.id, payment_method)
+                    .then(() => {
+                        this.$router.push({name: 'changed_premium'});
+                    });
+                }
             }
             else{
                 alert('すでにプレミアム会員です');
