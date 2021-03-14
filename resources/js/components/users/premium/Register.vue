@@ -24,7 +24,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button @click="register()" class="btn btn-success mt-4">プレミアム登録する</button>
+
+                            <button @click="register" class="btn btn-success mt-4">プレミアム登録する</button>
                         </div>
 
                         <p>※月額500円(税込)</p>
@@ -50,6 +51,7 @@ export default {
                 name : '',
             },
             intent: '',
+            errors : {},
         }
     },
     components: {
@@ -73,6 +75,22 @@ export default {
                 this.intent = res.data;
             });
         },
+        async getPayment(){
+            const { setupIntent, error} = await this.stripe.confirmCardSetup(
+                this.intent.client_secret, {
+                    payment_method : {
+                        card : this.card,
+                        billing_details : this.card_details,
+                    }
+                }
+            );
+            if(error) {
+                this.$set(this.errors, 'payment' , error);
+            }
+            else{
+                return setupIntent.payment_method;
+            }
+        }
     },
     created(){
         this.user = this.$store.getters.user;
