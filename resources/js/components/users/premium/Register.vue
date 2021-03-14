@@ -3,7 +3,7 @@
         <Header></Header>
         <div class="container">
             <div class="col-md-8 mt-3 mx-auto">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-header">プレミアム登録</div>
                     <div class="card-body text-center">
                         <h3>プレミアム会員は</h3>
