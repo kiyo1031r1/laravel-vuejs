@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-success mt-4">プレミアム登録する</button>
+                                <button class="btn btn-success mt-4" :data-secret="intent.client_secret">プレミアム登録する</button>
                             </form>
                         </div>
 
@@ -47,11 +47,11 @@ export default {
         return{
             user: {},
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
-            card : null,
+            card : '',
             card_details: {
-                name : null,
+                name : '',
             },
-            intent: null,
+            intent: '',
         }
     },
     components: {
