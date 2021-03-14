@@ -38,6 +38,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4 mb-3 mx-auto">
+                <div class="card">
+                    <div class="card-header">アプリ確認用</div>
+                    <div class="card-body text-center">
+                        <button @click="cancelNow" class="btn btn-primary">プレミアム即解除</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -102,6 +111,12 @@ export default {
             else{
                 return setupIntent.payment_method;
             }
+        },
+        cancelNow(){
+            axios.post('/api/subscription/cancelNow')
+            .then(() => {
+                this.$router.push({name: 'video'});
+            });
         }
     },
     created(){

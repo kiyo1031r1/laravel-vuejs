@@ -28,7 +28,10 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function cancelNow(){
-        
+    public function cancelNow(Request $request){
+        $user = $request->user();
+        $user->subscription('default')->cancelNow();
+        $user->status = 'normal';
+        $user->save();
     }
 }
