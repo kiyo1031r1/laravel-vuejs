@@ -15,7 +15,7 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-lg-3 col-form-label">名前</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" id="name">
+                                        <input class="form-control" id="name" v-model="card_details.name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -48,6 +48,9 @@ export default {
             user: {},
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
             card : null,
+            card_details: {
+                name : null,
+            },
             intent: null,
         }
     },
