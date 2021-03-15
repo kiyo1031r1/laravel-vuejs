@@ -46,10 +46,8 @@ class SubscriptionController extends Controller
             )->create($request->payment_method);
 
             //ステータスをプレミアムへ変更
-            if($user->status === 'normal'){
-                $user->status = 'premium';
-                $user->save();
-            }
+            $user->status = 'premium';
+            $user->save();
         }
         else{
             throw ValidationException::withMessages([
