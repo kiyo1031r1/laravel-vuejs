@@ -12,6 +12,10 @@ class SubscriptionController extends Controller
         return $user->createSetupIntent();
     }
 
+    public function getStatus(){
+        
+    }
+
     public function subscribe(Request $request){
         $user = $request->user();
 
