@@ -8,6 +8,7 @@
                     <div class="card-body text-center">
                         <h3 data-testid="name">{{user.name}}さんは</h3>
                         <h3>現在プレミアム会員です。</h3>
+                        <p>次回更新日 : {{ next_update }}</p>
                         <button @click="cancel()" class="btn btn-success mt-4">解約する</button>
                     </div>
                 </div>
@@ -23,7 +24,8 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            user: {}
+            user: {},
+            next_update: '',
         }
     },
     components: {
@@ -40,10 +42,17 @@ export default {
             else{
                 alert('すでに一般会員です');
             }
+        },
+        getNextUpdate(){
+            axios.get('/api/subscription/get_next_update')
+            .then((res) => {
+                this.next_update = res.data;
+            })
         }
     },
     created(){
         this.user = this.$store.getters.user;
+        this.getNextUpdate();
     }
 }
 </script>
