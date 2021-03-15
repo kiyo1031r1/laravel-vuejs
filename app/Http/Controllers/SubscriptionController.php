@@ -16,6 +16,7 @@ class SubscriptionController extends Controller
     public function getStatus(Request $request){
         $user = $request->user();
         $is_active = $user->subscribed('default');
+        $grace_period = '';
 
         if($is_active){
             //課金継続中
@@ -25,6 +26,7 @@ class SubscriptionController extends Controller
             //課金キャンセル(猶予期間あり)
             elseif($user->subscription('default')->onGracePeriod()){
                 $subscription_status = 'cancel';
+                $grace_period = $user->subscriptions()->onGracePeriod()->first()->ends_at;
             }
         }
         //未課金
@@ -32,7 +34,7 @@ class SubscriptionController extends Controller
             $subscription_status = 'normal';
         }
 
-        return $subscription_status;
+        return ['status' => $subscription_status, 'grace_period' => $grace_period];
     }
 
     public function subscribe(Request $request){

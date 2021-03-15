@@ -38,6 +38,10 @@
                             <p>※月額500円(税込)</p>
                             <p>※サンプルの為、ボタンを押しても実際に課金はされません</p>
                         </div>
+
+                        <div v-show="subscription_status === 'cancel'" class="py-3">
+                            <p><span class="h5 text-success">[{{ grace_period | moment}}]</span>まで引き続きプレミアム動画を視聴することができます。</p>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -65,6 +69,7 @@ export default {
 
             //課金情報
             subscription_status : '',
+            grace_period : '',
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
             card : '',
             card_details: {
@@ -102,7 +107,8 @@ export default {
         getStatus(){
             axios.get('/api/subscription/get_status')
             .then((res) => {
-                this.subscription_status = res.data;
+                this.subscription_status = res.data.status;
+                this.grace_period = res.data.grace_period;
             });
         },
         getIntent(){
