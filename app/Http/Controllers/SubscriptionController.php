@@ -29,7 +29,18 @@ class SubscriptionController extends Controller
     }
 
     public function cancel(Request $request){
+        $user = $request->user();
 
+        $is_active = $user->subscribed('default');
+        if($is_active) {
+            //課金継続中の場合、キャンセル処理を行う
+            if($user->subscription('default')->recurring()){
+                $user->subscription('default')->cancel();
+        
+                $user->status = 'normal';
+                $user->save();
+            }
+        }
     }
 
     public function cancelNow(Request $request){

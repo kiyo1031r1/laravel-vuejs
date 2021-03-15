@@ -34,7 +34,7 @@ export default {
     methods: {
         cancel(){
             if(this.user.status === 'premium'){
-                axios.post('/api/users/cancel_premium/' + this.user.id)
+                axios.post('/api/subscription/cancel')
                 .then(() => {
                     this.$router.push({name: 'changed_normal'});
                 });
