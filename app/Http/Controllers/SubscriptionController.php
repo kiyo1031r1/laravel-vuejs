@@ -35,7 +35,24 @@ class SubscriptionController extends Controller
         $user->save();
     }
 
-    public function getNextUpdate(){
-        
+    public function getNextUpdate(Request $request){
+        $user = $request->user();
+        $is_active = $user->subscribed('default');
+
+        if($is_active) {
+            //課金継続中の場合、次回更新日を返す
+            if($user->subscription('default')->recurring()){
+                $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+                $subscription = $user->subscriptions()->active()->first();
+                $subscription_details = $stripe->subscriptions->retrieve($subscription->stripe_id);
+    
+                //日時取得後、フォーマット
+                $next_update = date('Y-m-d', $subscription_details->current_period_end);
+                $week = ['日', '月','水', '木', '金', '土'];
+                $next_update_week = date('w', $subscription_details->current_period_end);
+    
+                return $next_update. ' ('.$week[$next_update_week].')';
+            }
+        }
     }
 }

@@ -83,7 +83,7 @@
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-md-3">次回更新日</label>
                         <div class="col-md-7">
-                            <input class="form-control" disabled>
+                            <input class="form-control" v-model="next_update" disabled>
                         </div>
                     </div>
 
@@ -110,6 +110,7 @@ export default {
             user:{},
             errors:{},
             is_password_hidden: true,
+            next_update: '',
         }
     },
     components:{
@@ -141,10 +142,20 @@ export default {
                     this.errors = error.response.data.errors;
                 });
             }
+        },
+        getNextUpdate(){
+            axios.get('/api/subscription/get_next_update')
+            .then((res) => {
+                this.next_update = res.data;
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            })
         }
     },
     created(){
         this.getUser();
+        this.getNextUpdate();
     }
 }
 </script>
