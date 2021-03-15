@@ -34,4 +34,8 @@ class SubscriptionController extends Controller
         $user->status = 'normal';
         $user->save();
     }
+
+    public function getNextUpdate(){
+        
+    }
 }
