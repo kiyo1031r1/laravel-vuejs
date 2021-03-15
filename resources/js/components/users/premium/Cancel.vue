@@ -9,7 +9,8 @@
                         <h3 data-testid="name">{{user.name}}さんは</h3>
                         <h3>現在プレミアム会員です。</h3>
                         <p>次回更新日 : {{ next_update }}</p>
-                        <button @click="cancel()" class="btn btn-success mt-4">解約する</button>
+                        <button @click="cancel()" class="btn btn-success my-4">解約する</button>
+                        <p>※解約後も次回更新日までプレミアム動画を視聴することができます。</p>
                     </div>
                 </div>
             </div>
