@@ -34,10 +34,13 @@ export default {
     methods: {
         cancel(){
             if(this.user.status === 'premium'){
-                axios.post('/api/subscription/cancel')
-                .then(() => {
-                    this.$router.push({name: 'changed_normal'});
-                });
+                const result = confirm('プレミアム登録を解約します。よろしいですか？');
+                if(result){
+                    axios.post('/api/subscription/cancel')
+                    .then(() => {
+                        this.$router.push({name: 'changed_normal'});
+                    });
+                }
             }
             else{
                 alert('すでに一般会員です');
