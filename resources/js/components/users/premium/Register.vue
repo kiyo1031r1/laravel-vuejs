@@ -10,7 +10,7 @@
                         <h3>全ての動画が見放題!!</h3>
 
                         <!-- カード登録 -->
-                        <div class="card-form">
+                        <div v-show="subscription_status === 'normal'" class="card-form">
                             <!-- カード登録エラー -->
                             <div v-if="errors.payment">
                                 <p class="text-danger">{{ errors.payment.message }}</p>
