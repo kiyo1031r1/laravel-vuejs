@@ -15,6 +15,10 @@
                             <div v-if="errors.payment">
                                 <p class="text-danger">{{ errors.payment.message }}</p>
                             </div>
+                            <!-- サブスクリプション登録エラー -->
+                            <div v-else-if="errors.subscription">
+                                <p class="text-danger">{{ errors.subscription[0] }}</p>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-lg-3 col-form-label">名前</label>
@@ -76,7 +80,7 @@ export default {
     },
     methods: {
         async register(){
-            if(this.user.status === 'normal'){
+            if(this.user.status === 'normal' && this.subscription_status === 'normal'){
                 this.errors = {};
                 const paymentMethod = await this.getPayment();
 
@@ -86,11 +90,14 @@ export default {
                     })
                     .then(() => {
                         this.$router.push({name: 'changed_premium'});
+                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
                     });
                 }
             }
             else{
-                alert('すでにプレミアム会員です');
+                alert('すでにプレミアム会員、またはプレミアム期間中です');
             }
         },
         getStatus(){

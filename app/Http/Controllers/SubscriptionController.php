@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class SubscriptionController extends Controller
 {
@@ -47,6 +48,11 @@ class SubscriptionController extends Controller
                 $user->status = 'premium';
                 $user->save();
             }
+        }
+        else{
+            throw ValidationException::withMessages([
+                'subscription' => ['すでにプレミアム会員、またはプレミアム期間中です。']
+            ]);
         }
     }
 
