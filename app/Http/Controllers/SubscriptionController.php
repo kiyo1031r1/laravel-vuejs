@@ -12,8 +12,26 @@ class SubscriptionController extends Controller
         return $user->createSetupIntent();
     }
 
-    public function getStatus(){
-        
+    public function getStatus(Request $request){
+        $user = $request->user();
+        $is_active = $user->subscribed('default');
+
+        if($is_active){
+            //課金継続中
+            if($user->subscription('default')->recurring()){
+                $subscription_status = 'premium';
+            }
+            //課金キャンセル(猶予期間あり)
+            elseif($user->subscription('default')->onGracePeriod()){
+                $subscription_status = 'cancel';
+            }
+        }
+        //未課金
+        else{
+            $subscription_status = 'normal';
+        }
+
+        return $subscription_status;
     }
 
     public function subscribe(Request $request){
