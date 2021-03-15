@@ -113,7 +113,7 @@ export default {
             }
         },
         cancelNow(){
-            axios.post('/api/subscription/cancelNow')
+            axios.post('/api/subscription/cancel_now')
             .then(() => {
                 this.$router.push({name: 'video'});
             });
