@@ -9,7 +9,7 @@
                         <h3>プレミアム会員は</h3>
                         <h3>全ての動画が見放題!!</h3>
 
-                        <!-- カード登録 -->
+                        <!-- プレミアム登録 -->
                         <div v-show="subscription_status === 'normal'" class="card-form">
                             <!-- カード登録エラー -->
                             <div v-if="errors.payment">
@@ -39,9 +39,11 @@
                             <p>※サンプルの為、ボタンを押しても実際に課金はされません</p>
                         </div>
 
+                        <!-- キャンセル状態 -->
                         <div v-show="subscription_status === 'cancel'" class="py-3">
                             <p><span class="h5 text-success">[{{ grace_period | moment}}]</span>まで引き続きプレミアム動画を視聴することができます。</p>
                         </div> 
+                        
                     </div>
                 </div>
             </div>
