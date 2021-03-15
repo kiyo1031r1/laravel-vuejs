@@ -59,6 +59,9 @@ export default {
     data(){
         return{
             user: {},
+
+            //課金情報
+            subscription_status : '',
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
             card : '',
             card_details: {
@@ -89,6 +92,12 @@ export default {
             else{
                 alert('すでにプレミアム会員です');
             }
+        },
+        getStatus(){
+            axios.get('/api/subscription/get_status')
+            .then((res) => {
+                this.subscription_status = res.data;
+            });
         },
         getIntent(){
             axios.get('/api/subscription')
@@ -121,6 +130,7 @@ export default {
     },
     created(){
         this.user = this.$store.getters.user;
+        this.getStatus();
         this.getIntent();
     },
     mounted(){
