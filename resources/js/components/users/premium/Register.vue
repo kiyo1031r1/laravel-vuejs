@@ -125,7 +125,7 @@ export default {
     },
     mounted(){
         const elements = this.stripe.elements();
-        this.card = elements.create('card');
+        this.card = elements.create('card', {hidePostalCode: true});
         this.card.mount('#card-element');
     }
 }
