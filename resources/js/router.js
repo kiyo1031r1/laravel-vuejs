@@ -30,6 +30,7 @@ import UserPremiumRegister from './components/users/premium/Register'
 import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
 import UserPremiumCancel from './components/users/premium/Cancel'
 import UserPremiumChangedNormal from './components/users/premium/ChangedNormal'
+import UserPremiumEditCard from './components/users/premium/EditCard'
 
 Vue.use(Router);
 
@@ -160,6 +161,12 @@ const router = new Router({
             name: 'changed_normal',
             component: UserPremiumChangedNormal,
              //コンポーネントにナビゲーションガードあり
+        },
+        {
+            path:'/premium/edit_card',
+            name: 'edit_card',
+            component: UserPremiumEditCard,
+            //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/admin/login',
