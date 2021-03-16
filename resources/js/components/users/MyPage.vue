@@ -90,7 +90,7 @@
                     <!-- クレジットカード -->
                     <div class="form-group row pt-5">
                         <label class="col-form-label col-lg-3">クレジットカード</label>
-                        <div class="col-lg-6 pt-3 m-3 border rounded">
+                        <div v-if="user.stripe_id" class="col-lg-6 pt-3 m-3 border rounded">
                             <div class="form-group">
                                 <label class="col-form-label">名前</label>
                                 <input class="form-control" :value="card_information.name" disabled>
@@ -108,9 +108,12 @@
                                 <input class="form-control" :value="card_information.exp_month + '月 / ' + card_information.exp_year + '年'" disabled>
                             </div>
                         </div>
+                        <div v-else class="col-lg-7">
+                            <input class="form-control" value="未登録" disabled>
+                        </div>
                     </div>
 
-                    <div class="form-group row pt-5">
+                    <div v-show="user.stripe_id" class="form-group row pt-5">
                         <label class="col-form-label col-lg-3">クレジットカード変更</label>
                         <div class="col-lg-6 pt-3 m-3 border rounded">
                             <!-- カード登録エラー -->
@@ -179,6 +182,7 @@ export default {
             this.user.name = this.isAuthenticated.name;
             this.user.email = this.isAuthenticated.email;
             this.user.status = this.isAuthenticated.status;
+            this.user.stripe_id = this.isAuthenticated.stripe_id;
         },
         passwordHiddenToggle(){
             this.is_password_hidden = !this.is_password_hidden;
