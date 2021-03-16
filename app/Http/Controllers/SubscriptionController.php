@@ -99,7 +99,27 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function getCardExpiration(){
-
+    public function getCardInformation(Request $request){
+        $user = $request->user();
+        $stripe_id = $user->stripe_id;
+        //顧客情報登録済みの場合
+        if($stripe_id){
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $payment_methods = $stripe->paymentMethods->all([
+                'customer' => $stripe_id,
+                'type' => 'card',
+                'limit' => 1,
+            ]);
+            
+            $payment_method = $payment_methods->data[0];
+            $card = [];
+            $card['name'] = $payment_method->billing_details->name;
+            $card['exp_month'] = $payment_method->card->exp_month;
+            $card['exp_year'] = $payment_method->card->exp_year;
+            $card['brand'] = $user->card_brand;
+            $card['last_four'] = $user->card_last_four;
+            
+            return $card;
+        }
     }
 }
