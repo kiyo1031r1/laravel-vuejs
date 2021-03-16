@@ -92,20 +92,20 @@
                         <label class="col-form-label col-lg-3">クレジットカード</label>
                         <div class="col-lg-6 pt-3 m-3 border rounded">
                             <div class="form-group">
-                                <label class="col-form-label">名義</label>
-                                <input class="form-control" :value="card.name" disabled>
+                                <label class="col-form-label">名前</label>
+                                <input class="form-control" :value="card_information.name" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">ブランド</label>
-                                <input class="form-control" :value="card.brand" disabled>
+                                <input class="form-control" :value="card_information.brand" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">番号</label>
-                                <input class="form-control" :value="'************' + card.last_four" disabled>
+                                <input class="form-control" :value="'************' + card_information.last_four" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">有効期限</label>
-                                <input class="form-control" :value="card.exp_month + '月 / ' + card.exp_year + '年'" disabled>
+                                <input class="form-control" :value="card_information.exp_month + '月 / ' + card_information.exp_year + '年'" disabled>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ export default {
             errors:{},
             is_password_hidden: true,
             next_update: '',
-            card: {},
+            card_information: {},
         }
     },
     components:{
@@ -179,7 +179,7 @@ export default {
         getCardInformation(){
             axios.get('/api/subscription/get_card_information')
             .then((res) => {
-                this.card = res.data;
+                this.card_information = res.data;
             });
         }
     },
