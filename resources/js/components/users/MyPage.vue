@@ -110,6 +110,28 @@
                         </div>
                     </div>
 
+                    <div class="form-group row pt-5">
+                        <label class="col-form-label col-lg-3">クレジットカード変更</label>
+                        <div class="col-lg-6 pt-3 m-3 border rounded">
+                            <!-- カード登録エラー -->
+                            <div v-if="errors.payment">
+                                <p class="text-danger">{{ errors.payment.message }}</p>
+                            </div>
+                            <!-- サブスクリプション登録エラー -->
+                            <div v-else-if="errors.subscription">
+                                <p class="text-danger">{{ errors.subscription[0] }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">名前</label>
+                                <input class="form-control" id="name" v-model="card_details.name">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-element" class="col-form-label">カード情報</label>
+                                <div class="card-number" id="card-element">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -135,6 +157,12 @@ export default {
             is_password_hidden: true,
             next_update: '',
             card_information: {},
+            stripe : Stripe(process.env.MIX_STRIPE_KEY),
+            card : '',
+            card_details: {
+                name : '',
+            },
+            intent: '',
         }
     },
     components:{
@@ -181,12 +209,40 @@ export default {
             .then((res) => {
                 this.card_information = res.data;
             });
-        }
+        },
+        getIntent(){
+            axios.get('/api/subscription')
+            .then((res) => {
+                this.intent = res.data;
+            });
+        },
+        async getPayment(){
+            const { setupIntent, error} = await this.stripe.confirmCardSetup(
+                this.intent.client_secret, {
+                    payment_method : {
+                        card : this.card,
+                        billing_details : this.card_details,
+                    }
+                }
+            );
+            if(error) {
+                this.$set(this.errors, 'payment' , error);
+            }
+            else{
+                return setupIntent.payment_method;
+            }
+        },
     },
     created(){
         this.getUser();
         this.getNextUpdate();
         this.getCardInformation();
+        this.getIntent();
+    },
+    mounted(){
+        const elements = this.stripe.elements();
+        this.card = elements.create('card', {hidePostalCode: true});
+        this.card.mount('#card-element');
     }
 }
 </script>
@@ -201,5 +257,11 @@ export default {
 
 .fa-icon{
     height: 20px;
+}
+
+.card-number{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 </style>
