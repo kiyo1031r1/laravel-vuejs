@@ -1,5 +1,6 @@
 <template>
     <div>
+        <FlashMessage></FlashMessage>
         <Header></Header>
         <div class="container">
             <div class="col-md-8 mt-3 mx-auto">
@@ -79,7 +80,12 @@ export default {
                     payment_method : paymentMethod,
                 })
                 .then(() => {
-                    this.$router.push({name: 'my_page'});
+                    this.$store.dispatch('setFlashMessage', {
+                        message:'クレジットカード情報を更新しました'
+                    });
+                    setTimeout(() => {
+                        this.$router.push({name: 'my_page'});
+                    }, 3000);
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
