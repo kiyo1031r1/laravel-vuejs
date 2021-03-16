@@ -1,21 +1,21 @@
 <template>
     <div>
         <Header></Header>
-        <div class="col-md-6 mx-auto mt-4">
+        <div class="col-lg-6 mx-auto mt-4">
             <div class="card">
                 <div class="card-header">ユーザー情報</div>
                 <div class="card-body">
                     <!-- ユーザー名 -->
                     <div class="form-group row">
-                        <label class="col-form-label col-md-3">ユーザー名</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3">ユーザー名</label>
+                        <div class="col-lg-7">
                             <input class="form-control" :value="isAuthenticated.name" disabled 
                             data-testid="input_name_disabled">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-md-3" for="name">ユーザー名を変更</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3" for="name">ユーザー名を変更</label>
+                        <div class="col-lg-7">
                             <input :class="errors.name ? 'form-control is-invalid' : 'form-control'" id="name" v-model="user.name" 
                             data-testid="input_name">
                             <div v-if="errors.name" class="invalid-feedback" data-testid ="error_name">
@@ -26,15 +26,15 @@
 
                     <!-- メールアドレス -->
                     <div class="form-group row pt-5">
-                        <label class="col-form-label col-md-3">メールアドレス</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3">メールアドレス</label>
+                        <div class="col-lg-7">
                             <input class="form-control" :value="isAuthenticated.email" disabled 
                             data-testid="input_email_disabled">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-md-3" for="email">メールアドレスを変更</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3" for="email">メールアドレスを変更</label>
+                        <div class="col-lg-7">
                             <input :class="errors.email ? 'form-control is-invalid' : 'form-control'" id="email" v-model="user.email" 
                             data-testid="input_email">
                             <div v-if="errors.email" class="invalid-feedback" data-testid ="error_email">
@@ -45,8 +45,8 @@
 
                     <!-- パスワード -->
                     <div class="form-group row pt-5">
-                        <label class="col-form-label col-md-3" for="password">パスワードを変更</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3" for="password">パスワードを変更</label>
+                        <div class="col-lg-7">
                             <input :type="is_password_hidden ? 'password' : 'text'"
                             :class="errors.password ? 'form-control is-invalid' : 'form-control'" id="password" v-model="user.password"
                             data-testid="input_password">
@@ -54,7 +54,7 @@
                                 {{ errors.password[0]}}
                             </div>
                         </div>
-                        <div @click="passwordHiddenToggle()" class="password-icon col-md-1"
+                        <div @click="passwordHiddenToggle()" class="password-icon col-lg-1"
                         data-testid="password_icon">
                             <span v-if="is_password_hidden" data-testid="eye_slash"><v-icon name="eye-slash" scale="1.5"/></span>
                             <span v-else data-testid="eye"><v-icon name="eye" scale="1.5"/></span>
@@ -63,8 +63,8 @@
 
                     <!-- パスワードの確認 -->
                     <div class="form-group row">
-                        <label class="col-form-label col-md-3" for="password_confirmation">パスワード再確認</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3" for="password_confirmation">パスワード再確認</label>
+                        <div class="col-lg-7">
                             <input :type="is_password_hidden ? 'password' : 'text'"
                             class="form-control" id="password_confirmation" v-model="user.password_confirmation">
                         </div>
@@ -72,8 +72,8 @@
 
                     <!-- ステータス -->
                     <div class="form-group row pt-5">
-                        <label class="col-form-label col-md-3">ステータス</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3">ステータス</label>
+                        <div class="col-lg-7">
                             <input class="form-control" :value="user.status" disabled 
                             data-testid="input_status_disabled">
                         </div>
@@ -81,8 +81,8 @@
 
                     <!-- 次回更新日 -->
                     <div class="form-group row pt-5">
-                        <label class="col-form-label col-md-3">次回更新日</label>
-                        <div class="col-md-7">
+                        <label class="col-form-label col-lg-3">次回更新日</label>
+                        <div class="col-lg-7">
                             <input class="form-control" v-model="next_update" disabled>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
             </div>
 
 
-            <div class="col-md-4 mx-auto my-5">
+            <div class="col-lg-4 mx-auto my-5">
                 <button @click="edit()" class="btn btn-primary btn-block" type="submit" 
                 data-testid="button_edit">更新</button>
             </div>
