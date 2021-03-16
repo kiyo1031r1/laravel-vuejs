@@ -69,3 +69,4 @@ Route::post('subscription/subscribe', [SubscriptionController::class, 'subscribe
 Route::post('subscription/cancel', [SubscriptionController::class, 'cancel']);
 Route::post('subscription/cancel_now', [SubscriptionController::class, 'cancelNow']);
 Route::get('subscription/get_next_update', [SubscriptionController::class, 'getNextUpdate']);
+Route::get('subscription/get_card_expiration', [SubscriptionController::class, 'getCardExpiration']);

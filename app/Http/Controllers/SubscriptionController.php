@@ -98,4 +98,8 @@ class SubscriptionController extends Controller
             }
         }
     }
+
+    public function getCardExpiration(){
+
+    }
 }
