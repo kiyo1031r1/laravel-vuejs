@@ -30,7 +30,13 @@
                                 </div>
                             </div>
 
-                            <button @click="editCard" class="btn btn-success mt-4">変更</button>
+                            <div class="col-lg-4 mx-auto">
+                                <button v-if="!is_loading" @click="editCard" class="btn btn-primary mt-4 btn-block" :disabled="is_loading">変更</button>
+                                <button v-else class="btn btn-primary mt-4 btn-block" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,6 +61,7 @@ export default {
                 name : '',
             },
             intent: '',
+            is_loading: false,
             errors : {},
         }
     },
@@ -63,6 +70,7 @@ export default {
     },
     methods: {
         async editCard(){
+            this.is_loading = true;
             this.errors = {};
             const paymentMethod = await this.getPayment();
 
@@ -75,6 +83,7 @@ export default {
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
+                    this.is_loading = false;
                 });
             }
         },
@@ -95,6 +104,7 @@ export default {
             );
             if(error) {
                 this.$set(this.errors, 'payment' , error);
+                this.is_loading = false;
             }
             else{
                 return setupIntent.payment_method;
