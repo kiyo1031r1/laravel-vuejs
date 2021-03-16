@@ -111,6 +111,7 @@ export default {
             errors:{},
             is_password_hidden: true,
             next_update: '',
+            card: {},
         }
     },
     components:{
@@ -151,11 +152,18 @@ export default {
             .catch(error => {
                 this.errors = error.response.data.errors;
             })
+        },
+        getCardInformation(){
+            axios.get('/api/subscription/get_card_information')
+            .then((res) => {
+                this.card = res.data;
+            });
         }
     },
     created(){
         this.getUser();
         this.getNextUpdate();
+        this.getCardInformation();
     }
 }
 </script>
