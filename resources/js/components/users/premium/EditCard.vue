@@ -6,7 +6,7 @@
                 <div class="card mb-3">
                     <div class="card-header">クレジットカード情報の変更</div>
                     <div class="card-body text-center">
-                        <div v-show="subscription_status === 'premium' || subscription_status === 'cancel'" class="card-form">
+                        <div class="card-form">
                             <!-- カード登録エラー -->
                             <div v-if="errors.payment">
                                 <p class="text-danger">{{ errors.payment.message }}</p>
@@ -32,7 +32,6 @@
 
                             <button @click="editCard" class="btn btn-success mt-4">変更</button>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -50,8 +49,6 @@ export default {
             user: {},
 
             //課金情報
-            subscription_status : '',
-            grace_period : '',
             stripe : Stripe(process.env.MIX_STRIPE_KEY),
             card : '',
             card_details: {
@@ -81,13 +78,6 @@ export default {
                 });
             }
         },
-        getStatus(){
-            axios.get('/api/subscription/get_status')
-            .then((res) => {
-                this.subscription_status = res.data.status;
-                this.grace_period = res.data.grace_period;
-            });
-        },
         getIntent(){
             axios.get('/api/subscription')
             .then((res) => {
@@ -113,7 +103,6 @@ export default {
     },
     created(){
         this.user = this.$store.getters.user;
-        this.getStatus();
         this.getIntent();
     },
     mounted(){
