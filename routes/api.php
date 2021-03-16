@@ -66,6 +66,7 @@ Route::apiResource('re_video_comments', ReVideoCommentController::class);
 Route::get('subscription', [SubscriptionController::class, 'index']);
 Route::get('subscription/get_status', [SubscriptionController::class, 'getStatus']);
 Route::post('subscription/subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('subscription/edit_card', [SubscriptionController::class, 'editCard']);
 Route::post('subscription/cancel', [SubscriptionController::class, 'cancel']);
 Route::post('subscription/cancel_now', [SubscriptionController::class, 'cancelNow']);
 Route::get('subscription/get_next_update', [SubscriptionController::class, 'getNextUpdate']);

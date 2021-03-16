@@ -56,6 +56,10 @@ class SubscriptionController extends Controller
         }
     }
 
+    public function editCard(){
+
+    }
+
     public function cancel(Request $request){
         $user = $request->user();
 
