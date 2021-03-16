@@ -56,8 +56,32 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function editCard(){
+    public function editCard(Request $request){
+        $user = $request->user();
+        $stripe_id = $user->stripe_id;
+        
+        //顧客情報登録済みの場合
+        if($stripe_id){
+            //前回のカード情報を全て削除
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $payment_methods = $stripe->paymentMethods->all([
+                'customer' => $stripe_id,
+                'type' => 'card',
+            ]);
+            
+            foreach($payment_methods as $payment_method){
+                $stripe->paymentMethods->detach($payment_method->id);
+            }
 
+            //カード情報を更新
+            $new_payment_method = $request->payment_method;
+            $user->updateDefaultPaymentMethod($new_payment_method);
+        }
+        else{
+            throw ValidationException::withMessages([
+                'subscription' => ['課金未実施の為、処理を行うことができませんでした。']
+            ]);
+        }
     }
 
     public function cancel(Request $request){
