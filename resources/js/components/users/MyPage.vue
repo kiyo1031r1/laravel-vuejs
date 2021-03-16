@@ -107,6 +107,11 @@
                                 <label class="col-form-label">有効期限</label>
                                 <input class="form-control" :value="card_information.exp_month + '月 / ' + card_information.exp_year + '年'" disabled>
                             </div>
+                            <div class="text-center p-3">
+                                <router-link :to="{ name : 'edit_card' }">
+                                    <a>クレジットカード情報を変更</a>
+                                </router-link>
+                            </div>
                         </div>
                         <div v-else class="col-lg-7">
                             <input class="form-control" value="未登録" disabled>
