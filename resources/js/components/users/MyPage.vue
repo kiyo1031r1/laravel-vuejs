@@ -87,6 +87,29 @@
                         </div>
                     </div>
 
+                    <!-- クレジットカード -->
+                    <div class="form-group row pt-5">
+                        <label class="col-form-label col-lg-3">クレジットカード</label>
+                        <div class="col-lg-6 pt-3 m-3 border rounded">
+                            <div class="form-group">
+                                <label class="col-form-label">名義</label>
+                                <input class="form-control" :value="card.name" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">ブランド</label>
+                                <input class="form-control" :value="card.brand" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">番号</label>
+                                <input class="form-control" :value="'************' + card.last_four" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">有効期限</label>
+                                <input class="form-control" :value="card.exp_month + '月 / ' + card.exp_year + '年'" disabled>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
