@@ -42,6 +42,12 @@ class SubscriptionController extends Controller
 
         //未課金または課金猶予がない場合に登録
         if(!$user->subscribed('default')){
+
+            //顧客情報登録済みの場合、前回のカード情報を全て削除
+            if($user->stripe_id){
+                $this->destroyCard($user->stripe_id);
+            }
+
             $user->newSubscription('default', env('STRIPE_PREMIUM_KEY')
             )->create($request->payment_method);
 
@@ -63,15 +69,7 @@ class SubscriptionController extends Controller
         //顧客情報登録済みの場合
         if($stripe_id){
             //前回のカード情報を全て削除
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-            $payment_methods = $stripe->paymentMethods->all([
-                'customer' => $stripe_id,
-                'type' => 'card',
-            ]);
-
-            foreach($payment_methods as $payment_method){
-                $stripe->paymentMethods->detach($payment_method->id);
-            }
+            $this->destroyCard($stripe_id);
 
             //カード情報を更新
             $new_payment_method = $request->payment_method;
@@ -81,6 +79,18 @@ class SubscriptionController extends Controller
             throw ValidationException::withMessages([
                 'subscription' => ['課金未実施の為、処理を行うことができませんでした。']
             ]);
+        }
+    }
+
+    private function destroyCard($stripe_id){
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        $payment_methods = $stripe->paymentMethods->all([
+            'customer' => $stripe_id,
+            'type' => 'card',
+        ]);
+
+        foreach($payment_methods as $payment_method){
+            $stripe->paymentMethods->detach($payment_method->id);
         }
     }
 
