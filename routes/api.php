@@ -13,6 +13,7 @@ use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VideoCommentController;
 use App\Http\Controllers\ReVideoCommentController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,13 @@ Route::post('/videos/download', [VideoController::class, 'download']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::post('video_comments/get_comment', [VideoCommentController::class, 'getComment']);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
+
+//subscription
+Route::get('subscription', [SubscriptionController::class, 'index']);
+Route::get('subscription/get_status', [SubscriptionController::class, 'getStatus']);
+Route::post('subscription/subscribe', [SubscriptionController::class, 'subscribe']);
+Route::post('subscription/edit_card', [SubscriptionController::class, 'editCard']);
+Route::post('subscription/cancel', [SubscriptionController::class, 'cancel']);
+Route::post('subscription/cancel_now', [SubscriptionController::class, 'cancelNow']);
+Route::get('subscription/get_next_update', [SubscriptionController::class, 'getNextUpdate']);
+Route::get('subscription/get_card_information', [SubscriptionController::class, 'getCardInformation']);

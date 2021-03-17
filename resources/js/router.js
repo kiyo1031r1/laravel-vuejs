@@ -27,9 +27,8 @@ import UserVideoCategoryIndex from './components/users/videos/CategoryIndex'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoWatch from './components/users/videos/Watch'
 import UserPremiumRegister from './components/users/premium/Register'
-import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
 import UserPremiumCancel from './components/users/premium/Cancel'
-import UserPremiumChangedNormal from './components/users/premium/ChangedNormal'
+import UserPremiumEditCard from './components/users/premium/EditCard'
 
 Vue.use(Router);
 
@@ -142,12 +141,6 @@ const router = new Router({
              }
         },
         {
-            path:'/premium/changed_premium',
-            name: 'changed_premium',
-            component: UserPremiumChangedPremium,
-             //コンポーネントにナビゲーションガードあり
-        },
-        {
             path:'/premium/cancel',
             name: 'premium_cancel',
             component: UserPremiumCancel,
@@ -156,10 +149,12 @@ const router = new Router({
              }
         },
         {
-            path:'/premium/changed_normal',
-            name: 'changed_normal',
-            component: UserPremiumChangedNormal,
-             //コンポーネントにナビゲーションガードあり
+            path:'/premium/edit_card',
+            name: 'edit_card',
+            component: UserPremiumEditCard,
+            meta: {
+                customerOnly : true,
+            }
         },
         {
             path:'/admin/login',
@@ -369,6 +364,37 @@ router.beforeEach((to, from, next) => {
         .catch(() => {
             store.dispatch('resetUser');
             next();
+        });
+    }
+    else{
+        next();
+    }
+});
+
+//クレジットカード変更ページの認証ガード
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.customerOnly)){
+        axios.get('/api/user')
+        .then((res) => {
+            const user = res.data;
+            store.dispatch('setUser', user);
+
+            //一度でもプレミアム登録をしているかチェック
+            if(user.stripe_id){
+                next();
+            }
+            else{
+                next({name: 'premium_register'});
+            }
+        })
+        .catch(() => {
+            store.dispatch('resetUser');
+            //遷移予定だったpathを取得
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
         });
     }
     else{

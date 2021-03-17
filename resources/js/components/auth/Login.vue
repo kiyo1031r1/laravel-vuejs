@@ -189,10 +189,17 @@ export default {
             .then(() => {
                 axios.post('/api/login', this.user)
                 .then(() => {
-                    //遷移前のpath情報があれば、そのページに遷移
-                    this.$router.push(
-                        this.$route.query.redirect ? this.$route.query.redirect : {name: 'video'}
-                    );
+                    //課金状況をチェック
+                    axios.get('/api/subscription/get_status')
+                    .then((res) => {
+                        this.$store.dispatch('setSubscriptionStatus', res.data.status);
+
+                        //遷移前のpath情報があれば、そのページに遷移
+                        this.$router.push(
+                            this.$route.query.redirect ? this.$route.query.redirect : {name: 'video'}
+                        );
+                    });
+
                 })
                 .catch((error) =>{
                     this.errors = error.response.data.errors;
