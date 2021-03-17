@@ -166,7 +166,9 @@ const router = new Router({
             path:'/premium/edit_card',
             name: 'edit_card',
             component: UserPremiumEditCard,
-            //コンポーネントにナビゲーションガードあり
+            meta: {
+                customerOnly : true,
+            }
         },
         {
             path:'/admin/login',
@@ -376,6 +378,37 @@ router.beforeEach((to, from, next) => {
         .catch(() => {
             store.dispatch('resetUser');
             next();
+        });
+    }
+    else{
+        next();
+    }
+});
+
+//クレジットカード変更ページの認証ガード
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.customerOnly)){
+        axios.get('/api/user')
+        .then((res) => {
+            const user = res.data;
+            store.dispatch('setUser', user);
+
+            //一度でもプレミアム登録をしているかチェック
+            if(user.stripe_id){
+                next();
+            }
+            else{
+                next({name: 'premium_register'});
+            }
+        })
+        .catch(() => {
+            store.dispatch('resetUser');
+            //遷移予定だったpathを取得
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
         });
     }
     else{
