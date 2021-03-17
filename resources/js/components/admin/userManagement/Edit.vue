@@ -27,7 +27,7 @@
                     </tr>
                     <tr>
                         <td scope="row">ステータス</td>
-                        <td>{{status}}</td>
+                        <td>{{user.status}}</td>
                     </tr>
                     <tr>
                         <td scope="row">次回更新日</td>
@@ -47,21 +47,6 @@
                 <div class="card-header">ステータス変更</div>
                 <div class="card-body">
                     <form @submit.prevent="edit">
-                        <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-md-4 pt-0">ステータス</legend>
-                                <div class="col-md-6">
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="status_normal">ノーマル</label>
-                                        <input class="form-check-input" type="radio" id="status_normal" value="normal" v-model="user.status">
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="status_premium">プレミアム</label>
-                                        <input class="form-check-input" type="radio" id="status_premium" value="premium" v-model="user.status">
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="role">権限</label>
                             <div class="col-md-6">
@@ -113,7 +98,6 @@ export default {
             axios.get('/api/users/' + this.id)
             .then(res => {
                 this.user = res.data;
-                this.status = this.user.status;
                 this.role_id = this.user.role_id;
             });
         },

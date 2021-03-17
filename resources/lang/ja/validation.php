@@ -142,6 +142,7 @@ return [
         'comment' => 'コメント',
         're_comment' => 'コメント',
         'category' => 'カテゴリー',
+        'role_id' => '権限',
     ],
 
 ];
