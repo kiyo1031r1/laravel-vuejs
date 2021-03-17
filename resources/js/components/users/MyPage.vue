@@ -179,10 +179,7 @@ export default {
             axios.get('/api/subscription/get_next_update')
             .then((res) => {
                 this.next_update = res.data;
-            })
-            .catch(error => {
-                this.errors = error.response.data.errors;
-            })
+            });
         },
         getCardInformation(){
             axios.get('/api/subscription/get_card_information')
