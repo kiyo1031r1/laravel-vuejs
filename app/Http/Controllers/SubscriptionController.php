@@ -107,6 +107,11 @@ class SubscriptionController extends Controller
                 $user->save();
             }
         }
+        else{
+            throw ValidationException::withMessages([
+                'subscription' => ['未課金状態の為、処理を行うことができませんでした。']
+            ]);
+        }
     }
 
     public function cancelNow(Request $request){

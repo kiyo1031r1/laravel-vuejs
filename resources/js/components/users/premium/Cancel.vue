@@ -9,6 +9,12 @@
                         <h3 data-testid="name">{{user.name}}さんは</h3>
                         <h3>現在プレミアム会員です。</h3>
                         <p>次回更新日 : {{ next_update }}</p>
+
+                        <!-- サブスクリプション登録エラー -->
+                        <div v-if="errors.subscription">
+                            <p class="text-danger">{{ errors.subscription[0] }}</p>
+                        </div>
+
                         <div class="col-lg-4 my-4 mx-auto">
                             <button v-if="!is_loading" @click="cancel" class="btn btn-success btn-block" :disabled="is_loading">解約する</button>
                             <button v-else class="btn btn-success btn-block" type="button" disabled>
@@ -34,6 +40,7 @@ export default {
             user: {},
             next_update: '',
             is_loading: false,
+            errors: {},
         }
     },
     components: {
@@ -48,6 +55,10 @@ export default {
                     axios.post('/api/subscription/cancel')
                     .then(() => {
                         this.$router.push({name: 'changed_normal'});
+                    })
+                    .catch((error) => {
+                        this.errors = error.response.data.errors;
+                        this.is_loading = false;
                     });
                 }
             }
