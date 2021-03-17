@@ -46,6 +46,9 @@
             <div class="card">
                 <div class="card-header">ステータス変更</div>
                 <div class="card-body">
+                    <div v-if="errors.role_id">
+                        <p class="text-danger text-center">{{ errors.role_id[0] }}</p>
+                    </div>
                     <form @submit.prevent="edit">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label" for="role">権限</label>
@@ -75,6 +78,7 @@ export default {
             user:{},
             status:'',
             role_id: '',
+            errors: {},
         }
     },
     props: ['id']  
@@ -107,6 +111,9 @@ export default {
                 axios.put('/api/users/' + this.id, this.user)
                 .then(() => {
                     this.$router.push({name: 'user_management'})
+                })
+                .catch((error) => {
+                    this.errors = error.response.data.errors;
                 });
             }
         }
