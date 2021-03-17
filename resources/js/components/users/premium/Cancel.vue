@@ -55,6 +55,9 @@ export default {
                     this.is_loading = true;
                     axios.post('/api/subscription/cancel')
                     .then(() => {
+                        //vuexの課金状況を更新
+                        this.$store.dispatch('setSubscriptionStatus', 'cancel');
+                        
                         this.$store.dispatch('setFlashMessage', {
                             message:'プレミアム登録を解約しました',
                             time: 5000,

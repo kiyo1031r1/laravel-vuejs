@@ -153,6 +153,9 @@ export default {
                         payment_method : paymentMethod,
                     })
                     .then(() => {
+                        //vuexの課金状況を更新
+                        this.$store.dispatch('setSubscriptionStatus', 'premium');
+
                         this.$store.dispatch('setFlashMessage', {
                             message:'プレミアム登録が完了しました',
                             time: 5000,
@@ -205,6 +208,9 @@ export default {
             this.is_loading = true;
             axios.post('/api/subscription/cancel_now')
             .then(() => {
+                //vuexの課金状況を更新
+                this.$store.dispatch('setSubscriptionStatus', 'normal');
+
                 this.$router.push({name: 'video'});
             });
         }
