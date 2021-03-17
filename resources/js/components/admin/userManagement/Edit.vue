@@ -30,10 +30,6 @@
                         <td>{{user.status}}</td>
                     </tr>
                     <tr>
-                        <td scope="row">次回更新日</td>
-                        <td></td>
-                    </tr>
-                    <tr>
                         <td scope="row">権限</td>
                         <td>{{role_id | role}}</td>
                     </tr>
