@@ -9,7 +9,13 @@
                         <h3 data-testid="name">{{user.name}}さんは</h3>
                         <h3>現在プレミアム会員です。</h3>
                         <p>次回更新日 : {{ next_update }}</p>
-                        <button @click="cancel()" class="btn btn-success my-4">解約する</button>
+                        <div class="col-lg-4 my-4 mx-auto">
+                            <button v-if="!is_loading" @click="cancel" class="btn btn-success btn-block" :disabled="is_loading">解約する</button>
+                            <button v-else class="btn btn-success btn-block" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+                        </div>
                         <p>※解約後も次回更新日までプレミアム動画を視聴することができます。</p>
                     </div>
                 </div>
@@ -27,6 +33,7 @@ export default {
         return{
             user: {},
             next_update: '',
+            is_loading: false,
         }
     },
     components: {
@@ -37,6 +44,7 @@ export default {
             if(this.user.status === 'premium'){
                 const result = confirm('プレミアム登録を解約します。よろしいですか？');
                 if(result){
+                    this.is_loading = true;
                     axios.post('/api/subscription/cancel')
                     .then(() => {
                         this.$router.push({name: 'changed_normal'});
