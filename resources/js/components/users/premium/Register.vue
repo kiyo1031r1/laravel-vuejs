@@ -54,14 +54,21 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-3 mx-auto">
+            <div v-if="subscription_status === 'cancel'" class="col-md-4 mb-3 mx-auto">
                 <div class="card">
                     <div class="card-header">アプリ確認用</div>
-                    <div class="card-body text-center">
-                        <button @click="cancelNow" class="btn btn-primary">プレミアム即解除</button>
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card-body text-center">
+                            <button v-if="!is_loading" @click="cancelNow" class="btn btn-primary btn-block" :disabled="is_loading">プレミアム即解除</button>
+                            <button v-else class="btn btn-primary btn-block" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -146,6 +153,7 @@ export default {
             }
         },
         cancelNow(){
+            this.is_loading = true;
             axios.post('/api/subscription/cancel_now')
             .then(() => {
                 this.$router.push({name: 'video'});
