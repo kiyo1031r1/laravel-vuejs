@@ -68,7 +68,7 @@ class SubscriptionController extends Controller
                 'customer' => $stripe_id,
                 'type' => 'card',
             ]);
-            
+
             foreach($payment_methods as $payment_method){
                 $stripe->paymentMethods->detach($payment_method->id);
             }
@@ -119,7 +119,7 @@ class SubscriptionController extends Controller
     
                 //日時取得後、フォーマット
                 $next_update = date('Y-m-d', $subscription_details->current_period_end);
-                $week = ['日', '月','水', '木', '金', '土'];
+                $week = ['日', '月', '火', '水', '木', '金', '土'];
                 $next_update_week = date('w', $subscription_details->current_period_end);
     
                 return $next_update. ' ('.$week[$next_update_week].')';
