@@ -1,5 +1,6 @@
 <template>
     <div>
+        <FlashMessage></FlashMessage>
         <Header></Header>
         <div class="container">
             <div class="col-md-8 mt-3 mx-auto">
@@ -152,7 +153,13 @@ export default {
                         payment_method : paymentMethod,
                     })
                     .then(() => {
-                        this.$router.push({name: 'changed_premium'});
+                        this.$store.dispatch('setFlashMessage', {
+                            message:'プレミアム登録が完了しました',
+                            time: 5000,
+                        });
+                        setTimeout(() => {
+                            this.$router.push({name: 'my_page'});
+                        }, 5000);
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;

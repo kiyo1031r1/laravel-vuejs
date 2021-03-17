@@ -1,5 +1,6 @@
 <template>
     <div>
+        <FlashMessage></FlashMessage>
         <Header></Header>
         <div class="container">
             <div class="col-md-6 mt-3 mx-auto">
@@ -54,7 +55,13 @@ export default {
                     this.is_loading = true;
                     axios.post('/api/subscription/cancel')
                     .then(() => {
-                        this.$router.push({name: 'changed_normal'});
+                        this.$store.dispatch('setFlashMessage', {
+                            message:'プレミアム登録を解約しました',
+                            time: 5000,
+                        });
+                        setTimeout(() => {
+                            this.$router.push({name: 'premium_register'});
+                        }, 5000);
                     })
                     .catch((error) => {
                         this.errors = error.response.data.errors;
