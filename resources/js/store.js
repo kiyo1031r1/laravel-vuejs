@@ -10,7 +10,8 @@ export default new Vuex.Store({
         flashColor: null,
         flashTime: null,
 
-        user: {}
+        user: {},
+        subscription_status: null,
     },
     getters: {
         flashMessage: state => state.flashMessage,
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         flashTime: state => state.flashTime,
 
         user: state => state.user,
+        subscription_status: state => state.subscription_status,
     },
     mutations: {
         setFlashMessage(state, {message, time, color}) {
@@ -37,6 +39,12 @@ export default new Vuex.Store({
         },
         resetUser(state){
             state.user = null;
+            state.subscription_status = null;
+        },
+
+        //ログイン時に取得した課金ステータスを保存
+        setSubscriptionStatus(state, subscription_status){
+            state.subscription_status = subscription_status;
         }
     },
     actions: {
@@ -49,6 +57,10 @@ export default new Vuex.Store({
         },
         resetUser({commit}){
             commit('resetUser');
+        },
+
+        setSubscriptionStatus({commit}, subscription_status){
+            commit('setSubscriptionStatus', subscription_status);
         }
     }
 });
