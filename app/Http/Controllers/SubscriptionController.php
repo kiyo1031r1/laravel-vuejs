@@ -57,7 +57,7 @@ class SubscriptionController extends Controller
         }
         else{
             throw ValidationException::withMessages([
-                'subscription' => ['すでにプレミアム会員、またはプレミアム期間中です。']
+                'subscription' => ['すでにプレミアム会員です。またはプレミアム期間中です。']
             ]);
         }
     }
