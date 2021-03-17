@@ -120,11 +120,12 @@ export default {
                 })
                 .then(() => {
                     this.$store.dispatch('setFlashMessage', {
-                        message:'クレジットカード情報を更新しました'
+                        message:'クレジットカード情報を更新しました',
+                        time: 5000,
                     });
                     setTimeout(() => {
                         this.$router.push({name: 'my_page'});
-                    }, 3000);
+                    }, 5000);
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
