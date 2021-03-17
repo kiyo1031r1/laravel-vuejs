@@ -42,6 +42,44 @@
                     </div>
                 </div>
             </div>
+
+            <!-- アプリ確認用 -->
+            <div class="border-top"></div>
+            <div class="col-md-8 my-3 mx-auto">
+                <div class="card">
+                    <div class="card-header">アプリ確認用</div>
+                    <div class="card-body">
+                        <table class="table table-sm table-bordered table-hover text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">カード番号</th>
+                                    <th scope="col">ブランド</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>4242424242424242</td>
+                                    <td>visa</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>5555555555554444</td>
+                                    <td>Mastercard</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>3566002020360505</td>
+                                    <td>JCB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="m-0">※[有効期限]は現在よりも未来の年月日を指定してください。</p>
+                        <p class="m-0">※[CVC]は任意の数字3桁を入力してください。</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
