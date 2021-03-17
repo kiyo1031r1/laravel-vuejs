@@ -17,7 +17,13 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user){
-        $user->update($request->all());
+        //$user->update($request->all());
+        $request->validate([
+            'role_id' => ['required', 'integer', 'max:2'],
+        ]);
+
+        $user->role_id = $request['role_id'];
+        $user->save();
     }
 
     public function updateFromUser(UpdateFromUserRequest $request){
