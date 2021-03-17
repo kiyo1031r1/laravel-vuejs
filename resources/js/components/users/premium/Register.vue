@@ -156,7 +156,7 @@ export default {
                     })
                     .catch(error => {
                         this.errors = error.response.data.errors;
-                        this.is_loading = true;
+                        this.is_loading = false;
                     });
                 }
             }
