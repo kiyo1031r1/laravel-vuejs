@@ -55,31 +55,6 @@
                                 </select>
                             </div>
 
-                            <!-- 次回更新日 -->
-                            <div class="form-group">
-                                <label class="col-form-label">次回更新日(※現在不可)</label>
-                                <Datepicker
-                                    v-model="search.next_update_start"
-                                    :language="datepicker.language"
-                                    :format="datepicker.format"
-                                    :input-class="datepicker.input_class"
-                                    :bootstrap-styling="true"
-                                    :clear-button="true"
-                                    :placeholder="'〜から(未指定可)'"
-                                    :disabled-dates="{from: search.next_update_end}">
-                                </Datepicker>
-                                <Datepicker
-                                    v-model="search.next_update_end"
-                                    :language="datepicker.language"
-                                    :format="datepicker.format"
-                                    :input-class="datepicker.input_class"
-                                    :bootstrap-styling="true"
-                                    :clear-button="true"
-                                    :placeholder="'〜まで(未指定可)'"
-                                    :disabled-dates="{to: search.next_update_start}">
-                                </Datepicker>
-                            </div>
-
                             <!-- 権限 -->
                             <div class="form-group">
                                 <label class="col-form-label">権限</label>
@@ -196,31 +171,6 @@
                                 </select>
                             </div>
 
-                            <!-- 次回更新日 -->
-                            <div class="form-group">
-                                <label class="col-form-label">次回更新日(※現在不可)</label>
-                                <Datepicker
-                                    v-model="search.next_update_start"
-                                    :language="datepicker.language"
-                                    :format="datepicker.format"
-                                    :input-class="datepicker.input_class"
-                                    :bootstrap-styling="true"
-                                    :clear-button="true"
-                                    :placeholder="'〜から(未指定可)'"
-                                    :disabled-dates="{from: search.next_update_end}">
-                                </Datepicker>
-                                <Datepicker
-                                    v-model="search.next_update_end"
-                                    :language="datepicker.language"
-                                    :format="datepicker.format"
-                                    :input-class="datepicker.input_class"
-                                    :bootstrap-styling="true"
-                                    :clear-button="true"
-                                    :placeholder="'〜まで(未指定可)'"
-                                    :disabled-dates="{to: search.next_update_start}">
-                                </Datepicker>
-                            </div>
-
                             <!-- 権限 -->
                             <div class="form-group">
                                 <label class="col-form-label">権限</label>
@@ -266,9 +216,6 @@
                                             <v-icon @click="sortList('status', 'desc')" name="caret-square-down"/>
                                         </th>
                                         <th scope="col">
-                                            <span class="mr-1">次回更新日</span>
-                                        </th>
-                                        <th scope="col">
                                             <span class="mr-1">権限</span>
                                             <v-icon @click="sortList('role', 'asc');" name="caret-square-up"/>
                                             <v-icon @click="sortList('role', 'desc')" name="caret-square-down"/>
@@ -284,7 +231,6 @@
                                         <td class="email">{{user.email}}</td>
                                         <td>{{user.created_at | moment}}</td>
                                         <td>{{user.status}}</td>
-                                        <td></td>
                                         <td>{{user.role_id | role}}</td>
                                         <td>
                                             <router-link :to="{name: 'user_management_edit', params: { id: user.id}}">
