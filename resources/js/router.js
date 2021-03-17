@@ -27,9 +27,7 @@ import UserVideoCategoryIndex from './components/users/videos/CategoryIndex'
 import UserVideoIndex from './components/users/videos/Index'
 import UserVideoWatch from './components/users/videos/Watch'
 import UserPremiumRegister from './components/users/premium/Register'
-import UserPremiumChangedPremium from './components/users/premium/ChangedPremium'
 import UserPremiumCancel from './components/users/premium/Cancel'
-import UserPremiumChangedNormal from './components/users/premium/ChangedNormal'
 import UserPremiumEditCard from './components/users/premium/EditCard'
 
 Vue.use(Router);
@@ -143,24 +141,12 @@ const router = new Router({
              }
         },
         {
-            path:'/premium/changed_premium',
-            name: 'changed_premium',
-            component: UserPremiumChangedPremium,
-             //コンポーネントにナビゲーションガードあり
-        },
-        {
             path:'/premium/cancel',
             name: 'premium_cancel',
             component: UserPremiumCancel,
             meta: {
                 premiumOnly: true,
              }
-        },
-        {
-            path:'/premium/changed_normal',
-            name: 'changed_normal',
-            component: UserPremiumChangedNormal,
-             //コンポーネントにナビゲーションガードあり
         },
         {
             path:'/premium/edit_card',
