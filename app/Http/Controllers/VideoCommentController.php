@@ -14,6 +14,13 @@ class VideoCommentController extends Controller
         VideoComment::create($request->all());
     }
 
+    public function update(VideoComment $video_comment){
+        $input = request()->validate([
+            'comment' => ['required', 'string', 'max:255']
+        ]);
+        $video_comment->update($input);
+    }
+
     public function getComment(Request $request){
         $comments = VideoComment::with(['user:id,name', 'reVideoComments.user:id,name'])
         ->where('video_id', $request['video_id'])
