@@ -78,7 +78,7 @@
                                     <!-- コメント返信フォーム -->
                                     <template v-if="comment.re_comment_form">
                                         <div class="input-group mt-2 mb-4">
-                                            <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_comment"></textarea>
+                                            <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_video_comment"></textarea>
                                             <div class="input-group-append">
                                                 <button @click="createReComment(comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
@@ -209,7 +209,7 @@ export default {
             },
             //コメント
             my_video_comment: '',
-            my_re_comment: '',
+            my_re_video_comment: '',
             my_edit_comment: '',
             my_edit_re_comment: '',
             is_re_comment_form: false,
@@ -270,7 +270,7 @@ export default {
     watch: {
         $route(to, from){
             this.my_video_comment = '';
-            this.my_re_comment = '';
+            this.my_re_video_comment = '';
             this.my_edit_comment = '';
             this.my_edit_re_comment = '';
             this.is_re_comment_form = false;
@@ -394,7 +394,7 @@ export default {
         },
         createReComment(comment){
             axios.post('/api/re_video_comments', {
-                re_comment: this.my_re_comment,
+                re_comment: this.my_re_video_comment,
                 video_comment_id: comment.id,
                 user_id: this.user.id
             })
@@ -464,7 +464,7 @@ export default {
         },
         initializedComment(){
             this.my_video_comment = '';
-            this.my_re_comment = '';
+            this.my_re_video_comment = '';
             this.my_edit_comment = '';
             this.my_edit_re_comment = '';
             this.is_re_comment_form = false;
