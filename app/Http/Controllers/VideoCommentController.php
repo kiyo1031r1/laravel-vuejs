@@ -27,7 +27,9 @@ class VideoCommentController extends Controller
         ->where('video_id', $request['video_id'])
         ->orderBy('created_at', 'desc')
         ->paginate($request['per_page']);
+        \Debugbar::addMessage($comments);
         return $comments;
+
     }
 
     public function destroy(VideoComment $video_comment){
