@@ -412,7 +412,7 @@ export default {
             comment.edit_comment_form = !comment.edit_comment_form;
             this.my_edit_comment = comment.comment;
 
-            //返信フォームを１つだけ表示
+            //編集フォームを１つだけ表示
             this.is_edit_comment_form = !this.is_edit_comment_form;
         },
         editComment(comment){
@@ -430,7 +430,7 @@ export default {
             comment.edit_re_comment_form = !comment.edit_re_comment_form;
             this.my_edit_re_comment = comment.re_comment;
 
-            //返信フォームを１つだけ表示
+            //返信編集フォームを１つだけ表示
             this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
         },
         editReComment(comment){
