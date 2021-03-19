@@ -102,7 +102,7 @@
                                         <!-- 表示切り替え -->
                                         <div @click="commentToggle(video_comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ video_comment.id" role="button" 
                                         aria-expanded="false" :aria-controls="'comment' + video_comment.id">
-                                            <a v-if="!video_comment.re_comment_toggle">▼このコメントへの返信を表示</a>
+                                            <a v-if="!video_comment.re_video_comment_toggle">▼このコメントへの返信を表示</a>
                                             <a v-else>▼このコメントへの返信を非表示</a>
                                         </div>
 
@@ -351,7 +351,7 @@ export default {
 
                 this.video_comments.forEach((object, index) => {
                     //返信表示の切り替え属性を付与
-                    this.$set(this.video_comments[index], 're_comment_toggle', false);
+                    this.$set(this.video_comments[index], 're_video_comment_toggle', false);
                     //返信フォームの切り替え属性を付与
                     this.$set(this.video_comments[index], 're_comment_form', false);
                     //編集フォームの切り替え属性を付与
@@ -371,7 +371,7 @@ export default {
             })
         },
         commentToggle(video_comment){
-            video_comment.re_comment_toggle = !video_comment.re_comment_toggle;
+            video_comment.re_video_comment_toggle = !video_comment.re_video_comment_toggle;
         },
         createComment(){
             axios.post('/api/video_comments', {
