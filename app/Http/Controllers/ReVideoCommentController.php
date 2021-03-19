@@ -11,7 +11,7 @@ class ReVideoCommentController extends Controller
         $request->validate([
             're_video_comment' => ['required', 'string', 'max:255']
         ]);
-        ReVideoComment::create(['re_comment' => $request['re_video_comment']]);
+        ReVideoComment::create($request->all());
     }
 
     public function update(ReVideoComment $re_video_comment){
