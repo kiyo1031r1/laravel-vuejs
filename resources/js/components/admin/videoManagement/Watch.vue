@@ -27,8 +27,8 @@
                             </div>
                             <!-- コメント一覧 -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{comments.length}}件</h5>
-                                <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{video_comments.length}}件</h5>
+                                <div v-for="comment in video_comments" :key="comment.id" class="border-top py-3">
                                     <div class="mb-2">
                                         <span>{{comment.user.name}}</span>
                                         <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
@@ -120,7 +120,7 @@ export default {
                 height: '',
                 content_height: ''
             },
-            comments: [],
+            video_comments: [],
             
             //無限スクロール
             start_page: 1,
@@ -174,7 +174,7 @@ export default {
     watch: {
         $route(to, from){
             //コメントは追加されるので初期化
-            this.comments = [];
+            this.video_comments = [];
             this.getVideo();
         }
     },
@@ -212,7 +212,7 @@ export default {
                 this.new = res.data.data;
                 let new_data = res.data.data;
                 new_data.forEach((data) => {
-                    this.comments.push(data);
+                    this.video_comments.push(data);
                 })
 
                 this.last_page = res.data.last_page;
@@ -220,8 +220,8 @@ export default {
                 if($state) $state.loaded();
 
                 //返信表示の切り替え属性を付与
-                this.comments.forEach((object, index) => {
-                    this.$set(this.comments[index], 're_comment_toggle', false);
+                this.video_comments.forEach((object, index) => {
+                    this.$set(this.video_comments[index], 're_comment_toggle', false);
                 })
 
                 //概要の高さを取得
@@ -242,7 +242,7 @@ export default {
             if(result){
                 axios.delete('/api/video_comments/' + id)
                 .then(()=>{
-                    this.comments = [];
+                    this.video_comments = [];
                     this.getComment(null, this.start_page, false);
                 });
             }
@@ -252,7 +252,7 @@ export default {
             if(result){
                 axios.delete('/api/re_video_comments/' + id)
                 .then(() => {
-                    this.comments = [];
+                    this.video_comments = [];
                     this.getComment(null, this.start_page, false);
                 })
             }
