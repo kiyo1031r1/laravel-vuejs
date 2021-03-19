@@ -384,7 +384,7 @@ export default {
             this.is_edit_comment_form = !this.is_edit_comment_form;
         },
         editComment(comment){
-            axios.put('/api/video_comments' + comment.id, {
+            axios.put('/api/video_comments/' + comment.id, {
                 comment: this.my_edit_comment,
             })
             .then(() => {
