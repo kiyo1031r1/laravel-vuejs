@@ -28,7 +28,6 @@ class VideoCommentController extends Controller
         ->orderBy('created_at', 'desc')
         ->orderBy('id', 'desc') //同じ時間だった場合、同じものが再度選択される場合がある為
         ->paginate($request['per_page']);
-        \Debugbar::addMessage($comments);
         return $comments;
 
     }
