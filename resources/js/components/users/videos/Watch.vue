@@ -367,6 +367,9 @@ export default {
             //返信フォームを１つだけ表示
             this.is_edit_comment_form = !this.is_edit_comment_form;
         },
+        editComment(comment){
+
+        },
         deleteComment(id){
             console.log(id);
             const result = confirm('コメントを削除します。よろしいですか？');
