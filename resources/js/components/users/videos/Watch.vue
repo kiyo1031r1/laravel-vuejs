@@ -417,7 +417,9 @@ export default {
         initializedComment(){
             this.my_comment = '';
             this.my_re_comment = '';
+            this.my_edit_comment = '';
             this.is_re_comment_form = false;
+            this.is_edit_comment_form = false;
             this.comments = [];
             this.getComment(null, this.start_page, false);
         },
