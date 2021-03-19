@@ -53,6 +53,11 @@
                                         <button v-else 
                                         @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm">キャンセル
                                         </button>
+                                    
+                                        <template v-if="isCommentUser(comment) && !comment.re_comment_form" class="text-right">
+                                            <button @click="editComment(comment.id)" class="btn btn-outline-primary btn-sm ml-3">編集</button>
+                                            <button @click="deleteComment(comment.id)" class="btn btn-outline-danger btn-sm ml-3">削除</button>
+                                        </template>
                                     </div>
 
                                     <!-- コメント返信フォーム -->
@@ -65,10 +70,6 @@
                                             <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
                                         </div>
                                     </template>
-                                    <div v-if="isCommentUser(comment) && !comment.re_comment_form" class="text-right">
-                                        <button @click="editComment(comment.id)" class="btn btn-primary m-3">コメント編集</button>
-                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
-                                    </div>
 
                                     <!-- 返信コメント -->
                                     <div v-if="comment.re_video_comments.length > 0" class="px-3">
