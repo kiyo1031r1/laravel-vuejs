@@ -9,16 +9,16 @@ class ReVideoCommentController extends Controller
 {
     public function store(Request $request){
         $request->validate([
-            're_comment' => ['required', 'string', 'max:255']
+            're_video_comment' => ['required', 'string', 'max:255']
         ]);
-        ReVideoComment::create($request->all());
+        ReVideoComment::create(['re_comment' => $request['re_video_comment']]);
     }
 
     public function update(ReVideoComment $re_video_comment){
         $input = request()->validate([
-            'edit_re_comment' => ['required', 'string', 'max:255']
+            'edit_re_video_comment' => ['required', 'string', 'max:255']
         ]);
-        $re_video_comment->re_comment = $input['edit_re_comment'];
+        $re_video_comment->re_comment = $input['edit_re_video_comment'];
         $re_video_comment->save();
     }
 

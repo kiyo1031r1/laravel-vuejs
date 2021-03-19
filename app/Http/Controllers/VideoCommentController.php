@@ -9,16 +9,16 @@ class VideoCommentController extends Controller
 {
     public function store(Request $request){
         $request->validate([
-            'comment' => ['required', 'string', 'max:255']
+            'video_comment' => ['required', 'string', 'max:255']
         ]);
-        VideoComment::create($request->all());
+        VideoComment::create(['comment' => $request['video_comment']]);
     }
 
     public function update(VideoComment $video_comment){
         $input = request()->validate([
-            'edit_comment' => ['required', 'string', 'max:255']
+            'edit_video_comment' => ['required', 'string', 'max:255']
         ]);
-        $video_comment->comment = $input['edit_comment'];
+        $video_comment->comment = $input['edit_video_comment'];
         $video_comment->save();
     }
 
