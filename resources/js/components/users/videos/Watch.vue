@@ -118,7 +118,7 @@
                                                 
                                                 <template v-if="isCommentUser(re_video_comment)">
                                                     <!-- 編集ボタン -->
-                                                    <button v-if="!comment.edit_re_comment_form"
+                                                    <button v-if="!re_video_comment.edit_re_comment_form"
                                                     @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3"
                                                     :disabled="is_edit_re_comment_form || is_re_comment_form">編集
                                                     </button>
@@ -129,7 +129,7 @@
                                                     <!-- 削除ボタン -->
                                                     <button 
                                                     @click="deleteReComment(re_video_comment.id)" class="btn btn-outline-danger btn-sm mr-3"
-                                                    :disabled="is_edit_comment_form || is_re_comment_form">削除
+                                                    :disabled="is_edit_re_comment_form || is_re_comment_form">削除
                                                     </button>
                                                 </template>
                                             </div>
@@ -200,8 +200,10 @@ export default {
             my_comment: '',
             my_re_comment: '',
             my_edit_comment: '',
+            my_edit_re_comment: '',
             is_re_comment_form: false,
             is_edit_comment_form: false,
+            is_edit_re_comment_form: false,
             comments: [],
             errors:{},
             
@@ -339,6 +341,8 @@ export default {
                     this.$set(this.comments[index], 're_comment_form', false);
                     //編集フォームの切り替え属性を付与
                     this.$set(this.comments[index], 'edit_comment_form', false);
+                    //返信編集フォームの切り替え属性を付与
+                    this.$set(this.comments[index], 'edit_re_comment_form', false);
                 })
 
                 //概要の高さを取得
@@ -406,6 +410,13 @@ export default {
             .catch((error) => {
                 this.errors = error.response.data.errors;
             });
+        },
+        editReCommentFormToggle(comment){
+            comment.edit_re_comment_form = !comment.edit_re_comment_form;
+            this.my_edit_re_comment = comment.comment;
+
+            //返信フォームを１つだけ表示
+            this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
         },
         deleteComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
