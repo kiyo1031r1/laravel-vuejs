@@ -26,6 +26,7 @@ class VideoCommentController extends Controller
         $comments = VideoComment::with(['user:id,name', 'reVideoComments.user:id,name'])
         ->where('video_id', $request['video_id'])
         ->orderBy('created_at', 'desc')
+        ->orderBy('id', 'desc') //同じ時間だった場合、同じものが再度選択される場合がある為
         ->paginate($request['per_page']);
         \Debugbar::addMessage($comments);
         return $comments;
