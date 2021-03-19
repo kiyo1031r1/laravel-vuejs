@@ -118,7 +118,7 @@
                                                 
                                                 <div v-if="isCommentUser(re_video_comment)" :class="index === video_comment.re_video_comments.length - 1 ?  '' : 'pb-3'">
                                                     <!-- 編集ボタン -->
-                                                    <button v-if="!re_video_comment.edit_re_comment_form"
+                                                    <button v-if="!re_video_comment.edit_re_video_comment_form"
                                                     @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3"
                                                     :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">編集
                                                     </button>
@@ -134,7 +134,7 @@
                                                 </div>
 
                                                 <!-- 返信コメント編集フォーム -->
-                                                <template v-if="re_video_comment.edit_re_comment_form">
+                                                <template v-if="re_video_comment.edit_re_video_comment_form">
                                                     <div class="input-group mt-2 mb-4">
                                                         <textarea :class="errors.edit_re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
                                                         <div class="input-group-append">
@@ -357,7 +357,7 @@ export default {
                     //編集フォームの切り替え属性を付与
                     this.$set(this.video_comments[index], 'edit_video_comment_form', false);
                     //返信編集フォームの切り替え属性を付与
-                    this.$set(this.video_comments[index], 'edit_re_comment_form', false);
+                    this.$set(this.video_comments[index], 'edit_re_video_comment_form', false);
                 })
 
                 //概要の高さを取得
@@ -427,7 +427,7 @@ export default {
             });
         },
         editReCommentFormToggle(re_video_comment){
-            re_video_comment.edit_re_comment_form = !re_video_comment.edit_re_comment_form;
+            re_video_comment.edit_re_video_comment_form = !re_video_comment.edit_re_video_comment_form;
             this.my_edit_re_video_comment = re_video_comment.re_comment;
 
             //返信編集フォームを１つだけ表示
