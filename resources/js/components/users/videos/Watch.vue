@@ -55,7 +55,7 @@
                                         </button>
                                     
                                         <template v-if="isCommentUser(comment) && !comment.re_comment_form" class="text-right">
-                                            <button @click="editComment(comment.id)" class="btn btn-outline-primary btn-sm ml-3">編集</button>
+                                            <button @click="editCommentFormToggle(comment)" class="btn btn-outline-primary btn-sm ml-3">編集</button>
                                             <button @click="deleteComment(comment.id)" class="btn btn-outline-danger btn-sm ml-3">削除</button>
                                         </template>
                                     </div>
@@ -346,8 +346,7 @@ export default {
         isCommentUser(comment){
             return comment.user_id === this.user.id;
         },
-        editComment(id){
-
+        editCommentFormToggle(comment){
         },
         deleteComment(id){
             console.log(id);
