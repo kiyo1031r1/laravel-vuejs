@@ -120,7 +120,7 @@
                                                     <!-- 編集ボタン -->
                                                     <button v-if="!re_video_comment.edit_re_comment_form"
                                                     @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3"
-                                                    :disabled="is_edit_re_comment_form || is_re_video_comment_form">編集
+                                                    :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">編集
                                                     </button>
                                                     <!-- 編集キャンセルボタン -->
                                                     <button v-else
@@ -129,7 +129,7 @@
                                                     <!-- 削除ボタン -->
                                                     <button 
                                                     @click="deleteReComment(re_video_comment.id)" class="btn btn-outline-danger btn-sm mr-3"
-                                                    :disabled="is_edit_re_comment_form || is_re_video_comment_form">削除
+                                                    :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">削除
                                                     </button>
                                                 </template>
 
@@ -214,7 +214,7 @@ export default {
             my_edit_re_video_comment: '',
             is_re_video_comment_form: false,
             is_edit_video_comment_form: false,
-            is_edit_re_comment_form: false,
+            is_edit_re_video_comment_form: false,
             comments: [],
             errors:{},
             
@@ -275,7 +275,7 @@ export default {
             this.my_edit_re_video_comment = '';
             this.is_re_video_comment_form = false;
             this.is_edit_video_comment_form = false;
-            this.is_edit_re_comment_form = false;
+            this.is_edit_re_video_comment_form = false;
             this.comments = [];
             this.getVideo();
         }
@@ -431,7 +431,7 @@ export default {
             this.my_edit_re_video_comment = re_comment.re_comment;
 
             //返信編集フォームを１つだけ表示
-            this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
+            this.is_edit_re_video_comment_form = !this.is_edit_re_video_comment_form;
         },
         editReComment(re_comment){
             axios.put('/api/re_video_comments/' + re_comment.id, {
@@ -469,7 +469,7 @@ export default {
             this.my_edit_re_video_comment = '';
             this.is_re_video_comment_form = false;
             this.is_edit_video_comment_form = false;
-            this.is_edit_re_comment_form = false;
+            this.is_edit_re_video_comment_form = false;
             this.comments = [];
             this.getComment(null, this.start_page, false);
         },
