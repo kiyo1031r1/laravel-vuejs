@@ -31,11 +31,11 @@
                                 <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
-                                    <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_video_comment"></textarea>
+                                    <textarea :class="errors.video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_video_comment"></textarea>
                                     <div class="input-group-append">
                                         <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
                                     </div>
-                                    <div v-if="errors.comment" class="invalid-feedback">{{ errors.comment[0]}}</div>
+                                    <div v-if="errors.video_comment" class="invalid-feedback">{{ errors.video_comment[0]}}</div>
                                 </div>
 
                                 <!-- コメント一覧 -->
@@ -78,22 +78,22 @@
                                     <!-- コメント返信フォーム -->
                                     <template v-if="video_comment.re_video_comment_form">
                                         <div class="input-group mt-2 mb-4">
-                                            <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_video_comment"></textarea>
+                                            <textarea :class="errors.re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_video_comment"></textarea>
                                             <div class="input-group-append">
                                                 <button @click="createReComment(video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
-                                            <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
+                                            <div v-if="errors.re_video_comment" class="invalid-feedback">{{ errors.re_video_comment[0]}}</div>
                                         </div>
                                     </template>
 
                                     <!-- コメント編集フォーム -->
                                     <template v-if="video_comment.edit_video_comment_form">
                                         <div class="input-group mt-2 mb-4">
-                                            <textarea :class="errors.edit_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_video_comment"></textarea>
+                                            <textarea :class="errors.edit_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_video_comment"></textarea>
                                             <div class="input-group-append">
                                                 <button @click="editComment(video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
-                                            <div v-if="errors.edit_comment" class="invalid-feedback">{{ errors.edit_comment[0]}}</div>
+                                            <div v-if="errors.edit_video_comment" class="invalid-feedback">{{ errors.edit_video_comment[0]}}</div>
                                         </div>
                                     </template>
 
@@ -136,11 +136,11 @@
                                                 <!-- 返信コメント編集フォーム -->
                                                 <template v-if="re_video_comment.edit_re_video_comment_form">
                                                     <div class="input-group mt-2 mb-4">
-                                                        <textarea :class="errors.edit_re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
+                                                        <textarea :class="errors.edit_re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
                                                         <div class="input-group-append">
                                                             <button @click="editReComment(re_video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                                         </div>
-                                                        <div v-if="errors.edit_re_comment" class="invalid-feedback">{{ errors.edit_re_comment[0]}}</div>
+                                                        <div v-if="errors.edit_re_video_comment" class="invalid-feedback">{{ errors.edit_re_video_comment[0]}}</div>
                                                     </div>
                                                 </template>
                                             </div>
@@ -375,7 +375,7 @@ export default {
         },
         createComment(){
             axios.post('/api/video_comments', {
-                comment: this.my_video_comment,
+                video_comment: this.my_video_comment,
                 video_id: this.video.id,
                 user_id: this.user.id
             })
@@ -394,7 +394,7 @@ export default {
         },
         createReComment(re_video_comment){
             axios.post('/api/re_video_comments', {
-                re_comment: this.my_re_video_comment,
+                re_video_comment: this.my_re_video_comment,
                 video_comment_id: re_video_comment.id,
                 user_id: this.user.id
             })
@@ -417,7 +417,7 @@ export default {
         },
         editComment(video_comment){
             axios.put('/api/video_comments/' + video_comment.id, {
-                edit_comment: this.my_edit_video_comment,
+                edit_video_comment: this.my_edit_video_comment,
             })
             .then(() => {
                 this.initializedComment();
@@ -435,7 +435,7 @@ export default {
         },
         editReComment(re_video_comment){
             axios.put('/api/re_video_comments/' + re_video_comment.id, {
-                edit_re_comment: this.my_edit_re_video_comment,
+                edit_re_video_comment: this.my_edit_re_video_comment,
             })
             .then(() => {
                 this.initializedComment();
