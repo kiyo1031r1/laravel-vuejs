@@ -65,7 +65,7 @@
                                             <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
                                         </div>
                                     </template>
-                                    <div v-if="isCommentUser(comment)" class="text-right">
+                                    <div v-if="isCommentUser(comment) && !comment.re_comment_form" class="text-right">
                                         <button @click="editComment(comment.id)" class="btn btn-primary m-3">コメント編集</button>
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
