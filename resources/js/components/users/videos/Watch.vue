@@ -100,8 +100,8 @@
                                     <!-- 返信コメント -->
                                     <div v-if="video_comment.re_video_comments.length > 0" class="px-3">
                                         <!-- 表示切り替え -->
-                                        <div @click="commentToggle(video_comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ video_comment.id" role="button" 
-                                        aria-expanded="false" :aria-controls="'comment' + video_comment.id">
+                                        <div @click="commentToggle(video_comment)" class="btn btn-link" data-toggle="collapse" :href="'#video_comment'+ video_comment.id" role="button" 
+                                        aria-expanded="false" :aria-controls="'video_comment' + video_comment.id">
                                             <a v-if="!video_comment.re_video_comment_toggle">▼このコメントへの返信を表示</a>
                                             <a v-else>▼このコメントへの返信を非表示</a>
                                         </div>
@@ -109,7 +109,7 @@
                                         <!-- 返信コメント一覧 -->
                                         <div class="px-3">
                                             <div v-for="(re_video_comment, index) in video_comment.re_video_comments" 
-                                            :key="re_video_comment.id" class="collapse border-top" :id="'comment' + video_comment.id">
+                                            :key="re_video_comment.id" class="collapse border-top" :id="'video_comment' + video_comment.id">
                                                 <div class="mt-3 mb-2">
                                                     <span>{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
