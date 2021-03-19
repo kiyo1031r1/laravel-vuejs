@@ -396,7 +396,6 @@ export default {
             });
         },
         deleteComment(id){
-            console.log(id);
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
                 axios.delete('/api/video_comments/' + id)
