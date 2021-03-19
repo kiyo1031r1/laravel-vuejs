@@ -429,6 +429,17 @@ export default {
             //返信フォームを１つだけ表示
             this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
         },
+        editReComment(comment){
+            axios.put('/api/re_video_comments/' + comment.id, {
+                edit_re_comment: this.my_edit_re_comment,
+            })
+            .then(() => {
+                this.initializedComment();
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
+        },
         deleteComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
