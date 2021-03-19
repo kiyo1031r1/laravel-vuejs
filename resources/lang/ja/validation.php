@@ -141,6 +141,7 @@ return [
         'file_name' => 'ファイル名',
         'comment' => 'コメント',
         'edit_comment' => 'コメント',
+        'edit_re_comment' => 'コメント',
         're_comment' => 'コメント',
         'category' => 'カテゴリー',
         'role_id' => '権限',

@@ -14,6 +14,14 @@ class ReVideoCommentController extends Controller
         ReVideoComment::create($request->all());
     }
 
+    public function update(ReVideoComment $re_video_comment){
+        $input = request()->validate([
+            'edit_re_comment' => ['required', 'string', 'max:255']
+        ]);
+        $re_video_comment->re_comment = $input['edit_re_comment'];
+        $re_video_comment->save();
+    }
+
     public function destroy(ReVideoComment $re_video_comment){
         $re_video_comment->delete();
     }
