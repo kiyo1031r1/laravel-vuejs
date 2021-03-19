@@ -385,7 +385,7 @@ export default {
         },
         editComment(comment){
             axios.put('/api/video_comments/' + comment.id, {
-                comment: this.my_edit_comment,
+                edit_comment: this.my_edit_comment,
             })
             .then(() => {
                 this.initializedComment();

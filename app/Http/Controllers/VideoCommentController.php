@@ -16,7 +16,7 @@ class VideoCommentController extends Controller
 
     public function update(VideoComment $video_comment){
         $input = request()->validate([
-            'comment' => ['required', 'string', 'max:255']
+            'edit_comment' => ['required', 'string', 'max:255']
         ]);
         $video_comment->update($input);
     }

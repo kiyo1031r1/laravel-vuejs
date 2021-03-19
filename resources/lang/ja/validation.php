@@ -140,6 +140,7 @@ return [
         'video_time' => '再生時間',
         'file_name' => 'ファイル名',
         'comment' => 'コメント',
+        'edit_comment' => 'コメント',
         're_comment' => 'コメント',
         'category' => 'カテゴリー',
         'role_id' => '権限',
