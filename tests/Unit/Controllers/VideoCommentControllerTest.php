@@ -26,7 +26,7 @@ class VideoCommentControllerTest extends TestCase
         $video = Video::factory()->create();
         $user = User::factory()->for(Role::factory())->create();
         $response = $this->postJson('/api/video_comments', [
-            'comment' => $request,
+            'video_comment' => $request,
             'video_id'=> $video->id,
             'user_id'=> $user->id,
         ]);
@@ -37,7 +37,7 @@ class VideoCommentControllerTest extends TestCase
         elseif($code === 200){
             $response->assertStatus($code);
             $this->assertDatabaseHas('video_comments', [
-                'comment' => $request,
+                'video_comment' => $request,
                 'video_id'=> $video->id,
                 'user_id'=> $user->id,
             ]);
@@ -47,9 +47,46 @@ class VideoCommentControllerTest extends TestCase
     public function storeDataProvider(){
         return[
             'pass' => [str_repeat('a', 255), 200, null, null],
-            'comment_required' => [' ', 422, 'comment', 'コメントは必ず入力してください。'],
-            'comment_string' => [11111111, 422, 'comment', 'コメントには文字列を指定してください。'],
-            'comment_max' => [str_repeat('a', 256), 422, 'comment', 'コメントには255文字以下の文字列を指定してください。'],
+            'video_comment_required' => [' ', 422, 'video_comment', 'コメントは必ず入力してください。'],
+            'video_comment_string' => [11111111, 422, 'video_comment', 'コメントには文字列を指定してください。'],
+            'video_comment_max' => [str_repeat('a', 256), 422, 'video_comment', 'コメントには255文字以下の文字列を指定してください。'],
+        ];
+    }
+
+    /**
+     * @dataProvider updateDataProvider
+     * @param パラメータ
+     * @param コード
+     * @param カラム名
+     * @param エラーメッセージ
+     */
+    public function testUpdate($request, $code, $column, $message){
+        $video = Video::factory()->create();
+        $user = User::factory()->for(Role::factory())->create();
+        $video_comment = VideoComment::factory()->for($video)->for($user)->create();
+
+        $response = $this->putJson('/api/video_comments/'.$video_comment->id, [
+            'edit_video_comment' => $request,
+        ]);
+
+        if($code === 422){
+            $response->assertJsonValidationErrors([$column => $message])
+            ->assertStatus($code);
+        }
+        elseif($code === 200){
+            $response->assertStatus($code);
+            $this->assertDatabaseHas('video_comments', [
+                'video_comment' => $request,
+            ]);
+        }
+    }
+
+    public function updateDataProvider(){
+        return[
+            'pass' => [str_repeat('a', 255), 200, null, null],
+            'edit_video_comment_required' => [' ', 422, 'edit_video_comment', 'コメントは必ず入力してください。'],
+            'edit_video_comment_string' => [11111111, 422, 'edit_video_comment', 'コメントには文字列を指定してください。'],
+            'edit_video_comment_max' => [str_repeat('a', 256), 422, 'edit_video_comment', 'コメントには255文字以下の文字列を指定してください。'],
         ];
     }
 
@@ -82,7 +119,7 @@ class VideoCommentControllerTest extends TestCase
             'data' => [
                 '*' => [
                     'id', 
-                    'comment', 
+                    'video_comment', 
                     'video_id', 
                     'user_id', 
                     'created_at', 
@@ -93,7 +130,7 @@ class VideoCommentControllerTest extends TestCase
                     're_video_comments' => [
                         '*' => [
                             'id', 
-                            're_comment', 
+                            're_video_comment', 
                             'video_comment_id', 
                             'user_id', 
                             'created_at', 

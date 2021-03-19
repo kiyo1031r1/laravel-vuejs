@@ -28,7 +28,7 @@ class ReVideoCommentFactory extends Factory
         $video_comment_num = 500;
 
         return [
-            're_comment' => $this->faker->realText(random_int(11, 100)),
+            're_video_comment' => $this->faker->realText(random_int(11, 100)),
             'video_comment_id' => random_int(1, $video_comment_num),
             'user_id' => random_int(1, $user_num),
         ];

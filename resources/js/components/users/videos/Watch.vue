@@ -27,70 +27,122 @@
                             </div>
                             <!-- コメント -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{comments.length}}件</h5>
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{total_comments}}件</h5>
                                 <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
-                                    <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_comment"></textarea>
+                                    <textarea :class="errors.video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_video_comment"></textarea>
                                     <div class="input-group-append">
                                         <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
                                     </div>
-                                    <div v-if="errors.comment" class="invalid-feedback">{{ errors.comment[0]}}</div>
+                                    <div v-if="errors.video_comment" class="invalid-feedback">{{ errors.video_comment[0]}}</div>
                                 </div>
 
                                 <!-- コメント一覧 -->
-                                <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
+                                <div v-for="video_comment in video_comments" :key="video_comment.id" class="border-top py-3">
                                     <div class="mb-2">
-                                        <span>{{comment.user.name}}</span>
-                                        <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
+                                        <span>{{video_comment.user.name}}</span>
+                                        <span class="text-secondary ml-2">{{video_comment.created_at | moment_ago}}</span>
                                     </div>
-                                    <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
+                                    <p class="mb-0" style="white-space: pre-wrap">{{video_comment.video_comment}}</p>
                                     <div class="mt-2">
-                                        <button v-if="!comment.re_comment_form" 
-                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm"
-                                        :disabled="is_re_comment_form" >返信
-                                        </button>
-                                        <button v-else 
-                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm">キャンセル
-                                        </button>
+                                        <template>
+                                            <!-- 返信ボタン -->
+                                            <button v-if="!video_comment.re_video_comment_form" 
+                                            @click="reCommentFormToggle(video_comment)" class="btn btn-outline-secondary btn-sm mr-3"
+                                            :disabled="is_re_video_comment_form || is_edit_video_comment_form" >返信
+                                            </button>
+                                            <button v-else
+                                            @click="reCommentFormToggle(video_comment)" class="btn btn-outline-secondary btn-sm mr-3">返信をキャンセル
+                                            </button>
+                                        </template>
+                                    
+                                        <template v-if="isCommentUser(video_comment)">
+                                            <!-- 編集ボタン -->
+                                            <button v-if="!video_comment.edit_video_comment_form"
+                                            @click="editCommentFormToggle(video_comment)" class="btn btn-outline-primary btn-sm mr-3"
+                                            :disabled="is_edit_video_comment_form || is_re_video_comment_form">編集
+                                            </button>
+                                            <!-- 編集キャンセルボタン -->
+                                            <button v-else
+                                            @click="editCommentFormToggle(video_comment)" class="btn btn-outline-primary btn-sm mr-3">編集をキャンセル
+                                            </button>
+                                            <!-- 削除ボタン -->
+                                            <button 
+                                            @click="deleteComment(video_comment.id)" class="btn btn-outline-danger btn-sm mr-3"
+                                            :disabled="is_edit_video_comment_form || is_re_video_comment_form">削除
+                                            </button>
+                                        </template>
                                     </div>
 
                                     <!-- コメント返信フォーム -->
-                                    <template v-if="comment.re_comment_form">
+                                    <template v-if="video_comment.re_video_comment_form">
                                         <div class="input-group mt-2 mb-4">
-                                            <textarea :class="errors.re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_comment"></textarea>
+                                            <textarea :class="errors.re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_re_video_comment"></textarea>
                                             <div class="input-group-append">
-                                                <button @click="createReComment(comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                                <button @click="createReComment(video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
-                                            <div v-if="errors.re_comment" class="invalid-feedback">{{ errors.re_comment[0]}}</div>
+                                            <div v-if="errors.re_video_comment" class="invalid-feedback">{{ errors.re_video_comment[0]}}</div>
                                         </div>
                                     </template>
-                                    <div v-if="isCommentUser(comment)" class="text-right">
-                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
-                                    </div>
+
+                                    <!-- コメント編集フォーム -->
+                                    <template v-if="video_comment.edit_video_comment_form">
+                                        <div class="input-group mt-2 mb-4">
+                                            <textarea :class="errors.edit_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_video_comment"></textarea>
+                                            <div class="input-group-append">
+                                                <button @click="editComment(video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                            </div>
+                                            <div v-if="errors.edit_video_comment" class="invalid-feedback">{{ errors.edit_video_comment[0]}}</div>
+                                        </div>
+                                    </template>
 
                                     <!-- 返信コメント -->
-                                    <div v-if="comment.re_video_comments.length > 0" class="px-3">
+                                    <div v-if="video_comment.re_video_comments.length > 0" class="px-3">
                                         <!-- 表示切り替え -->
-                                        <div @click="commentToggle(comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
-                                        aria-expanded="false" :aria-controls="'comment' + comment.id">
-                                            <a v-if="!comment.re_comment_toggle">▼このコメントへの返信を表示</a>
+                                        <div @click="commentToggle(video_comment)" class="btn btn-link" data-toggle="collapse" :href="'#video_comment'+ video_comment.id" role="button" 
+                                        aria-expanded="false" :aria-controls="'video_comment' + video_comment.id">
+                                            <a v-if="!video_comment.re_video_comment_toggle">▼このコメントへの返信を表示</a>
                                             <a v-else>▼このコメントへの返信を非表示</a>
                                         </div>
 
                                         <!-- 返信コメント一覧 -->
                                         <div class="px-3">
-                                            <div v-for="re_video_comment in comment.re_video_comments" 
-                                            :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
+                                            <div v-for="(re_video_comment, index) in video_comment.re_video_comments" 
+                                            :key="re_video_comment.id" class="collapse border-top" :id="'video_comment' + video_comment.id">
                                                 <div class="mt-3 mb-2">
                                                     <span>{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
                                                 </div>
-                                                <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
+                                                <p style="white-space: pre-wrap">{{re_video_comment.re_video_comment}}</p>
                                                 
-                                                <div v-if="isCommentUser(re_video_comment)" class="text-right">
-                                                    <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
+                                                <div v-if="isCommentUser(re_video_comment)" :class="index === video_comment.re_video_comments.length - 1 ?  '' : 'pb-3'">
+                                                    <!-- 編集ボタン -->
+                                                    <button v-if="!re_video_comment.edit_re_video_comment_form"
+                                                    @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3"
+                                                    :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">編集
+                                                    </button>
+                                                    <!-- 編集キャンセルボタン -->
+                                                    <button v-else
+                                                    @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3">編集をキャンセル
+                                                    </button>
+                                                    <!-- 削除ボタン -->
+                                                    <button 
+                                                    @click="deleteReComment(re_video_comment.id)" class="btn btn-outline-danger btn-sm mr-3"
+                                                    :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">削除
+                                                    </button>
                                                 </div>
+
+                                                <!-- 返信コメント編集フォーム -->
+                                                <template v-if="re_video_comment.edit_re_video_comment_form">
+                                                    <div class="input-group mt-2 mb-4">
+                                                        <textarea :class="errors.edit_re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
+                                                        <div class="input-group-append">
+                                                            <button @click="editReComment(re_video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                                        </div>
+                                                        <div v-if="errors.edit_re_video_comment" class="invalid-feedback">{{ errors.edit_re_video_comment[0]}}</div>
+                                                    </div>
+                                                </template>
                                             </div>
                                         </div>
                                     </div>
@@ -156,10 +208,15 @@ export default {
                 content_height: ''
             },
             //コメント
-            my_comment: '',
-            my_re_comment: '',
-            is_re_comment_form: false,
-            comments: [],
+            my_video_comment: '',
+            my_re_video_comment: '',
+            my_edit_video_comment: '',
+            my_edit_re_video_comment: '',
+            is_re_video_comment_form: false,
+            is_edit_video_comment_form: false,
+            is_edit_re_video_comment_form: false,
+            video_comments: [],
+            total_comments: '',
             errors:{},
             
             //無限スクロール
@@ -213,10 +270,14 @@ export default {
     },
     watch: {
         $route(to, from){
-            this.my_comment = '';
-            this.my_re_comment = '';
-            this.is_re_comment_form = false;
-            this.comments = [];
+            this.my_video_comment = '';
+            this.my_re_video_comment = '';
+            this.my_edit_video_comment = '';
+            this.my_edit_re_video_comment = '';
+            this.is_re_video_comment_form = false;
+            this.is_edit_video_comment_form = false;
+            this.is_edit_re_video_comment_form = false;
+            this.video_comments = [];
             this.getVideo();
         }
     },
@@ -278,22 +339,29 @@ export default {
                 per_page :  this.per_page,
             })
             .then(res => {
+                //トータルコメント数を取得
+                this.total_comments = res.data.total;
+
                 //追加データをマージ
                 this.new = res.data.data;
                 let new_data = res.data.data;
                 new_data.forEach((data) => {
-                    this.comments.push(data);
+                    this.video_comments.push(data);
                 })
 
                 this.last_page = res.data.last_page;
                 this.end_page = page;
                 if($state) $state.loaded();
 
-                this.comments.forEach((object, index) => {
+                this.video_comments.forEach((object, index) => {
                     //返信表示の切り替え属性を付与
-                    this.$set(this.comments[index], 're_comment_toggle', false);
+                    this.$set(this.video_comments[index], 're_video_comment_toggle', false);
                     //返信フォームの切り替え属性を付与
-                    this.$set(this.comments[index], 're_comment_form', false);
+                    this.$set(this.video_comments[index], 're_video_comment_form', false);
+                    //編集フォームの切り替え属性を付与
+                    this.$set(this.video_comments[index], 'edit_video_comment_form', false);
+                    //返信編集フォームの切り替え属性を付与
+                    this.$set(this.video_comments[index], 'edit_re_video_comment_form', false);
                 })
 
                 //概要の高さを取得
@@ -306,12 +374,12 @@ export default {
                  })
             })
         },
-        commentToggle(comment){
-            comment.re_comment_toggle = !comment.re_comment_toggle;
+        commentToggle(video_comment){
+            video_comment.re_video_comment_toggle = !video_comment.re_video_comment_toggle;
         },
         createComment(){
             axios.post('/api/video_comments', {
-                comment: this.my_comment,
+                video_comment: this.my_video_comment,
                 video_id: this.video.id,
                 user_id: this.user.id
             })
@@ -322,16 +390,16 @@ export default {
                 this.errors = error.response.data.errors;
             });
         },
-        reCommentFormToggle(comment){
-            comment.re_comment_form = !comment.re_comment_form;
+        reCommentFormToggle(video_comment){
+            video_comment.re_video_comment_form = !video_comment.re_video_comment_form;
 
             //返信フォームを１つだけ表示
-            this.is_re_comment_form = !this.is_re_comment_form;
+            this.is_re_video_comment_form = !this.is_re_video_comment_form;
         },
-        createReComment(comment){
+        createReComment(re_video_comment){
             axios.post('/api/re_video_comments', {
-                re_comment: this.my_re_comment,
-                video_comment_id: comment.id,
+                re_video_comment: this.my_re_video_comment,
+                video_comment_id: re_video_comment.id,
                 user_id: this.user.id
             })
             .then(() => {
@@ -341,11 +409,46 @@ export default {
                 this.errors = error.response.data.errors;
             });
         },
-        isCommentUser(comment){
-            return comment.user_id === this.user.id;
+        isCommentUser(video_comment){
+            return video_comment.user_id === this.user.id;
+        },
+        editCommentFormToggle(video_comment){
+            video_comment.edit_video_comment_form = !video_comment.edit_video_comment_form;
+            this.my_edit_video_comment = video_comment.video_comment;
+
+            //編集フォームを１つだけ表示
+            this.is_edit_video_comment_form = !this.is_edit_video_comment_form;
+        },
+        editComment(video_comment){
+            axios.put('/api/video_comments/' + video_comment.id, {
+                edit_video_comment: this.my_edit_video_comment,
+            })
+            .then(() => {
+                this.initializedComment();
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
+        },
+        editReCommentFormToggle(re_video_comment){
+            re_video_comment.edit_re_video_comment_form = !re_video_comment.edit_re_video_comment_form;
+            this.my_edit_re_video_comment = re_video_comment.re_video_comment;
+
+            //返信編集フォームを１つだけ表示
+            this.is_edit_re_video_comment_form = !this.is_edit_re_video_comment_form;
+        },
+        editReComment(re_video_comment){
+            axios.put('/api/re_video_comments/' + re_video_comment.id, {
+                edit_re_video_comment: this.my_edit_re_video_comment,
+            })
+            .then(() => {
+                this.initializedComment();
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
         },
         deleteComment(id){
-            console.log(id);
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
                 axios.delete('/api/video_comments/' + id)
@@ -364,10 +467,14 @@ export default {
             }
         },
         initializedComment(){
-            this.my_comment = '';
-            this.my_re_comment = '';
-            this.is_re_comment_form = false;
-            this.comments = [];
+            this.my_video_comment = '';
+            this.my_re_video_comment = '';
+            this.my_edit_video_comment = '';
+            this.my_edit_re_video_comment = '';
+            this.is_re_video_comment_form = false;
+            this.is_edit_video_comment_form = false;
+            this.is_edit_re_video_comment_form = false;
+            this.video_comments = [];
             this.getComment(null, this.start_page, false);
         },
         infiniteHandler($state){

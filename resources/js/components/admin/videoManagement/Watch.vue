@@ -27,35 +27,35 @@
                             </div>
                             <!-- コメント一覧 -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{comments.length}}件</h5>
-                                <div v-for="comment in comments" :key="comment.id" class="border-top py-3">
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{total_comments}}件</h5>
+                                <div v-for="video_comment in video_comments" :key="video_comment.id" class="border-top py-3">
                                     <div class="mb-2">
-                                        <span>{{comment.user.name}}</span>
-                                        <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
+                                        <span>{{video_comment.user.name}}</span>
+                                        <span class="text-secondary ml-2">{{video_comment.created_at | moment_ago}}</span>
                                     </div>
-                                    <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
+                                    <p class="mb-0" style="white-space: pre-wrap">{{video_comment.video_comment}}</p>
                                     <div class="text-right">
-                                        <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
+                                        <button @click="deleteComment(video_comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
 
                                     <!-- 返信コメント -->
-                                    <div v-if="comment.re_video_comments.length > 0" class="px-3">
+                                    <div v-if="video_comment.re_video_comments.length > 0" class="px-3">
                                         <!-- 表示切り替え -->
-                                        <div @click="commentToggle(comment)" class="btn btn-link" data-toggle="collapse" :href="'#comment'+ comment.id" role="button" 
-                                        aria-expanded="false" :aria-controls="'comment' + comment.id">
-                                            <a v-if="!comment.re_comment_toggle">▼このコメントへの返信を表示</a>
+                                        <div @click="commentToggle(video_comment)" class="btn btn-link" data-toggle="collapse" :href="'#video_comment'+ video_comment.id" role="button" 
+                                        aria-expanded="false" :aria-controls="'video_comment' + video_comment.id">
+                                            <a v-if="!video_comment.re_video_comment_toggle">▼このコメントへの返信を表示</a>
                                             <a v-else>▼このコメントへの返信を非表示</a>
                                         </div>
 
                                         <!-- 返信コメント一覧 -->
                                         <div class="px-3">
-                                            <div v-for="re_video_comment in comment.re_video_comments" 
-                                            :key="re_video_comment.id" class="collapse border-top" :id="'comment' + comment.id">
+                                            <div v-for="re_video_comment in video_comment.re_video_comments" 
+                                            :key="re_video_comment.id" class="collapse border-top" :id="'video_comment' + video_comment.id">
                                                 <div class="mt-3 mb-2">
                                                     <span >{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
                                                 </div>
-                                                <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
+                                                <p style="white-space: pre-wrap">{{re_video_comment.re_video_comment}}</p>
                                                 <div class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
                                                 </div>
@@ -120,7 +120,8 @@ export default {
                 height: '',
                 content_height: ''
             },
-            comments: [],
+            video_comments: [],
+            total_comments: '',
             
             //無限スクロール
             start_page: 1,
@@ -174,7 +175,7 @@ export default {
     watch: {
         $route(to, from){
             //コメントは追加されるので初期化
-            this.comments = [];
+            this.video_comments = [];
             this.getVideo();
         }
     },
@@ -208,11 +209,14 @@ export default {
                 per_page :  this.per_page,
             })
             .then(res => {
+                //トータルコメント数を取得
+                this.total_comments = res.data.total;
+
                 //追加データをマージ
                 this.new = res.data.data;
                 let new_data = res.data.data;
                 new_data.forEach((data) => {
-                    this.comments.push(data);
+                    this.video_comments.push(data);
                 })
 
                 this.last_page = res.data.last_page;
@@ -220,8 +224,8 @@ export default {
                 if($state) $state.loaded();
 
                 //返信表示の切り替え属性を付与
-                this.comments.forEach((object, index) => {
-                    this.$set(this.comments[index], 're_comment_toggle', false);
+                this.video_comments.forEach((object, index) => {
+                    this.$set(this.video_comments[index], 're_video_comment_toggle', false);
                 })
 
                 //概要の高さを取得
@@ -234,15 +238,15 @@ export default {
                  })
             })
         },
-        commentToggle(comment){
-            comment.re_comment_toggle = !comment.re_comment_toggle;
+        commentToggle(video_comment){
+            video_comment.re_video_comment_toggle = !video_comment.re_video_comment_toggle;
         },
         deleteComment(id){
             const result = confirm('コメントを削除します。よろしいですか？');
             if(result){
                 axios.delete('/api/video_comments/' + id)
                 .then(()=>{
-                    this.comments = [];
+                    this.video_comments = [];
                     this.getComment(null, this.start_page, false);
                 });
             }
@@ -252,7 +256,7 @@ export default {
             if(result){
                 axios.delete('/api/re_video_comments/' + id)
                 .then(() => {
-                    this.comments = [];
+                    this.video_comments = [];
                     this.getComment(null, this.start_page, false);
                 })
             }
@@ -262,7 +266,7 @@ export default {
                 $state.complete();
             }
             else{
-                this.getVideo($state, this.end_page + 1, true);
+                this.getComment($state, this.end_page + 1, true);
             }
         },
         moveRecommend(video){
