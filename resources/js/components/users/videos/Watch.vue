@@ -383,7 +383,17 @@ export default {
             this.is_edit_comment_form = !this.is_edit_comment_form;
         },
         editComment(comment){
-
+            axios.put('/api/video_comments' + comment.id, {
+                comment: this.my_edit_comment,
+                video_id: this.video.id,
+                user_id: this.user.id
+            })
+            .then(() => {
+                this.initializedComment();
+            })
+            .catch((error) => {
+                this.errors = error.response.data.errors;
+            });
         },
         deleteComment(id){
             console.log(id);
