@@ -47,6 +47,7 @@
                                     <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
                                     <div class="mt-2">
                                         <template>
+                                            <!-- 返信ボタン -->
                                             <button v-if="!comment.re_comment_form" 
                                             @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm mr-3"
                                             :disabled="is_re_comment_form" >返信
@@ -57,13 +58,16 @@
                                         </template>
                                     
                                         <template v-if="isCommentUser(comment)">
+                                            <!-- 編集ボタン -->
                                             <button v-if="!comment.edit_comment_form"
                                             @click="editCommentFormToggle(comment)" class="btn btn-outline-primary btn-sm mr-3"
                                             :disabled="is_edit_comment_form">編集
                                             </button>
+                                            <!-- 編集キャンセルボタン -->
                                             <button v-else
                                             @click="editCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm mr-3">編集をキャンセル
                                             </button>
+                                            <!-- 削除ボタン -->
                                             <button @click="deleteComment(comment.id)" class="btn btn-outline-danger btn-sm mr-3">削除</button>
                                         </template>
                                     </div>
