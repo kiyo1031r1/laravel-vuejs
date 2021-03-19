@@ -89,7 +89,7 @@
                                     <!-- コメント編集フォーム -->
                                     <template v-if="comment.edit_comment_form">
                                         <div class="input-group mt-2 mb-4">
-                                            <textarea :class="errors.edit_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_comment"></textarea>
+                                            <textarea :class="errors.edit_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_video_comment"></textarea>
                                             <div class="input-group-append">
                                                 <button @click="editComment(comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                             </div>
@@ -210,7 +210,7 @@ export default {
             //コメント
             my_video_comment: '',
             my_re_video_comment: '',
-            my_edit_comment: '',
+            my_edit_video_comment: '',
             my_edit_re_comment: '',
             is_re_comment_form: false,
             is_edit_comment_form: false,
@@ -271,7 +271,7 @@ export default {
         $route(to, from){
             this.my_video_comment = '';
             this.my_re_video_comment = '';
-            this.my_edit_comment = '';
+            this.my_edit_video_comment = '';
             this.my_edit_re_comment = '';
             this.is_re_comment_form = false;
             this.is_edit_comment_form = false;
@@ -410,14 +410,14 @@ export default {
         },
         editCommentFormToggle(comment){
             comment.edit_comment_form = !comment.edit_comment_form;
-            this.my_edit_comment = comment.comment;
+            this.my_edit_video_comment = comment.comment;
 
             //編集フォームを１つだけ表示
             this.is_edit_comment_form = !this.is_edit_comment_form;
         },
         editComment(comment){
             axios.put('/api/video_comments/' + comment.id, {
-                edit_comment: this.my_edit_comment,
+                edit_comment: this.my_edit_video_comment,
             })
             .then(() => {
                 this.initializedComment();
@@ -465,7 +465,7 @@ export default {
         initializedComment(){
             this.my_video_comment = '';
             this.my_re_video_comment = '';
-            this.my_edit_comment = '';
+            this.my_edit_video_comment = '';
             this.my_edit_re_comment = '';
             this.is_re_comment_form = false;
             this.is_edit_comment_form = false;
