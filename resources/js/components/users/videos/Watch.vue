@@ -71,6 +71,17 @@
                                         </div>
                                     </template>
 
+                                    <!-- コメント編集フォーム -->
+                                    <template v-if="comment.edit_comment_form">
+                                        <div class="input-group mt-2 mb-4">
+                                            <textarea :class="errors.edit_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_comment"></textarea>
+                                            <div class="input-group-append">
+                                                <button @click="editComment(comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                            </div>
+                                            <div v-if="errors.edit_comment" class="invalid-feedback">{{ errors.edit_comment[0]}}</div>
+                                        </div>
+                                    </template>
+
                                     <!-- 返信コメント -->
                                     <div v-if="comment.re_video_comments.length > 0" class="px-3">
                                         <!-- 表示切り替え -->
@@ -160,6 +171,7 @@ export default {
             //コメント
             my_comment: '',
             my_re_comment: '',
+            my_edit_comment: '',
             is_re_comment_form: false,
             is_edit_comment_form: false,
             comments: [],
