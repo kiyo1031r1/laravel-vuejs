@@ -33,7 +33,7 @@
                                         <span>{{comment.user.name}}</span>
                                         <span class="text-secondary ml-2">{{comment.created_at | moment_ago}}</span>
                                     </div>
-                                    <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
+                                    <p class="mb-0" style="white-space: pre-wrap">{{comment.video_comment}}</p>
                                     <div class="text-right">
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
@@ -55,7 +55,7 @@
                                                     <span >{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
                                                 </div>
-                                                <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
+                                                <p style="white-space: pre-wrap">{{re_video_comment.re_video_comment}}</p>
                                                 <div class="text-right">
                                                     <button @click="deleteReComment(re_video_comment.id)" class="btn btn-danger m-3">返信コメント削除</button>
                                                 </div>
