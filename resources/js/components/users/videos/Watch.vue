@@ -59,7 +59,7 @@
                                     
                                         <template v-if="isCommentUser(video_comment)">
                                             <!-- 編集ボタン -->
-                                            <button v-if="!video_comment.edit_comment_form"
+                                            <button v-if="!video_comment.edit_video_comment_form"
                                             @click="editCommentFormToggle(video_comment)" class="btn btn-outline-primary btn-sm mr-3"
                                             :disabled="is_edit_video_comment_form || is_re_video_comment_form">編集
                                             </button>
@@ -87,7 +87,7 @@
                                     </template>
 
                                     <!-- コメント編集フォーム -->
-                                    <template v-if="video_comment.edit_comment_form">
+                                    <template v-if="video_comment.edit_video_comment_form">
                                         <div class="input-group mt-2 mb-4">
                                             <textarea :class="errors.edit_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_video_comment"></textarea>
                                             <div class="input-group-append">
@@ -355,7 +355,7 @@ export default {
                     //返信フォームの切り替え属性を付与
                     this.$set(this.video_comments[index], 're_video_comment_form', false);
                     //編集フォームの切り替え属性を付与
-                    this.$set(this.video_comments[index], 'edit_comment_form', false);
+                    this.$set(this.video_comments[index], 'edit_video_comment_form', false);
                     //返信編集フォームの切り替え属性を付与
                     this.$set(this.video_comments[index], 'edit_re_comment_form', false);
                 })
@@ -409,7 +409,7 @@ export default {
             return video_comment.user_id === this.user.id;
         },
         editCommentFormToggle(video_comment){
-            video_comment.edit_comment_form = !video_comment.edit_comment_form;
+            video_comment.edit_video_comment_form = !video_comment.edit_video_comment_form;
             this.my_edit_video_comment = video_comment.comment;
 
             //編集フォームを１つだけ表示
