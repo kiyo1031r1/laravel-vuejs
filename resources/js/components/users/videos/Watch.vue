@@ -44,7 +44,7 @@
                                         <span>{{video_comment.user.name}}</span>
                                         <span class="text-secondary ml-2">{{video_comment.created_at | moment_ago}}</span>
                                     </div>
-                                    <p class="mb-0" style="white-space: pre-wrap">{{video_comment.comment}}</p>
+                                    <p class="mb-0" style="white-space: pre-wrap">{{video_comment.video_comment}}</p>
                                     <div class="mt-2">
                                         <template>
                                             <!-- 返信ボタン -->
@@ -114,7 +114,7 @@
                                                     <span>{{re_video_comment.user.name}}</span>
                                                     <span class="text-secondary ml-2">{{re_video_comment.created_at | moment_ago}}</span>
                                                 </div>
-                                                <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
+                                                <p style="white-space: pre-wrap">{{re_video_comment.re_video_comment}}</p>
                                                 
                                                 <div v-if="isCommentUser(re_video_comment)" :class="index === video_comment.re_video_comments.length - 1 ?  '' : 'pb-3'">
                                                     <!-- 編集ボタン -->
@@ -410,7 +410,7 @@ export default {
         },
         editCommentFormToggle(video_comment){
             video_comment.edit_video_comment_form = !video_comment.edit_video_comment_form;
-            this.my_edit_video_comment = video_comment.comment;
+            this.my_edit_video_comment = video_comment.video_comment;
 
             //編集フォームを１つだけ表示
             this.is_edit_video_comment_form = !this.is_edit_video_comment_form;
@@ -428,7 +428,7 @@ export default {
         },
         editReCommentFormToggle(re_video_comment){
             re_video_comment.edit_re_video_comment_form = !re_video_comment.edit_re_video_comment_form;
-            this.my_edit_re_video_comment = re_video_comment.re_comment;
+            this.my_edit_re_video_comment = re_video_comment.re_video_comment;
 
             //返信編集フォームを１つだけ表示
             this.is_edit_re_video_comment_form = !this.is_edit_re_video_comment_form;

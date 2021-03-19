@@ -18,7 +18,7 @@ class ReVideoCommentController extends Controller
         $input = request()->validate([
             'edit_re_video_comment' => ['required', 'string', 'max:255']
         ]);
-        $re_video_comment->re_comment = $input['edit_re_video_comment'];
+        $re_video_comment->re_video_comment = $input['edit_re_video_comment'];
         $re_video_comment->save();
     }
 
