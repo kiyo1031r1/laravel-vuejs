@@ -161,6 +161,7 @@ export default {
             my_comment: '',
             my_re_comment: '',
             is_re_comment_form: false,
+            is_edit_comment_form: false,
             comments: [],
             errors:{},
             
@@ -296,6 +297,8 @@ export default {
                     this.$set(this.comments[index], 're_comment_toggle', false);
                     //返信フォームの切り替え属性を付与
                     this.$set(this.comments[index], 're_comment_form', false);
+                    //編集フォームの切り替え属性を付与
+                    this.$set(this.comments[index], 'edit_comment_form', false);
                 })
 
                 //概要の高さを取得
@@ -347,6 +350,10 @@ export default {
             return comment.user_id === this.user.id;
         },
         editCommentFormToggle(comment){
+            comment.edit_comment_form = !comment.edit_comment_form;
+
+            //返信フォームを１つだけ表示
+            this.is_edit_comment_form = !this.is_edit_comment_form;
         },
         deleteComment(id){
             console.log(id);
