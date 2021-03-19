@@ -136,7 +136,7 @@
                                                 <!-- 返信コメント編集フォーム -->
                                                 <template v-if="re_video_comment.edit_re_comment_form">
                                                     <div class="input-group mt-2 mb-4">
-                                                        <textarea :class="errors.edit_re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_comment"></textarea>
+                                                        <textarea :class="errors.edit_re_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
                                                         <div class="input-group-append">
                                                             <button @click="editReComment(re_video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                                         </div>
@@ -211,7 +211,7 @@ export default {
             my_video_comment: '',
             my_re_video_comment: '',
             my_edit_video_comment: '',
-            my_edit_re_comment: '',
+            my_edit_re_video_comment: '',
             is_re_comment_form: false,
             is_edit_comment_form: false,
             is_edit_re_comment_form: false,
@@ -272,7 +272,7 @@ export default {
             this.my_video_comment = '';
             this.my_re_video_comment = '';
             this.my_edit_video_comment = '';
-            this.my_edit_re_comment = '';
+            this.my_edit_re_video_comment = '';
             this.is_re_comment_form = false;
             this.is_edit_comment_form = false;
             this.is_edit_re_comment_form = false;
@@ -428,14 +428,14 @@ export default {
         },
         editReCommentFormToggle(re_comment){
             re_comment.edit_re_comment_form = !re_comment.edit_re_comment_form;
-            this.my_edit_re_comment = re_comment.re_comment;
+            this.my_edit_re_video_comment = re_comment.re_comment;
 
             //返信編集フォームを１つだけ表示
             this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
         },
         editReComment(re_comment){
             axios.put('/api/re_video_comments/' + re_comment.id, {
-                edit_re_comment: this.my_edit_re_comment,
+                edit_re_comment: this.my_edit_re_video_comment,
             })
             .then(() => {
                 this.initializedComment();
@@ -466,7 +466,7 @@ export default {
             this.my_video_comment = '';
             this.my_re_video_comment = '';
             this.my_edit_video_comment = '';
-            this.my_edit_re_comment = '';
+            this.my_edit_re_video_comment = '';
             this.is_re_comment_form = false;
             this.is_edit_comment_form = false;
             this.is_edit_re_comment_form = false;
