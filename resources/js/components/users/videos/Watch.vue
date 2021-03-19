@@ -378,6 +378,7 @@ export default {
         },
         editCommentFormToggle(comment){
             comment.edit_comment_form = !comment.edit_comment_form;
+            this.my_edit_comment = comment.comment;
 
             //返信フォームを１つだけ表示
             this.is_edit_comment_form = !this.is_edit_comment_form;
