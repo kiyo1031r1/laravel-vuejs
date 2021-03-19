@@ -31,7 +31,7 @@
                                 <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
-                                    <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_comment"></textarea>
+                                    <textarea :class="errors.comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_video_comment"></textarea>
                                     <div class="input-group-append">
                                         <button @click="createComment()" class="btn btn-success" style="border-radius:3px">コメント</button>
                                     </div>
@@ -208,7 +208,7 @@ export default {
                 content_height: ''
             },
             //コメント
-            my_comment: '',
+            my_video_comment: '',
             my_re_comment: '',
             my_edit_comment: '',
             my_edit_re_comment: '',
@@ -269,7 +269,7 @@ export default {
     },
     watch: {
         $route(to, from){
-            this.my_comment = '';
+            this.my_video_comment = '';
             this.my_re_comment = '';
             this.my_edit_comment = '';
             this.my_edit_re_comment = '';
@@ -375,7 +375,7 @@ export default {
         },
         createComment(){
             axios.post('/api/video_comments', {
-                comment: this.my_comment,
+                comment: this.my_video_comment,
                 video_id: this.video.id,
                 user_id: this.user.id
             })
@@ -463,7 +463,7 @@ export default {
             }
         },
         initializedComment(){
-            this.my_comment = '';
+            this.my_video_comment = '';
             this.my_re_comment = '';
             this.my_edit_comment = '';
             this.my_edit_re_comment = '';
