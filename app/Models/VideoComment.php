@@ -10,7 +10,7 @@ class VideoComment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'comment',
+        'video_comment',
         'video_id',
         'user_id',
     ];
