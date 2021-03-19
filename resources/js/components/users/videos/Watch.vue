@@ -66,6 +66,7 @@
                                         </div>
                                     </template>
                                     <div v-if="isCommentUser(comment)" class="text-right">
+                                        <button @click="editComment(comment.id)" class="btn btn-primary m-3">コメント編集</button>
                                         <button @click="deleteComment(comment.id)" class="btn btn-danger m-3">コメント削除</button>
                                     </div>
 
@@ -343,6 +344,9 @@ export default {
         },
         isCommentUser(comment){
             return comment.user_id === this.user.id;
+        },
+        editComment(id){
+
         },
         deleteComment(id){
             console.log(id);
