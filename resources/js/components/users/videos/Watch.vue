@@ -132,6 +132,17 @@
                                                     :disabled="is_edit_re_comment_form || is_re_comment_form">削除
                                                     </button>
                                                 </template>
+
+                                                <!-- 返信コメント編集フォーム -->
+                                                <template v-if="re_video_comment.edit_re_comment_form">
+                                                    <div class="input-group mt-2 mb-4">
+                                                        <textarea :class="errors.edit_re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
+                                                        <div class="input-group-append">
+                                                            <button @click="editReComment(re_video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
+                                                        </div>
+                                                        <div v-if="errors.edit_re_video_comment" class="invalid-feedback">{{ errors.edit_re_video_comment[0]}}</div>
+                                                    </div>
+                                                </template>
                                             </div>
                                         </div>
                                     </div>
