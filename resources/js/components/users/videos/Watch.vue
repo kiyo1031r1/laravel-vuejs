@@ -65,7 +65,7 @@
                                             </button>
                                             <!-- 編集キャンセルボタン -->
                                             <button v-else
-                                            @click="editCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm mr-3">編集をキャンセル
+                                            @click="editCommentFormToggle(comment)" class="btn btn-outline-primary btn-sm mr-3">編集をキャンセル
                                             </button>
                                             <!-- 削除ボタン -->
                                             <button 
