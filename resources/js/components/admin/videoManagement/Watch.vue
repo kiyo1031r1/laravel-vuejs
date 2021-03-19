@@ -27,7 +27,7 @@
                             </div>
                             <!-- コメント一覧 -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{video_comments.length}}件</h5>
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{total_comments}}件</h5>
                                 <div v-for="video_comment in video_comments" :key="video_comment.id" class="border-top py-3">
                                     <div class="mb-2">
                                         <span>{{video_comment.user.name}}</span>
@@ -121,6 +121,7 @@ export default {
                 content_height: ''
             },
             video_comments: [],
+            total_comments: '',
             
             //無限スクロール
             start_page: 1,
@@ -208,6 +209,9 @@ export default {
                 per_page :  this.per_page,
             })
             .then(res => {
+                //トータルコメント数を取得
+                this.total_comments = res.data.total;
+                
                 //追加データをマージ
                 this.new = res.data.data;
                 let new_data = res.data.data;

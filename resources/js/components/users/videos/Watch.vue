@@ -27,7 +27,7 @@
                             </div>
                             <!-- コメント -->
                             <div class="border-top py-3">
-                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{video_comments.length}}件</h5>
+                                <h5 class="comment-title font-weight-bold pb-3 mb-0">Comment : {{total_comments}}件</h5>
                                 <!-- コメント投稿フォーム -->
                                 <span>{{user.name}} としてコメントする</span>
                                 <div class="input-group mb-4">
@@ -216,6 +216,7 @@ export default {
             is_edit_video_comment_form: false,
             is_edit_re_video_comment_form: false,
             video_comments: [],
+            total_comments: '',
             errors:{},
             
             //無限スクロール
@@ -338,6 +339,9 @@ export default {
                 per_page :  this.per_page,
             })
             .then(res => {
+                //トータルコメント数を取得
+                this.total_comments = res.data.total;
+
                 //追加データをマージ
                 this.new = res.data.data;
                 let new_data = res.data.data;
