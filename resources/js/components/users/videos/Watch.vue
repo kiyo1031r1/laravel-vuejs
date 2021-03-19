@@ -426,15 +426,15 @@ export default {
                 this.errors = error.response.data.errors;
             });
         },
-        editReCommentFormToggle(comment){
-            comment.edit_re_comment_form = !comment.edit_re_comment_form;
-            this.my_edit_re_comment = comment.re_comment;
+        editReCommentFormToggle(re_comment){
+            re_comment.edit_re_comment_form = !re_comment.edit_re_comment_form;
+            this.my_edit_re_comment = re_comment.re_comment;
 
             //返信編集フォームを１つだけ表示
             this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
         },
-        editReComment(comment){
-            axios.put('/api/re_video_comments/' + comment.id, {
+        editReComment(re_comment){
+            axios.put('/api/re_video_comments/' + re_comment.id, {
                 edit_re_comment: this.my_edit_re_comment,
             })
             .then(() => {
