@@ -46,16 +46,24 @@
                                     </div>
                                     <p class="mb-0" style="white-space: pre-wrap">{{comment.comment}}</p>
                                     <div class="mt-2">
-                                        <button v-if="!comment.re_comment_form" 
-                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm"
-                                        :disabled="is_re_comment_form" >返信
-                                        </button>
-                                        <button v-else 
-                                        @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm">キャンセル
-                                        </button>
+                                        <template>
+                                            <button v-if="!comment.re_comment_form" 
+                                            @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm"
+                                            :disabled="is_re_comment_form" >返信
+                                            </button>
+                                            <button v-else 
+                                            @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm">キャンセル
+                                            </button>
+                                        </template>
                                     
-                                        <template v-if="isCommentUser(comment) && !comment.re_comment_form" class="text-right">
-                                            <button @click="editCommentFormToggle(comment)" class="btn btn-outline-primary btn-sm ml-3">編集</button>
+                                        <template v-if="isCommentUser(comment)">
+                                            <button v-if="!comment.edit_comment_form" 
+                                            @click="editCommentFormToggle(comment)" class="btn btn-outline-primary btn-sm ml-3"
+                                            :disabled="is_edit_comment_form">編集
+                                            </button>
+                                            <button v-else
+                                            @click="editCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm ml-3">編集をキャンセル
+                                            </button>
                                             <button @click="deleteComment(comment.id)" class="btn btn-outline-danger btn-sm ml-3">削除</button>
                                         </template>
                                     </div>
