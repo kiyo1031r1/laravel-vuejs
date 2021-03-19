@@ -211,7 +211,7 @@ export default {
             .then(res => {
                 //トータルコメント数を取得
                 this.total_comments = res.data.total;
-                
+
                 //追加データをマージ
                 this.new = res.data.data;
                 let new_data = res.data.data;
@@ -266,7 +266,7 @@ export default {
                 $state.complete();
             }
             else{
-                this.getVideo($state, this.end_page + 1, true);
+                this.getComment($state, this.end_page + 1, true);
             }
         },
         moveRecommend(video){
