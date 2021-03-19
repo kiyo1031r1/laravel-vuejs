@@ -136,7 +136,7 @@
                                                 <!-- 返信コメント編集フォーム -->
                                                 <template v-if="re_video_comment.edit_re_comment_form">
                                                     <div class="input-group mt-2 mb-4">
-                                                        <textarea :class="errors.edit_re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_video_comment"></textarea>
+                                                        <textarea :class="errors.edit_re_video_comment ? 'form-control is-invalid' : 'form-control'" rows="2" v-model="my_edit_re_comment"></textarea>
                                                         <div class="input-group-append">
                                                             <button @click="editReComment(re_video_comment)" class="btn btn-success" style="border-radius:3px">コメント</button>
                                                         </div>
@@ -424,7 +424,7 @@ export default {
         },
         editReCommentFormToggle(comment){
             comment.edit_re_comment_form = !comment.edit_re_comment_form;
-            this.my_edit_re_comment = comment.comment;
+            this.my_edit_re_comment = comment.re_comment;
 
             //返信フォームを１つだけ表示
             this.is_edit_re_comment_form = !this.is_edit_re_comment_form;
