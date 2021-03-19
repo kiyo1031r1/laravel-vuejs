@@ -108,7 +108,7 @@
 
                                         <!-- 返信コメント一覧 -->
                                         <div class="px-3">
-                                            <div v-for="re_video_comment in video_comment.re_video_comments" 
+                                            <div v-for="(re_video_comment, index) in video_comment.re_video_comments" 
                                             :key="re_video_comment.id" class="collapse border-top" :id="'comment' + video_comment.id">
                                                 <div class="mt-3 mb-2">
                                                     <span>{{re_video_comment.user.name}}</span>
@@ -116,7 +116,7 @@
                                                 </div>
                                                 <p style="white-space: pre-wrap">{{re_video_comment.re_comment}}</p>
                                                 
-                                                <template v-if="isCommentUser(re_video_comment)">
+                                                <div v-if="isCommentUser(re_video_comment)" :class="index === video_comment.re_video_comments.length - 1 ?  '' : 'pb-3'">
                                                     <!-- 編集ボタン -->
                                                     <button v-if="!re_video_comment.edit_re_comment_form"
                                                     @click="editReCommentFormToggle(re_video_comment)" class="btn btn-outline-primary btn-sm mr-3"
@@ -131,7 +131,7 @@
                                                     @click="deleteReComment(re_video_comment.id)" class="btn btn-outline-danger btn-sm mr-3"
                                                     :disabled="is_edit_re_video_comment_form || is_re_video_comment_form">削除
                                                     </button>
-                                                </template>
+                                                </div>
 
                                                 <!-- 返信コメント編集フォーム -->
                                                 <template v-if="re_video_comment.edit_re_comment_form">
