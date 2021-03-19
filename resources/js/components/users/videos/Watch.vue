@@ -53,7 +53,7 @@
                                             :disabled="is_re_comment_form" >返信
                                             </button>
                                             <button v-else
-                                            @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm mr-3">キャンセル
+                                            @click="reCommentFormToggle(comment)" class="btn btn-outline-secondary btn-sm mr-3">返信をキャンセル
                                             </button>
                                         </template>
                                     
