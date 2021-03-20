@@ -211,7 +211,7 @@ class VideoController extends Controller
     }
 
     public function watch(Video $video){
-        $video = Video::with('videoCategories')->find($video->id);
+        $video = Video::with('videoCategories')->findOrFail($video->id);
         $recommends = $this->getRecommend($video);
         return ['video' => $video, 'recommends' => $recommends];
     }

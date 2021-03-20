@@ -330,26 +330,40 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.subscriptionOnly)){
         axios.get('/api/user')
+        //ログイン確認
         .then(res => {
             const user = res.data;
             store.dispatch('setUser', user);
 
-            //課金状況を取得
-            axios.get('/api/subscription/get_status')
+            //動画ステータスを取得
+            axios.post('/api/videos/watch/' + to.params.id)
             .then(res => {
-                const subscription_status = res.data.status;
-                store.dispatch('setSubscriptionStatus', res.data.status);
+                const video = res.data.video;
+                if(video.status === 'premium'){
+                    //課金状況を取得
+                    axios.get('/api/subscription/get_status')
+                    .then(res => {
+                        const subscription_status = res.data.status;
+                        store.dispatch('setSubscriptionStatus', res.data.status);
 
-                if(subscription_status === 'premium' || subscription_status === 'cancel'){
-                    next();
-                }
-                else{
-                    next({name: 'premium_register',
-                        query: {
-                            redirect: to.path
+                        if(subscription_status === 'premium' || subscription_status === 'cancel'){
+                            next();
+                        }
+                        else{
+                            next({name: 'premium_register',
+                                query: {
+                                    redirect: to.path
+                                }
+                            });
                         }
                     });
                 }
+                else{
+                    next();
+                }
+            })
+            .catch(() => {
+                next({name: 'video'});
             });
         })
         .catch(() => {
@@ -365,7 +379,6 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
-
 
 //管理者ページの認証ガード
 router.beforeEach((to, from, next) => {
