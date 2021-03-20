@@ -12,6 +12,9 @@ export default new Vuex.Store({
 
         user: {},
         subscription_status: null,
+
+        video: {},
+        recommends: {},
     },
     getters: {
         flashMessage: state => state.flashMessage,
@@ -20,6 +23,9 @@ export default new Vuex.Store({
 
         user: state => state.user,
         subscription_status: state => state.subscription_status,
+        video : state => state.video,
+        recommends : state => state.recommends,
+
     },
     mutations: {
         setFlashMessage(state, {message, time, color}) {
@@ -45,7 +51,12 @@ export default new Vuex.Store({
         //ログイン時に取得した課金ステータスを保存
         setSubscriptionStatus(state, subscription_status){
             state.subscription_status = subscription_status;
-        }
+        },
+
+        setVideo(state, {video, recommends}){
+            state.video = video,
+            state.recommends = recommends
+        },
     },
     actions: {
         setFlashMessage({commit}, {message, time = 3000, color = 'primary'}) {
@@ -61,6 +72,10 @@ export default new Vuex.Store({
 
         setSubscriptionStatus({commit}, subscription_status){
             commit('setSubscriptionStatus', subscription_status);
+        },
+
+        setVideo({commit}, {video, recommends}){
+            commit('setVideo', {video, recommends});
         }
     }
 });

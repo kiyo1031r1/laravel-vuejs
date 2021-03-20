@@ -326,7 +326,7 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-//プレミアム動画ページ
+//動画視聴ページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.subscriptionOnly)){
         axios.get('/api/user')
@@ -339,6 +339,12 @@ router.beforeEach((to, from, next) => {
             axios.post('/api/videos/watch/' + to.params.id)
             .then(res => {
                 const video = res.data.video;
+                const recommends = res.data.recommends;
+                store.dispatch('setVideo', {
+                    video: video,
+                    recommends: recommends,
+                });
+
                 if(video.status === 'premium'){
                     //課金状況を取得
                     axios.get('/api/subscription/get_status')

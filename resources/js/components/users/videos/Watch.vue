@@ -270,14 +270,11 @@ export default {
     },
     methods:{
         getVideo(){
-            axios.post('/api/videos/watch/' + this.id)
-            .then(res => {
-                this.video = res.data.video;
-                this.recommends = res.data.recommends;
-
-                //初回コメント読み込み
-                this.getComment(null, this.start_page, false);
-            });
+            this.video = this.$store.getters.video;
+            this.recommends = this.$store.getters.recommends;
+            
+            //初回コメント読み込み
+            this.getComment(null, this.start_page, false);
         },
         aboutToggle(){
             if(!this.about.toggle){
