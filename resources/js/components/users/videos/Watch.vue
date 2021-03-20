@@ -255,17 +255,6 @@ export default {
             return this.initialized && this.last_page > this.end_page;
         }
     },
-    beforeRouteEnter(to,from,next){
-        axios.post('/api/videos/exist', {
-            id: to.params.id
-        })
-        .then(() => {
-            next();
-        })
-        .catch(() => {
-            next({name: 'video'});
-        })
-    },
     watch: {
         $route(to, from){
             this.my_video_comment = '';
