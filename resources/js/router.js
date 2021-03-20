@@ -111,6 +111,7 @@ const router = new Router({
             path:'/video/:category',
             name: 'video_index',
             component: UserVideoIndex,
+            props: true,
             meta: {
                 common: true
             }

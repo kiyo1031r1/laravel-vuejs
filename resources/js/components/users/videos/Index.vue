@@ -138,6 +138,8 @@ export default {
             },
         }
     },
+    props: ['category']
+    ,
     computed:{
         createPageColumn() {
             const column = [];
@@ -209,9 +211,8 @@ export default {
         getVideo(){
             //初回のみ登録
             if(this.search.categories.length === 0) {
-                //urlからカテゴリー名とidを取得
-                const category_name = this.$route.path.split('/').slice(-1)[0];
-                const category_id = this.categories.findIndex(category => category === category_name) + 1;
+                //カテゴリー名からidを取得
+                const category_id = this.categories.findIndex(category => category === this.category) + 1;
                 this.search.categories.push({id: category_id})
             }
 
