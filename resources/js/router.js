@@ -123,7 +123,7 @@ const router = new Router({
             props: true,
             meta: {
                 authOnly: true,
-                subscriptionOnly: true
+                watchNavigation: true
             }
         },
         {
@@ -328,7 +328,7 @@ router.beforeEach((to, from, next) => {
 
 //動画視聴ページ
 router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.subscriptionOnly)){
+    if(to.matched.some(record => record.meta.watchNavigation)){
         axios.get('/api/user')
         //ログイン確認
         .then(res => {
