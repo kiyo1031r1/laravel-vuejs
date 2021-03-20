@@ -161,7 +161,10 @@ export default {
                             time: 5000,
                         });
                         setTimeout(() => {
-                            this.$router.push({name: 'my_page'});
+                            //遷移前のpath情報があれば、そのページに遷移
+                            this.$router.push(
+                                this.$route.query.redirect ? this.$route.query.redirect : {name: 'my_page'}
+                            );
                         }, 5000);
                     })
                     .catch(error => {
