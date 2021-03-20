@@ -121,7 +121,8 @@ const router = new Router({
             component: UserVideoWatch,
             props: true,
             meta: {
-                authOnly: true
+                authOnly: true,
+                subscriptionOnly: true
             }
         },
         {
@@ -309,6 +310,46 @@ router.beforeEach((to, from, next) => {
             else{
                 next({name: 'premium_cancel'});
             }
+        })
+        .catch(() => {
+            store.dispatch('resetUser');
+            next({name: 'login', 
+                query: {
+                    redirect: to.path
+                }
+            });
+        });
+    }
+    else{
+        next();
+    }
+});
+
+//プレミアム動画ページ
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.subscriptionOnly)){
+        axios.get('/api/user')
+        .then(res => {
+            const user = res.data;
+            store.dispatch('setUser', user);
+
+            //課金状況を取得
+            axios.get('/api/subscription/get_status')
+            .then(res => {
+                const subscription_status = res.data.status;
+                store.dispatch('setSubscriptionStatus', res.data.status);
+
+                if(subscription_status === 'premium' || subscription_status === 'cancel'){
+                    next();
+                }
+                else{
+                    next({name: 'premium_register',
+                        query: {
+                            redirect: to.path
+                        }
+                    });
+                }
+            });
         })
         .catch(() => {
             store.dispatch('resetUser');

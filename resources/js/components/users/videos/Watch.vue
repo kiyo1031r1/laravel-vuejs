@@ -197,8 +197,6 @@ export default {
     data(){
         return{
             user: '',
-            subscription_status: '',
-            is_direct: false,
             video: {},
             about:{
                 see_more : false,
@@ -288,36 +286,9 @@ export default {
                 this.video = res.data.video;
                 this.recommends = res.data.recommends;
 
-                //直接遷移の場合のプレミアム判別
-                if(this.is_direct){
-                    if(!this.isPremium(this.video.status)){
-                        this.$router.push({name: 'premium_register'});
-                    }
-                    else{
-                        //初回コメント読み込み
-                        this.getComment(null, this.start_page, false);
-                    }
-                }
-                else{
-                    //初回コメント読み込み
-                    this.getComment(null, this.start_page, false);
-                }
+                //初回コメント読み込み
+                this.getComment(null, this.start_page, false);
             });
-        },
-        isPremium(status){
-            this.video.status = status;
-            if(this.video.status === 'premium' && this.user.status === 'normal'){
-                //課金キャンセル中は視聴可能
-                if(this.subscription_status === 'cancel'){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else {
-                return true;
-            }
         },
         aboutToggle(){
             if(!this.about.toggle){
@@ -488,36 +459,11 @@ export default {
 
         moveRecommend(video){
             this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
-        },
-        getStatus(){
-            axios.get('/api/subscription/get_status')
-            .then((res) => {
-                this.subscription_status = res.data.status;
-
-                //vuexに再度課金状況を登録
-                this.$store.dispatch('setSubscriptionStatus', res.data.status);
-            });
-        },
+        }
     },
     created(){
         this.user = this.$store.getters.user;
-        this.subscription_status = this.$store.getters.subscription_status;
-
-        //動画一覧ページから遷移の場合
-        if(this.status && this.subscription_status){
-            if(!this.isPremium(this.status)){
-                this.$router.push({name: 'premium_register'});
-            }
-            else{
-                this.getVideo();
-            }
-        }
-        //直接遷移の場合
-        else{
-            this.is_direct = true;
-            this.getStatus();
-            this.getVideo();
-        }
+        this.getVideo();
     },
 }
 </script>
