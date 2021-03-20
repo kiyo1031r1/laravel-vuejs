@@ -161,17 +161,6 @@ export default {
             return this.initialized && this.last_page > this.end_page;
         }
     },
-    beforeRouteEnter(to,from,next){
-        axios.post('/api/videos/exist', {
-            id: to.params.id
-        })
-        .then(() => {
-            next();
-        })
-        .catch(() => {
-            next({name: 'video_management'});
-        })
-    },
     watch: {
         $route(to, from){
             //コメントは追加されるので初期化

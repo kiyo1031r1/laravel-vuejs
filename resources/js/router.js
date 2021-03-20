@@ -113,7 +113,8 @@ const router = new Router({
             component: UserVideoIndex,
             props: true,
             meta: {
-                common: true
+                common: true,
+                categoryExist: true,
             }
         },
         {
@@ -123,7 +124,7 @@ const router = new Router({
             props: true,
             meta: {
                 authOnly: true,
-                watchNavigation: true
+                watchNavigation: true,
             }
         },
         {
@@ -181,6 +182,7 @@ const router = new Router({
             props: true,
             meta: {
                 admin_authOnly: true,
+                userExist: true,
              }
         },
         {
@@ -206,6 +208,7 @@ const router = new Router({
             props: true,
             meta: {
                 admin_authOnly: true,
+                videoExist: true,
              }
         },
         {
@@ -215,6 +218,7 @@ const router = new Router({
             props: true,
             meta: {
                 admin_authOnly: true,
+                videoExist: true,
              }
         }
     ]
@@ -462,5 +466,65 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
+
+//カテゴリー存在確認
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.categoryExist)){
+        axios.post('/api/video_categories/exist', {
+            file_name: to.params.category
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video'});
+        })
+    }
+    else{
+        next();
+    }
+});
+
+//ユーザー存在確認
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.userExist)){
+        axios.post('/api/users/exist', {
+            id: to.params.id
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'user_management'});
+        })
+    }
+    else{
+        next();
+    }
+});
+
+//動画存在確認
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.videoExist)){
+        axios.post('/api/videos/exist', {
+            id: to.params.id
+        })
+        .then(() => {
+            next();
+        })
+        .catch(() => {
+            next({name: 'video_management'});
+        })
+    }
+    else{
+        next();
+    }
+});
+
+
+
+
+
+
 
 export default router;

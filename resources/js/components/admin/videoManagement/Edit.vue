@@ -225,17 +225,6 @@ export default {
             });
         }
     },
-    beforeRouteEnter(to,from,next){
-        axios.post('/api/videos/exist', {
-            id: to.params.id
-        })
-        .then(() => {
-            next();
-        })
-        .catch(() => {
-            next({name: 'video_management'});
-        })
-    },
     methods:{
         //カテゴリー
         getCategory(){

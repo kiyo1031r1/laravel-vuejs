@@ -196,17 +196,6 @@ export default {
     components:{
         Header,
     },
-    beforeRouteEnter(to,from,next){
-        axios.post('/api/video_categories/exist', {
-            file_name: to.params.category
-        })
-        .then(() => {
-            next();
-        })
-        .catch(() => {
-            next({name: 'video'});
-        })
-    },
     methods:{
         getVideo(){
             //初回のみ登録
