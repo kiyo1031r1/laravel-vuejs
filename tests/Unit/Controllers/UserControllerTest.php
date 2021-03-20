@@ -311,46 +311,6 @@ class UserControllerTest extends TestCase
         ];
     }
 
-    public function testRegisterPremium(){
-        $user_normal = User::factory()->for(Role::factory())
-        ->create(['status' => 'normal']);
-        $response = $this->postJson('/api/users/register_premium/'.$user_normal->id);
-        $this->assertDatabaseHas('users', [
-            'id' => $user_normal->id,
-            'status' => 'premium'
-        ]);
-        $response->assertOk();
-
-        $user_premium = User::factory()->for(Role::factory())
-        ->create(['status' => 'premium']);
-        $response = $this->postJson('/api/users/register_premium/'.$user_premium->id);
-        $this->assertDatabaseHas('users', [
-            'id' => $user_premium->id,
-            'status' => 'premium'
-        ]);
-        $response->assertOk();
-    }
-
-    public function testCancelPremium(){
-        $user_premium = User::factory()->for(Role::factory())
-        ->create(['status' => 'premium']);
-        $response = $this->postJson('/api/users/cancel_premium/'.$user_premium->id);
-        $this->assertDatabaseHas('users', [
-            'id' => $user_premium->id,
-            'status' => 'normal'
-        ]);
-        $response->assertOk();
-
-        $user_normal = User::factory()->for(Role::factory())
-        ->create(['status' => 'normal']);
-        $response = $this->postJson('/api/users/cancel_premium/'.$user_normal->id);
-        $this->assertDatabaseHas('users', [
-            'id' => $user_normal->id,
-            'status' => 'normal'
-        ]);
-        $response->assertOk();
-    }
-
     public function testExist(){
         //ダミー
         User::factory()->count(10)->for(Role::factory())->create();

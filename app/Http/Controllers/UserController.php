@@ -97,20 +97,6 @@ class UserController extends Controller
         }
     }
 
-    public function registerPremium(User $user){
-        if($user->status === 'normal'){
-            $user->status = 'premium';
-            $user->save();
-        }
-    }
-
-    public function cancelPremium(User $user){
-        if($user->status === 'premium'){
-            $user->status = 'normal';
-            $user->save();
-        }
-    }
-
     public function exist(Request $request){
         return User::findOrFail($request['id']);
     }
