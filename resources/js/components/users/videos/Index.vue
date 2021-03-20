@@ -259,7 +259,7 @@ export default {
             return page === this.current_page;
         },
         moveVideoWatch(video){
-            this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
+            this.$router.push({name: 'video_watch', params: { id: video.id} });
         }
     },
     created(){

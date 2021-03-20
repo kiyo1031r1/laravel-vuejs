@@ -227,7 +227,7 @@ export default {
             recommends: [],
         }
     },
-    props: ['id', 'status']
+    props: ['id']
     ,
     components:{
         Header,
@@ -458,7 +458,7 @@ export default {
         },
 
         moveRecommend(video){
-            this.$router.push({name: 'video_watch', params: { id: video.id, status: video.status} });
+            this.$router.push({name: 'video_watch', params: { id: video.id} });
         }
     },
     created(){
