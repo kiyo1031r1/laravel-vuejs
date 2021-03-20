@@ -220,7 +220,7 @@ const router = new Router({
     ]
 });
 
-//ユーザーページの認証ガード
+//ユーザーページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.authOnly)){
         axios.get('/api/user')
@@ -257,7 +257,7 @@ router.beforeEach((to, from, next) => {
 });
 
 
-//ユーザーページの共通ページ
+//ユーザー共通ページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.common)){
         axios.get('/api/user')
@@ -277,7 +277,7 @@ router.beforeEach((to, from, next) => {
 });
 
 
-//プレミアムページ
+//プレミアム登録ページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.premiumOnly)){
         axios.get('/api/user')
@@ -386,7 +386,7 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-//管理者ページの認証ガード
+//管理者ページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.admin_authOnly)){
         axios.get('/api/user')
@@ -432,7 +432,7 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-//クレジットカード変更ページの認証ガード
+//クレジットカード変更ページ
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.customerOnly)){
         axios.get('/api/user')
