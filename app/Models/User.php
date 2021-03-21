@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function reVideoComments(){
         return $this->hasMany(ReVideoComment::class);
     }
+
+    public function videoEvaluation(){
+        return $this->hasOne(VideoEvaluation::class);
+    }
 }
