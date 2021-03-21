@@ -9,6 +9,12 @@ class VideoEvaluation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'evaluation',
+        'video_id',
+        'user_id',
+    ];
+
     public function video(){
         return $this->belongsTo(Video::class);
     }
