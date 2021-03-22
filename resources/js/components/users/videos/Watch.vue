@@ -104,9 +104,8 @@
                                                 <option value="4">星4</option>
                                                 <option value="5">星5</option>
                                             </select>
-                                            <div v-if="errors.evaluation" class="invalid-feedback">
-                                                {{errors.evaluation[0]}}
-                                            </div>
+                                            <div v-if="errors.evaluation" class="invalid-feedback">{{errors.evaluation[0]}}</div>
+                                            <div v-else-if="errors.user_id" class="evaluation-userId-error">{{errors.user_id[0]}}</div>
                                             <button @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
                                         </div>
                                     </div>
@@ -382,7 +381,8 @@ export default {
         },
         evaluateVideo(){
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
-                evaluation: this.my_evaluation
+                evaluation: this.my_evaluation,
+                user_id: this.user.id,
             })
             .then(() => {
                 this.getEvaluation();
@@ -574,6 +574,13 @@ export default {
     background-color:#A9A9A9;
     padding: 5px 10px 5px 10px;
     border-radius: 20px;
+}
+
+.evaluation-userId-error{
+    color: #e3342f;
+    font-size: 80%;
+    font-family: "Nunito", sans-serif;
+    margin-top: 4px;
 }
 
 .video-about{

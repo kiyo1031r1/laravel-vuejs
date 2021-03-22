@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\VideoEvaluation;
 use App\Models\Video;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class VideoEvaluationController extends Controller
 {
@@ -27,14 +26,14 @@ class VideoEvaluationController extends Controller
 
     public function evaluate(Video $video, Request $request){
         $input = $request->validate([
-            'evaluation' => ['required', 'integer', 'in:1,2,3,4,5']
+            'evaluation' => ['required', 'integer', 'in:1,2,3,4,5'],
+            'user_id' => ['required', 'integer', 'unique:video_evaluations']
         ]);
-        $user = Auth::user();
 
         VideoEvaluation::create([
             'evaluation' => $input['evaluation'],
             'video_id' => $video->id,
-            'user_id' => $user->id,
+            'user_id' => $input['user_id'],
         ]);
     }
 }
