@@ -397,14 +397,22 @@ export default {
             .then(() => {
                 this.is_evaluate = true;
                 this.getEvaluation();
-
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
             });
         },
         editEvaluateVideo(){
-
+            axios.put('/api/video_evaluations/' + this.video.id, {
+                evaluation: this.my_evaluation,
+            })
+            .then(() => {
+                this.is_evaluate = true;
+                this.getEvaluation();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            });
         },
         aboutToggle(){
             if(!this.about.toggle){
