@@ -28,6 +28,10 @@ class Video extends Model
         return $this->hasMany(VideoComment::class);
     }
 
+    public function videoEvaluations(){
+        return $this->hasMany(VideoEvaluation::class);
+    }
+
     public function setThumbnailAttribute($value){
         //seederの自動生成用、またはサムネイル削除の場合
         if(strpos($value, '/images') !== false || $value === null){

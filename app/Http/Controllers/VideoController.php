@@ -191,11 +191,17 @@ class VideoController extends Controller
 
         //ソート
         $sort = $request['sort'];
-        if($sort['created_at'] === 'desc'){
+        if($sort['sort'] === 'created_at_desc'){
             $query->orderBy('created_at', 'desc');
         }
-        if($sort['created_at'] === 'asc'){
+        if($sort['sort'] === 'created_at_asc'){
             $query->orderBy('created_at', 'asc');
+        }
+        if($sort['sort'] === 'evaluation_desc'){
+            $query->orderBy('evaluation', 'desc');
+        }
+        if($sort['sort'] === 'evaluation_asc'){
+            $query->orderBy('evaluation', 'asc');
         }
 
         return $query->paginate($sort['per_page']);

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- メイン画面 -->
-                <div class="col-md-8">
+                <div class="main">
                     <!-- ビデオ画面 -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <video class="embed-responsive-item img-thumbnail" 
@@ -17,6 +17,64 @@
                             <!-- タイトル -->
                             <div>
                                 <h4>{{video.title}}</h4>
+
+                                <!-- 評価 -->
+                                <div class="text-right mb-2">
+                                    <div>
+                                        <span v-if="video.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else class="evaluation-back">
+                                            未評価
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- 作成日時 -->
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
                             <!-- 概要 -->
@@ -71,12 +129,12 @@
                     </div>
                 </div>
                 <!-- レコメンド動画 -->
-                <div class="col-md-3">
+                <div class="recommends">
                     <p class="h4 text-center my-3">あなたへのオススメ</p>
                     <div v-for="recommend in recommends" :key="recommend.id">
                         <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail !== null ? recommend.thumbnail : '/images/default_thumbnail.jpg' ">
                                     <span v-if="recommend.status == 'premium'" class="badge badge-warning" 
                                     style="position: absolute; top:4px; right:4px; font-size:100%">{{recommend.status}}
@@ -85,13 +143,66 @@
                                     style="position: absolute; bottom:4px; right:4px; font-size:100%">{{recommend.video_time}}
                                     </span>
                                 </div>
-                                <div class="col-md-7 p-2">
+                                <div class="col-lg-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
                                         <span v-for="category in recommend.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1">{{category.name}}
                                         </span>
                                     </p>
+                                    <div class="text-right">
+                                        <span v-if="recommend.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else>
+                                            <div class="evaluation-blank"></div>
+                                        </span>
+                                    </div>
+                                    <p class="text-right mb-0">{{recommend.created_at | moment}}</p>
                                 </div>
                             </div>
                         </div>
@@ -270,6 +381,12 @@ export default {
 </script>
 
 <style scoped>
+.evaluation-back{
+    border:#A9A9A9 1px solid;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
 .video-about{
     white-space: pre-wrap;
     overflow: hidden;
@@ -280,8 +397,27 @@ export default {
     cursor: pointer;
 }
 
+.main {
+	width: 100%;
+    margin: 0px 10px 0px 10px;
+}
+
+@media (min-width: 1300px) {
+.main {
+    width: 60%
+}
+}
+
+.recommends{
+    width: 500px;
+}
+
 .recommend{
     cursor: pointer;
+}
+
+.evaluation-blank{
+    height: 23px;
 }
 
 .card-title{
@@ -290,6 +426,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .card-tag{
@@ -297,6 +434,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    margin-bottom: 0px;
 }
 
 </style>

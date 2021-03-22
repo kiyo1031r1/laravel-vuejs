@@ -1,10 +1,11 @@
 <template>
     <div>
+        <FlashMessage></FlashMessage>
         <Header></Header>
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- メイン画面 -->
-                <div class="col-md-8">
+                <div class="main">
                     <!-- ビデオ画面 -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <video class="embed-responsive-item img-thumbnail" 
@@ -17,6 +18,87 @@
                             <!-- タイトル -->
                             <div>
                                 <h4>{{video.title}}</h4>
+                                <!-- 評価 -->
+                                <div class="text-right">
+                                    <div>
+                                        <span v-if="evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else class="evaluation-back">
+                                            未評価
+                                        </span>
+                                    </div>
+
+                                    <!-- 評価フォーム切り替え -->
+                                    <div class="btn btn-link px-0" data-toggle="collapse" href="#evaluation" role="button" 
+                                    aria-expanded="false" aria-controls="evaluation">
+                                        <a>▼この動画を評価する</a>
+                                    </div>
+
+                                    <!-- 評価フォーム -->
+                                    <div class="collapse form-inline" id="evaluation">
+                                        <div class="col-auto ml-auto px-0">
+                                            <select v-model="my_evaluation" :class="errors.evaluation ? 'form-control is-invalid' : 'form-control'">
+                                                <option value="1">★</option>
+                                                <option value="2">★★</option>
+                                                <option value="3">★★★</option>
+                                                <option value="4">★★★★</option>
+                                                <option value="5">★★★★★</option>
+                                            </select>
+                                            <div v-if="errors.evaluation" class="invalid-feedback">{{errors.evaluation[0]}}</div>
+                                            <div v-else-if="errors.user_id" class="evaluation-userId-error">{{errors.user_id[0]}}</div>
+                                            <div>
+                                                <button v-if="!is_evaluate" @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                                <button v-else @click="editEvaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価を変更</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
                             <!-- 概要 -->
@@ -155,12 +237,12 @@
                     </div>
                 </div>
                 <!-- レコメンド動画 -->
-                <div class="col-md-3">
+                <div class="recommends">
                     <p class="h4 text-center my-3">あなたへのオススメ</p>
                     <div v-for="recommend in recommends" :key="recommend.id">
                         <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail !== null ? recommend.thumbnail : '/images/default_thumbnail.jpg' ">
                                     <span v-if="recommend.status == 'premium'" class="badge badge-warning" 
                                     style="position: absolute; top:4px; right:4px; font-size:100%">{{recommend.status}}
@@ -169,13 +251,66 @@
                                     style="position: absolute; bottom:4px; right:4px; font-size:100%">{{recommend.video_time}}
                                     </span>
                                 </div>
-                                <div class="col-md-7 p-2">
+                                <div class="col-lg-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
                                         <span v-for="category in recommend.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1">{{category.name}}
                                         </span>
                                     </p>
+                                    <div class="text-right">
+                                        <span v-if="recommend.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else>
+                                            <div class="evaluation-blank"></div>
+                                        </span>
+                                    </div>
+                                    <p class="text-right mb-0">{{recommend.created_at | moment}}</p>
                                 </div>
                             </div>
                         </div>
@@ -198,6 +333,9 @@ export default {
         return{
             user: '',
             video: {},
+            evaluation: '',
+            my_evaluation: '1',
+            is_evaluate: false,
             about:{
                 see_more : false,
                 toggle: false,
@@ -272,9 +410,56 @@ export default {
         getVideo(){
             this.video = this.$store.getters.video;
             this.recommends = this.$store.getters.recommends;
+            this.getEvaluation();
+            this.isEvaluate();
             
             //初回コメント読み込み
             this.getComment(null, this.start_page, false);
+        },
+        getEvaluation(){
+            axios.get('/api/video_evaluations/get_evaluation/' + this.video.id)
+            .then(res => {
+                this.evaluation = res.data;
+            });
+        },
+        isEvaluate(){
+            axios.get('/api/video_evaluations/is_evaluate/' + this.video.id)
+            .then(res => {
+                this.is_evaluate = res.data.is_evaluate;
+                this.my_evaluation = res.data.evaluation;
+            });
+        },
+        evaluateVideo(){
+            this.errors = {};
+            axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
+                evaluation: this.my_evaluation,
+            })
+            .then(() => {
+                this.is_evaluate = true;
+                this.$store.dispatch('setFlashMessage', {
+                    message:'動画を評価しました',
+                });
+                this.getEvaluation();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            });
+        },
+        editEvaluateVideo(){
+            this.errors = {};
+            axios.put('/api/video_evaluations/' + this.video.id, {
+                evaluation: this.my_evaluation,
+            })
+            .then(() => {
+                this.is_evaluate = true;
+                this.$store.dispatch('setFlashMessage', {
+                    message:'評価の値を変更しました',
+                });
+                this.getEvaluation();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            });
         },
         aboutToggle(){
             if(!this.about.toggle){
@@ -455,6 +640,19 @@ export default {
 </script>
 
 <style scoped>
+.evaluation-back{
+    border:#A9A9A9 1px solid;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
+.evaluation-userId-error{
+    color: #e3342f;
+    font-size: 80%;
+    font-family: "Nunito", sans-serif;
+    margin-top: 4px;
+}
+
 .video-about{
     white-space: pre-wrap;
     overflow: hidden;
@@ -465,8 +663,27 @@ export default {
     cursor: pointer;
 }
 
+.main {
+	width: 100%;
+    margin: 0px 10px 0px 10px;
+}
+
+@media (min-width: 1300px) {
+.main {
+    width: 60%
+}
+}
+
+.recommends{
+    width: 500px;
+}
+
 .recommend{
     cursor: pointer;
+}
+
+.evaluation-blank{
+    height: 23px;
 }
 
 .card-title{
@@ -475,6 +692,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .card-tag{
@@ -482,6 +700,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    margin-bottom: 0px;
 }
 
 </style>

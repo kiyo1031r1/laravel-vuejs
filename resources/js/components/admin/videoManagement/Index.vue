@@ -18,9 +18,11 @@
 
                                 <!-- 並び替え -->
                                 <label class="col-form-label p-2" for="per_page">並び替え</label>
-                                <select @change="changeFirstPage()" v-model="sort.created_at" class="form-control mx-2">
-                                    <option value="desc">新しい順</option>
-                                    <option value="asc">古い順</option>
+                                <select @change="changeFirstPage()" v-model="sort.sort" class="form-control mx-2">
+                                    <option value="created_at_desc">新しい順</option>
+                                    <option value="created_at_asc">古い順</option>
+                                    <option value="evaluation_desc">評価の多い順</option>
+                                    <option value="evaluation_asc">評価の少ない順</option>
                                 </select>
                             </div>
                     </div>
@@ -118,6 +120,59 @@
                                         class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                         </span>
                                     </p>
+                                    <!-- 評価 -->
+                                    <div class="text-right">
+                                        <span v-if="video.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else>
+                                            <div class="evaluation-blank"></div>
+                                        </span>
+                                    </div>
                                     <p class="text-right mb-0">{{video.created_at | moment}}</p>
                                 </div>
                                 <div class="card-button card-body">
@@ -201,7 +256,7 @@ export default {
 
             //ソート
             sort:{
-                created_at: 'desc',
+                sort: 'created_at_desc',
                 per_page: 10,
             }
         }
@@ -408,6 +463,10 @@ export default {
     -webkit-line-clamp: 3;
     overflow: hidden;
     white-space: pre-wrap;
+}
+
+.evaluation-blank{
+    height: 23px;
 }
 
 .card-button{
