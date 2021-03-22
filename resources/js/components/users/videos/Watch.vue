@@ -88,12 +88,13 @@
                                         </span>
                                     </div>
 
-                                <!-- 評価フォーム切り替え -->
+                                    <!-- 評価フォーム切り替え -->
                                     <div class="btn btn-link px-0" data-toggle="collapse" href="#evaluation" role="button" 
                                     aria-expanded="false" aria-controls="evaluation">
                                         <a>▼この動画を評価する</a>
                                     </div>
 
+                                    <!-- 評価フォーム -->
                                     <div class="collapse form-inline" id="evaluation">
                                         <div class="col-md-6 ml-auto">
                                             <select v-model="my_evaluation" class="form-control">
@@ -103,7 +104,7 @@
                                                 <option value="4">星4</option>
                                                 <option value="5">星5</option>
                                             </select>
-                                            <button class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                            <button @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
                                         </div>
                                     </div>
                                 </div>
@@ -375,6 +376,9 @@ export default {
             .then(res => {
                 this.evaluation = res.data;
             })
+        },
+        evaluateVideo(){
+            
         },
         aboutToggle(){
             if(!this.about.toggle){
