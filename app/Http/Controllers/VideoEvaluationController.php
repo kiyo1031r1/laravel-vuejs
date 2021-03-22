@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VideoEvaluation;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideoEvaluationController extends Controller
 {
@@ -38,6 +39,15 @@ class VideoEvaluationController extends Controller
     }
 
     public function isEvaluate(Video $video){
-        
+        $user = Auth::user();
+        $evaluation = VideoEvaluation::where('video_id', $video->id)
+        ->where('user_id', $user->id)->first();
+
+        if($evaluation){
+            return 'true';
+        }
+        else{
+            return 'false';
+        }
     }
 }
