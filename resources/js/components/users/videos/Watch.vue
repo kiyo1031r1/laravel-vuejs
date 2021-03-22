@@ -383,6 +383,9 @@ export default {
             })
             .then(() => {
                 this.is_evaluate = true;
+                this.$store.dispatch('setFlashMessage', {
+                    message:'動画を評価しました',
+                });
                 this.getEvaluation();
             })
             .catch(error => {
