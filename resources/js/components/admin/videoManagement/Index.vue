@@ -118,6 +118,59 @@
                                         class="badge badge-secondary mr-1" style="font-size:100%">{{category.name}}
                                         </span>
                                     </p>
+                                    <!-- 評価 -->
+                                    <div class="text-right">
+                                        <span v-if="video.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="video.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else>
+                                            <div class="evaluation-blank"></div>
+                                        </span>
+                                    </div>
                                     <p class="text-right mb-0">{{video.created_at | moment}}</p>
                                 </div>
                                 <div class="card-button card-body">
@@ -408,6 +461,10 @@ export default {
     -webkit-line-clamp: 3;
     overflow: hidden;
     white-space: pre-wrap;
+}
+
+.evaluation-blank{
+    height: 23px;
 }
 
 .card-button{
