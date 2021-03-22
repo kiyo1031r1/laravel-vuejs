@@ -6,6 +6,7 @@ use App\Models\VideoEvaluation;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class VideoEvaluationController extends Controller
 {
@@ -31,11 +32,18 @@ class VideoEvaluationController extends Controller
         ]);
 
         $user = Auth::user();
-        VideoEvaluation::create([
-            'evaluation' => $input['evaluation'],
-            'video_id' => $video->id,
-            'user_id' => $user->id,
-        ]);
+        if(!$this->isEvaluate($video)){
+            VideoEvaluation::create([
+                'evaluation' => $input['evaluation'],
+                'video_id' => $video->id,
+                'user_id' => $user->id,
+            ]);
+        }
+        else{
+            throw ValidationException::withMessages([
+                'user_id' => ['すでに評価されています。']
+            ]);
+        }
     }
 
     public function update(Video $video, Request $request){
