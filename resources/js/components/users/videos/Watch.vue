@@ -378,9 +378,14 @@ export default {
             });
         },
         evaluateVideo(){
-            axios.post('/api/video_evaluations/evaluate/' + this.video.id, this.my_evaluation)
+            axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
+                evaluate: this.my_evaluation
+            })
             .then(() => {
                 this.getEvaluation();
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
             });
         },
         aboutToggle(){
