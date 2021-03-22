@@ -1,5 +1,6 @@
 <template>
     <div>
+        <FlashMessage></FlashMessage>
         <Header></Header>
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -408,6 +409,9 @@ export default {
             })
             .then(() => {
                 this.is_evaluate = true;
+                this.$store.dispatch('setFlashMessage', {
+                    message:'評価の値を変更しました',
+                });
                 this.getEvaluation();
             })
             .catch(error => {
