@@ -33,7 +33,7 @@
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
-                                            <v-icon name="star-half" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
                                         </span>
                                         <span v-else-if="evaluation >= 4" class="evaluation-back">
                                             <v-icon name="star" style="color:#FFD700"/>
@@ -46,7 +46,7 @@
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
-                                            <v-icon name="star-half" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                         </span>
                                         <span v-else-if="evaluation >= 3" class="evaluation-back">
@@ -59,7 +59,7 @@
                                         <span v-else-if="evaluation >= 2.5" class="evaluation-back">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
-                                            <v-icon name="star-half" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                         </span>
@@ -72,7 +72,7 @@
                                         </span>
                                         <span v-else-if="evaluation >= 1.5" class="evaluation-back">
                                             <v-icon name="star" style="color:#FFD700"/>
-                                            <v-icon name="star-half" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
@@ -601,7 +601,7 @@ export default {
 
 <style scoped>
 .evaluation-back{
-    background-color:#A9A9A9;
+    border:#A9A9A9 1px solid;
     padding: 5px 10px 5px 10px;
     border-radius: 20px;
 }
