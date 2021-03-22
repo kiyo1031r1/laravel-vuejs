@@ -291,7 +291,7 @@ export default {
             user: '',
             video: {},
             evaluation: '',
-            my_evaluation: '',
+            my_evaluation: '1',
             about:{
                 see_more : false,
                 toggle: false,
