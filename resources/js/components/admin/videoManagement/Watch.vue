@@ -17,6 +17,64 @@
                             <!-- タイトル -->
                             <div>
                                 <h4>{{video.title}}</h4>
+
+                                <!-- 評価 -->
+                                <div class="text-right mb-2">
+                                    <div>
+                                        <span v-if="evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else class="evaluation-back">
+                                            未評価
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- 作成日時 -->
                                 <p class="text-right">{{video.created_at | moment}}</p>
                             </div>
                             <!-- 概要 -->
@@ -270,6 +328,12 @@ export default {
 </script>
 
 <style scoped>
+.evaluation-back{
+    border:#A9A9A9 1px solid;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
 .video-about{
     white-space: pre-wrap;
     overflow: hidden;
