@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class VideoEvaluationController extends Controller
 {
     public function getEvaluation(Video $video){
-        $evaluations = VideoEvaluation::find($video)->all();
+        $evaluations = $video->videoEvaluations;
         if(count($evaluations) > 0){
             $sum = 0;
             foreach($evaluations as $evaluate){
