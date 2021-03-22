@@ -385,7 +385,8 @@ export default {
         isEvaluate(){
             axios.get('/api/video_evaluations/is_evaluate/' + this.video.id)
             .then(res => {
-                this.is_evaluate = res.data;
+                this.is_evaluate = res.data.is_evaluate;
+                this.my_evaluation = res.data.evaluation;
             });
         },
         evaluateVideo(){

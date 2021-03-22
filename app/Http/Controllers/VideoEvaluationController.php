@@ -44,7 +44,7 @@ class VideoEvaluationController extends Controller
         ->where('user_id', $user->id)->first();
 
         if($evaluation){
-            return 'true';
+            return ['is_evaluate' => 'true', 'evaluation' => $evaluation->evaluation];
         }
         else{
             return 'false';
