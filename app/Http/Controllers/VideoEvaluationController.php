@@ -38,6 +38,10 @@ class VideoEvaluationController extends Controller
         ]);
     }
 
+    public function update(Video $video, Request $request){
+        
+    }
+
     public function isEvaluate(Video $video){
         $user = Auth::user();
         $evaluation = VideoEvaluation::where('video_id', $video->id)
