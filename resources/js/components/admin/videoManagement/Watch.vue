@@ -21,51 +21,51 @@
                                 <!-- 評価 -->
                                 <div class="text-right mb-2">
                                     <div>
-                                        <span v-if="evaluation >= 5">
+                                        <span v-if="video.evaluation >= 5">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 4.5">
+                                        <span v-else-if="video.evaluation >= 4.5">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star-half-alt" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 4">
+                                        <span v-else-if="video.evaluation >= 4">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 3.5">
+                                        <span v-else-if="video.evaluation >= 3.5">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star-half-alt" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 3">
+                                        <span v-else-if="video.evaluation >= 3">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 2.5">
+                                        <span v-else-if="video.evaluation >= 2.5">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star-half-alt" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 2">
+                                        <span v-else-if="video.evaluation >= 2">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 1.5">
+                                        <span v-else-if="video.evaluation >= 1.5">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star-half-alt" style="color:#FFD700"/>
                                         </span>
-                                        <span v-else-if="evaluation >= 1">
+                                        <span v-else-if="video.evaluation >= 1">
                                             <v-icon name="star" style="color:#FFD700"/>
                                         </span>
                                         <span v-else class="evaluation-back">
