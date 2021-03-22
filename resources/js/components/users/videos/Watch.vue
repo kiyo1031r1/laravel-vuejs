@@ -382,7 +382,10 @@ export default {
             });
         },
         isEvaluate(){
-            
+            axios.get('/api/video_evaluations/is_evaluate/' + this.video.id)
+            .then(res => {
+                this.is_evaluate = res.data;
+            });
         },
         evaluateVideo(){
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
