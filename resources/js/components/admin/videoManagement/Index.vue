@@ -18,9 +18,11 @@
 
                                 <!-- 並び替え -->
                                 <label class="col-form-label p-2" for="per_page">並び替え</label>
-                                <select @change="changeFirstPage()" v-model="sort.created_at" class="form-control mx-2">
-                                    <option value="desc">新しい順</option>
-                                    <option value="asc">古い順</option>
+                                <select @change="changeFirstPage()" v-model="sort.sort" class="form-control mx-2">
+                                    <option value="created_at_desc">新しい順</option>
+                                    <option value="created_at_asc">古い順</option>
+                                    <option value="evaluation_desc">評価の多い順</option>
+                                    <option value="evaluation_asc">評価の少ない順</option>
                                 </select>
                             </div>
                     </div>
@@ -254,7 +256,7 @@ export default {
 
             //ソート
             sort:{
-                created_at: 'desc',
+                sort: 'created_at_desc',
                 per_page: 10,
             }
         }
