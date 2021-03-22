@@ -310,6 +310,7 @@
                                             <div class="evaluation-blank"></div>
                                         </span>
                                     </div>
+                                    <p class="text-right mb-0">{{recommend.created_at | moment}}</p>
                                 </div>
                             </div>
                         </div>
@@ -676,6 +677,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .card-tag{
@@ -683,6 +685,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    margin-bottom: 0px;
 }
 
 </style>
