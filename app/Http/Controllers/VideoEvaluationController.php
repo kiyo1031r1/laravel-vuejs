@@ -39,7 +39,16 @@ class VideoEvaluationController extends Controller
     }
 
     public function update(Video $video, Request $request){
+        $input = $request->validate([
+            'evaluation' => ['required', 'integer', 'in:1,2,3,4,5'],
+        ]);
+
+        $user = Auth::user();
+        $evaluation = VideoEvaluation::where('video_id', $video->id)
+        ->where('user_id', $user->id)->first();
         
+        $evaluation->evaluate = $input['evaluation'];
+        $evaluation->save();
     }
 
     public function isEvaluate(Video $video){
