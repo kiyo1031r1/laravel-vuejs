@@ -97,18 +97,20 @@
 
                                     <!-- 評価フォーム -->
                                     <div class="collapse form-inline" id="evaluation">
-                                        <div class="col-md-6 ml-auto">
+                                        <div class="col-auto ml-auto px-0">
                                             <select v-model="my_evaluation" :class="errors.evaluation ? 'form-control is-invalid' : 'form-control'">
-                                                <option value="1">星1</option>
-                                                <option value="2">星2</option>
-                                                <option value="3">星3</option>
-                                                <option value="4">星4</option>
-                                                <option value="5">星5</option>
+                                                <option value="1">★</option>
+                                                <option value="2">★★</option>
+                                                <option value="3">★★★</option>
+                                                <option value="4">★★★★</option>
+                                                <option value="5">★★★★★</option>
                                             </select>
                                             <div v-if="errors.evaluation" class="invalid-feedback">{{errors.evaluation[0]}}</div>
                                             <div v-else-if="errors.user_id" class="evaluation-userId-error">{{errors.user_id[0]}}</div>
-                                            <button v-if="!is_evaluate" @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
-                                            <button v-else @click="editEvaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価を変更</button>
+                                            <div>
+                                                <button v-if="!is_evaluate" @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                                <button v-else @click="editEvaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価を変更</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
