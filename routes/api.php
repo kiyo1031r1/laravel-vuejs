@@ -57,7 +57,7 @@ Route::post('/videos/search', [VideoController::class, 'search']);
 Route::post('/videos/exist', [VideoController::class, 'exist']);
 Route::post('/videos/watch/{video}', [VideoController::class, 'watch']);
 Route::post('/videos/download', [VideoController::class, 'download']);
-Route::apiResource('video_evaluations', VideoEvaluationController::class);
+Route::get('video_evaluations/{video}', [VideoEvaluationController::class, 'evaluation']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::post('video_comments/get_comment', [VideoCommentController::class, 'getComment']);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
