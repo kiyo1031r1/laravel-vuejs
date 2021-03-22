@@ -38,6 +38,10 @@ class VideoEvaluationController extends Controller
                 'video_id' => $video->id,
                 'user_id' => $user->id,
             ]);
+
+            //評価平均値を更新
+            $video->evaluation = $this->getEvaluation($video);
+            $video->save();
         }
         else{
             throw ValidationException::withMessages([
@@ -57,6 +61,10 @@ class VideoEvaluationController extends Controller
         
         $evaluation->evaluation = $input['evaluation'];
         $evaluation->save();
+
+        //評価平均値を更新
+        $video->evaluation = $this->getEvaluation($video);
+        $video->save();
     }
 
     public function isEvaluate(Video $video){
