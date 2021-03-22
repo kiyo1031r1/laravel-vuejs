@@ -294,6 +294,7 @@ export default {
             video: {},
             evaluation: '',
             my_evaluation: '1',
+            is_evaluate: false,
             about:{
                 see_more : false,
                 toggle: false,
@@ -369,6 +370,7 @@ export default {
             this.video = this.$store.getters.video;
             this.recommends = this.$store.getters.recommends;
             this.getEvaluation();
+            this.isEvaluate();
             
             //初回コメント読み込み
             this.getComment(null, this.start_page, false);
@@ -378,6 +380,9 @@ export default {
             .then(res => {
                 this.evaluation = res.data;
             });
+        },
+        isEvaluate(){
+            
         },
         evaluateVideo(){
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
