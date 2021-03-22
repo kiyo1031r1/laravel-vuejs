@@ -395,7 +395,6 @@ export default {
         evaluateVideo(){
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
                 evaluation: this.my_evaluation,
-                user_id: this.user.id,
             })
             .then(() => {
                 this.is_evaluate = true;
