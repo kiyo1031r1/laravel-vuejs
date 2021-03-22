@@ -106,7 +106,8 @@
                                             </select>
                                             <div v-if="errors.evaluation" class="invalid-feedback">{{errors.evaluation[0]}}</div>
                                             <div v-else-if="errors.user_id" class="evaluation-userId-error">{{errors.user_id[0]}}</div>
-                                            <button @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                            <button v-if="!is_evaluate" @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                            <button v-else class="btn btn-primary btn-sm my-2 ml-2">評価を変更</button>
                                         </div>
                                     </div>
                                 </div>
@@ -393,7 +394,9 @@ export default {
                 user_id: this.user.id,
             })
             .then(() => {
+                this.is_evaluate = true;
                 this.getEvaluation();
+
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
