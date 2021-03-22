@@ -134,7 +134,7 @@
                     <div v-for="recommend in recommends" :key="recommend.id">
                         <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail !== null ? recommend.thumbnail : '/images/default_thumbnail.jpg' ">
                                     <span v-if="recommend.status == 'premium'" class="badge badge-warning" 
                                     style="position: absolute; top:4px; right:4px; font-size:100%">{{recommend.status}}
@@ -143,13 +143,66 @@
                                     style="position: absolute; bottom:4px; right:4px; font-size:100%">{{recommend.video_time}}
                                     </span>
                                 </div>
-                                <div class="col-md-7 p-2">
+                                <div class="col-md-6 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
                                         <span v-for="category in recommend.video_categories" :key="category.id"
                                         class="badge badge-secondary mr-1">{{category.name}}
                                         </span>
                                     </p>
+                                    <div class="text-right">
+                                        <span v-if="recommend.evaluation >= 5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 4">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 3">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 2">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1.5">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                            <v-icon name="star-half-alt" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else-if="recommend.evaluation >= 1">
+                                            <v-icon name="star" style="color:#FFD700"/>
+                                        </span>
+                                        <span v-else>
+                                            <div class="evaluation-blank"></div>
+                                        </span>
+                                    </div>
+                                    <p class="text-right mb-0">{{recommend.created_at | moment}}</p>
                                 </div>
                             </div>
                         </div>
@@ -348,12 +401,17 @@ export default {
     cursor: pointer;
 }
 
+.evaluation-blank{
+    height: 23px;
+}
+
 .card-title{
     height: 40px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .card-tag{
@@ -361,6 +419,7 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    margin-bottom: 0px;
 }
 
 </style>
