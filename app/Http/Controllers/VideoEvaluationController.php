@@ -7,7 +7,7 @@ use App\Models\Video;
 
 class VideoEvaluationController extends Controller
 {
-    public function evaluation(Video $video){
+    public function getEvaluation(Video $video){
         $evaluations = VideoEvaluation::find($video)->all();
         if(count($evaluations) > 0){
             $sum = 0;

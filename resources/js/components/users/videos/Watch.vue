@@ -372,13 +372,13 @@ export default {
             this.getComment(null, this.start_page, false);
         },
         getEvaluation(){
-            axios.get('/api/video_evaluations/' + this.video.id)
+            axios.get('/api/video_evaluations/get_evaluation/' + this.video.id)
             .then(res => {
                 this.evaluation = res.data;
             })
         },
         evaluateVideo(){
-            
+
         },
         aboutToggle(){
             if(!this.about.toggle){
