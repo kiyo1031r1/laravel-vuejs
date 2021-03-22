@@ -20,7 +20,7 @@
                                 <!-- 評価 -->
                                 <div class="text-right">
                                     <div>
-                                        <span v-if="evaluation === 5" class="evaluation-back">
+                                        <span v-if="evaluation >= 5" class="evaluation-back">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
@@ -41,7 +41,7 @@
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFFFE0"/>
                                         </span>
-                                        <span v-if="evaluation >= 3.5" class="evaluation-back">
+                                        <span v-else-if="evaluation >= 3.5" class="evaluation-back">
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
                                             <v-icon name="star" style="color:#FFD700"/>
