@@ -379,7 +379,7 @@ export default {
         },
         evaluateVideo(){
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
-                evaluate: this.my_evaluation
+                evaluation: this.my_evaluation
             })
             .then(() => {
                 this.getEvaluation();
