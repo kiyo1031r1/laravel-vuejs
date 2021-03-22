@@ -32,7 +32,7 @@ class VideoEvaluationController extends Controller
         ]);
 
         $user = Auth::user();
-        if($this->isEvaluate($video) === 'false'){
+        if($this->isEvaluate($video) === 'false'){    //vue側にtrue or falseを送るように、文字列で返すようにしている為
             VideoEvaluation::create([
                 'evaluation' => $input['evaluation'],
                 'video_id' => $video->id,
@@ -64,6 +64,7 @@ class VideoEvaluationController extends Controller
         $evaluation = VideoEvaluation::where('video_id', $video->id)
         ->where('user_id', $user->id)->first();
 
+        //vue側にtrue or falseを送るように文字列で返す。booleanで返すと1 or 0になる為。
         if($evaluation){
             return ['is_evaluate' => 'true', 'evaluation' => $evaluation->evaluation];
         }
