@@ -94,7 +94,17 @@
                                         <a>▼この動画を評価する</a>
                                     </div>
 
-                                    <div class="collapse" id="evaluation">
+                                    <div class="collapse form-inline" id="evaluation">
+                                        <div class="col-md-6 ml-auto">
+                                            <select v-model="my_evaluation" class="form-control">
+                                                <option value="1">星1</option>
+                                                <option value="2">星2</option>
+                                                <option value="3">星3</option>
+                                                <option value="4">星4</option>
+                                                <option value="5">星5</option>
+                                            </select>
+                                            <button class="btn btn-primary btn-sm my-2 ml-2">評価</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -280,6 +290,7 @@ export default {
             user: '',
             video: {},
             evaluation: '',
+            my_evaluation: '',
             about:{
                 see_more : false,
                 toggle: false,
