@@ -32,7 +32,7 @@ class VideoEvaluationController extends Controller
         ]);
 
         $user = Auth::user();
-        if(!$this->isEvaluate($video)){
+        if($this->isEvaluate($video) === 'false'){
             VideoEvaluation::create([
                 'evaluation' => $input['evaluation'],
                 'video_id' => $video->id,
