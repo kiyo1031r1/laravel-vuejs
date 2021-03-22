@@ -393,6 +393,7 @@ export default {
             });
         },
         evaluateVideo(){
+            this.errors = {};
             axios.post('/api/video_evaluations/evaluate/' + this.video.id, {
                 evaluation: this.my_evaluation,
             })
@@ -405,6 +406,7 @@ export default {
             });
         },
         editEvaluateVideo(){
+            this.errors = {};
             axios.put('/api/video_evaluations/' + this.video.id, {
                 evaluation: this.my_evaluation,
             })
