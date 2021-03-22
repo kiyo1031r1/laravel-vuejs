@@ -47,7 +47,7 @@ class VideoEvaluationController extends Controller
         $evaluation = VideoEvaluation::where('video_id', $video->id)
         ->where('user_id', $user->id)->first();
         
-        $evaluation->evaluate = $input['evaluation'];
+        $evaluation->evaluation = $input['evaluation'];
         $evaluation->save();
     }
 
