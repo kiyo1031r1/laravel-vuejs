@@ -97,13 +97,16 @@
                                     <!-- 評価フォーム -->
                                     <div class="collapse form-inline" id="evaluation">
                                         <div class="col-md-6 ml-auto">
-                                            <select v-model="my_evaluation" class="form-control">
+                                            <select v-model="my_evaluation" :class="errors.evaluation ? 'form-control is-invalid' : 'form-control'">
                                                 <option value="1">星1</option>
                                                 <option value="2">星2</option>
                                                 <option value="3">星3</option>
                                                 <option value="4">星4</option>
                                                 <option value="5">星5</option>
                                             </select>
+                                            <div v-if="errors.evaluation" class="invalid-feedback">
+                                                {{errors.evaluation[0]}}
+                                            </div>
                                             <button @click="evaluateVideo" class="btn btn-primary btn-sm my-2 ml-2">評価</button>
                                         </div>
                                     </div>
