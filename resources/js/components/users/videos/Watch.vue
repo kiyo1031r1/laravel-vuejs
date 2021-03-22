@@ -375,10 +375,13 @@ export default {
             axios.get('/api/video_evaluations/get_evaluation/' + this.video.id)
             .then(res => {
                 this.evaluation = res.data;
-            })
+            });
         },
         evaluateVideo(){
-
+            axios.post('/api/video_evaluations/evaluate/' + this.video.id, this.my_evaluation)
+            .then(() => {
+                this.getEvaluation();
+            });
         },
         aboutToggle(){
             if(!this.about.toggle){
