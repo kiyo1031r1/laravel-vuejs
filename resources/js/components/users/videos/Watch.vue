@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <!-- メイン画面 -->
-                <div class="col-md-8">
+                <div class="main">
                     <!-- ビデオ画面 -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <video class="embed-responsive-item img-thumbnail" 
@@ -237,12 +237,12 @@
                     </div>
                 </div>
                 <!-- レコメンド動画 -->
-                <div class="col-md-3">
+                <div class="recommends">
                     <p class="h4 text-center my-3">あなたへのオススメ</p>
                     <div v-for="recommend in recommends" :key="recommend.id">
                         <div @click="moveRecommend(recommend)" class="recommend card mb-2">
                             <div class="row no-gutters">
-                                <div class="col-md-6">
+                                <div class="col-lg-5">
                                     <img class="img-fluid" style="position:relative" :src="recommend.thumbnail !== null ? recommend.thumbnail : '/images/default_thumbnail.jpg' ">
                                     <span v-if="recommend.status == 'premium'" class="badge badge-warning" 
                                     style="position: absolute; top:4px; right:4px; font-size:100%">{{recommend.status}}
@@ -251,7 +251,7 @@
                                     style="position: absolute; bottom:4px; right:4px; font-size:100%">{{recommend.video_time}}
                                     </span>
                                 </div>
-                                <div class="col-md-6 p-2">
+                                <div class="col-lg-7 p-2">
                                     <p class="card-title">{{recommend.title}}</p>
                                     <p class="card-tag">
                                         <span v-for="category in recommend.video_categories" :key="category.id"
@@ -661,6 +661,21 @@ export default {
 .see-more{
     color: #3490dc;
     cursor: pointer;
+}
+
+.main {
+	width: 100%;
+    margin: 0px 10px 0px 10px;
+}
+
+@media (min-width: 1300px) {
+.main {
+    width: 60%
+}
+}
+
+.recommends{
+    width: 500px;
 }
 
 .recommend{
