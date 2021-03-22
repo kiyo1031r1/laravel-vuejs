@@ -344,9 +344,16 @@ export default {
         getVideo(){
             this.video = this.$store.getters.video;
             this.recommends = this.$store.getters.recommends;
+            this.getEvaluation();
             
             //初回コメント読み込み
             this.getComment(null, this.start_page, false);
+        },
+        getEvaluation(){
+            axios.get('/api/video_evaluations/' + this.video.id)
+            .then(res => {
+                this.evaluation = res.data;
+            })
         },
         aboutToggle(){
             if(!this.about.toggle){
