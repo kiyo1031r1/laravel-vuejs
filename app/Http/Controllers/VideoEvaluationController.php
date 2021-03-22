@@ -36,4 +36,8 @@ class VideoEvaluationController extends Controller
             'user_id' => $input['user_id'],
         ]);
     }
+
+    public function isEvaluate(Video $video){
+        
+    }
 }
