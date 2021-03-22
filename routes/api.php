@@ -60,7 +60,7 @@ Route::post('/videos/download', [VideoController::class, 'download']);
 Route::get('video_evaluations/get_evaluation/{video}', [VideoEvaluationController::class, 'getEvaluation']);
 Route::post('video_evaluations/evaluate/{video}', [VideoEvaluationController::class, 'evaluate']);
 Route::get('video_evaluations/is_evaluate/{video}', [VideoEvaluationController::class, 'isEvaluate']);
-Route::put('video_evaluations/update/{video}', [VideoEvaluationController::class, 'update']);
+Route::put('video_evaluations/{video}', [VideoEvaluationController::class, 'update']);
 Route::apiResource('video_comments', VideoCommentController::class);
 Route::post('video_comments/get_comment', [VideoCommentController::class, 'getComment']);
 Route::apiResource('re_video_comments', ReVideoCommentController::class);
