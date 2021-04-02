@@ -21,8 +21,7 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "league/flysystem-aws-s3-v3": "^1.0",
-        "payjp/payjp-php": "^1.2"
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
