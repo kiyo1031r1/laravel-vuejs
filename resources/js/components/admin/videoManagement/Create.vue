@@ -190,7 +190,7 @@ export default {
             video: '',
             video_name: '',
             video_preview: null,
-            allow_video_ext: ['mov', 'mp4', 'mpg', 'avi', 'wmv'],
+            allow_video_ext: ['mov', 'mp4'],
             video_time: '',
             sample_video_url: '',
 
