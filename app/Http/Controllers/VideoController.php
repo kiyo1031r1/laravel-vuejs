@@ -11,6 +11,7 @@ use \InterventionImage;
 use Illuminate\Support\Facades\Storage;
 use DateTime;
 use DateTimeZone;
+use FFMpeg;
 
 class VideoController extends Controller
 {
@@ -112,6 +113,15 @@ class VideoController extends Controller
         }
         else{
             $video->video = $input_video->store('videos');
+            //エンコード
+            //$video_file_name = pathinfo($video->video, PATHINFO_BASENAME);
+            //$video_file_name_no_exp = pathinfo($video->video, PATHINFO_FILENAME);
+            //$encode_file_path = Storage::disk('public')->put('videos', $video_file_name_no_exp. '.mp4');
+            //FFMpeg::open($this->video_file_path. $video_file_name)
+            //->export()
+            //->toDisk('public')
+            //->inFormat(new \FFMpeg\Format\Video\X264('libmp3lame', 'libx264'))
+            //->save('test.mp4');
         }
     }
 
